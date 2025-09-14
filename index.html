@@ -407,14 +407,13 @@
       <!-- Cards -->
       <div class="grid gap-8 grid-cols-1 md:grid-cols-2">
         <!-- Parent Card -->
-        <article
-          class="lr-card card-parent rounded-xl p-8 bg-[rgba(243,236,255,0.9)] dark:bg-gray-800 border border-pink-100 dark:border-gray-700 hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-full flex flex-col">
+        <article class="rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 flex flex-col h-full">
           <div class="flex flex-col h-full">
             <div class="flex items-start gap-6 w-full">
               <!-- left column -->
               <div class="flex-1 flex flex-col w-full">
                 <div class="flex items-center gap-4">
-                  <div class="rounded-lg p-3 bg-white/90 shadow-sm">
+                  <div class="rounded-lg p-3 bg-purple-100 dark:bg-purple-900/30 shadow-sm">
                     <!-- icon -->
                     <svg class="w-6 h-6 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2 2 2 4-4 6 6"></path>
@@ -462,14 +461,14 @@
               </a>
             </div>
             <!-- right column: image slot (optional) -->
-            <div class="hidden md:block w-40 h-40 rounded-lg overflow-hidden shadow-inner border border-white/40 dark:border-gray-600/40 card-img-zoom self-center flex-shrink-0">
+            <div class="hidden md:block w-40 h-40 rounded-lg overflow-hidden shadow-inner border border-white/40 dark:border-gray-700/60 card-img-zoom self-center flex-shrink-0">
               <!-- Replace src with your image or remove the <img> if you don't want one -->
               <img src="./public/parent-card.jpg" alt="Parent kit preview" class="w-full h-full object-cover">
             </div>
           </div>
   
           <!-- decorative float blob -->
-          <div class="absolute -right-16 -top-12 w-48 h-48 rounded-full bg-pink-200 opacity-30 pointer-events-none float-blob"></div>
+          <div class="absolute -right-16 -top-12 w-48 h-48 rounded-full bg-pink-200 dark:bg-pink-900/20 opacity-30 pointer-events-none float-blob"></div>
         </article>
   
         <!-- School Card -->
@@ -479,9 +478,9 @@
               <!-- left column -->
               <div class="flex-1 flex flex-col w-full">
                 <div class="flex items-center gap-4">
-                  <div class="rounded-lg p-3 bg-white/90 shadow-sm">
+                  <div class="rounded-lg p-3 bg-pink-100 dark:bg-pink-900/30 shadow-sm">
                     <!-- icon -->
-                    <svg class="w-6 h-6 text-pink-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <svg class="w-6 h-6 text-pink-600 dark:text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3h8v4M3 21h18v-7H3v7z"></path>
                     </svg>
                   </div>
@@ -660,7 +659,7 @@
         <!-- Two-up layout: For Home (Kits) and For Schools (Program) -->
         <div class="grid gap-8 md:grid-cols-2">
           <!-- For Home (Kits) -->
-          <article class="lr-card rounded-xl p-8 border bg-white/90 hover:shadow-2xl transition-shadow">
+          <article class="rounded-2xl p-6 md:p-8 border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:shadow-xl transition-all duration-300">
             <header class="mb-4">
               <h3 class="text-2xl font-bold text-slate-900 dark:text-white">For Home (Kits)</h3>
               <p class="mt-1 text-sm font-semibold text-pink-600">Levels: Level 0 • Level 1 • Level 2 • Level 3</p>
@@ -685,7 +684,7 @@
           </article>
   
           <!-- For Schools (Program) -->
-          <article class="lr-card rounded-xl p-8 border bg-white/90 hover:shadow-2xl transition-shadow">
+          <article class="rounded-2xl p-6 md:p-8 border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:shadow-xl transition-all duration-300">
             <header class="mb-4">
               <h3 class="text-2xl font-bold text-slate-900 dark:text-white">For Schools (Program)</h3>
             </header>

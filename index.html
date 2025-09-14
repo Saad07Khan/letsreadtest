@@ -722,18 +722,7 @@
       </div>
     </div>
 
- <!-- Reading Age Diagnostic Section (improved) -->
-<!-- Reading Age Diagnostic Section — with inline background fallback -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reading Age Diagnostic Section</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-<!-- Reading Age Diagnostic Section -->
+ <!-- Reading Age Diagnostic Section -->
 <section id="reading-age-diagnostic"
          class="relative overflow-hidden py-16 md:py-20"
          style="background: linear-gradient(90deg,#6b21a8 0%, #7c3aed 50%, #ec4899 100%);">
@@ -876,33 +865,7 @@
       </div>
     </div>
   </div>
-
-  <!-- Role-based CTA visibility -->
-  <script>
-    (function() {
-      try {
-        const role = 'parent'; // Simulating for demo - replace with actual localStorage logic
-        const schoolBtn = document.getElementById('cta-class-screening');
-        const parentBtn = document.getElementById('cta-free-check');
-        if (role === 'school') {
-          schoolBtn && schoolBtn.classList.remove('hidden');
-        } else if (role === 'parent') {
-          parentBtn && parentBtn.classList.remove('hidden');
-        } else {
-          schoolBtn && schoolBtn.classList.remove('hidden');
-          parentBtn && parentBtn.classList.remove('hidden');
-        }
-      } catch (e) {
-        const schoolBtn = document.getElementById('cta-class-screening');
-        const parentBtn = document.getElementById('cta-free-check');
-        schoolBtn && schoolBtn.classList.remove('hidden');
-        parentBtn && parentBtn.classList.remove('hidden');
-      }
-    })();
-  </script>
 </section>
-</body>
-</html>
 
   <!-- Testimonials Section -->
   <section class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">

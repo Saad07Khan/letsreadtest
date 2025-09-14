@@ -1,0 +1,10 @@
+/* Custom dark mode overrides */
+html.dark #how-it-works {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+}
+
+html.dark #how-it-works * {
+  color: #ffffff !important;
+}

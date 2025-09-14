@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="./public/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resources - Let's Read - Ignite The Joy of Reading</title>
+  <!-- use Poppins to get the rounded geometric look similar to the screenshot -->
+  <link rel="stylesheet" href="./public/tailwind.css" />
+  <!-- Dark Mode CSS -->
+  <link rel="stylesheet" href="./public/dark-mode.css" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <!-- Dark Mode JS -->
+  <script src="./public/js/dark-mode.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    [x-cloak] { display: none !important; }
+    /* Smooth transitions for dark mode */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Prevent flash of unstyled content in dark mode */
+    .js-enabled .dark-mode-transition * {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+  </style>
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)">
+  <style>
+    :root { --hero-yellow: #F6C548; } /* slightly warm yellow */
+    .font-poppins { font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+  </style>
+
+  <meta name="description"
+    content="Kinesthetic reading kits offer young children the tools to ignite a passion for lifelong learning. 100+ Schools, 10000+ Teachers, 50000+ Students trust Let's Read." />
+
+  <style>
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 240 10% 3.9%;
+      --primary: 240 73% 57%;
+      --primary-foreground: 0 0% 98%;
+      --muted: 240 4.8% 95.9%;
+      --muted-foreground: 240 3.8% 46.1%;
+      --card: 0 0% 100%;
+      --card-foreground: 240 10% 3.9%;
+      --border: 240 5.9% 90%;
+
+      --child-purple: 280 87% 65%;
+      --child-pink: 330 81% 60%;
+      --child-yellow: 45 93% 58%;
+      --child-blue: 210 92% 60%;
+      --child-green: 140 69% 58%;
+
+      --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--child-purple)));
+      --gradient-secondary: linear-gradient(135deg, hsl(var(--child-pink)), hsl(var(--child-purple)));
+      --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--child-purple)));
+    }
+
+    .dark {
+      --background: 240 10% 3.9%;
+      --foreground: 0 0% 98%;
+      --primary: 240 73% 57%;
+      --muted: 240 3.7% 15.9%;
+      --muted-foreground: 240 5% 64.9%;
+      --card: 240 10% 3.9%;
+      --card-foreground: 0 0% 98%;
+      --border: 240 3.7% 15.9%;
+    }
+
+    body {
+      background-color: hsl(var(--background));
+      color: hsl(var(--foreground));
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
+  
+  <!-- Alpine.js for interactivity -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body x-data="{
+  darkMode: localStorage.getItem('darkMode') === 'true',
+  mobileMenuOpen: false,
+  contactOpen: false
+}" x-init="
+  $watch('darkMode', val => { 
+    localStorage.setItem('darkMode', val); 
+    document.documentElement.classList.toggle('dark', val);
+    document.cookie = `darkMode=${val}; path=/; max-age=31536000; samesite=lax`;
+  });
+  document.documentElement.classList.toggle('dark', darkMode);
+" :class="{ 'dark': darkMode }" class="font-poppins bg-white dark:bg-gray-900 transition-colors duration-200" x-cloak>
+  <!-- Top Bar -->
+  <div x-show="topMenuOpen" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-8">
+        <div class="flex items-center">
+          <span>🎁 Free Reading Age Check for your child/class — Book a 10-min call</span>
+        </div>
+        <button
+          class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium px-3 py-1 rounded-full text-xs transition-colors">
+          Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <nav class="bg-white shadow-sm sticky top-0 z-50" x-data="{ mobileMenuOpen: false, contactOpen: false, name:'', email:'', mobileNum:'', childName:'', message:'', submitted:false }" x-cloak>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <a href="index.html" class="flex-shrink-0">
+          <img src="./public/lets read logo.png" alt="Let's Read Logo" class="h-10 w-auto">
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-1">
+          <a href="#" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">About</a>
+          <a href="#" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Programs</a>
+          <a href="resources.html" class="px-3 py-2 text-sm font-medium text-purple-600">Resources</a>
+          <a href="products.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Products</a>
+          <a href="#" @click.prevent="contactOpen = true" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Contact</a>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="hidden md:flex items-center space-x-3">
+          <button class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800">I'm a Parent</button>
+          <button class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700">I'm a School</button>
+          <button @click="darkMode = !darkMode" class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800" :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+            <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="md:hidden flex items-center space-x-2">
+          <button @click="darkMode = !darkMode" class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800" :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+            <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </button>
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white" aria-label="Toggle menu">
+            <svg x-show="!mobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg x-show="mobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div x-show="mobileMenuOpen" class="md:hidden pb-4">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">About</a>
+          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Programs</a>
+          <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Resources</a>
+          <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Products</a>
+          <a href="#" @click.prevent="contactOpen = true; mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Contact</a>
+        </div>
+        <div class="pt-4 pb-3 border-t border-gray-200">
+          <div class="flex items-center px-5 space-x-3">
+            <button
+              class="flex-1 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800">
+              I'm a Parent
+            </button>
+            <button
+              class="flex-1 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700">
+              I'm a School
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="h-12 md:h-20 lg:h-32"></div>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Resources</h1>
+      <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        Explore our collection of reading resources and materials.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Resource Card 1 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow dark:bg-gray-800">
+        <div class="h-48 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+          <svg class="h-16 w-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Phonics Worksheets</h3>
+          <p class="text-gray-600 mb-4">Downloadable worksheets for practicing phonics skills.</p>
+          <a href="#" class="text-purple-600 hover:text-purple-800 font-medium">Download Now →</a>
+        </div>
+      </div>
+
+      <!-- Resource Card 2 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow dark:bg-gray-800">
+        <div class="h-48 bg-gradient-to-r from-blue-500 to-cyan-400 flex items-center justify-center">
+          <svg class="h-16 w-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Instructional Videos</h3>
+          <p class="text-gray-600 mb-4">Watch our expert educators demonstrate reading strategies.</p>
+          <a href="#" class="text-purple-600 hover:text-purple-800 font-medium">Watch Videos →</a>
+        </div>
+      </div>
+
+      <!-- Resource Card 3 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow dark:bg-gray-800">
+        <div class="h-48 bg-gradient-to-r from-green-500 to-emerald-400 flex items-center justify-center">
+          <svg class="h-16 w-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Printable Activities</h3>
+          <p class="text-gray-600 mb-4">Engaging activities to reinforce reading skills.</p>
+          <a href="#" class="text-purple-600 hover:text-purple-800 font-medium">View Activities →</a>
+        </div>
+      </div>
+    </div>
+  </main>
+   
+  <!-- Footer -->
+  <footer
+  role="contentinfo"
+  style="background: linear-gradient(90deg,#5b21b6,#6d28d9); background-color: #6d28d9;"
+  class="text-white pt-16 pb-8 relative overflow-hidden z-10"
+  >
+  <!-- decorative top glow -->
+  <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 w-3/4 h-36 pointer-events-none bg-gradient-to-b from-pink-500/20 to-transparent rounded-full"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+      <!-- Brand -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="bg-yellow-400 rounded-full p-2 flex items-center justify-center">
+            <span class="text-purple-700 font-bold text-lg">LR</span>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold tracking-tight text-white">LET'S READ</h3>
+            <p class="text-sm text-white">Empowering young minds through literacy.</p>
+          </div>
+        </div>
+
+        <p class="text-white leading-relaxed text-sm max-w-sm">
+          Reading kits, diagnostics and training to help children build strong reading foundations.
+        </p>
+
+        <!-- Social / contact icons (brand-colored icons inside subtle circles) -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <!-- Twitter (brand color) -->
+          <a href="#" aria-label="Twitter" title="Twitter"
+             class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-sky-400 hover:text-white">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.52 8.52 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+            </svg>
+          </a>
+
+          <!-- WhatsApp (brand green) -->
+          <a href="https://wa.me/911234567890" aria-label="WhatsApp" title="WhatsApp"
+             class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-green-400 hover:text-white">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16.7 14.6c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.2s-.8.9-1 1.1c-.2.2-.4.2-.7.1-.3-.1-1.4-.5-2.6-1.6-1-1-1.6-2.2-1.8-2.5-.2-.3 0-.5.1-.7.1-.1.3-.4.4-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.7-.5-.6-.7-.6h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1.1 2.7 1.2 2.9.1.2 2.2 3.5 5.4 4.9.8.3 1.5.5 2 .6.8.3 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.4-.1-.2-.3-.2-.6-.3zM12 2C6.5 2 2 6.3 2 11.7c0 2.1.7 4 1.9 5.6L2 22l4.8-1.6c1.6.9 3.4 1.3 5.2 1.3 5.5 0 10-4.3 10-9.7S17.5 2 12 2z"/>
+            </svg>
+          </a>
+
+          <!-- Phone (neutral/blue) -->
+          <a href="tel:+911234567890" aria-label="Phone" title="Call us"
+             class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-blue-200 hover:text-white">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C9.92 21 3 14.08 3 6a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.27.2 2.48.57 3.6.12.33.04.7-.25.99l-2.2 2.2z"/>
+            </svg>
+          </a>
+
+          <!-- Email (neutral/red) -->
+          <a href="mailto:info@letsread.com" aria-label="Email" title="Email us"
+             class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-rose-300 hover:text-white">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- For Parents -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4 text-white">For Parents</h4>
+        <ul class="space-y-2 text-white text-sm">
+          <li><a href="#" class="hover:underline">Shop Kits</a></li>
+          <li><a href="#" class="hover:underline">Readiness Quiz</a></li>
+          <li><a href="#" class="hover:underline">Sample Activity</a></li>
+          <li><a href="#" class="hover:underline">FAQs</a></li>
+        </ul>
+      </div>
+
+      <!-- For Schools -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4 text-white">For Schools</h4>
+        <ul class="space-y-2 text-white text-sm">
+          <li><a href="#" class="hover:underline">Program</a></li>
+          <li><a href="#" class="hover:underline">Diagnostic</a></li>
+          <li><a href="#" class="hover:underline">Training</a></li>
+          <li><a href="#" class="hover:underline">Case Studies</a></li>
+          <li><a href="#" class="hover:underline">Demo</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4 text-white">Resources</h4>
+        <ul class="space-y-2 text-white text-sm">
+          <li><a href="#" class="hover:underline">Articles</a></li>
+          <li><a href="#" class="hover:underline">Downloads</a></li>
+          <li><a href="#" class="hover:underline">Research</a></li>
+          <li><a href="#" class="hover:underline">Press</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Legal row: full width -->
+    <div class="lg:col-span-4 mt-8 pt-6 border-t border-white/20">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="text-white text-sm">© <span id="lr-year">2025</span> Let's Read India. All rights reserved.</div>
+
+        <div class="flex items-center gap-4 text-sm">
+          <a href="#" class="text-white/70 hover:text-white transition">Privacy</a>
+          <span class="hidden md:inline text-white/40">•</span>
+          <a href="#" class="text-white/70 hover:text-white transition">Terms</a>
+          <span class="hidden md:inline text-white/40">•</span>
+          <a href="#" class="text-white/70 hover:text-white transition">Refunds / Shipping</a>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end grid -->
+</div>
+</footer>
+
+<!-- Contact Modal -->
+<div x-show="contactOpen" class="fixed inset-0 z-60 flex items-center justify-center px-4" x-transition>
+  <!-- backdrop -->
+  <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" @click="contactOpen = false" aria-hidden="true"></div>
+
+  <!-- modal panel -->
+  <div class="relative w-full max-w-md bg-white rounded-2xl p-6 shadow-2xl z-10 mx-auto my-8 overflow-y-auto" 
+       @click.away="contactOpen = false"
+       x-transition:enter="ease-out duration-300"
+       x-transition:enter-start="opacity-0 scale-95"
+       x-transition:enter-end="opacity-100 scale-100"
+       x-transition:leave="ease-in duration-200"
+       x-transition:leave-start="opacity-100 scale-100"
+       x-transition:leave-end="opacity-0 scale-95">
+    
+    <!-- Close button -->
+    <button @click="contactOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500">
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div class="text-center">
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">Let's Talk!</h2>
+      <p class="text-gray-600 mb-6">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+    </div>
+
+    <form class="space-y-4" @submit.prevent="">
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+        <input type="text" id="name" x-model="name" required 
+               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+        <input type="email" id="email" x-model="email" required
+               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+      </div>
+
+      <div>
+        <label for="mobile" class="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
+        <input type="tel" id="mobile" x-model="mobileNum" required
+               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+      </div>
+
+      <div>
+        <label for="child" class="block text-sm font-medium text-gray-700 mb-1">Child's Name (if applicable)</label>
+        <input type="text" id="child" x-model="childName"
+               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
+        <textarea id="message" rows="4" x-model="message" required
+                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+      </div>
+
+      <button type="submit" 
+              @click="submitted = true; setTimeout(() => { submitted = false; contactOpen = false }, 2000)"
+              class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">
+        <span x-show="!submitted">Send Message</span>
+        <span x-show="submitted">Message Sent!</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Auto-update year (optional) -->
+<script>
+  (function(){ const el = document.getElementById('lr-year'); if(el) el.textContent = new Date().getFullYear(); })();
+</script>
+</body>
+</html>

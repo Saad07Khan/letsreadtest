@@ -1,0 +1,179 @@
+/* Dark mode overrides */
+
+/* Base styles */
+.dark {
+  color-scheme: dark;
+}
+
+/* Text colors */
+.dark .text-gray-900 {
+  color: #f3f4f6; /* gray-100 */
+}
+
+.dark .text-gray-800 {
+  color: #e5e7eb; /* gray-200 */
+}
+
+.dark .text-gray-700 {
+  color: #d1d5db; /* gray-300 */
+}
+
+.dark .text-gray-600 {
+  color: #9ca3af; /* gray-400 */
+}
+
+/* Backgrounds */
+.dark .bg-white {
+  background-color: #111827; /* gray-900 */
+}
+
+.dark #how-it-works {
+  background-color: #000000 !important;
+}
+
+.dark .bg-gray-50 {
+  background-color: #1f2937; /* gray-800 */
+}
+
+.dark .bg-gray-100 {
+  background-color: #374151; /* gray-700 */
+}
+
+/* Cards and containers */
+.dark .bg-opacity-90 {
+  opacity: 0.9;
+}
+
+.dark .bg-white\/90 {
+  background-color: rgba(17, 24, 39, 0.9); /* gray-900 with 90% opacity */
+}
+
+/* Buttons */
+.dark .bg-purple-600 {
+  background-color: #7c3aed; /* purple-700 */
+}
+
+.dark .bg-pink-500 {
+  background-color: #db2777; /* pink-600 */
+}
+
+.dark .hover\:bg-purple-700:hover {
+  background-color: #6d28d9; /* purple-600 */
+}
+
+.dark .hover\:bg-pink-600:hover {
+  background-color: #ec4899; /* pink-500 */
+}
+
+/* Forms */
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #1f2937; /* gray-800 */
+  border-color: #374151; /* gray-700 */
+  color: white;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #9ca3af; /* gray-400 */
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+  border-color: #a78bfa; /* purple-400 */
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.5); /* purple-400 with opacity */
+  outline: none;
+}
+
+/* Navigation */
+.dark .sticky {
+  background-color: rgba(17, 24, 39, 0.95); /* gray-900 with 95% opacity */
+  backdrop-filter: blur(4px);
+}
+
+/* Footer */
+.dark footer {
+  border-top: 1px solid #374151; /* gray-700 */
+}
+
+/* Testimonials */
+.dark .testimonial-card {
+  background-color: #1f2937; /* gray-800 */
+  border-color: #374151; /* gray-700 */
+}
+
+/* FAQ */
+.dark .faq-item {
+  border-color: #374151; /* gray-700 */
+}
+
+.dark .faq-item button:hover {
+  background-color: #1f2937; /* gray-800 */
+}
+
+/* Modal */
+.dark .modal-content {
+  background-color: #1f2937; /* gray-800 */
+  border-color: #374151; /* gray-700 */
+}
+
+/* Override any light text that needs to be dark in dark mode */
+.dark .text-black {
+  color: white;
+}
+
+/* Add smooth transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Specific component overrides */
+.dark .lr-card {
+  border-color: #374151; /* gray-700 */
+  background-color: #1f2937; /* gray-800 */
+}
+
+.dark .lr-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: rgba(167, 139, 250, 0.2); /* purple-400 with 20% opacity */
+}
+
+/* Hero section adjustments */
+.dark .hero-gradient {
+  background: linear-gradient(to right, #4c1d95 0%, #831843 100%); /* purple-900 to pink-900 with opacity */
+}
+
+/* Testimonial author text */
+.dark .testimonial-author {
+  color: white;
+}
+
+/* Form labels */
+.dark label {
+  color: #d1d5db; /* gray-300 */
+}
+
+/* Custom scrollbar for dark mode */
+@media (min-width: 768px) {
+  .dark ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background-color: #1f2937; /* gray-800 */
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background-color: #4b5563; /* gray-600 */
+    border-radius: 9999px;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background-color: #6b7280; /* gray-500 */
+  }
+}

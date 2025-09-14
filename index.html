@@ -1,0 +1,1613 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="./public/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Let's Read - Ignite The Joy of Reading | Kinesthetic Reading Kits</title>
+  <!-- use Poppins to get the rounded geometric look similar to the screenshot -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Site font */
+    :root { --hero-yellow: #F6C548; } /* slightly warm yellow */
+    .font-poppins { font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+  </style>
+
+  <meta name="description"
+    content="Kinesthetic reading kits offer young children the tools to ignite a passion for lifelong learning. 100+ Schools, 10000+ Teachers, 50000+ Students trust Let's Read." />
+
+  <style>
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 240 10% 3.9%;
+      --primary: 240 73% 57%;
+      --primary-foreground: 0 0% 98%;
+      --muted: 240 4.8% 95.9%;
+      --muted-foreground: 240 3.8% 46.1%;
+      --card: 0 0% 100%;
+      --card-foreground: 240 10% 3.9%;
+      --border: 240 5.9% 90%;
+
+      --child-purple: 280 87% 65%;
+      --child-pink: 330 81% 60%;
+      --child-yellow: 45 93% 58%;
+      --child-blue: 210 92% 60%;
+      --child-green: 140 69% 58%;
+
+      --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--child-purple)));
+      --gradient-secondary: linear-gradient(135deg, hsl(var(--child-pink)), hsl(var(--child-purple)));
+      --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--child-purple)));
+    }
+
+    .dark {
+      --background: 240 10% 3.9%;
+      --foreground: 0 0% 98%;
+      --primary: 240 73% 57%;
+      --muted: 240 3.7% 15.9%;
+      --muted-foreground: 240 5% 64.9%;
+      --card: 240 10% 3.9%;
+      --card-foreground: 0 0% 98%;
+      --border: 240 3.7% 15.9%;
+    }
+
+    body {
+      background-color: hsl(var(--background));
+      color: hsl(var(--foreground));
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ---------- Custom styles & micro-interactions ---------- */
+
+    /* Card base */
+    .lr-card {
+      border-width: 1px;
+      border-style: solid;
+      transition: transform 250ms cubic-bezier(.2,.9,.2,1), box-shadow 250ms ease, border-color 250ms ease;
+      will-change: transform;
+    }
+    /* hover lift */
+    .lr-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 40px rgba(99, 24, 155, 0.12);
+    }
+    /* image zoom on hover */
+    .card-img-zoom img {
+      transition: transform 420ms cubic-bezier(.2,.9,.2,1);
+      transform-origin: center center;
+    }
+    .lr-card:hover .card-img-zoom img {
+      transform: scale(1.06) rotate(-0.5deg);
+    }
+
+    /* animated blur/float blobs */
+    @keyframes floatSlow {
+      0% { transform: translateY(0) scale(1); opacity: .35; }
+      50% { transform: translateY(-8px) scale(1.03); opacity: .45; }
+      100% { transform: translateY(0) scale(1); opacity: .35; }
+    }
+    .float-blob { animation: floatSlow 6s ease-in-out infinite; filter: blur(16px); }
+
+    /* CTA gradient glide and chevron slide */
+    .lr-cta {
+      transition: transform 220ms ease, box-shadow 220ms ease;
+      background-size: 200% 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .lr-cta:focus { outline: 4px solid rgba(139,92,246,0.14); outline-offset: 4px; }
+    .lr-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(99,24,155,0.14); }
+    .chev {
+      transition: transform 260ms cubic-bezier(.2,.9,.2,1);
+    }
+    .lr-cta:hover .chev { transform: translateX(6px); }
+
+    /* soft border colors */
+    .card-parent { border-color: rgba(189, 97, 255, 0.12); background: linear-gradient(180deg, rgba(250,244,255,0.9), rgba(255,250,255,0.85)); }
+    .card-school { border-color: rgba(255,176,199,0.12); background: linear-gradient(180deg, rgba(255,245,246,0.95), rgba(255,245,248,0.9)); }
+
+    /* small responsive tweaks */
+    @media (max-width: 767px) {
+      .lr-cta { width: 100%; display: inline-flex; justify-content:center; }
+    }
+
+    /* slight focus-visible utility */
+    :focus-visible { outline: 3px solid rgba(99,24,155,0.12); outline-offset: 3px; }
+  </style>
+  
+  <!-- Icon utility fallbacks: ensure sizes/colors show even if Tailwind utilities are missing -->
+  <style>
+    /* sizing helpers used by icon wrappers */
+    .w-14 { width: 3.5rem; }
+    .h-14 { height: 3.5rem; }
+    .w-7  { width: 1.75rem; }
+    .h-7  { height: 1.75rem; }
+    
+    /* layout helpers */
+    .inline-flex { display: inline-flex; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .rounded-full { border-radius: 9999px; }
+    
+    /* color helpers used by icons */
+    .text-purple-600 { color: #7c3aed; }
+    .text-pink-600   { color: #db2777; }
+    
+    /* background helpers for icon circles (escaped arbitrary values) */
+    .bg-\[rgba\(124\,58\,237\,0\.08\)\] { background-color: rgba(124,58,237,0.08); }
+    .bg-\[rgba\(236\,72\,153\,0\.08\)\]  { background-color: rgba(236,72,153,0.08); }
+    .bg-\[rgba\(124\,58\,237\,0\.06\)\] { background-color: rgba(124,58,237,0.06); }
+  </style>
+  
+  <!-- Local compiled Tailwind CSS -->
+  <link rel="stylesheet" href="./public/tailwind.css" />
+  <!-- Dark Mode CSS -->
+  <link rel="stylesheet" href="./public/dark-mode.css" />
+  <!-- Alpine.js for interactivity -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <!-- Dark Mode JS -->
+  <script src="./public/js/dark-mode.js" defer></script>
+  <!-- Custom Dark Mode Overrides -->
+  <link rel="stylesheet" href="./public/css/custom-dark.css" />
+</head>
+
+<body x-data="{ darkMode: localStorage.getItem('darkMode') === 'true', mobileMenuOpen: false, topMenuOpen: true, contactOpen: false }"
+  x-init="
+    // Initialize dark mode from localStorage
+    $watch('darkMode', val => { 
+      localStorage.setItem('darkMode', val); 
+      document.documentElement.classList.toggle('dark', val);
+      // Save preference for non-Alpine.js pages
+      document.cookie = `darkMode=${val}; path=/; max-age=31536000; samesite=lax`;
+    });
+    // Apply initial dark mode
+    document.documentElement.classList.toggle('dark', darkMode);
+  "
+  :class="{ 'dark': darkMode }"
+  class="font-poppins bg-white dark:bg-gray-900 transition-colors duration-200">
+
+  <!-- Top Bar -->
+  <div x-show="topMenuOpen" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-8">
+        <div class="flex items-center">
+          <span>🎁 Free Reading Age Check for your child/class — Book a 10-min call</span>
+        </div>
+        <button
+          class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium px-3 py-1 rounded-full text-xs transition-colors">
+          Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+ <!-- Main Navigation (updated) -->
+<nav class="bg-white shadow-sm sticky top-0 z-50" x-data="{ mobileMenuOpen: false, contactOpen: false, name:'', email:'', mobileNum:'', childName:'', message:'', submitted:false }" x-cloak>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <a href="index.html" class="flex-shrink-0">
+        <img src="./public/lets read logo.png" alt="Let's Read Logo" class="h-10 w-auto">
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-1">
+        <a href="#" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">About</a>
+        <a href="programs.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Programs</a>
+        <a href="resources.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Resources</a>
+        <a href="products.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Products</a>
+        <!-- Contact opens modal -->
+        <a href="#" @click.prevent="contactOpen = true" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Contact</a>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="hidden md:flex items-center space-x-3">
+        <button class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800">I'm a Parent</button>
+        <button class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700">I'm a School</button>
+        <button @click="darkMode = !darkMode" class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800" :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+          <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </button>
+        <a href="https://wa.me/1234567890" target="_blank" class="p-2 text-gray-600 hover:text-green-500" aria-label="WhatsApp">
+          <!-- svg -->
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"> ... </svg>
+        </a>
+
+        <a href="tel:+1234567890" class="p-2 text-gray-600 hover:text-blue-500" aria-label="Call">
+          <!-- svg -->
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> ... </svg>
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+        <div class="md:hidden flex items-center space-x-2">
+          <button @click="darkMode = !darkMode" class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800" :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+            <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </button>
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white" aria-label="Toggle menu">
+          <svg x-show="!mobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /> </svg>
+          <svg x-show="mobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /> </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div x-show="mobileMenuOpen" class="md:hidden pb-4" x-transition>
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">About</a>
+        <a href="programs.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Programs</a>
+        <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Resources</a>
+        <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Products</a>
+        <!-- Mobile Contact opens modal -->
+        <a href="#" @click.prevent="contactOpen = true; mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Contact</a>
+      </div>
+
+      <div class="pt-4 pb-3 border-t border-gray-200">
+        <div class="flex items-center px-5 space-x-3">
+          <button class="flex-1 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700">I'm a Parent</button>
+          <button class="flex-1 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">I'm a School</button>
+        </div>
+
+        <div class="mt-3 flex justify-center space-x-4">
+          <a href="https://wa.me/1234567890" target="_blank" class="text-gray-600 hover:text-green-500" aria-label="WhatsApp">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"> ... </svg>
+          </a>
+          <a href="tel:+1234567890" class="text-gray-600 hover:text-blue-500" aria-label="Call">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> ... </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div x-show="contactOpen" x-cloak class="fixed inset-0 z-60 flex items-center justify-center px-4" x-transition>
+    <!-- backdrop -->
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" @click="contactOpen = false" aria-hidden="true"></div>
+
+    <!-- modal panel -->
+    <div class="relative max-w-lg w-full mx-auto bg-white rounded-2xl shadow-xl overflow-hidden" @keydown.escape.window="contactOpen = false" x-trap.noscroll="contactOpen">
+      <div class="p-6">
+        <div class="flex items-start justify-between">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900">Please complete the form below</h3>
+            <p class="mt-1 text-sm text-gray-500">and we will get back to you within 24 hours.</p>
+          </div>
+          <button @click="contactOpen = false" class="text-gray-400 hover:text-gray-600 ml-4" aria-label="Close modal">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+        </div>
+
+        <form class="mt-5 space-y-4" @submit.prevent="
+            submitted = true;
+            /* simulate submit - replace with real submit logic */
+            console.log({name, email, mobileNum, childName, message});
+            setTimeout(()=> {
+              contactOpen = false;
+              submitted = false;
+              name=''; email=''; mobileNum=''; childName=''; message='';
+            }, 1200);
+          ">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Enter your name</label>
+            <input x-model="name" required type="text" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-purple-300" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Enter your email</label>
+            <input x-model="email" required type="email" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-purple-300" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Enter your mobile number</label>
+            <input x-model="mobileNum" required type="tel" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-purple-300" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Enter your child name</label>
+            <input x-model="childName" type="text" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-purple-300" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Enter your message</label>
+            <textarea x-model="message" rows="3" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-purple-300"></textarea>
+          </div>
+
+          <div class="flex items-center justify-between space-x-3">
+            <button type="submit" :disabled="submitted" class="flex-1 px-4 py-2 text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 disabled:opacity-60">
+              <span x-show="!submitted">Enquire Now</span>
+              <span x-show="submitted">Sending...</span>
+            </button>
+
+            <button type="button" @click="contactOpen = false" class="px-4 py-2 text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">
+              Cancel
+            </button>
+          </div>
+
+          <!-- optional success hint -->
+          <div x-show="submitted" class="text-sm text-green-600 text-center">Your enquiry is being sent...</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[90vh] flex items-center justify-start overflow-hidden">
+
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img src="./public/main image.png" alt="Children reading books" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/50 to-black/20"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 max-w-4xl mx-0 px-4 sm:px-6 lg:px-28 w-full text-white font-poppins">
+      <div class="text-left max-w-2xl">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-medium mb-4 leading-tight tracking-tight">
+          <span class="block">Kinesthetic Reading Kits &amp; Programs</span>
+          <span class="block">that Build Confident <span class="text-[var(--hero-yellow)] font-semibold">Readers</span></span>
+        </h1>
+
+        <p class="text-base sm:text-lg md:text-xl mb-6 text-gray-200 leading-relaxed">
+          Let's Read India helps children (3–10) move from phonics → comprehension → fluent reading through joyful,
+          hands-on learning — at home and in school.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 mb-6">
+          <button
+            style="background-color: var(--hero-yellow);"
+            class="text-gray-900 font-semibold py-3 px-6 rounded-full text-base transition-all transform hover:scale-105 w-full sm:w-auto text-center">
+            Shop Kits for My Child
+          </button>
+          <button
+            class="bg-white hover:bg-gray-100 text-gray-900 font-semibold py-3 px-6 rounded-full text-base transition-all transform hover:scale-105 w-full sm:w-auto text-center">
+            Book a Demo for My School
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- ---------- REPLACED: Choose Your Path to Reading Success (replaces old Programs) ---------- -->
+  <section id="choose-path" class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight">Choose Your Path to Reading Success</h2>
+        <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600 dark:text-gray-300">
+          Whether you're a parent looking to support your child at home or an educator seeking to enhance your classroom,
+          we have the perfect solution for you.
+        </p>
+      </div>
+  
+      <!-- Cards -->
+      <!-- NOTE: items-stretch ensures card children take equal height so mt-auto works reliably -->
+      <div class="grid gap-8 grid-cols-1 md:grid-cols-2 items-stretch">
+        <!-- Parent Card -->
+        <article
+          class="lr-card card-parent rounded-xl p-8 bg-[rgba(243,236,255,0.9)] dark:bg-gray-800 border border-pink-100 dark:border-gray-700 hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-full flex flex-col">
+          <div class="flex flex-col h-full">
+            <div class="flex items-start gap-6 w-full">
+              <!-- left column -->
+              <div class="flex-1 flex flex-col w-full">
+                <div class="flex items-center gap-4">
+                  <div class="rounded-lg p-3 bg-white/90 shadow-sm">
+                    <!-- icon -->
+                    <svg class="w-6 h-6 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2 2 2 4-4 6 6"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white">For Parents</h3>
+                    <div class="text-sm font-semibold text-pink-600 mt-1">Home Learning Kits</div>
+                  </div>
+                </div>
+    
+                <p class="mt-6 text-slate-600 dark:text-slate-300">
+                  Give your child the gift of confident reading with our structured, fun-filled home learning kits.
+                  Perfect for ages 3–10 and designed for busy parents.
+                </p>
+    
+                <ul class="mt-6 space-y-3 text-slate-700 dark:text-slate-200">
+                  <li class="flex items-start gap-3">
+                    <span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span>
+                    <span>Age-appropriate levels</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span>
+                    <span>Parent-friendly guides</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span>
+                    <span>Progress tracking</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span>
+                    <span>15–20 mins daily routines</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <!-- push CTA to bottom with margin -->
+            <div class="mt-8">
+              <a href="parents.html" class="inline-flex items-center justify-center px-8 py-3 rounded-lg text-white font-semibold lr-cta bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 transition-all">
+                Explore Home Kits
+                <svg class="w-4 h-4 ml-3 chev" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+            <!-- right column: image slot (optional) -->
+            <div class="hidden md:block w-40 h-40 rounded-lg overflow-hidden shadow-inner border border-white/40 dark:border-gray-600/40 card-img-zoom self-center flex-shrink-0">
+              <!-- Replace src with your image or remove the <img> if you don't want one -->
+              <img src="./public/parent-card.jpg" alt="Parent kit preview" class="w-full h-full object-cover">
+            </div>
+          </div>
+  
+          <!-- decorative float blob -->
+          <div class="absolute -right-16 -top-12 w-48 h-48 rounded-full bg-pink-200 opacity-30 pointer-events-none float-blob"></div>
+        </article>
+  
+        <!-- School Card -->
+        <article
+          class="lr-card card-school rounded-xl p-8 bg-[rgba(255,240,242,0.9)] dark:bg-gray-800 border border-pink-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-full flex flex-col">
+          <div class="flex flex-col h-full">
+            <div class="flex items-start gap-6 w-full">
+              <!-- left column -->
+              <div class="flex-1 flex flex-col w-full">
+                <div class="flex items-center gap-4">
+                  <div class="rounded-lg p-3 bg-white/90 shadow-sm">
+                    <!-- icon -->
+                    <svg class="w-6 h-6 text-pink-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3h8v4M3 21h18v-7H3v7z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white">For Schools</h3>
+                    <div class="text-sm font-semibold text-pink-600 mt-1">Classroom Programs</div>
+                  </div>
+                </div>
+    
+                <p class="mt-6 text-slate-600 dark:text-slate-300">
+                  Transform your school's reading program with our evidence-based curriculum and teacher training.
+                  Aligned with educational standards and proven to boost literacy rates.
+                </p>
+    
+                <ul class="mt-6 space-y-3 text-slate-700 dark:text-slate-200">
+                  <li class="flex items-start gap-3">
+                    <span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span>
+                    <span>Teacher training</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span>
+                    <span>Classroom resources</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span>
+                    <span>Assessment tools</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span>
+                    <span>Ongoing support</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <!-- push CTA to bottom with margin -->
+            <div class="mt-8">
+              <a href="schools.html" class="inline-flex items-center justify-center px-8 py-3 rounded-lg text-white font-semibold lr-cta bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 transition-all">
+                See School Program
+                <svg class="w-4 h-4 ml-3 chev" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+            
+            <!-- right column: image slot (optional) -->
+            <div class="hidden md:block w-40 h-40 rounded-lg overflow-hidden shadow-inner border border-white/40 dark:border-gray-600/40 card-img-zoom self-center flex-shrink-0">
+              <!-- Replace src with your image or remove the <img> if you don't want one -->
+              <img src="./public/school-card.jpg" alt="School program preview" class="w-full h-full object-cover">
+            </div>
+          </div>
+  
+          <div class="absolute -left-16 -bottom-12 w-48 h-48 rounded-full bg-purple-200 opacity-30 pointer-events-none float-blob"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ---------- end replaced section ---------- -->
+<!-- How It Works Section -->
+<section id="how-it-works" class="py-20 bg-gradient-to-b from-white to-pink-50 dark:bg-black" style="background-color: var(--background);" x-bind:style="darkMode ? 'background-color: #000000 !important;' : ''">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-500">How Let's Read India Works</h2>
+      <div class="w-24 h-1.5 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6 rounded-full"></div>
+      <div class="flex justify-center items-center space-x-2 mb-8">
+        <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+        <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+      </div>
+      <p class="text-lg text-slate-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        Our comprehensive approach combines proven methodologies with innovative tools to create an effective and joyful
+        reading learning experience for children of all ages.
+      </p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <!-- Card 1: Systematic Phonics -->
+      <article class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
+        <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/30 dark:to-pink-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="currentColor" aria-hidden="true">
+            <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 11.414V7a1 1 0 10-2 0v6a1 1 0 00.293.707l3 3a1 1 0 101.414-1.414L13 13.414z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">Systematic Phonics</h3>
+        <p class="text-slate-600 dark:text-gray-300 leading-relaxed flex-grow">
+          Structured progression through phonetic patterns, building strong foundational reading skills step by step with our carefully designed curriculum.
+        </p>
+        <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
+          <a href="#" class="inline-flex items-center text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors">
+            Learn more
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Card 2: Kinesthetic Activities -->
+      <article class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
+        <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-50 to-purple-50 dark:from-pink-900/30 dark:to-purple-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-pink-600 dark:text-pink-400" fill="currentColor" aria-hidden="true">
+            <path d="M7 11a1 1 0 011-1h.26a2 2 0 001.98-1.68A3 3 0 0114.5 6c1.34 0 2.5 1.08 2.5 2.41V11h1.5A2.5 2.5 0 0121 13.5V18a4 4 0 01-4 4H8a4 4 0 01-4-4v-3a3 3 0 013-3h.5z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Kinesthetic Activities</h3>
+        <p class="text-slate-600 dark:text-gray-300 leading-relaxed flex-grow">
+          Hands-on learning with letter tiles, movement games, and tactile experiences that make reading engaging and memorable for young learners.
+        </p>
+        <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
+          <a href="#" class="inline-flex items-center text-sm font-medium text-pink-600 dark:text-pink-400 hover:text-pink-800 dark:hover:text-pink-300 transition-colors">
+            Learn more
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Card 3: Decodable Readers -->
+      <article class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
+        <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="currentColor" aria-hidden="true">
+            <path d="M3 5a1 1 0 011-1h12a3 3 0 013 3v10a1 1 0 01-1 1H5a2 2 0 01-2-2V5zM6 7v10h12V7H6z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Decodable Readers</h3>
+        <p class="text-slate-600 dark:text-gray-300 leading-relaxed flex-grow">
+          Carefully crafted stories that match your child's phonetic knowledge, building confidence and fluency with every page they read.
+        </p>
+        <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
+          <a href="#" class="inline-flex items-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+            Learn more
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Card 4: Reading Diagnostic -->
+      <article class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
+        <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/30 dark:to-yellow-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-amber-600 dark:text-amber-400" fill="currentColor" aria-hidden="true">
+            <path d="M3 3h2v18H3V3zm5 6h2v12H8V9zm5-4h2v16h-2V5zm5 8h2v8h-2v-8z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">Reading Diagnostic</h3>
+        <p class="text-slate-600 dark:text-gray-300 leading-relaxed flex-grow">
+          Precise assessment tools that identify reading levels and guide personalized learning paths for optimal progress.
+        </p>
+        <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
+          <a href="#" class="inline-flex items-center text-sm font-medium text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 transition-colors">
+            Learn more
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- <div class="h-12 md:h-20 lg:h-32"></div> -->
+  <!-- What’s Inside (Program Snapshot) -->
+    <section id="program-snapshot" class="mt-24 md:mt-32 py-16 bg-white dark:bg-gray-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header matches HOW LET'S READ INDIA WORKS style -->
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide">WHAT’S INSIDE ?</h2>
+          <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+          <div class="flex justify-center items-center space-x-2 mb-6">
+            <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+            <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+            <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+          </div>
+        </div>
+  
+        <!-- Two-up layout: For Home (Kits) and For Schools (Program) -->
+        <div class="grid gap-8 md:grid-cols-2">
+          <!-- For Home (Kits) -->
+          <article class="lr-card rounded-xl p-8 border bg-white/90 hover:shadow-2xl transition-shadow">
+            <header class="mb-4">
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">For Home (Kits)</h3>
+              <p class="mt-1 text-sm font-semibold text-pink-600">Levels: Level 0 • Level 1 • Level 2 • Level 3</p>
+            </header>
+  
+            <ul class="mt-4 space-y-3 text-slate-700 dark:text-slate-300">
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span><span>letter/sound cards</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span><span>blending boards</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span><span>tactile mats</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span><span>word families</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span><span>decodable story booklets</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span><span>progress tracker</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span><span>parent guide</span></li>
+            </ul>
+  
+            <div class="mt-6 space-y-3">
+              <a href="#" class="w-full block text-center px-6 py-3 rounded-lg text-white font-semibold lr-cta bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600">
+                Shop All Kits
+                <svg class="w-4 h-4 ml-3 chev inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+  
+          <!-- For Schools (Program) -->
+          <article class="lr-card rounded-xl p-8 border bg-white/90 hover:shadow-2xl transition-shadow">
+            <header class="mb-4">
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">For Schools (Program)</h3>
+            </header>
+  
+            <ul class="mt-10 space-y-3 text-slate-700 dark:text-slate-300">
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span><span>1 classroom kit per section</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span><span>set of levelled decodables</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span><span>lesson plans</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span><span>LR Diagnostic Tool</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span><span>dashboards</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span><span>teacher training (in-person/virtual)</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span><span>ongoing mentoring</span></li>
+            </ul>
+  
+            <div class="mt-6 flex flex-col sm:flex-row gap-3">
+              <a href="#" class="flex-1 text-center px-6 py-3 rounded-lg text-white font-semibold lr-cta bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 flex items-center justify-center">
+                Download Brochure
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              </a>
+              <a href="#" class="flex-1 text-center px-6 py-3 rounded-lg text-white font-semibold lr-cta bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 flex items-center justify-center">
+                Book a Demo
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section> 
+    <div class="h-12 md:h-20 lg:h-32"></div>
+    <!-- Section Heading: Reading Age Diagnostic -->
+    <div class="text-center mt-16 mb-6">
+      <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-wide">READING AGE DIAGNOSTIC</h2>
+      <div class="w-20 h-1 bg-pink-500 mx-auto mb-6 mt-3"></div>
+      <div class="flex justify-center items-center space-x-2">
+        <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+        <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+      </div>
+    </div>
+
+ <!-- Reading Age Diagnostic Section (improved) -->
+<!-- Reading Age Diagnostic Section — with inline background fallback -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Age Diagnostic Section</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<!-- Reading Age Diagnostic Section -->
+<section id="reading-age-diagnostic"
+         class="relative overflow-hidden py-16 md:py-20"
+         style="background: linear-gradient(90deg,#6b21a8 0%, #7c3aed 50%, #ec4899 100%);">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <!-- Left: Headline, copy, features, CTAs -->
+      <div class="text-white">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+          Know Their Reading Age. Teach What Matters.
+        </h2>
+
+        <p class="mt-6 text-white/90 text-lg leading-relaxed max-w-xl">
+          Our research-backed diagnostic tool provides precise reading-age assessment in just minutes.
+          Understand exactly where each child stands and what they need to progress confidently.
+        </p>
+
+        <!-- Feature boxes in 2x2 grid -->
+        <div class="mt-8 grid grid-cols-2 gap-4">
+          <!-- 5-7 Minutes -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <div class="flex items-center gap-2 mb-2">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3M12 6a9 9 0 110 12 9 9 0 010-12z" />
+              </svg>
+              <span class="text-white font-semibold">5-7 Minutes</span>
+            </div>
+            <p class="text-white/80 text-sm">Quick, efficient assessment that doesn't disrupt learning time</p>
+          </div>
+
+          <!-- Student-Friendly -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <div class="flex items-center gap-2 mb-2">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm-7 9a7 7 0 0114 0v1H5v-1z"/>
+              </svg>
+              <span class="text-white font-semibold">Student-Friendly</span>
+            </div>
+            <p class="text-white/80 text-sm">Engaging, game-like interface that children enjoy</p>
+          </div>
+
+          <!-- Precise Results -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <div class="flex items-center gap-2 mb-2">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+              <span class="text-white font-semibold">Precise Results</span>
+            </div>
+            <p class="text-white/80 text-sm">Accurate reading age assessment with detailed insights</p>
+          </div>
+
+          <!-- Personalized Path -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <div class="flex items-center gap-2 mb-2">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+              <span class="text-white font-semibold">Personalized Path</span>
+            </div>
+            <p class="text-white/80 text-sm">Customized learning recommendations based on results</p>
+          </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <a id="cta-class-screening" href="#" class="hidden role-school inline-flex items-center justify-center px-8 py-3 rounded-lg text-purple-700 font-semibold bg-white hover:bg-white/90 transition shadow-lg">
+            Run a Class Screening
+          </a>
+
+          <a id="cta-free-check" href="#" class="hidden role-parent inline-flex items-center justify-center px-8 py-3 rounded-lg text-purple-700 font-semibold bg-white hover:bg-white/90 transition shadow-lg">
+            Get a Free Check for My Child
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: What You'll Discover and Sample Report -->
+      <div class="space-y-8">
+        <!-- What You'll Discover -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white border border-white/20">
+          <h3 class="text-xl font-semibold mb-6 text-white">What You'll Discover</h3>
+
+          <ul class="space-y-4 text-white/90">
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-yellow-300 flex-shrink-0"></span>
+              <span>Identify exact reading level and gaps</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-yellow-300 flex-shrink-0"></span>
+              <span>Track progress over time with detailed reports</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-yellow-300 flex-shrink-0"></span>
+              <span>Get personalized learning recommendations</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-yellow-300 flex-shrink-0"></span>
+              <span>Understand phonetic strengths and weaknesses</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-2 h-2 rounded-full bg-yellow-300 flex-shrink-0"></span>
+              <span>Compare against age-appropriate benchmarks</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Sample Report -->
+        <div class="bg-white rounded-2xl p-6 shadow-lg">
+          <div class="text-purple-600 font-semibold mb-4">Sample Diagnostic Report</div>
+
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <div>
+                <div class="text-sm text-gray-600">Reading Age:</div>
+                <div class="font-bold text-gray-900 text-lg">7 years 3 months</div>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center">
+              <div>
+                <div class="text-sm text-gray-600">Phonics Level:</div>
+                <div class="font-bold text-gray-900">Level 2 - Consonant Blends</div>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center">
+              <div>
+                <div class="text-sm text-gray-600">Recommended Kit:</div>
+                <div class="font-semibold text-purple-600">Level 2 Home Kit</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-purple-600 to-pink-500 rounded-full" style="width: 75%"></div>
+              </div>
+              <div class="mt-2 text-xs text-gray-600">75% progress towards next level</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Role-based CTA visibility -->
+  <script>
+    (function() {
+      try {
+        const role = 'parent'; // Simulating for demo - replace with actual localStorage logic
+        const schoolBtn = document.getElementById('cta-class-screening');
+        const parentBtn = document.getElementById('cta-free-check');
+        if (role === 'school') {
+          schoolBtn && schoolBtn.classList.remove('hidden');
+        } else if (role === 'parent') {
+          parentBtn && parentBtn.classList.remove('hidden');
+        } else {
+          schoolBtn && schoolBtn.classList.remove('hidden');
+          parentBtn && parentBtn.classList.remove('hidden');
+        }
+      } catch (e) {
+        const schoolBtn = document.getElementById('cta-class-screening');
+        const parentBtn = document.getElementById('cta-free-check');
+        schoolBtn && schoolBtn.classList.remove('hidden');
+        parentBtn && parentBtn.classList.remove('hidden');
+      }
+    })();
+  </script>
+</section>
+</body>
+</html>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-10 left-20 w-20 h-20 bg-yellow-400 rounded-full"></div>
+      <div class="absolute bottom-32 right-16 w-28 h-28 bg-pink-500 rounded-full"></div>
+      <div class="absolute top-1/2 right-1/4 w-16 h-16 bg-blue-400 rounded-full"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">TESTIMONIALS</h2>
+        <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+        <div class="flex justify-center items-center space-x-2 mb-6">
+          <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+          <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+          <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+        </div>
+        <p class="text-lg text-gray-600 dark:text-gray-300">
+          See what people say about our company
+        </p>
+      </div>
+
+      <!-- Testimonials grid -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-purple-600 text-white relative rounded-lg p-8">
+          <div class="absolute -top-4 left-6">
+            <div class="bg-yellow-400 w-12 h-12 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="pt-8">
+            <p class="text-white/90 leading-relaxed mb-6">
+              Let's read really helped my students build clarity of sounds and gaining confidence in listening and
+              speaking. The hands-on activities got my students curious for learning.
+            </p>
+
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-white/20 rounded-full mr-4 flex items-center justify-center">
+                <div class="w-8 h-8 bg-pink-500 rounded-full"></div>
+              </div>
+              <div>
+                <div class="font-semibold">Harshita Doe</div>
+                <div class="text-yellow-400 text-sm">TeachForIndia Fellow</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-600 text-white relative rounded-lg p-8">
+          <div class="absolute -top-4 left-6">
+            <div class="bg-yellow-400 w-12 h-12 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="pt-8">
+            <p class="text-white/90 leading-relaxed mb-6">
+              The 'Let's Read' materials have been an invaluable asset in my classroom. Their impact has been especially
+              profound for students facing learning challenges. The interactive and engaging nature of the activities
+              has been a source of joy for all students, fostering a fun-filled approach to reading and comprehension.
+            </p>
+
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-white/20 rounded-full mr-4 flex items-center justify-center">
+                <div class="w-8 h-8 bg-pink-500 rounded-full"></div>
+              </div>
+              <div>
+                <div class="font-semibold">Muhammed Hasan</div>
+                <div class="text-yellow-400 text-sm">Teach For India</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-600 text-white relative rounded-lg p-8">
+          <div class="absolute -top-4 left-6">
+            <div class="bg-yellow-400 w-12 h-12 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="pt-8">
+            <p class="text-white/90 leading-relaxed mb-6">
+              Thanks to Let's Read, learning English as a language has become engaging, joyful, and highly effective for
+              the students. I wholeheartedly recommend the Let's Read program to any educator seeking to revolutionize
+              literacy instruction and make a lasting impact in their classrooms.
+            </p>
+
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-white/20 rounded-full mr-4 flex items-center justify-center">
+                <div class="w-8 h-8 bg-pink-500 rounded-full"></div>
+              </div>
+              <div>
+                <div class="font-semibold">Harshita Doe</div>
+                <div class="text-yellow-400 text-sm">RAASTA School Transformation Program</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The rest of your page remains unchanged (Products, Skills, FAQ, CTA, Footer) -->
+  <!-- Products Section -->
+  <section id="products" class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 dark:text-white">Our Products</h2>
+        <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+        <div class="flex justify-center items-center space-x-2 mb-6">
+          <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+          <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+          <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+        </div>
+        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          Explore our wide range of Products Designed to meet your needs. Select the perfect solution for yourself with
+          just a few clicks.
+        </p>
+      </div>
+
+      <!-- ... rest of products content identical to your original ... -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+        <div class="flex flex-col bg-purple-600 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full">
+          <div class="aspect-video bg-gradient-to-r from-purple-600 to-pink-500"></div>
+          <div class="flex flex-col flex-grow bg-purple-600 text-white p-6">
+            <div class="relative flex flex-col grow" style="height: 180px; overflow: hidden;">
+            <h3 class="text-xl font-bold mb-3 dark:text-white">Let's Read Educator's Guide</h3>
+            <p class="text-white/90 text-sm leading-relaxed">
+              Our Let's Read Educator's Handbook is your ultimate guide to teaching phonics skills, effectively. The
+              handbook includes a detailed guide to parents and learners of how to utilize our toolkit properly to
+              ensure each group...
+            </p>
+            <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-purple-600 to-transparent"></div>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-white/80 mb-3 h-5">
+              <a href="products.html" class="underline">Read More</a>
+            </div>
+            <div x-data="{ show:false }" class="mt-auto">
+              <div x-show="!show">
+                <button @click="show = true"
+                  class="w-full bg-yellow-400 text-gray-900 hover:bg-yellow-300 py-2 px-4 rounded-md transition-colors">
+                  Shop Now
+                </button>
+              </div>
+              <div x-show="show" class="flex gap-2">
+                <button @click="$store.cart.add({ id: 'educators-guide', name: `Let's Read Educator's Guide` })"
+                  class="flex-1 bg-yellow-400 text-gray-900 hover:bg-yellow-300 py-2 px-4 rounded-md transition-colors font-semibold">
+                  Add to Cart
+                </button>
+                <button
+                  class="flex-1 bg-white text-gray-900 hover:bg-gray-100 py-2 px-4 rounded-md transition-colors font-semibold">
+                  Buy Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col bg-purple-600 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full">
+          <div class="aspect-video bg-gradient-to-r from-purple-600 to-pink-500"></div>
+          <div class="flex flex-col flex-grow bg-purple-600 text-white p-6">
+            <div class="relative flex flex-col grow" style="height: 180px; overflow: hidden;">
+            <h3 class="text-xl font-bold mb-3 dark:text-white">Let's Read Kits</h3>
+            <p class="text-white/90 text-sm leading-relaxed">
+              Let's Read kits are fun, engaging hands-on activities and games that support reading at every level.
+              Purchase these exciting activities to make reading great, fun...
+            </p>
+            <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-purple-600 to-transparent"></div>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-white/80 mb-3 h-5">
+              <a href="products.html" class="underline">Read More</a>
+            </div>
+            <div x-data="{ show:false }" class="mt-auto">
+              <div x-show="!show">
+                <button @click="show = true"
+                  class="w-full bg-yellow-400 text-gray-900 hover:bg-yellow-300 py-2 px-4 rounded-md transition-colors">
+                  Shop Now
+                </button>
+              </div>
+              <div x-show="show" class="flex gap-2">
+                <button @click="$store.cart.add({ id: 'kits', name: `Let's Read Kits` })"
+                  class="flex-1 bg-yellow-400 text-gray-900 hover:bg-yellow-300 py-2 px-4 rounded-md transition-colors font-semibold">
+                  Add to Cart
+                </button>
+                <button
+                  class="flex-1 bg-white text-gray-900 hover:bg-gray-100 py-2 px-4 rounded-md transition-colors font-semibold">
+                  Buy Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col bg-purple-600 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full">
+          <div class="aspect-video bg-gradient-to-r from-purple-600 to-pink-500"></div>
+          <div class="flex flex-col flex-grow bg-purple-600 text-white p-6">
+            <div class="relative flex flex-col grow" style="height: 180px; overflow: hidden;">
+            <h3 class="text-xl font-bold mb-3 dark:text-white">Level 0 Kit</h3>
+            <p class="text-white/90 text-sm leading-relaxed">
+              Level 0 is for beginners and mostly young children. The carefully planned sets of activities help the
+              children to transition from mother tongue to English and recognise letters and associate sound with
+              symbols. Although this level is for early years, activities like the picture cards can be used as pre...
+            </p>
+            <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-purple-600 to-transparent"></div>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-white/80 mb-3 h-5">
+              <a href="products.html" class="underline">Read More</a>
+            </div>
+            <div x-data="{ show:false }" class="mt-auto">
+              <div x-show="!show">
+                <button @click="show = true"
+                  class="w-full bg-yellow-400 text-gray-900 hover:bg-yellow-300 py-2 px-4 rounded-md transition-colors">
+                  Shop Now
+                </button>
+              </div>
+              <div x-show="show" class="flex gap-2">
+                <button @click="$store.cart.add({ id: 'level-0', name: 'Level 0 Kit' })"
+                  class="flex-1 bg-yellow-400 text-gray-900 hover:bg-yellow-300 py-2 px-4 rounded-md transition-colors font-semibold">
+                  Add to Cart
+                </button>
+                <button
+                  class="flex-1 bg-white text-gray-900 hover:bg-gray-100 py-2 px-4 rounded-md transition-colors font-semibold">
+                  Buy Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col bg-purple-600 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full">
+          <div class="aspect-video bg-gradient-to-r from-purple-600 to-pink-500"></div>
+          <div class="flex flex-col flex-grow bg-purple-600 text-white p-6">
+            <div class="relative flex flex-col grow" style="height: 180px; overflow: hidden;">
+            <h3 class="text-xl font-bold mb-3 dark:text-white">Level 1 Kit</h3>
+            <p class="text-white/90 text-sm leading-relaxed">
+              Level 1 is all about learning to read CVC (3 letter) words, sentences and stories. The carefully selected
+              activities help young learners to master fluency in reading and pick up speed. This is excellent for
+              building self esteem for your little ones. The Level 1 kit comes with a detailed manual t...
+            </p>
+            <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-purple-600 to-transparent"></div>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-white/80 mb-3 h-5">
+              <a href="products.html" class="underline">Read More</a>
+            </div>
+            <div x-data="{ show:false }" class="mt-auto">
+              <div x-show="!show">
+                <button @click="show = true"
+                  class="w-full bg-yellow-400 text-gray-900 hover:bg-yellow-300 py-2 px-4 rounded-md transition-colors">
+                  Shop Now
+                </button>
+              </div>
+              <div x-show="show" class="flex gap-2">
+                <button @click="$store.cart.add({ id: 'level-1', name: 'Level 1 Kit' })"
+                  class="flex-1 bg-yellow-400 text-gray-900 hover:bg-yellow-300 py-2 px-4 rounded-md transition-colors font-semibold">
+                  Add to Cart
+                </button>
+                <button
+                  class="flex-1 bg-white text-gray-900 hover:bg-gray-100 py-2 px-4 rounded-md transition-colors font-semibold">
+                  Buy Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Achievements etc - unchanged -->
+      <div class="mb-16">
+        <div class="text-center mb-12">
+          <h3 class="text-4xl md:text-5xl font-bold mb-4 dark:text-white">Our Achievements</h3>
+          <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+          <div class="flex justify-center items-center space-x-2">
+            <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+            <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+            <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
+          <div class="bg-purple-600 text-white text-center p-6 rounded-lg">
+            <div class="text-4xl mb-4">🏫</div>
+            <div class="text-3xl md:text-4xl font-bold mb-2">100+</div>
+            <div class="text-lg">Schools</div>
+          </div>
+          <div class="bg-purple-600 text-white text-center p-6 rounded-lg">
+            <div class="text-4xl mb-4">👩‍🏫</div>
+            <div class="text-3xl md:text-4xl font-bold mb-2">10K+</div>
+            <div class="text-lg">Teachers</div>
+          </div>
+          <div class="bg-purple-600 text-white text-center p-6 rounded-lg">
+            <div class="text-4xl mb-4">👨‍🎓</div>
+            <div class="text-3xl md:text-4xl font-bold mb-2">50K+</div>
+            <div class="text-lg">Students</div>
+          </div>
+          <div class="bg-purple-600 text-white text-center p-6 rounded-lg">
+            <div class="text-4xl mb-4">📜</div>
+            <div class="text-3xl md:text-4xl font-bold mb-2">NCF 2022</div>
+            <div class="text-lg">NEP 2020 / NIPUN Bharat</div>
+          </div>
+          <div class="bg-purple-600 text-white text-center p-6 rounded-lg">
+            <div class="text-4xl mb-4">📈</div>
+            <div class="text-3xl md:text-4xl font-bold mb-2">8-12 wks</div>
+            <div class="text-lg">Reading age improvement</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <h3 class="text-2xl md:text-3xl font-bold mb-2 dark:text-white">
+          <span class="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">LET'S READ</span>
+          Helps Your Child Develop
+        </h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-20 left-10 w-32 h-32 bg-yellow-400 rounded-full"></div>
+      <div class="absolute bottom-20 right-10 w-24 h-24 bg-pink-500 rounded-full"></div>
+      <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-blue-400 rounded-full"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Skills Icons Section -->
+      <div class="mb-20">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-4xl mx-auto">
+          <div class="text-center">
+            <div class="bg-purple-600 rounded-2xl p-6 mb-4 mx-auto w-20 h-20 flex items-center justify-center">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253">
+                </path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-sm dark:text-white">Literacy Skills</h3>
+          </div>
+          <div class="text-center">
+            <div class="bg-purple-600 rounded-2xl p-6 mb-4 mx-auto w-20 h-20 flex items-center justify-center">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                </path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-sm dark:text-white">Confidence</h3>
+          </div>
+          <div class="text-center">
+            <div class="bg-purple-600 rounded-2xl p-6 mb-4 mx-auto w-20 h-20 flex items-center justify-center">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                </path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-sm dark:text-white">Communication Skills</h3>
+          </div>
+          <div class="text-center">
+            <div class="bg-purple-600 rounded-2xl p-6 mb-4 mx-auto w-20 h-20 flex items-center justify-center">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                </path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-sm dark:text-white">Social Skills</h3>
+          </div>
+          <div class="text-center">
+            <div class="bg-purple-600 rounded-2xl p-6 mb-4 mx-auto w-20 h-20 flex items-center justify-center">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                </path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-sm dark:text-white">Creativity & Imagination</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder & Research Section -->
+  <section class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide">Founder & Research</h2>
+        <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+        <div class="flex justify-center items-center space-x-2 mb-6">
+          <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+          <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+          <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col md:flex-row items-center gap-8 max-w-5xl mx-auto">
+        <div class="md:w-1/3">
+          <img src="https://via.placeholder.com/300x400/f3f4f6/6b7280?text=Dr.+Asma+Zaidi" alt="Dr. Asma Zaidi" class="rounded-lg shadow-xl w-full h-auto">
+        </div>
+        <div class="md:w-2/3 space-y-6">
+          <p class="text-lg text-gray-700 dark:text-gray-300">
+            Founded by <span class="font-semibold text-pink-600 dark:text-pink-400">Dr. Asma Zaidi</span>, award-winning early-years educator and teacher-trainer. Her doctoral work on kinesthetic reading underpins Let's Read India's program design and the LR Diagnostic.
+          </p>
+          <div class="pt-4">
+            <a href="about.html" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 dark:bg-pink-700 dark:hover:bg-pink-800 transition-colors">
+              About Our Approach
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden" x-data="faq()">
+    <div class="absolute left-0 bottom-0 w-80 h-80 opacity-20">
+      <div class="w-full h-full bg-gradient-to-r from-yellow-400 to-pink-500 rounded-full"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 dark:text-white">Frequently Asked Questions</h2>
+        <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+        <div class="flex justify-center items-center space-x-2 mb-6">
+          <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+          <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+          <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+        </div>
+        <p class="text-lg text-gray-600 dark:text-gray-300">
+          Get Answers to Some Common Queries.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <span class="font-medium pr-4">1. What ages is this for?</span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="isOpen" x-transition class="px-6 pb-6 pt-0 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            <div class="border-t pt-4">
+              <p class="text-gray-600 leading-relaxed dark:text-gray-400">3–10 years (levels progress with the child).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <span class="font-medium pr-4">2. How much time daily?</span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="isOpen" x-transition class="px-6 pb-6 pt-0 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            <div class="border-t pt-4">
+              <p class="text-gray-600 leading-relaxed dark:text-gray-400">10–15 minutes consistently works best.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <span class="font-medium pr-4">3. Do I need training?</span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="isOpen" x-transition class="px-6 pb-6 pt-0 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            <div class="border-t pt-4">
+              <p class="text-gray-600 leading-relaxed dark:text-gray-400">Parent/teacher guides included; schools get training.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <span class="font-medium pr-4">4. Does this follow the curriculum?</span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="isOpen" x-transition class="px-6 pb-6 pt-0 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            <div class="border-t pt-4">
+              <p class="text-gray-600 leading-relaxed dark:text-gray-400">Yes—aligned with NCF 2022 and NEP 2020 FLN goals.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <span class="font-medium pr-4">5. How is progress tracked?</span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="isOpen" x-transition class="px-6 pb-6 pt-0 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            <div class="border-t pt-4">
+              <p class="text-gray-600 leading-relaxed dark:text-gray-400">LR Diagnostic + simple trackers (home/school).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <span class="font-medium pr-4">6. Language support?</span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="isOpen" x-transition class="px-6 pb-6 pt-0 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            <div class="border-t pt-4">
+              <p class="text-gray-600 leading-relaxed dark:text-gray-400">Designed for Indian learners; works for L1 & L2 English.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-gradient-to-r from-yellow-400 to-pink-500 relative overflow-hidden">
+    <div class="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full"></div>
+    <div class="absolute bottom-10 right-10 w-24 h-24 bg-white/10 rounded-full"></div>
+    <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-white/10 rounded-full"></div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="bg-white/20 backdrop-blur-sm rounded-full w-40 h-40 mx-auto mb-8 flex items-center justify-center">
+        <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center">
+          <div class="w-24 h-24 bg-pink-500 rounded-full"></div>
+        </div>
+      </div>
+
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 text-center">
+        Ready to Spark a Love for Reading?
+      </h2>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+        <a href="products.html"
+          class="px-8 py-4 bg-white text-purple-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors text-center">
+          Shop Kits Now
+        </a>
+        <a href="schools.html"
+          class="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors text-center">
+          Book a School Demo
+        </a>
+      </div>
+      <p class="text-white/80 text-center">
+        Want help choosing the right level? <a href="https://wa.me/yourwhatsappnumber" target="_blank" class="text-white font-medium hover:underline">Talk to us on WhatsApp</a>
+      </p>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('faq', () => ({
+        openIndex: null,
+        toggle(index) {
+          this.openIndex = this.openIndex === index ? null : index;
+        }
+      }))
+    })
+  </script>
+
+
+  <!-- Improved Footer -->
+  <!-- Paste/replace the old footer with this -->
+  <!-- Full footer (Tailwind + inline background fallback) -->
+<footer
+role="contentinfo"
+style="background: linear-gradient(90deg,#5b21b6,#6d28d9); background-color: #6d28d9;"
+class="text-white pt-16 pb-8 relative overflow-hidden z-10"
+>
+<!-- decorative top glow -->
+<div class="absolute -top-10 left-1/2 transform -translate-x-1/2 w-3/4 h-36 pointer-events-none bg-gradient-to-b from-pink-500/20 to-transparent rounded-full"></div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+    <!-- Brand -->
+    <div class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="bg-yellow-400 rounded-full p-2 flex items-center justify-center">
+          <span class="text-purple-700 font-bold text-lg">LR</span>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold tracking-tight text-white">LET'S READ</h3>
+          <p class="text-sm text-white">Empowering young minds through literacy.</p>
+        </div>
+      </div>
+
+      <p class="text-white leading-relaxed text-sm max-w-sm">
+        Reading kits, diagnostics and training to help children build strong reading foundations.
+      </p>
+
+      <!-- Social / contact icons (brand-colored icons inside subtle circles) -->
+      <div class="flex items-center gap-2 flex-wrap">
+        <!-- Twitter (brand color) -->
+        <a href="#" aria-label="Twitter" title="Twitter"
+           class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-sky-400 hover:text-white">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.52 8.52 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+          </svg>
+        </a>
+
+        <!-- WhatsApp (brand green) -->
+        <a href="https://wa.me/911234567890" aria-label="WhatsApp" title="WhatsApp"
+           class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-green-400 hover:text-white">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M16.7 14.6c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.2s-.8.9-1 1.1c-.2.2-.4.2-.7.1-.3-.1-1.4-.5-2.6-1.6-1-1-1.6-2.2-1.8-2.5-.2-.3 0-.5.1-.7.1-.1.3-.4.4-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.7-.5-.6-.7-.6h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1.1 2.7 1.2 2.9.1.2 2.2 3.5 5.4 4.9.8.3 1.5.5 2 .6.8.3 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.4-.1-.2-.3-.2-.6-.3zM12 2C6.5 2 2 6.3 2 11.7c0 2.1.7 4 1.9 5.6L2 22l4.8-1.6c1.6.9 3.4 1.3 5.2 1.3 5.5 0 10-4.3 10-9.7S17.5 2 12 2z"/>
+          </svg>
+        </a>
+
+        <!-- Phone (neutral/blue) -->
+        <a href="tel:+911234567890" aria-label="Phone" title="Call us"
+           class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-blue-200 hover:text-white">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C9.92 21 3 14.08 3 6a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.27.2 2.48.57 3.6.12.33.04.7-.25.99l-2.2 2.2z"/>
+          </svg>
+        </a>
+
+        <!-- Email (neutral/red) -->
+        <a href="mailto:info@letsread.com" aria-label="Email" title="Email us"
+           class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-rose-300 hover:text-white">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- For Parents -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4 text-white">For Parents</h4>
+      <ul class="space-y-2 text-white text-sm">
+        <li><a href="#" class="hover:underline">Shop Kits</a></li>
+        <li><a href="#" class="hover:underline">Readiness Quiz</a></li>
+        <li><a href="#" class="hover:underline">Sample Activity</a></li>
+        <li><a href="#" class="hover:underline">FAQs</a></li>
+      </ul>
+    </div>
+
+    <!-- For Schools -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4 text-white">For Schools</h4>
+      <ul class="space-y-2 text-white text-sm">
+        <li><a href="#" class="hover:underline">Program</a></li>
+        <li><a href="#" class="hover:underline">Diagnostic</a></li>
+        <li><a href="#" class="hover:underline">Training</a></li>
+        <li><a href="#" class="hover:underline">Case Studies</a></li>
+        <li><a href="#" class="hover:underline">Demo</a></li>
+      </ul>
+    </div>
+
+    <!-- Resources -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4 text-white">Resources</h4>
+      <ul class="space-y-2 text-white text-sm">
+        <li><a href="#" class="hover:underline">Articles</a></li>
+        <li><a href="#" class="hover:underline">Downloads</a></li>
+        <li><a href="#" class="hover:underline">Research</a></li>
+        <li><a href="#" class="hover:underline">Press</a></li>
+      </ul>
+    </div>
+
+    <!-- Legal row: full width -->
+    <div class="lg:col-span-4 mt-8 pt-6 border-t border-white/20">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="text-white text-sm">© <span id="lr-year">2025</span> Let's Read India. All rights reserved.</div>
+
+        <div class="flex items-center gap-4 text-sm">
+          <a href="#" class="text-white/70 hover:text-white transition">Privacy</a>
+          <span class="hidden md:inline text-white/40">•</span>
+          <a href="#" class="text-white/70 hover:text-white transition">Terms</a>
+          <span class="hidden md:inline text-white/40">•</span>
+          <a href="#" class="text-white/70 hover:text-white transition">Refunds / Shipping</a>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end grid -->
+</div>
+
+<!-- Auto-update year (optional) -->
+<script>
+  (function(){ const el = document.getElementById('lr-year'); if(el) el.textContent = new Date().getFullYear(); })();
+</script>
+</footer>
+
+</body>
+
+</html>

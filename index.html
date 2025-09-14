@@ -392,20 +392,20 @@
 
   </section>
   <!-- ---------- REPLACED: Choose Your Path to Reading Success (replaces old Programs) ---------- -->
-  <section id="choose-path" class="py-20 bg-white dark:bg-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="choose-path" class="py-16 md:py-24 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
       <!-- Header -->
-      <div class="text-center mb-12">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight">Choose Your Path to Reading Success</h2>
-        <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600 dark:text-gray-300">
+      <div class="text-center mb-12 max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4">Choose Your Path to Reading Success</h2>
+        <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6"></div>
+        <p class="text-lg text-slate-600 dark:text-gray-300">
           Whether you're a parent looking to support your child at home or an educator seeking to enhance your classroom,
           we have the perfect solution for you.
         </p>
       </div>
   
       <!-- Cards -->
-      <!-- NOTE: items-stretch ensures card children take equal height so mt-auto works reliably -->
-      <div class="grid gap-8 grid-cols-1 md:grid-cols-2 items-stretch">
+      <div class="grid gap-8 grid-cols-1 md:grid-cols-2">
         <!-- Parent Card -->
         <article
           class="lr-card card-parent rounded-xl p-8 bg-[rgba(243,236,255,0.9)] dark:bg-gray-800 border border-pink-100 dark:border-gray-700 hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-full flex flex-col">
@@ -473,10 +473,9 @@
         </article>
   
         <!-- School Card -->
-        <article
-          class="lr-card card-school rounded-xl p-8 bg-[rgba(255,240,242,0.9)] dark:bg-gray-800 border border-pink-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-full flex flex-col">
+        <article class="bg-white dark:bg-gray-800 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
           <div class="flex flex-col h-full">
-            <div class="flex items-start gap-6 w-full">
+            <div class="flex flex-col md:flex-row items-start gap-6 w-full">
               <!-- left column -->
               <div class="flex-1 flex flex-col w-full">
                 <div class="flex items-center gap-4">
@@ -527,14 +526,9 @@
                 </svg>
               </a>
             </div>
-            
-            <!-- right column: image slot (optional) -->
-            <div class="hidden md:block w-40 h-40 rounded-lg overflow-hidden shadow-inner border border-white/40 dark:border-gray-600/40 card-img-zoom self-center flex-shrink-0">
-              <!-- Replace src with your image or remove the <img> if you don't want one -->
-              <img src="./public/school-card.jpg" alt="School program preview" class="w-full h-full object-cover">
-            </div>
           </div>
   
+          <!-- decorative float blob -->
           <div class="absolute -left-16 -bottom-12 w-48 h-48 rounded-full bg-purple-200 opacity-30 pointer-events-none float-blob"></div>
         </article>
       </div>
@@ -566,7 +560,7 @@
       <article class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
         <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/30 dark:to-pink-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="currentColor" aria-hidden="true">
-            <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 11.414V7a1 1 0 10-2 0v6a1 1 0 00.293.707l3 3a1 1 0 101.414-1.414L13 13.414z"/>
+            <path d="M12 8v4l3 3M12 6a9 9 0 110 12 9 9 0 010-12zm1 11.414V7a1 1 0 10-2 0v6a1 1 0 00.293.707l3 3a1 1 0 101.414-1.414L13 13.414z"/>
           </svg>
         </div>
         <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">Systematic Phonics</h3>
@@ -1168,31 +1162,31 @@
           </div>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
-          <div class="bg-purple-600 text-white text-center p-6 rounded-lg">
-            <div class="text-4xl mb-4">🏫</div>
-            <div class="text-3xl md:text-4xl font-bold mb-2">100+</div>
-            <div class="text-lg">Schools</div>
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
+          <div class="bg-purple-600 text-white text-center p-4 md:p-6 rounded-lg flex flex-col items-center justify-between h-full">
+            <div class="text-3xl md:text-4xl mb-3 md:mb-4">🏫</div>
+            <div class="text-2xl md:text-3xl font-bold mb-1 md:mb-2">100+</div>
+            <div class="text-sm md:text-base">Schools</div>
           </div>
-          <div class="bg-purple-600 text-white text-center p-6 rounded-lg">
-            <div class="text-4xl mb-4">👩‍🏫</div>
-            <div class="text-3xl md:text-4xl font-bold mb-2">10K+</div>
-            <div class="text-lg">Teachers</div>
+          <div class="bg-purple-600 text-white text-center p-4 md:p-6 rounded-lg flex flex-col items-center justify-between h-full">
+            <div class="text-3xl md:text-4xl mb-3 md:mb-4">👩‍🏫</div>
+            <div class="text-2xl md:text-3xl font-bold mb-1 md:mb-2">10K+</div>
+            <div class="text-sm md:text-base">Teachers</div>
           </div>
-          <div class="bg-purple-600 text-white text-center p-6 rounded-lg">
-            <div class="text-4xl mb-4">👨‍🎓</div>
-            <div class="text-3xl md:text-4xl font-bold mb-2">50K+</div>
-            <div class="text-lg">Students</div>
+          <div class="bg-purple-600 text-white text-center p-4 md:p-6 rounded-lg flex flex-col items-center justify-between h-full">
+            <div class="text-3xl md:text-4xl mb-3 md:mb-4">👨‍🎓</div>
+            <div class="text-2xl md:text-3xl font-bold mb-1 md:mb-2">50K+</div>
+            <div class="text-sm md:text-base">Students</div>
           </div>
-          <div class="bg-purple-600 text-white text-center p-6 rounded-lg">
-            <div class="text-4xl mb-4">📜</div>
-            <div class="text-3xl md:text-4xl font-bold mb-2">NCF 2022</div>
-            <div class="text-lg">NEP 2020 / NIPUN Bharat</div>
+          <div class="bg-purple-600 text-white text-center p-4 md:p-6 rounded-lg flex flex-col items-center justify-between h-full">
+            <div class="text-3xl md:text-4xl mb-3 md:mb-4">📜</div>
+            <div class="text-xl md:text-2xl font-bold mb-1 md:mb-2">NCF 2022</div>
+            <div class="text-sm md:text-base">NEP 2020 / NIPUN Bharat</div>
           </div>
-          <div class="bg-purple-600 text-white text-center p-6 rounded-lg">
-            <div class="text-4xl mb-4">📈</div>
-            <div class="text-3xl md:text-4xl font-bold mb-2">8-12 wks</div>
-            <div class="text-lg">Reading age improvement</div>
+          <div class="bg-purple-600 text-white text-center p-4 md:p-6 rounded-lg flex flex-col items-center justify-between h-full">
+            <div class="text-3xl md:text-4xl mb-3 md:mb-4">📈</div>
+            <div class="text-xl md:text-2xl font-bold mb-1 md:mb-2">8-12 wks</div>
+            <div class="text-sm md:text-base">Reading age improvement</div>
           </div>
         </div>
       </div>

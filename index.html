@@ -1,19 +1,115 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="./public/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="./public/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Let's Read - Ignite The Joy of Reading | Kinesthetic Reading Kits</title>
-  <!-- use Poppins to get the rounded geometric look similar to the screenshot -->
+  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'child-purple': '#A855F7',
+            'child-pink': '#EC4899',
+            'child-yellow': '#F6C548',
+            'child-blue': '#3B82F6',
+            'child-green': '#10B981',
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  
+  <!-- Alpine.js -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
   <style>
-    /* Site font */
-    :root { --hero-yellow: #F6C548; } /* slightly warm yellow */
-    .font-poppins { font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+    :root {
+      --hero-yellow: #F6C548;
+      --gradient-primary: linear-gradient(135deg, #4F46E5, #A855F7);
+      --gradient-secondary: linear-gradient(135deg, #EC4899, #A855F7);
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #1f2937;
+      background-color: #ffffff;
+    }
+    
+    .dark body {
+      color: #f3f4f6;
+      background-color: #111827;
+    }
+    
+    .btn-primary {
+      background-color: #7c3aed;
+      color: white;
+      font-weight: 500;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.2s;
+    }
+    
+    .btn-primary:hover {
+      background-color: #6d28d9;
+    }
+    
+    .btn-secondary {
+      background-color: #ec4899;
+      color: white;
+      font-weight: 500;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.2s;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #db2777;
+    }
+    
+    .section-padding {
+      padding: 4rem 0;
+    }
+    
+    @media (min-width: 768px) {
+      .section-padding {
+        padding: 6rem 0;
+      }
+    }
+    
+    .container {
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    @media (min-width: 640px) {
+      .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
   </style>
 
   <meta name="description"
@@ -144,30 +240,36 @@
   
   <!-- Local compiled Tailwind CSS -->
   <link rel="stylesheet" href="./public/tailwind.css" />
-  <!-- Dark Mode CSS -->
-  <link rel="stylesheet" href="./public/dark-mode.css" />
-  <!-- Alpine.js for interactivity -->
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <!-- Dark Mode JS -->
-  <script src="./public/js/dark-mode.js" defer></script>
   <!-- Custom Dark Mode Overrides -->
   <link rel="stylesheet" href="./public/css/custom-dark.css" />
 </head>
 
-<body x-data="{ darkMode: localStorage.getItem('darkMode') === 'true', mobileMenuOpen: false, topMenuOpen: true, contactOpen: false }"
+<body x-data="{ 
+    darkMode: localStorage.getItem('darkMode') === 'true', 
+    mobileMenuOpen: false,
+    contactOpen: false,
+    name: '',
+    email: '',
+    mobileNum: '',
+    childName: '',
+    message: '',
+    submitted: false
+  }"
   x-init="
     // Initialize dark mode from localStorage
-    $watch('darkMode', val => { 
-      localStorage.setItem('darkMode', val); 
-      document.documentElement.classList.toggle('dark', val);
-      // Save preference for non-Alpine.js pages
-      document.cookie = `darkMode=${val}; path=/; max-age=31536000; samesite=lax`;
+    darkMode = localStorage.getItem('darkMode') === 'true';
+    $watch('darkMode', value => {
+      localStorage.setItem('darkMode', value);
+      document.documentElement.classList.toggle('dark', value);
     });
-    // Apply initial dark mode
-    document.documentElement.classList.toggle('dark', darkMode);
+    
+    // Initialize dark mode on page load
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    }
   "
-  :class="{ 'dark': darkMode }"
-  class="font-poppins bg-white dark:bg-gray-900 transition-colors duration-200">
+  class="font-poppins antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200"
+  :class="{ 'overflow-hidden': mobileMenuOpen || contactOpen }">
 
   <!-- Top Bar -->
   <div x-show="topMenuOpen" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm">
@@ -211,162 +313,70 @@
           <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>
-          <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          <svg x-show="darkMode" class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
           </svg>
         </button>
-        <a href="https://wa.me/1234567890" target="_blank" class="p-2 text-gray-600 hover:text-green-500" aria-label="WhatsApp">
-          <!-- svg -->
-          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"> ... </svg>
-        </a>
-
-        <a href="tel:+1234567890" class="p-2 text-gray-600 hover:text-blue-500" aria-label="Call">
-          <!-- svg -->
-          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> ... </svg>
+        
+        <!-- CTA Button -->
+        <a href="#" @click="contactOpen = true" class="ml-4 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-md transition-colors">
+          Get Started
         </a>
       </div>
 
       <!-- Mobile menu button -->
-        <div class="md:hidden flex items-center space-x-2">
-          <button @click="darkMode = !darkMode" class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800" :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
-            <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-            <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-          </button>
-          <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white" aria-label="Toggle menu">
-          <svg x-show="!mobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /> </svg>
-          <svg x-show="mobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /> </svg>
+      <div class="md:hidden flex items-center">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none transition-colors">
+          <span class="sr-only">Open main menu</span>
+          <svg class="block h-6 w-6" :class="{'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg class="hidden h-6 w-6" :class="{'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
-      </div>
-    </div>
-
-    <!-- Mobile menu -->
-    <div x-show="mobileMenuOpen" class="md:hidden pb-4" x-transition>
-      <div class="px-2 pt-2 pb-3 space-y-1">
-        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">About</a>
-        <a href="programs.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Programs</a>
-        <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Resources</a>
-        <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Products</a>
-        <!-- Mobile Contact opens modal -->
-        <a href="#" @click.prevent="contactOpen = true; mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Contact</a>
-      </div>
-
-      <div class="pt-4 pb-3 border-t border-gray-200">
-        <div class="flex items-center px-5 space-x-3">
-          <button class="flex-1 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700">I'm a Parent</button>
-          <button class="flex-1 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">I'm a School</button>
-        </div>
-
-        <div class="mt-3 flex justify-center space-x-4">
-          <a href="https://wa.me/1234567890" target="_blank" class="text-gray-600 hover:text-green-500" aria-label="WhatsApp">
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"> ... </svg>
-          </a>
-          <a href="tel:+1234567890" class="text-gray-600 hover:text-blue-500" aria-label="Call">
-            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> ... </svg>
-          </a>
-        </div>
       </div>
     </div>
   </div>
 
-  <!-- Contact Modal -->
-  <div x-show="contactOpen" x-cloak class="fixed inset-0 z-60 flex items-center justify-center px-4" x-transition>
-    <!-- backdrop -->
-    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" @click="contactOpen = false" aria-hidden="true"></div>
-
-    <!-- modal panel -->
-    <div class="relative max-w-lg w-full mx-auto bg-white rounded-2xl shadow-xl overflow-hidden" @keydown.escape.window="contactOpen = false" x-trap.noscroll="contactOpen">
-      <div class="p-6">
-        <div class="flex items-start justify-between">
-          <div>
-            <h3 class="text-lg font-semibold text-gray-900">Please complete the form below</h3>
-            <p class="mt-1 text-sm text-gray-500">and we will get back to you within 24 hours.</p>
-          </div>
-          <button @click="contactOpen = false" class="text-gray-400 hover:text-gray-600 ml-4" aria-label="Close modal">
-            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-          </button>
-        </div>
-
-        <form class="mt-5 space-y-4" @submit.prevent="
-            submitted = true;
-            /* simulate submit - replace with real submit logic */
-            console.log({name, email, mobileNum, childName, message});
-            setTimeout(()=> {
-              contactOpen = false;
-              submitted = false;
-              name=''; email=''; mobileNum=''; childName=''; message='';
-            }, 1200);
-          ">
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Enter your name</label>
-            <input x-model="name" required type="text" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-purple-300" />
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Enter your email</label>
-            <input x-model="email" required type="email" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-purple-300" />
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Enter your mobile number</label>
-            <input x-model="mobileNum" required type="tel" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-purple-300" />
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Enter your child name</label>
-            <input x-model="childName" type="text" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-purple-300" />
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Enter your message</label>
-            <textarea x-model="message" rows="3" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-purple-300"></textarea>
-          </div>
-
-          <div class="flex items-center justify-between space-x-3">
-            <button type="submit" :disabled="submitted" class="flex-1 px-4 py-2 text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 disabled:opacity-60">
-              <span x-show="!submitted">Enquire Now</span>
-              <span x-show="submitted">Sending...</span>
-            </button>
-
-            <button type="button" @click="contactOpen = false" class="px-4 py-2 text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">
-              Cancel
-            </button>
-          </div>
-
-          <!-- optional success hint -->
-          <div x-show="submitted" class="text-sm text-green-600 text-center">Your enquiry is being sent...</div>
-        </form>
+  <!-- Mobile menu -->
+  <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden pb-4 bg-white dark:bg-gray-900 shadow-lg" x-transition>
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">About</a>
+      <a href="programs.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Programs</a>
+      <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Resources</a>
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Blog</a>
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Contact</a>
+      
+      <div class="pt-4 border-t border-gray-200 dark:border-gray-700 mt-4">
+        <a href="#" @click="contactOpen = true" class="block w-full text-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-base font-medium rounded-md transition-colors">
+          Get Started
+        </a>
       </div>
     </div>
   </div>
 </nav>
 
   <!-- Hero Section -->
-  <section class="relative min-h-[90vh] flex items-center justify-start overflow-hidden">
-
+  <section class="relative min-h-[90vh] flex items-center justify-start overflow-hidden bg-gray-100 dark:bg-gray-900">
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
       <img src="./public/main image.png" alt="Children reading books" class="w-full h-full object-cover" />
-      <div class="absolute inset-0 bg-gradient-to-r from-black/50 to-black/20"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-purple-900/50 to-transparent"></div>
     </div>
 
-    <!-- Content -->
-    <div class="relative z-10 max-w-4xl mx-0 px-4 sm:px-6 lg:px-28 w-full text-white font-poppins">
-      <div class="text-left max-w-2xl">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-medium mb-4 leading-tight tracking-tight">
-          <span class="block">Kinesthetic Reading Kits &amp; Programs</span>
+    <!-- Hero Content -->
+    <div class="container relative z-10 py-32">
+      <div class="max-w-2xl">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+          Kinesthetic Reading Kits &amp; Programs
           <span class="block">that Build Confident <span class="text-[var(--hero-yellow)] font-semibold">Readers</span></span>
         </h1>
-
-        <p class="text-base sm:text-lg md:text-xl mb-6 text-gray-200 leading-relaxed">
+        <p class="text-xl text-gray-200 mb-8 max-w-lg">
           Let's Read India helps children (3–10) move from phonics → comprehension → fluent reading through joyful,
           hands-on learning — at home and in school.
         </p>
-
-        <div class="flex flex-col sm:flex-row gap-4 mb-6">
+        <div class="flex flex-col sm:flex-row gap-4">
           <button
             style="background-color: var(--hero-yellow);"
             class="text-gray-900 font-semibold py-3 px-6 rounded-full text-base transition-all transform hover:scale-105 w-full sm:w-auto text-center">

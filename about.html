@@ -1,95 +1,112 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="./public/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Let's Read - Empowering Young Readers Through Playful Learning</title>
-  <!-- use Poppins to get the rounded geometric look similar to the screenshot -->
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="./public/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Let's Read - Ignite The Joy of Reading | Kinesthetic Reading Kits</title>
+  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'child-purple': '#A855F7',
+            'child-pink': '#EC4899',
+            'child-yellow': '#F6C548',
+            'child-blue': '#3B82F6',
+            'child-green': '#10B981',
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  
+  <!-- Alpine.js -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
   <style>
-    /* Site font */
-    :root { 
-      --hero-yellow: #F6C548; /* slightly warm yellow */
-      --primary: 262, 73%, 58%; /* Purple */
-      --secondary: 330, 81%, 60%; /* Pink */
-      --accent: 45, 93%, 58%; /* Yellow */
-    }
-    .font-poppins { font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
-    
-    /* Custom styles for about page */
-    .gradient-text {
-      background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    :root {
+      --hero-yellow: #F6C548;
+      --gradient-primary: linear-gradient(135deg, #4F46E5, #A855F7);
+      --gradient-secondary: linear-gradient(135deg, #EC4899, #A855F7);
     }
     
-    .section-header {
-      position: relative;
-      padding-bottom: 1.5rem;
-      margin-bottom: 2.5rem;
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #1f2937;
+      background-color: #ffffff;
     }
     
-    .section-header:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)));
-      border-radius: 2px;
+    .dark body {
+      color: #f3f4f6;
+      background-color: #111827;
     }
     
-    .feature-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .btn-primary {
+      background-color: #7c3aed;
+      color: white;
+      font-weight: 500;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.2s;
     }
     
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    .btn-primary:hover {
+      background-color: #6d28d9;
     }
     
-    .playful-underline {
-      position: relative;
-      display: inline-block;
+    .btn-secondary {
+      background-color: #ec4899;
+      color: white;
+      font-weight: 500;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.2s;
     }
     
-    .playful-underline:after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 100%;
-      height: 8px;
-      background: linear-gradient(90deg, hsl(var(--accent), 0.3), transparent);
-      z-index: -1;
-      border-radius: 4px;
+    .btn-secondary:hover {
+      background-color: #db2777;
     }
     
-    /* Blob animations */
-    @keyframes blob {
-      0% {
-        transform: translate(0px, 0px) scale(1);
-      }
-      33% {
-        transform: translate(30px, -50px) scale(1.1);
-      }
-      66% {
-        transform: translate(-20px, 20px) scale(0.9);
-      }
-      100% {
-        transform: translate(0px, 0px) scale(1);
+    .section-padding {
+      padding: 4rem 0;
+    }
+    
+    @media (min-width: 768px) {
+      .section-padding {
+        padding: 6rem 0;
       }
     }
     
-    .animate-blob {
-      animation: blob 7s infinite;
+    .container {
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    @media (min-width: 640px) {
+      .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+    
+    /* Apply Comic Sans MS to all text elements */
+    body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, div {
+      font-family: 'Comic Sans MS', 'Comic Neue', 'Comic Sans', cursive, sans-serif !important;
     }
     
     .animation-delay-2000 {
@@ -101,9 +118,8 @@
     }
   </style>
 
-  <meta name="description"
-    content="Discover how Let's Read transforms early literacy through playful learning. Our research-backed program helps children develop reading skills with engaging, hands-on activities designed for the Indian context." />
-
+  <meta name="description" content="Discover how Let's Read transforms early literacy through playful learning. Our research-backed program helps children develop reading skills with engaging, hands-on activities designed for the Indian context." />
+  
   <style>
     :root {
       --background: 0 0% 100%;
@@ -514,6 +530,69 @@
           <p class="text-gray-600 dark:text-gray-300">
             Our structured and progressive approach nurtures confidence, self-worth, and self-esteem in every child. As children grow more confident, the program provides just the right amount of cognitive stimulation and enhances higher-order thinking ability.
           </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Two Pathways Section -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          <span class="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">One mission, two pathways</span>
+        </h2>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- For Parents Card -->
+        <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <h3 class="text-2xl font-bold text-purple-700 dark:text-purple-400 mb-4">For Parents</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-6">
+            A calm, daily 10-15 min routine that moves children from sounds → words → sentences → stories.
+          </p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-pink-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-700 dark:text-gray-300">Levelled kits + decodable readers</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-pink-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-700 dark:text-gray-300">2-week plan and tips</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-medium py-2 px-6 rounded-lg transition-colors">
+            Take the Readiness Quiz
+          </a>
+        </div>
+        
+        <!-- For Schools & NGOs Card -->
+        <div class="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+          <h3 class="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-4">For Schools & NGOs</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-6">
+            Foundational literacy acceleration with baseline → follow-up checks.
+          </p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-700 dark:text-gray-300">Class kits & decodable libraries</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-5 w-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-700 dark:text-gray-300">Teacher PD and dashboards</span>
+            </li>
+          </ul>
+          <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-6 rounded-lg transition-colors">
+            Book a Demo
+          </a>
         </div>
       </div>
     </div>

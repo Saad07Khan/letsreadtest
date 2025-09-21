@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decodable Readers | Let's Read India</title>
+  <link rel="icon" type="image/svg+xml" href="./public/favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'child-purple': '#A855F7',
+            'child-pink': '#EC4899',
+            'child-yellow': '#F6C548',
+            'child-blue': '#3B82F6',
+            'child-green': '#10B981',
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body x-data="{ mobileMenuOpen: false, darkMode: localStorage.getItem('darkMode') === 'true' }" 
+      :class="{ 'dark': darkMode }" class="font-poppins">
+  
+  <!-- Navigation (identical styling) -->
+  <nav class="bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <a href="index.html" class="flex-shrink-0">
+          <img class="h-10 w-auto" src="./public/logo.png" alt="Let's Read India">
+        </a>
+        
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium">Home</a>
+          <a href="programs.html" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium">Programs</a>
+          <a href="resources.html" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium">Resources</a>
+          <a href="training.html" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium">Training</a>
+          <a href="decodablereaders.html" class="text-purple-600 dark:text-purple-400 font-medium">Decodable Readers</a>
+          <a href="#contact" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">Contact Us</a>
+          
+          <button @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode); document.documentElement.classList.toggle('dark', darkMode)" 
+                  class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <svg x-show="!darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+            <svg x-show="darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="md:hidden">
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <svg class="h-6 w-6" :class="{'hidden': mobileMenuOpen, 'block': !mobileMenuOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <svg class="h-6 w-6" :class="{'block': mobileMenuOpen, 'hidden': !mobileMenuOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden bg-white dark:bg-gray-900 shadow-lg">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
+        <a href="programs.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Programs</a>
+        <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Resources</a>
+        <a href="training.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Training</a>
+        <a href="decodablereaders.html" class="block px-3 py-2 rounded-md text-base font-medium text-purple-600 dark:text-purple-400 hover:bg-gray-100 dark:hover:bg-gray-800">Decodable Readers</a>
+        <a href="#contact" class="block px-3 py-2 text-center text-white bg-purple-600 rounded-md hover:bg-purple-700">Contact Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section (matching heading style) -->
+  <section class="bg-gradient-to-r from-child-blue to-child-green text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Decodable Readers</h1>
+      <p class="text-xl mb-8 max-w-3xl mx-auto">Phased, phonics-friendly storybooks designed to help early readers build confidence and fluency.</p>
+      <a href="#samples" class="bg-white text-purple-700 font-medium py-3 px-8 rounded-lg hover:bg-gray-100 inline-block">Browse Samples</a>
+    </div>
+  </section>
+
+  <!-- Why Decodable Readers -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4">Why Decodables Work</h2>
+        <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+        <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Carefully sequenced texts let learners apply taught phonics patterns immediately — increasing accuracy and motivation.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+          <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <svg class="w-8 h-8 text-blue-600 dark:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-center">Phonics-aligned</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-center">Each book targets a small set of letter-sound patterns to build mastery.</p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+          <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <svg class="w-8 h-8 text-green-600 dark:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-center">Gradual Progression</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-center">Books move from simple words to more complex patterns at a predictable pace.</p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+          <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <svg class="w-8 h-8 text-yellow-600 dark:text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-center">Confidence-building</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-center">Success with decodable texts motivates learners to tackle new words independently.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sample Books -->
+  <section id="samples" class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold mb-4">Sample Books</h2>
+        <p class="text-gray-600 dark:text-gray-300">Free downloadable sample pages and read-along audio for every level.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Book Card -->
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow">
+          <div class="h-40 bg-gradient-to-br from-child-purple to-child-pink rounded-md mb-4 flex items-center justify-center text-white font-bold">Level 1<br>Short Vowels</div>
+          <h4 class="text-xl font-semibold mb-2">Sam & the Cat</h4>
+          <p class="text-sm text-gray-500 dark:text-gray-300 mb-4">A simple story using CVC words to practise short vowel sounds.</p>
+          <div class="flex space-x-3">
+            <a class="text-sm font-medium px-3 py-2 rounded-md border" href="#">Download PDF</a>
+            <a class="text-sm font-medium px-3 py-2 rounded-md border" href="#">Listen</a>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow">
+          <div class="h-40 bg-gradient-to-br from-child-blue to-child-green rounded-md mb-4 flex items-center justify-center text-white font-bold">Level 2<br>Blend Families</div>
+          <h4 class="text-xl font-semibold mb-2">The Fast Truck</h4>
+          <p class="text-sm text-gray-500 dark:text-gray-300 mb-4">Introducing consonant blends and longer words in controlled text.</p>
+          <div class="flex space-x-3">
+            <a class="text-sm font-medium px-3 py-2 rounded-md border" href="#">Download PDF</a>
+            <a class="text-sm font-medium px-3 py-2 rounded-md border" href="#">Listen</a>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow">
+          <div class="h-40 bg-gradient-to-br from-child-yellow to-child-green rounded-md mb-4 flex items-center justify-center text-white font-bold">Level 3<br>Vowel Teams</div>
+          <h4 class="text-xl font-semibold mb-2">The Team at Sea</h4>
+          <p class="text-sm text-gray-500 dark:text-gray-300 mb-4">Long vowels and vowel teams presented in predictable patterns.</p>
+          <div class="flex space-x-3">
+            <a class="text-sm font-medium px-3 py-2 rounded-md border" href="#">Download PDF</a>
+            <a class="text-sm font-medium px-3 py-2 rounded-md border" href="#">Listen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educator Tips -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold mb-4">Tips for Teachers</h2>
+      </div>
+
+      <ul class="space-y-4 text-gray-600 dark:text-gray-300">
+        <li>1. Read the book aloud first to model fluency, then ask learners to whisper-read.</li>
+        <li>2. Highlight target sound patterns before reading and practise them in isolation.</li>
+        <li>3. Use picture cues to build meaning and keep comprehension questions simple.</li>
+        <li>4. Encourage confident reading — praise accuracy and strategy use rather than speed.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Request a Print / Contact Form -->
+  <section id="contact" class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden">
+        <div class="md:flex">
+          <div class="md:w-1/2 bg-gradient-to-br from-child-blue to-child-green p-8 text-white">
+            <h2 class="text-3xl font-bold mb-4">Request Print Copies</h2>
+            <p class="mb-6">Order classroom sets, request custom branding, or ask for sample packs to evaluate with learners.</p>
+
+            <div class="space-y-3 mt-6 text-white text-sm">
+              <div>📦 Minimum order: 20 copies</div>
+              <div>🎨 Custom branding available for institutional orders</div>
+              <div>📬 Delivery across major cities in India</div>
+            </div>
+          </div>
+
+          <div class="md:w-1/2 p-8">
+            <form class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">School / Organization</label>
+                <input type="text" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Contact Email</label>
+                <input type="email" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Number of Copies</label>
+                <input type="number" min="1" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+              </div>
+
+              <button type="submit" class="w-full bg-gradient-to-r from-child-blue to-child-green text-white font-medium py-2 px-4 rounded-lg hover:opacity-90">Request Quote</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (identical styling) -->
+  <footer class="bg-gray-900 text-gray-300 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center mb-4">
+            <img src="./public/logo.png" alt="Let's Read India" class="h-10">
+          </div>
+          <p class="text-sm">Decodable texts to support confident early reading across classrooms.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-white font-medium mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="hover:text-white">Home</a></li>
+            <li><a href="programs.html" class="hover:text-white">Programs</a></li>
+            <li><a href="resources.html" class="hover:text-white">Resources</a></li>
+            <li><a href="training.html" class="hover:text-white">Training</a></li>
+            <li><a href="decodablereaders.html" class="hover:text-white">Decodable Readers</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-white font-medium mb-4">Contact Us</h3>
+          <p class="mb-2">Email: resources@letsreadindia.com</p>
+          <p>Phone: +91 98765 43210</p>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
+        <p>&copy; <span x-text="new Date().getFullYear()"></span> Let's Read India. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize dark mode
+    document.addEventListener('alpine:init', () => {
+      if (localStorage.darkMode === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        Alpine.store('darkMode', true);
+      } else {
+        document.documentElement.classList.remove('dark');
+        Alpine.store('darkMode', false);
+      }
+    });
+  </script>
+</body>
+</html>

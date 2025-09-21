@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Kits | Let's Read India</title>
+  <link rel="icon" type="image/svg+xml" href="./public/favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'child-purple': '#A855F7',
+            'child-pink': '#EC4899',
+            'child-yellow': '#F6C548',
+            'child-blue': '#3B82F6',
+            'child-green': '#10B981',
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body x-data="{ mobileMenuOpen: false, darkMode: localStorage.getItem('darkMode') === 'true' }" 
+      :class="{ 'dark': darkMode }" class="font-poppins">
+  
+  <!-- Navigation (identical styling) -->
+  <nav class="bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <a href="index.html" class="flex-shrink-0">
+          <img class="h-10 w-auto" src="./public/logo.png" alt="Let's Read India">
+        </a>
+        
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium">Home</a>
+          <a href="programs.html" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium">Programs</a>
+          <a href="resources.html" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium">Resources</a>
+          <a href="training.html" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium">Training</a>
+          <a href="mediakits.html" class="text-purple-600 dark:text-purple-400 font-medium">Media Kits</a>
+          <a href="#contact" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">Contact Us</a>
+          
+          <button @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode); document.documentElement.classList.toggle('dark', darkMode)" 
+                  class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <svg x-show="!darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+            <svg x-show="darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="md:hidden">
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <svg class="h-6 w-6" :class="{'hidden': mobileMenuOpen, 'block': !mobileMenuOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <svg class="h-6 w-6" :class="{'block': mobileMenuOpen, 'hidden': !mobileMenuOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden bg-white dark:bg-gray-900 shadow-lg">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
+        <a href="programs.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Programs</a>
+        <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Resources</a>
+        <a href="training.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Training</a>
+        <a href="mediakits.html" class="block px-3 py-2 rounded-md text-base font-medium text-purple-600 dark:text-purple-400 hover:bg-gray-100 dark:hover:bg-gray-800">Media Kits</a>
+        <a href="#contact" class="block px-3 py-2 text-center text-white bg-purple-600 rounded-md hover:bg-purple-700">Contact Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section (matching heading style) -->
+  <section class="bg-gradient-to-r from-child-purple to-child-yellow text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Media Kits & Press Resources</h1>
+      <p class="text-xl mb-8 max-w-3xl mx-auto">Download logos, press releases, high-resolution images and guidelines for media coverage.</p>
+      <a href="#assets" class="bg-white text-purple-700 font-medium py-3 px-8 rounded-lg hover:bg-gray-100 inline-block">Explore Assets</a>
+    </div>
+  </section>
+
+  <!-- Press Materials -->
+  <section id="assets" class="py-16 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4">Press Materials</h2>
+        <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+        <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Everything a journalist or partner might need to write about our programs and impact.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+          <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <svg class="w-8 h-8 text-purple-600 dark:text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-center">Press Releases</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-center">Latest announcements, milestones and program launches available as ready-to-publish PDFs.</p>
+          <div class="mt-4 text-center">
+            <a class="inline-block px-4 py-2 border rounded-md" href="#">Download ZIP</a>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+          <div class="w-16 h-16 bg-pink-100 dark:bg-pink-900 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <svg class="w-8 h-8 text-pink-600 dark:text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-center">Brand Assets</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-center">Logos, colour palettes and approved imagery for print and digital use.</p>
+          <div class="mt-4 text-center">
+            <a class="inline-block px-4 py-2 border rounded-md" href="#">Download Logos</a>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+          <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <svg class="w-8 h-8 text-yellow-600 dark:text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-center">Media Kit PDF</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-center">A one-page overview with quick facts, quotes and contact details for editors.</p>
+          <div class="mt-4 text-center">
+            <a class="inline-block px-4 py-2 border rounded-md" href="#">Download PDF</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Gallery -->
+  <section class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold mb-4">Images & Photography</h2>
+        <p class="text-gray-600 dark:text-gray-300">High-resolution images suitable for print and web — captions and credit lines included.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow">
+          <div class="h-44 bg-gray-200 dark:bg-gray-600 rounded-md mb-4 flex items-center justify-center">Photo 1</div>
+          <p class="text-sm text-gray-500 dark:text-gray-300">Children reading in a classroom — credit: Let's Read India</p>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow">
+          <div class="h-44 bg-gray-200 dark:bg-gray-600 rounded-md mb-4 flex items-center justify-center">Photo 2</div>
+          <p class="text-sm text-gray-500 dark:text-gray-300">Volunteer storytellers at a community event</p>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow">
+          <div class="h-44 bg-gray-200 dark:bg-gray-600 rounded-md mb-4 flex items-center justify-center">Photo 3</div>
+          <p class="text-sm text-gray-500 dark:text-gray-300">Book distribution drive</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact for Media Inquiries -->
+  <section id="contact" class="py-16 bg-white dark:bg-gray-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden">
+        <div class="md:flex">
+          <div class="md:w-1/2 bg-gradient-to-br from-child-purple to-child-yellow p-8 text-white">
+            <h2 class="text-3xl font-bold mb-4">Media Inquiries</h2>
+            <p class="mb-6">For interview requests, spokespeople or high-res assets, contact our communications team.</p>
+
+            <div class="space-y-3 mt-6 text-white text-sm">
+              <div>📧 communications@letsreadindia.com</div>
+              <div>📞 +91 98765 43210</div>
+              <div>🕘 Office hours: Mon–Fri, 9am–6pm</div>
+            </div>
+          </div>
+
+          <div class="md:w-1/2 p-8">
+            <form class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Name</label>
+                <input type="text" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                <input type="email" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+                <textarea rows="4" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white"></textarea>
+              </div>
+
+              <button type="submit" class="w-full bg-gradient-to-r from-child-purple to-child-yellow text-white font-medium py-2 px-4 rounded-lg hover:opacity-90">Send Inquiry</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full footer (Tailwind + inline background fallback) -->
+<footer
+role="contentinfo"
+style="background: linear-gradient(90deg,#5b21b6,#6d28d9); background-color: #6d28d9;"
+class="text-white pt-16 pb-8 relative overflow-hidden z-10"
+>
+<!-- decorative top glow -->
+<div class="absolute -top-10 left-1/2 transform -translate-x-1/2 w-3/4 h-36 pointer-events-none bg-gradient-to-b from-pink-500/20 to-transparent rounded-full"></div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+    <!-- Brand -->
+    <div class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="bg-yellow-400 rounded-full p-2 flex items-center justify-center">
+          <span class="text-purple-700 font-bold text-lg">LR</span>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold tracking-tight text-white">LET'S READ</h3>
+          <p class="text-sm text-white">Empowering young minds through literacy.</p>
+        </div>
+      </div>
+
+      <p class="text-white leading-relaxed text-sm max-w-sm">
+        Reading kits, diagnostics and training to help children build strong reading foundations.
+      </p>
+
+      <!-- Social / contact icons (brand-colored icons inside subtle circles) -->
+      <div class="flex items-center gap-2 flex-wrap">
+        <!-- Twitter (brand color) -->
+        <a href="#" aria-label="Twitter" title="Twitter"
+           class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-sky-400 hover:text-white">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.52 8.52 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+          </svg>
+        </a>
+
+        <!-- WhatsApp (brand green) -->
+        <a href="https://wa.me/911234567890" aria-label="WhatsApp" title="WhatsApp"
+           class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-green-400 hover:text-white">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M16.7 14.6c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.2s-.8.9-1 1.1c-.2.2-.4.2-.7.1-.3-.1-1.4-.5-2.6-1.6-1-1-1.6-2.2-1.8-2.5-.2-.3 0-.5.1-.7.1-.1.3-.4.4-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.7-.5-.6-.7-.6h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1.1 2.7 1.2 2.9.1.2 2.2 3.5 5.4 4.9.8.3 1.5.5 2 .6.8.3 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.4-.1-.2-.3-.2-.6-.3zM12 2C6.5 2 2 6.3 2 11.7c0 2.1.7 4 1.9 5.6L2 22l4.8-1.6c1.6.9 3.4 1.3 5.2 1.3 5.5 0 10-4.3 10-9.7S17.5 2 12 2z"/>
+          </svg>
+        </a>
+
+        <!-- Phone (neutral/blue) -->
+        <a href="tel:+911234567890" aria-label="Phone" title="Call us"
+           class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-blue-200 hover:text-white">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C9.92 21 3 14.08 3 6a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.27.2 2.48.57 3.6.12.33.04.7-.25.99l-2.2 2.2z"/>
+          </svg>
+        </a>
+
+        <!-- Email (neutral/red) -->
+        <a href="mailto:info@letsread.com" aria-label="Email" title="Email us"
+           class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-rose-300 hover:text-white">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- For Parents -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4 text-white">For Parents</h4>
+      <ul class="space-y-2 text-white text-sm">
+        <li><a href="#" class="hover:underline">Shop Kits</a></li>
+        <li><a href="#" class="hover:underline">Readiness Quiz</a></li>
+        <li><a href="#" class="hover:underline">Sample Activity</a></li>
+        <li><a href="#" class="hover:underline">FAQs</a></li>
+      </ul>
+    </div>
+
+    <!-- For Schools -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4 text-white">For Schools</h4>
+      <ul class="space-y-2 text-white text-sm">
+        <li><a href="#" class="hover:underline">Program</a></li>
+        <li><a href="#" class="hover:underline">Diagnostic</a></li>
+        <li><a href="#" class="hover:underline">Training</a></li>
+        <li><a href="#" class="hover:underline">Case Studies</a></li>
+        <li><a href="#" class="hover:underline">Demo</a></li>
+      </ul>
+    </div>
+
+    <!-- Resources -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4 text-white">Resources</h4>
+      <ul class="space-y-2 text-white text-sm">
+        <li><a href="#" class="hover:underline">Articles</a></li>
+        <li><a href="#" class="hover:underline">Downloads</a></li>
+        <li><a href="#" class="hover:underline">Research</a></li>
+        <li><a href="#" class="hover:underline">Press</a></li>
+      </ul>
+    </div>
+
+    <!-- Legal row: full width -->
+    <div class="lg:col-span-4 mt-8 pt-6 border-t border-white/20">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="text-white text-sm">© <span id="lr-year">2025</span> Let's Read India. All rights reserved.</div>
+
+        <div class="flex items-center gap-4 text-sm">
+          <a href="#" class="text-white/70 hover:text-white transition">Privacy</a>
+          <span class="hidden md:inline text-white/40">•</span>
+          <a href="#" class="text-white/70 hover:text-white transition">Terms</a>
+          <span class="hidden md:inline text-white/40">•</span>
+          <a href="#" class="text-white/70 hover:text-white transition">Refunds / Shipping</a>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end grid -->
+</div>
+
+<!-- Auto-update year (optional) -->
+<script>
+  (function(){ const el = document.getElementById('lr-year'); if(el) el.textContent = new Date().getFullYear(); })();
+</script>
+</footer>
+
+  <script>
+    // Initialize dark mode
+    document.addEventListener('alpine:init', () => {
+      if (localStorage.darkMode === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        Alpine.store('darkMode', true);
+      } else {
+        document.documentElement.classList.remove('dark');
+        Alpine.store('darkMode', false);
+      }
+    });
+  </script>
+</body>
+</html>

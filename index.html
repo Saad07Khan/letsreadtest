@@ -8,7 +8,7 @@
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -116,6 +116,11 @@
     content="Kinesthetic reading kits offer young children the tools to ignite a passion for lifelong learning. 100+ Schools, 10000+ Teachers, 50000+ Students trust Let's Read." />
 
   <style>
+    /* Apply Comic Sans MS to all text elements */
+    body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, div {
+      font-family: 'Comic Sans MS', 'Comic Neue', 'Comic Sans', cursive, sans-serif !important;
+    }
+    
     :root {
       --background: 0 0% 100%;
       --foreground: 240 10% 3.9%;
@@ -287,7 +292,7 @@
   </div>
 
  <!-- Main Navigation (updated) -->
-<nav class="bg-white shadow-sm sticky top-0 z-50" x-data="{ mobileMenuOpen: false, contactOpen: false, name:'', email:'', mobileNum:'', childName:'', message:'', submitted:false }" x-cloak>
+<nav class="bg-white shadow-sm sticky top-0 z-50" x-data="{ mobileMenuOpen: false }" x-cloak>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
@@ -298,11 +303,11 @@
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-1">
         <a href="about.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">About</a>
-        <a href="programs.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Programs</a>
+        <a href="diagnostic.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Reading Diagnostic</a>
         <a href="resources.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Resources</a>
-        <a href="products.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Products</a>
+        <a href="products.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Shop</a>
         <!-- Contact opens modal -->
-        <a href="#" @click.prevent="contactOpen = true" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Contact</a>
+        <a href="#" @click.prevent="$root.contactOpen = true" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Contact</a>
       </div>
 
       <!-- Action Buttons -->
@@ -319,7 +324,7 @@
         </button>
         
         <!-- CTA Button -->
-        <a href="#" @click="contactOpen = true" class="ml-4 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-md transition-colors">
+        <a href="#" @click.prevent="$root.contactOpen = true" class="ml-4 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-md transition-colors">
           Get Started
         </a>
       </div>
@@ -346,10 +351,10 @@
       <a href="programs.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Programs</a>
       <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Resources</a>
       <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Blog</a>
-      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Contact</a>
+      <a href="#" @click.prevent="mobileMenuOpen = false; $root.contactOpen = true" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Contact</a>
       
       <div class="pt-4 border-t border-gray-200 dark:border-gray-700 mt-4">
-        <a href="#" @click="contactOpen = true" class="block w-full text-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-base font-medium rounded-md transition-colors">
+        <a href="#" @click.prevent="mobileMenuOpen = false; $root.contactOpen = true" class="block w-full text-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-base font-medium rounded-md transition-colors">
           Get Started
         </a>
       </div>
@@ -359,9 +364,18 @@
 
   <!-- Hero Section -->
   <section class="relative min-h-[90vh] flex items-center justify-start overflow-hidden bg-gray-100 dark:bg-gray-900">
-    <!-- Background Image with Overlay -->
-    <div class="absolute inset-0 z-0">
-      <img src="./public/main image.png" alt="Children reading books" class="w-full h-full object-cover" />
+    <!-- Background Images with Overlay - Responsive for Light/Dark Modes -->
+    <div class="absolute inset-0 z-0 w-full">
+      <!-- Light mode image -->
+      <img src="./public/main image.png" 
+           alt="Children reading books" 
+           class="w-full h-full object-cover dark:hidden" />
+      
+      <!-- Dark mode image (using same image but you can replace with a different one) -->
+      <img src="./public/main image.png" 
+           alt="Children reading books - Dark Mode" 
+           class="hidden w-full h-full object-cover dark:block" />
+           
       <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-purple-900/50 to-transparent"></div>
     </div>
 
@@ -545,7 +559,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
     <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-500">How Let's Read India Works</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide dark:text-white">How Let's Read India Works</h2>
       <div class="w-24 h-1.5 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6 rounded-full"></div>
       <div class="flex justify-center items-center space-x-2 mb-8">
         <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
@@ -648,7 +662,7 @@
 </section>
 <!-- <div class="h-12 md:h-20 lg:h-32"></div> -->
   <!-- What’s Inside (Program Snapshot) -->
-    <section id="program-snapshot" class="mt-24 md:mt-32 py-16 bg-white dark:bg-gray-900">
+    <section id="program-snapshot" class="mt-8 md:mt-26 py-16 bg-white dark:bg-gray-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header matches HOW LET'S READ INDIA WORKS style -->
         <div class="text-center mb-12">
@@ -718,9 +732,10 @@
         </div>
       </div>
     </section> 
+    
     <div class="h-12 md:h-20 lg:h-32"></div>
     <!-- Section Heading: Reading Age Diagnostic -->
-    <div class="text-center mt-16 mb-6">
+    <div class="text-center mt-6 mb-6">
       <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-wide">READING AGE DIAGNOSTIC</h2>
       <div class="w-20 h-1 bg-pink-500 mx-auto mb-6 mt-3"></div>
       <div class="flex justify-center items-center space-x-2">
@@ -1154,8 +1169,10 @@
         </div>
       </div>
 
-      <!-- Achievements etc - unchanged -->
-      <div class="mb-16">
+      <!-- Animated Achievements Section -->
+      <div class="mb-16" 
+           x-data="counters()"
+           x-init="init()">
         <div class="text-center mb-12">
           <h3 class="text-4xl md:text-5xl font-bold mb-4 dark:text-white">Our Achievements</h3>
           <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
@@ -1167,32 +1184,112 @@
         </div>
 
         <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
-          <div class="bg-purple-600 text-white text-center p-4 md:p-6 rounded-lg flex flex-col items-center justify-between h-full">
-            <div class="text-3xl md:text-4xl mb-3 md:mb-4">🏫</div>
-            <div class="text-2xl md:text-3xl font-bold mb-1 md:mb-2">100+</div>
-            <div class="text-sm md:text-base">Schools</div>
-          </div>
-          <div class="bg-purple-600 text-white text-center p-4 md:p-6 rounded-lg flex flex-col items-center justify-between h-full">
-            <div class="text-3xl md:text-4xl mb-3 md:mb-4">👩‍🏫</div>
-            <div class="text-2xl md:text-3xl font-bold mb-1 md:mb-2">10K+</div>
-            <div class="text-sm md:text-base">Teachers</div>
-          </div>
-          <div class="bg-purple-600 text-white text-center p-4 md:p-6 rounded-lg flex flex-col items-center justify-between h-full">
-            <div class="text-3xl md:text-4xl mb-3 md:mb-4">👨‍🎓</div>
-            <div class="text-2xl md:text-3xl font-bold mb-1 md:mb-2">50K+</div>
-            <div class="text-sm md:text-base">Students</div>
-          </div>
-          <div class="bg-purple-600 text-white text-center p-4 md:p-6 rounded-lg flex flex-col items-center justify-between h-full">
-            <div class="text-3xl md:text-4xl mb-3 md:mb-4">📜</div>
-            <div class="text-xl md:text-2xl font-bold mb-1 md:mb-2">NCF 2022</div>
-            <div class="text-sm md:text-base">NEP 2020 / NIPUN Bharat</div>
-          </div>
-          <div class="bg-purple-600 text-white text-center p-4 md:p-6 rounded-lg flex flex-col items-center justify-between h-full">
-            <div class="text-3xl md:text-4xl mb-3 md:mb-4">📈</div>
-            <div class="text-xl md:text-2xl font-bold mb-1 md:mb-2">8-12 wks</div>
-            <div class="text-sm md:text-base">Reading age improvement</div>
-          </div>
+          <template x-for="(m, i) in metrics" :key="i">
+            <div
+              class="bg-purple-600 text-white text-center p-4 md:p-6 rounded-lg flex flex-col items-center justify-between h-full min-h-[120px]"
+              :data-index="i"
+              data-counter
+            >
+              <div class="text-3xl md:text-4xl mb-3 md:mb-4" x-text="m.icon" aria-hidden="true"></div>
+              <div
+                x-show="m.type === 'number'"
+                class="text-2xl md:text-3xl font-bold mb-1 md:mb-2"
+                :aria-live="m.ariaLive ?? 'polite'"
+                role="status"
+                x-text="formatDisplay(m)"
+              ></div>
+              <div
+                x-show="m.type !== 'number'"
+                class="text-xl md:text-2xl font-bold mb-1 md:mb-2"
+                x-text="m.display"
+              ></div>
+              <div class="text-sm md:text-base" x-text="m.label"></div>
+            </div>
+          </template>
         </div>
+        
+        <script>
+          function counters() {
+            return {
+              metrics: [
+                { icon: '🏫', start: 0, target: 100, duration: 1600, compact: false, suffix: '+', unit: '', label: 'Schools', type: 'number', current: 0, animated: false },
+                { icon: '👩‍🏫', start: 0, target: 10000, duration: 1800, compact: true, suffix: '+', unit: '', label: 'Teachers', type: 'number', current: 0, animated: false },
+                { icon: '👨‍🎓', start: 0, target: 50000, duration: 2000, compact: true, suffix: '+', unit: '', label: 'Students', type: 'number', current: 0, animated: false },
+                { icon: '📜', type: 'text', display: 'NCF 2022', label: 'NEP 2020 / NIPUN Bharat' },
+                { icon: '📈', start: 8, target: 12, duration: 1400, compact: false, suffix: '', unit: ' wks', label: 'Reading age improvement', type: 'number', current: 8, animated: false },
+              ],
+
+              formatCompact(n) {
+                n = Math.round(n);
+                if (n >= 1000000) {
+                  const v = (n / 1000000);
+                  return Number.isInteger(v) ? `${v}M` : `${v.toFixed(1)}M`;
+                }
+                if (n >= 1000) {
+                  const v = (n / 1000);
+                  return Number.isInteger(v) ? `${v}K` : `${v.toFixed(1)}K`;
+                }
+                return `${n}`;
+              },
+
+              formatDisplay(m) {
+                if (m.type !== 'number') return m.display ?? '';
+                if (m.compact) {
+                  return `${this.formatCompact(m.current)}${m.suffix ?? ''}${m.unit ?? ''}`;
+                }
+                const formatted = Math.round(m.current).toLocaleString();
+                return `${formatted}${m.suffix ?? ''}${m.unit ?? ''}`;
+              },
+
+              animateMetric(m) {
+                if (!m || m.animated || m.type !== 'number') return;
+                m.animated = true;
+                const startVal = Number(m.start ?? 0);
+                const endVal = Number(m.target ?? 0);
+                const duration = Number(m.duration ?? 1600);
+                const startTime = performance.now();
+
+                const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+                const tick = (now) => {
+                  const elapsed = now - startTime;
+                  const progress = Math.min(elapsed / duration, 1);
+                  const eased = easeOutCubic(progress);
+                  m.current = Math.floor(startVal + (endVal - startVal) * eased);
+
+                  if (progress < 1) {
+                    requestAnimationFrame(tick);
+                  } else {
+                    m.current = endVal;
+                  }
+                };
+
+                requestAnimationFrame(tick);
+              },
+
+              init() {
+                this.$nextTick(() => {
+                  const container = this.$el;
+                  const els = container.querySelectorAll('[data-counter]');
+                  if (!els.length) return;
+
+                  const io = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                      if (!entry.isIntersecting) return;
+                      const el = entry.target;
+                      const idx = Number(el.getAttribute('data-index'));
+                      const metric = this.metrics[idx];
+                      if (metric) this.animateMetric(metric);
+                      obs.unobserve(el);
+                    });
+                  }, { threshold: 0.3 });
+
+                  els.forEach(el => io.observe(el));
+                });
+              }
+            };
+          }
+        </script>
       </div>
 
       <div class="text-center">
@@ -1578,6 +1675,113 @@ class="text-white pt-16 pb-8 relative overflow-hidden z-10"
   (function(){ const el = document.getElementById('lr-year'); if(el) el.textContent = new Date().getFullYear(); })();
 </script>
 </footer>
+
+<!-- Contact Form Modal -->
+<div x-show="contactOpen" 
+     class="fixed inset-0 z-50 overflow-y-auto" 
+     aria-labelledby="modal-title" 
+     role="dialog" 
+     aria-modal="true"
+     x-cloak>
+  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <!-- Background overlay -->
+    <div x-show="contactOpen" 
+         x-transition:enter="ease-out duration-300" 
+         x-transition:enter-start="opacity-0" 
+         x-transition:enter-end="opacity-100" 
+         x-transition:leave="ease-in duration-200" 
+         x-transition:leave-start="opacity-100" 
+         x-transition:leave-end="opacity-0" 
+         class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" 
+         @click="contactOpen = false"
+         aria-hidden="true"></div>
+
+    <!-- Modal panel -->
+    <div x-show="contactOpen"
+         x-transition:enter="ease-out duration-300"
+         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+         x-transition:leave="ease-in duration-200"
+         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+         class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+      
+      <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <div class="sm:flex sm:items-start">
+          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white" id="modal-title">
+                Get in Touch
+              </h3>
+              <button @click="contactOpen = false" type="button" class="text-gray-400 hover:text-gray-500">
+                <span class="sr-only">Close</span>
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div class="mt-2">
+              <form @submit.prevent="submitted = true" class="space-y-4">
+                <div>
+                  <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Your Name</label>
+                  <input type="text" id="name" x-model="name" required 
+                         class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:text-white">
+                </div>
+                
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                  <input type="email" id="email" x-model="email" required
+                         class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:text-white">
+                </div>
+                
+                <div>
+                  <label for="mobileNum" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Mobile Number</label>
+                  <input type="tel" id="mobileNum" x-model="mobileNum" required
+                         class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:text-white">
+                </div>
+                
+                <div>
+                  <label for="childName" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Child's Name (if applicable)</label>
+                  <input type="text" id="childName" x-model="childName"
+                         class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:text-white">
+                </div>
+                
+                <div>
+                  <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Your Message</label>
+                  <textarea id="message" x-model="message" rows="3"
+                           class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:text-white"></textarea>
+                </div>
+                
+                <div class="mt-6">
+                  <button type="submit" 
+                          class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                    Send Message
+                  </button>
+                </div>
+              </form>
+              
+              <div x-show="submitted" class="mt-4 p-4 bg-green-50 dark:bg-green-900/30 rounded-md">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm font-medium text-green-800 dark:text-green-200">
+                      Thank you for your message! We'll get back to you soon.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 

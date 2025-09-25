@@ -238,19 +238,36 @@
     </script>
 </head>
 
-<body class="font-poppins bg-white dark:bg-gray-900 transition-colors duration-200" x-data="{
-    darkMode: localStorage.getItem('darkMode') === 'true',
+<body class="font-poppins antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200" x-data="{ 
+    darkMode: localStorage.getItem('darkMode') === 'true', 
     mobileMenuOpen: false,
-    mobileMenuOpen: false,
-    contactOpen: false
-  }" x-init="
-    $watch('darkMode', val => { 
-      localStorage.setItem('darkMode', val); 
-      document.documentElement.classList.toggle('dark', val);
-      document.cookie = `darkMode=${val}; path=/; max-age=31536000; samesite=lax`;
+    contactOpen: false,
+    topMenuOpen: true,
+    cartOpen: false,
+    name: '',
+    email: '',
+    mobileNum: '',
+    childName: '',
+    message: '',
+    submitted: false
+  }"
+  x-init="
+    // Initialize dark mode from localStorage
+    darkMode = localStorage.getItem('darkMode') === 'true';
+    $watch('darkMode', value => {
+      localStorage.setItem('darkMode', value);
+      document.documentElement.classList.toggle('dark', value);
+      document.cookie = `darkMode=${value}; path=/; max-age=31536000; samesite=lax`;
     });
-    document.documentElement.classList.toggle('dark', darkMode);
-  " x-cloak>
+    
+    // Initialize dark mode on page load
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    }
+  "
+  :class="{ 'overflow-hidden': mobileMenuOpen || contactOpen || cartOpen }"
+>
+  
     <script>
         document.addEventListener('alpine:init', () => {
             // Sample product data - replace with your actual product data
@@ -417,120 +434,126 @@
         </div>
     </div>
 
-    <!-- Main Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50" x-data="{ mobileMenuOpen: false }" x-cloak>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-                <a href="index.html" class="flex-shrink-0">
-                    <img src="./public/lets read logo.png" alt="Let's Read Logo" class="h-10 w-auto">
-                </a>
-
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="about.html"
-                        class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">About</a>
-                    <a href="diagnostic.html"
-                        class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Reading Diagnostic</a>
-                    <a href="resources.html"
-                        class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Resources</a>
-                    <a href="products.html"
-                        class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Shop</a>
-                    <a href="#" @click.prevent="$root.contactOpen = true"
-                        class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600">Contact</a>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex items-center space-x-3">
-                    <!-- Shopping Cart -->
-                    <button @click="$store.cart.open()" class="relative p-2 text-gray-700 hover:text-purple-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                        </svg>
-                        <span x-show="$store.cart.count > 0"
-                            class="absolute -top-1 -right-1 bg-purple-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                            <span x-text="$store.cart.count"></span>
-                        </span>
-                    </button>
-
-                    <!-- Mobile menu button -->
-                    <div class="flex items-center md:hidden">
-                        <button @click="mobileMenuOpen = !mobileMenuOpen" type="button"
-                            class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-purple-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500"
-                            :aria-expanded="mobileMenuOpen">
-                            <span class="sr-only">Open main menu</span>
-                            <!-- Heroicon name: menu -->
-                            <svg x-show="!mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
-                            <!-- Heroicon name: x -->
-                            <svg x-show="mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mobile menu -->
-            <div x-show="mobileMenuOpen" class="md:hidden" x-cloak>
-                <!-- Mobile Search Bar -->
-                <div class="px-4 py-3 border-b border-gray-200">
-                    <div class="relative">
-                        <input type="text" x-model="searchQuery" @input="performSearch()"
-                            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md text-base focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                            placeholder="Search products...">
-                        <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </div>
-                    </div>
-                    <!-- Mobile Search Results -->
-                    <div x-show="searchQuery && searchResults && searchResults.length > 0"
-                        class="mt-2 bg-white border border-gray-200 rounded-md shadow-lg">
-                        <div class="px-4 py-2 text-xs font-semibold text-gray-500 bg-gray-50 border-b">PRODUCTS</div>
-                        <div class="max-h-48 overflow-y-auto">
-                            <template x-for="(item, index) in searchResults" :key="index">
-                                <a :href="item.link" @click="mobileMenuOpen = false"
-                                    class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100">
-                                    <div class="font-medium" x-text="item.title"></div>
-                                    <div class="text-sm text-gray-500" x-text="item.category"></div>
-                                </a>
-                            </template>
-                        </div>
-                    </div>
-                    <div x-show="searchQuery && (!searchResults || searchResults.length === 0)"
-                        class="mt-2 text-sm text-gray-500 text-center py-2">
-                        No results found
-                    </div>
-                </div>
-
-                <div class="pt-2 pb-3 space-y-1">
-                    <a href="about.html"
-                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-purple-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800">About</a>
-                    <a href="diagnostic.html"
-                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-purple-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800">Reading
-                        Diagnostic</a>
-                    <a href="resources.html"
-                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-purple-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800">Resources</a>
-                    <a href="products.html"
-                        class="block px-3 py-2 rounded-md text-base font-medium text-purple-600 bg-purple-50 dark:bg-gray-800">Shop</a>
-                    <a href="#" @click.prevent="contactOpen = true; mobileMenuOpen = false"
-                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-purple-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800">Contact
-                        Us</a>
-                </div>
-            </div>
+  <!-- Top Bar -->
+  <div x-show="topMenuOpen" x-cloak class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-10 py-2">
+        <div class="flex items-center">
+          <span class="text-xs sm:text-sm">🎁 Free Reading Age Check for your child/class — Book a 10-min call</span>
         </div>
-    </nav>
+        <button
+          class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium px-3 py-1 rounded-full text-xs transition-colors">
+          Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <nav class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50 dark:border-b dark:border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <a href="index.html" class="flex-shrink-0">
+          <img src="./public/lets%20read%20logo.png" alt="Let's Read Logo" class="h-10 w-auto">
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-1">
+          <a href="about.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">About</a>
+          <a href="diagnostic.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Reading Diagnostic</a>
+          <a href="resources.html" class="px-3 py-2 text-sm font-medium text-purple-600 dark:text-purple-400">Resources</a>
+          <a href="products.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Products</a>
+          <a href="#" @click.prevent="contactOpen = true"
+            class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Contact</a>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="hidden md:flex items-center space-x-3">
+          <button
+            class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800">I'm
+            a Parent</button>
+          <button
+            class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700">I'm
+            a School</button>
+          <button @click="darkMode = !darkMode"
+            class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
+            :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+            <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </button>
+          <button @click="$store.cart.open()"
+            class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 relative"
+            :aria-label="'View Cart'">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span x-show="$store.cart.count > 0" 
+                  class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center"
+                  x-text="$store.cart.count">
+            </span>
+          </button>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button @click="mobileMenuOpen = !mobileMenuOpen"
+            class="p-2 rounded-md text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
+            <svg class="h-6 w-6" :class="{ 'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg class="h-6 w-6" :class="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden" x-cloak>
+      <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-800">
+        <a href="about.html"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">About</a>
+        <a href="diagnostic.html"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Reading
+          Diagnostic</a>
+        <a href="resources.html"
+          class="block px-3 py-2 rounded-md text-base font-medium text-purple-600 hover:bg-gray-50 dark:text-purple-400 dark:hover:bg-gray-700">Resources</a>
+        <a href="products.html"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Products</a>
+        <a href="#" @click.prevent="contactOpen = true; mobileMenuOpen = false"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Contact</a>
+      </div>
+      <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <div class="space-y-1 px-2">
+          <a href="#"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">I'm
+            a Parent</a>
+          <a href="#"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">I'm
+            a School</a>
+          <button @click="darkMode = !darkMode"
+            class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+            <span x-text="darkMode ? 'Light Mode' : 'Dark Mode'"></span>
+          </button>
+          <button @click="$store.cart.open()"
+            class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+            View Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
 
     <!-- Products Page Content -->
     <main>

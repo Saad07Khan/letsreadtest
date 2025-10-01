@@ -1,12 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Decodable Readers | Let's Read India</title>
   <link rel="icon" type="image/svg+xml" href="./public/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training - Let's Read India</title>
+  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -27,262 +31,1698 @@
       }
     }
   </script>
+  
+  <!-- Alpine.js -->
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <style>
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 240 10% 3.9%;
+      --primary: 240 73% 57%;
+      --child-purple: 280 87% 65%;
+      --child-pink: 330 81% 60%;
+      --child-yellow: 45 93% 58%;
+      --child-blue: 210 92% 60%;
+      --child-green: 140 69% 58%;
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 1.75rem;
+      --text-4xl: 2rem;
+      --text-5xl: 2.25rem;
+      --text-6xl: 2.5rem;
+    }
+
+    .dark {
+      --background: 240 10% 3.9%;
+      --foreground: 0 0% 98%;
+    }
+
+    body {
+      background-color: hsl(var(--background));
+      color: hsl(var(--foreground));
+      font-family: 'Poppins', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Custom animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-15px) rotate(2deg); }
+      66% { transform: translateY(5px) rotate(-1deg); }
+    }
+
+    @keyframes slide-up {
+      from { 
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(246, 197, 72, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(246, 197, 72, 0.6); }
+    }
+
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .slide-up {
+      animation: slide-up 0.8s ease-out forwards;
+    }
+
+    .pulse-glow {
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    /* Glassmorphism */
+    .glass-card {
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .dark .glass-card {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #F6C548, #EC4899, #A855F7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [x-cloak] { display: none !important; }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Dark mode fixes for specific sections */
+    .section-bg {
+      background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 50%, #F1F5F9 100%);
+    }
+
+    .dark .section-bg {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    }
+
+    .sample-section {
+      background: linear-gradient(135deg, #fefce8 0%, #ffedd5 50%, #fce7f3 100%);
+    }
+
+    .dark .sample-section {
+      background: linear-gradient(135deg, #1c1917 0%, #292524 50%, #44403c 100%);
+    }
+
+    .home-routine-section {
+      background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 50%, #F1F5F9 100%);
+    }
+
+    .dark .home-routine-section {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    }
+
+    .classroom-section {
+      background: linear-gradient(135deg, #dbeafe 0%, #dcfce7 50%, #f3e8ff 100%);
+    }
+
+    .dark .classroom-section {
+      background: linear-gradient(135deg, #1e3a8a 0%, #166534 50%, #581c87 100%);
+    }
+
+    .phonics-section {
+      background: linear-gradient(135deg, #fefce8 0%, #ffedd5 50%, #fce7f3 100%);
+    }
+
+    .dark .phonics-section {
+      background: linear-gradient(135deg, #1c1917 0%, #292524 50%, #44403c 100%);
+    }
+
+    .delivery-section {
+      background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+    }
+
+    .dark .delivery-section {
+      background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+    }
+
+    /* Fix for bundles section background */
+    .bundles-section {
+      background: linear-gradient(135deg, #3730a3 0%, #6d28d9 50%, #be185d 100%);
+    }
+
+    .dark .bundles-section {
+      background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 50%, #831843 100%);
+    }
+
+    /* Level cards dark mode fix */
+    .level-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .level-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: inherit;
+      z-index: -1;
+    }
+
+    /* Table styles for phonics section */
+    .phonics-table {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+    }
+
+    .dark .phonics-table {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .table-header {
+      background: linear-gradient(135deg, #F6C548 0%, #EC4899 50%, #A855F7 100%);
+      color: white;
+      font-weight: 700;
+      padding: 20px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .table-row {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark .table-row {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .table-row:hover {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(16, 185, 129, 0.03) 100%);
+      transform: translateX(8px);
+    }
+
+    .dark .table-row:hover {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+    }
+
+    .level-badge {
+      background: linear-gradient(135deg, #3B82F6, #10B981);
+      color: white;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      display: inline-block;
+    }
+
+    /* Additional animations */
+    @keyframes float-gentle {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-15px) rotate(3deg); }
+      66% { transform: translateY(8px) rotate(-2deg); }
+    }
+    
+    @keyframes gradient-rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .floating-icon {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .progress-arrow {
+      position: relative;
+      padding: 0 20px;
+    }
+    
+    .progress-arrow:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9CA3AF;
+      font-size: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .progress-arrow {
+        padding: 10px 0;
+        width: 100%;
+      }
+      
+      .progress-arrow:not(:last-child)::after {
+        content: '↓';
+        right: 50%;
+        top: 100%;
+        transform: translateX(50%);
+      }
+    }
+  </style>
+
+  <meta name="description" content="Professional training programs for educators and parents to enhance children's reading skills. Learn effective teaching methodologies and strategies." />
 </head>
 
-<body x-data="{ mobileMenuOpen: false, darkMode: localStorage.getItem('darkMode') === 'true' }" 
-      :class="{ 'dark': darkMode }" class="font-poppins">
-  
-  <!-- Navigation (identical styling) -->
-  <nav class="bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-50">
+<body x-data="{ 
+  darkMode: localStorage.getItem('darkMode') === 'true', 
+  mobileMenuOpen: false,
+  contactOpen: false,
+  topMenuOpen: true
+}"
+x-init="
+  darkMode = localStorage.getItem('darkMode') === 'true';
+  $watch('darkMode', value => {
+    localStorage.setItem('darkMode', value);
+    document.documentElement.classList.toggle('dark', value);
+  });
+  if (darkMode) {
+    document.documentElement.classList.add('dark');
+  }
+">
+
+  <!-- Top Bar -->
+  <div x-show="topMenuOpen" x-cloak class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20">
+      <div class="flex items-center justify-between h-10 py-2">
+        <div class="flex items-center">
+          <span class="text-xs sm:text-sm">🎁 Free Reading Age Check for your child/class — Book a 10-min call</span>
+        </div>
+        <button class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium px-3 py-1 rounded-full text-xs transition-colors">
+          Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <nav class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50 dark:border-b dark:border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
         <a href="index.html" class="flex-shrink-0">
-          <img class="h-10 w-auto" src="./public/logo.png" alt="Let's Read India">
+          <img src="./public/lets%20read%20logo.png" alt="Let's Read Logo" class="h-10 w-auto">
         </a>
-        
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium">Home</a>
-          <a href="programs.html" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium">Programs</a>
-          <a href="resources.html" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium">Resources</a>
-          <a href="training.html" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium">Training</a>
-          <a href="decodablereaders.html" class="text-purple-600 dark:text-purple-400 font-medium">Decodable Readers</a>
-          <a href="#contact" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">Contact Us</a>
-          
-          <button @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode); document.documentElement.classList.toggle('dark', darkMode)" 
-                  class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-            <svg x-show="!darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-1">
+          <a href="about.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">About</a>
+          <a href="diagnostic.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Reading Diagnostic</a>
+          <a href="resources.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Resources</a>
+          <a href="products.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Products</a>
+          <a href="#" class="px-3 py-2 text-sm font-medium text-purple-600 dark:text-purple-400">Training</a>
+          <a href="#" @click.prevent="contactOpen = true" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Contact</a>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="hidden md:flex items-center space-x-3">
+          <button class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800">I'm a Parent</button>
+          <button class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700">I'm a School</button>
+          <button @click="darkMode = !darkMode" class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
+            <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
-            <svg x-show="darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
           </button>
         </div>
-        
+
+        <!-- Mobile menu button -->
         <div class="md:hidden">
-          <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-            <svg class="h-6 w-6" :class="{'hidden': mobileMenuOpen, 'block': !mobileMenuOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 rounded-md text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
+            <svg class="h-6 w-6" :class="{ 'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-            <svg class="h-6 w-6" :class="{'block': mobileMenuOpen, 'hidden': !mobileMenuOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            <svg class="h-6 w-6" :class="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
       </div>
     </div>
-    
-    <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden bg-white dark:bg-gray-900 shadow-lg">
-      <div class="px-2 pt-2 pb-3 space-y-1">
-        <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
-        <a href="programs.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Programs</a>
-        <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Resources</a>
-        <a href="training.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Training</a>
-        <a href="decodablereaders.html" class="block px-3 py-2 rounded-md text-base font-medium text-purple-600 dark:text-purple-400 hover:bg-gray-100 dark:hover:bg-gray-800">Decodable Readers</a>
-        <a href="#contact" class="block px-3 py-2 text-center text-white bg-purple-600 rounded-md hover:bg-purple-700">Contact Us</a>
+
+    <!-- Mobile menu -->
+    <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden" x-cloak>
+      <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-800">
+        <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">About</a>
+        <a href="diagnostic.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Reading Diagnostic</a>
+        <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Resources</a>
+        <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Products</a>
+        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-purple-600 hover:bg-gray-50 dark:text-purple-400 dark:hover:bg-gray-700">Training</a>
+        <a href="#" @click.prevent="contactOpen = true" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Contact</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section (matching heading style) -->
-  <section class="bg-gradient-to-r from-child-blue to-child-green text-white py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">Decodable Readers</h1>
-      <p class="text-xl mb-8 max-w-3xl mx-auto">Phased, phonics-friendly storybooks designed to help early readers build confidence and fluency.</p>
-      <a href="#samples" class="bg-white text-purple-700 font-medium py-3 px-8 rounded-lg hover:bg-gray-100 inline-block">Browse Samples</a>
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center overflow-hidden" style="background: linear-gradient(135deg, #3B82F6 0%, #10B981 50%, #EC4899 100%);">
+    <!-- Floating background elements -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-[10%] left-[10%] w-10 h-10 bg-child-yellow/30 rounded-full" style="animation: float 6s ease-in-out infinite;"></div>
+      <div class="absolute top-[20%] right-[15%] w-15 h-15 bg-child-purple/20 rounded-full" style="animation: float 8s ease-in-out infinite reverse;"></div>
+      <div class="absolute bottom-[30%] left-[20%] w-8 h-8 bg-child-pink/25 rounded-full" style="animation: float 7s ease-in-out infinite;"></div>
+      <div class="absolute bottom-[15%] right-[25%] w-12 h-12 bg-child-green/20 rounded-full" style="animation: float 5s ease-in-out infinite reverse;"></div>
     </div>
-  </section>
-
-  <!-- Why Decodable Readers -->
-  <section class="py-16 bg-white dark:bg-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold mb-4">Why Decodables Work</h2>
-        <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
-        <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Carefully sequenced texts let learners apply taught phonics patterns immediately — increasing accuracy and motivation.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
-          <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4 mx-auto">
-            <svg class="w-8 h-8 text-blue-600 dark:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8"></path>
-            </svg>
+    
+    <!-- Text overlay for better readability -->
+    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(16, 185, 129, 0.85) 50%, rgba(236, 72, 153, 0.9) 100%);"></div>
+    
+    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        
+        <!-- Left Content -->
+        <div class="space-y-8" style="animation: slideInUp 1s ease-out;">
+          <div class="space-y-6">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight" style="text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);">
+              Build Confidence with the 
+              <span class="text-child-yellow">Right Stories</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-white/90 font-light max-w-2xl leading-relaxed" style="text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);">
+              Decodable readers matched to your child's phonics stage—so every page is accessible and every success boosts confidence.
+            </p>
           </div>
-          <h3 class="text-xl font-bold mb-2 text-center">Phonics-aligned</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-center">Each book targets a small set of letter-sound patterns to build mastery.</p>
-        </div>
-
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
-          <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-4 mx-auto">
-            <svg class="w-8 h-8 text-green-600 dark:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
+          
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 pt-4">
+            <button class="text-white font-semibold py-4 px-8 rounded-full text-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-1" 
+                    style="background: linear-gradient(135deg, #F6C548 0%, #EC4899 100%); box-shadow: 0 8px 32px rgba(246, 197, 72, 0.3);">
+              Browse Sets
+            </button>
+            <button class="text-white font-semibold py-4 px-8 rounded-full text-lg transform transition-all duration-300 hover:-translate-y-1" 
+                    style="background: rgba(255, 255, 255, 0.15); border: 2px solid rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px);">
+              Read Samples
+            </button>
           </div>
-          <h3 class="text-xl font-bold mb-2 text-center">Gradual Progression</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-center">Books move from simple words to more complex patterns at a predictable pace.</p>
-        </div>
-
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
-          <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mb-4 mx-auto">
-            <svg class="w-8 h-8 text-yellow-600 dark:text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold mb-2 text-center">Confidence-building</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-center">Success with decodable texts motivates learners to tackle new words independently.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sample Books -->
-  <section id="samples" class="py-16 bg-gray-50 dark:bg-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold mb-4">Sample Books</h2>
-        <p class="text-gray-600 dark:text-gray-300">Free downloadable sample pages and read-along audio for every level.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <!-- Book Card -->
-        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow">
-          <div class="h-40 bg-gradient-to-br from-child-purple to-child-pink rounded-md mb-4 flex items-center justify-center text-white font-bold">Level 1<br>Short Vowels</div>
-          <h4 class="text-xl font-semibold mb-2">Sam & the Cat</h4>
-          <p class="text-sm text-gray-500 dark:text-gray-300 mb-4">A simple story using CVC words to practise short vowel sounds.</p>
-          <div class="flex space-x-3">
-            <a class="text-sm font-medium px-3 py-2 rounded-md border" href="#">Download PDF</a>
-            <a class="text-sm font-medium px-3 py-2 rounded-md border" href="#">Listen</a>
-          </div>
-        </div>
-
-        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow">
-          <div class="h-40 bg-gradient-to-br from-child-blue to-child-green rounded-md mb-4 flex items-center justify-center text-white font-bold">Level 2<br>Blend Families</div>
-          <h4 class="text-xl font-semibold mb-2">The Fast Truck</h4>
-          <p class="text-sm text-gray-500 dark:text-gray-300 mb-4">Introducing consonant blends and longer words in controlled text.</p>
-          <div class="flex space-x-3">
-            <a class="text-sm font-medium px-3 py-2 rounded-md border" href="#">Download PDF</a>
-            <a class="text-sm font-medium px-3 py-2 rounded-md border" href="#">Listen</a>
-          </div>
-        </div>
-
-        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow">
-          <div class="h-40 bg-gradient-to-br from-child-yellow to-child-green rounded-md mb-4 flex items-center justify-center text-white font-bold">Level 3<br>Vowel Teams</div>
-          <h4 class="text-xl font-semibold mb-2">The Team at Sea</h4>
-          <p class="text-sm text-gray-500 dark:text-gray-300 mb-4">Long vowels and vowel teams presented in predictable patterns.</p>
-          <div class="flex space-x-3">
-            <a class="text-sm font-medium px-3 py-2 rounded-md border" href="#">Download PDF</a>
-            <a class="text-sm font-medium px-3 py-2 rounded-md border" href="#">Listen</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Educator Tips -->
-  <section class="py-16 bg-white dark:bg-gray-900">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold mb-4">Tips for Teachers</h2>
-      </div>
-
-      <ul class="space-y-4 text-gray-600 dark:text-gray-300">
-        <li>1. Read the book aloud first to model fluency, then ask learners to whisper-read.</li>
-        <li>2. Highlight target sound patterns before reading and practise them in isolation.</li>
-        <li>3. Use picture cues to build meaning and keep comprehension questions simple.</li>
-        <li>4. Encourage confident reading — praise accuracy and strategy use rather than speed.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Request a Print / Contact Form -->
-  <section id="contact" class="py-16 bg-gray-50 dark:bg-gray-800">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden">
-        <div class="md:flex">
-          <div class="md:w-1/2 bg-gradient-to-br from-child-blue to-child-green p-8 text-white">
-            <h2 class="text-3xl font-bold mb-4">Request Print Copies</h2>
-            <p class="mb-6">Order classroom sets, request custom branding, or ask for sample packs to evaluate with learners.</p>
-
-            <div class="space-y-3 mt-6 text-white text-sm">
-              <div>📦 Minimum order: 20 copies</div>
-              <div>🎨 Custom branding available for institutional orders</div>
-              <div>📬 Delivery across major cities in India</div>
+          
+          <!-- Trust indicators -->
+          <div class="flex items-center gap-6 pt-8">
+            <div class="text-white/80 text-sm">
+              <div class="flex items-center gap-2 mb-1">
+                <div class="flex">
+                  <span class="text-child-yellow text-lg">★★★★★</span>
+                </div>
+                <span class="font-medium">4.9/5</span>
+              </div>
+              <p>Trusted by 50,000+ families</p>
+            </div>
+            <div class="h-8 w-px bg-white/30"></div>
+            <div class="text-white/80 text-sm">
+              <p class="font-medium mb-1">Evidence-Based</p>
+              <p>Phonics-aligned curriculum</p>
             </div>
           </div>
-
-          <div class="md:w-1/2 p-8">
-            <form class="space-y-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">School / Organization</label>
-                <input type="text" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+        </div>
+        
+        <!-- Right Content - Visual -->
+        <div class="relative flex justify-center lg:justify-end">
+          <div class="relative">
+            <!-- Glow effect behind child -->
+            <div class="absolute inset-0 rounded-full" style="background: radial-gradient(circle at center, rgba(246, 197, 72, 0.2) 0%, transparent 70%); animation: pulse 4s ease-in-out infinite;"></div>
+            
+            <!-- Child reading illustration placeholder -->
+            <div class="relative w-80 h-96 bg-gradient-to-br from-white/20 to-white/5 rounded-3xl backdrop-blur-sm border border-white/20 flex items-center justify-center z-10">
+              <!-- Book mockup -->
+              <div class="transform perspective-1000" style="transform: perspective(1000px) rotateY(-15deg) rotateX(5deg); filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));">
+                <div class="w-48 h-32 bg-gradient-to-br from-child-yellow via-child-pink to-child-purple rounded-lg shadow-2xl flex items-center justify-center">
+                  <div class="text-center text-white">
+                    <div class="w-16 h-16 bg-white/30 rounded-full flex items-center justify-center mx-auto mb-3 backdrop-blur-sm">
+                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                      </svg>
+                    </div>
+                    <p class="text-sm font-semibold">Reading Made Easy</p>
+                  </div>
+                </div>
               </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Contact Email</label>
-                <input type="email" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Number of Copies</label>
-                <input type="number" min="1" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-              </div>
-
-              <button type="submit" class="w-full bg-gradient-to-r from-child-blue to-child-green text-white font-medium py-2 px-4 rounded-lg hover:opacity-90">Request Quote</button>
-            </form>
+            </div>
+            
+            <!-- Floating success indicators -->
+            <div class="absolute -top-4 -right-4 bg-child-green text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg animate-bounce">
+              ✨ Confidence Up!
+            </div>
+            
+            <div class="absolute -bottom-4 -left-4 bg-child-blue text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg" style="animation: bounce 2s infinite; animation-delay: 1s;">
+              📚 Level Matched
+            </div>
           </div>
         </div>
+        
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="section-bg py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">BENEFITS</p>
+        <div class="flex items-center justify-center gap-8 mb-12">
+          <div class="progress-arrow text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Decode</h2>
+          </div>
+          <div class="progress-arrow text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Fluency</h2>
+          </div>
+          <div class="progress-arrow text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Comprehension</h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- Benefits Cards -->
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Benefit 1 -->
+        <div class="glass-card rounded-3xl p-8 text-center transform hover:scale-105 transition-all duration-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
+          <div class="benefit-icon floating-icon mx-auto text-4xl mb-4">
+            ☀️
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Just-right difficulty</h3>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Words use taught sounds/patterns; fewer surprises.</p>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="glass-card rounded-3xl p-8 text-center transform hover:scale-105 transition-all duration-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
+          <div class="benefit-icon floating-icon mx-auto text-4xl mb-4">
+            📈
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Visible progress</h3>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Short stories, repeated patterns; easy wins.</p>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="glass-card rounded-3xl p-8 text-center transform hover:scale-105 transition-all duration-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
+          <div class="benefit-icon floating-icon mx-auto text-4xl mb-4">
+            📚
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Transfer to real books</h3>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Build accuracy & pace before general readers.</p>
+        </div>
+      </div>
+
+      <!-- CTA Button -->
+      <div class="text-center mt-12">
+        <button class="quiz-btn bg-child-yellow hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+          See Score & Sequence
+        </button>
       </div>
     </div>
   </section>
 
-  <!-- Footer (identical styling) -->
-  <footer class="bg-gray-900 text-gray-300 py-12">
+  <!-- Choose Your Level Section -->
+  <section class="py-20 relative overflow-hidden">
+    <!-- Background gradient -->
+    <div class="absolute inset-0 -z-10">
+      <!-- Main gradient overlay -->
+      <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 via-blue-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
+      
+      <!-- Animated gradient overlay -->
+      <div class="absolute inset-0 opacity-50 dark:opacity-30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-200 via-transparent to-pink-200 dark:from-purple-900/30 dark:to-pink-900/30"></div>
+      
+      <!-- Decorative elements -->
+      <div class="absolute inset-0 overflow-hidden">
+        <!-- Floating gradient orbs -->
+        <div class="absolute -top-32 -left-32 w-64 h-64 bg-gradient-to-br from-blue-200 to-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-70 dark:opacity-20 dark:from-blue-900/30 dark:to-purple-900/30"></div>
+        <div class="absolute top-1/3 -right-20 w-80 h-80 bg-gradient-to-br from-pink-200 to-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-70 dark:opacity-20 dark:from-pink-900/30 dark:to-yellow-900/30"></div>
+        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-gradient-to-tr from-purple-200 to-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 dark:opacity-10 dark:from-purple-900/20 dark:to-blue-900/20"></div>
+        
+        <!-- Grid pattern -->
+        <div class="absolute inset-0 bg-[radial-gradient(#6366f180_1px,transparent_1px)] [background-size:16px_16px] dark:opacity-10"></div>
+      </div>
+    </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <div class="flex items-center mb-4">
-            <img src="./public/logo.png" alt="Let's Read India" class="h-10">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">CHOOSE YOUR LEVEL</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Find your starting set</h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300">
+          Not sure? <button class="quiz-btn bg-child-yellow hover:bg-yellow-500 text-gray-900 font-bold py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-md ml-2">Take the Readiness Quiz</button>
+        </p>
+      </div>
+
+      <!-- Level Cards -->
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- Level A -->
+        <div class="level-card p-8 text-center bg-gradient-to-br from-child-purple to-child-blue rounded-2xl shadow-xl transform hover:scale-102 transition-all duration-300">
+          <div class="level-badge inline-block mb-6 bg-white/20 text-white px-4 py-1 rounded-full text-sm font-medium">Level A</div>
+          
+          <!-- Card Visual Area -->
+          <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-12 mb-6 relative">
+            <div class="level-icon text-6xl font-bold text-white">A</div>
+            <!-- Decorative elements -->
+            <div class="absolute top-4 left-4 w-3 h-3 bg-white/40 rounded-full"></div>
+            <div class="absolute top-4 right-4 w-2 h-2 bg-white/30 rounded-full"></div>
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/40 rounded-full"></div>
           </div>
-          <p class="text-sm">Decodable texts to support confident early reading across classrooms.</p>
+          
+          <div class="text-white space-y-4">
+            <h3 class="text-2xl font-bold">Level A — Pre-CVC / Level 0</h3>
+            <p class="text-white/90 text-lg">Sounds, letter-sound links, first blends.</p>
+            <p class="text-white/80"><span class="font-semibold">Stories:</span> Word + picture prompts; simple captions</p>
+            
+            <div class="flex items-center justify-between pt-6">
+              <div class="price-tag bg-white/20 px-4 py-1 rounded-full text-sm font-medium">₹699</div>
+              <div class="difficulty-badge bg-white/20 px-3 py-1 rounded-full text-xs">Beginner</div>
+            </div>
+          </div>
         </div>
-        
-        <div>
-          <h3 class="text-white font-medium mb-4">Quick Links</h3>
-          <ul class="space-y-2">
-            <li><a href="index.html" class="hover:text-white">Home</a></li>
-            <li><a href="programs.html" class="hover:text-white">Programs</a></li>
-            <li><a href="resources.html" class="hover:text-white">Resources</a></li>
-            <li><a href="training.html" class="hover:text-white">Training</a></li>
-            <li><a href="decodablereaders.html" class="hover:text-white">Decodable Readers</a></li>
-          </ul>
+
+        <!-- Level B -->
+        <div class="level-card p-8 text-center bg-gradient-to-br from-child-pink to-child-purple rounded-2xl shadow-xl transform hover:scale-102 transition-all duration-300">
+          <div class="level-badge inline-block mb-6 bg-white/20 text-white px-4 py-1 rounded-full text-sm font-medium">Level B</div>
+          
+          <!-- Card Visual Area -->
+          <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-12 mb-6 relative">
+            <div class="level-icon text-6xl font-bold text-white">B</div>
+            <!-- Decorative elements -->
+            <div class="absolute top-4 left-4 w-3 h-3 bg-white/40 rounded-full"></div>
+            <div class="absolute top-4 right-4 w-2 h-2 bg-white/30 rounded-full"></div>
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/40 rounded-full"></div>
+          </div>
+          
+          <div class="text-white space-y-4">
+            <h3 class="text-2xl font-bold">Level B — CVC / Level 1</h3>
+            <p class="text-white/90 text-lg">Short-vowel CVC words (sat, pin, mop).</p>
+            <p class="text-white/80"><span class="font-semibold">Stories:</span> 8-12 sentences, 1-2 per page</p>
+            
+            <div class="flex items-center justify-between pt-6">
+              <div class="price-tag bg-white/20 px-4 py-1 rounded-full text-sm font-medium">₹799</div>
+              <div class="difficulty-badge bg-white/20 px-3 py-1 rounded-full text-xs">Early reader</div>
+            </div>
+          </div>
         </div>
-        
-        <div>
-          <h3 class="text-white font-medium mb-4">Contact Us</h3>
-          <p class="mb-2">Email: resources@letsreadindia.com</p>
-          <p>Phone: +91 98765 43210</p>
+      </div>
+
+      <!-- Additional Level Cards Row -->
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mt-8">
+        <!-- Level C -->
+        <div class="level-card p-8 text-center bg-gradient-to-br from-child-green to-child-blue rounded-2xl shadow-xl transform hover:scale-102 transition-all duration-300">
+          <div class="level-badge inline-block mb-6 bg-white/20 text-white px-4 py-1 rounded-full text-sm font-medium">Level C</div>
+          
+          <!-- Card Visual Area -->
+          <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-12 mb-6 relative">
+            <div class="level-icon text-6xl font-bold text-white">C</div>
+            <!-- Decorative elements -->
+            <div class="absolute top-4 left-4 w-3 h-3 bg-white/40 rounded-full"></div>
+            <div class="absolute top-4 right-4 w-2 h-2 bg-white/30 rounded-full"></div>
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/40 rounded-full"></div>
+          </div>
+          
+          <div class="text-white space-y-4">
+            <h3 class="text-2xl font-bold">Level C — Sentences & Phrases / Level 2</h3>
+            <p class="text-white/90 text-lg">Sentences with blends/digraphs; phrasing & expression.</p>
+            <p class="text-white/80"><span class="font-semibold">Stories:</span> 12–20 sentences; 2–4 per page</p>
+            
+            <div class="flex items-center justify-between pt-6">
+              <div class="price-tag bg-white/20 px-4 py-1 rounded-full text-sm font-medium">₹899</div>
+              <div class="difficulty-badge bg-white/20 px-3 py-1 rounded-full text-xs">Fluency</div>
+            </div>
+            
+            <div class="flex justify-center gap-3 mt-6">
+              <button class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-300">
+                View Set
+              </button>
+              <button class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-300">
+                Add to Cart
+              </button>
+            </div>
+            <button class="text-white/80 hover:text-white text-sm font-medium mt-2 transition-colors">
+              Read Sample
+            </button>
+          </div>
+        </div>
+
+        <!-- Level D -->
+        <div class="level-card p-8 text-center bg-gradient-to-br from-child-yellow to-child-pink rounded-2xl shadow-xl transform hover:scale-102 transition-all duration-300">
+          <div class="level-badge inline-block mb-6 bg-white/20 text-white px-4 py-1 rounded-full text-sm font-medium">Level D</div>
+          
+          <!-- Card Visual Area -->
+          <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-12 mb-6 relative">
+            <div class="level-icon text-6xl font-bold text-white">D</div>
+            <!-- Decorative elements -->
+            <div class="absolute top-4 left-4 w-3 h-3 bg-white/40 rounded-full"></div>
+            <div class="absolute top-4 right-4 w-2 h-2 bg-white/30 rounded-full"></div>
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/40 rounded-full"></div>
+          </div>
+          
+          <div class="text-white space-y-4">
+            <h3 class="text-2xl font-bold">Level D — Short Stories / Level 3</h3>
+            <p class="text-white/90 text-lg">Short stories; questions "why/how".</p>
+            <p class="text-white/80"><span class="font-semibold">Stories:</span> 2–4 pages per story; 40–120 words</p>
+            
+            <div class="flex items-center justify-between pt-6">
+              <div class="price-tag bg-white/20 px-4 py-1 rounded-full text-sm font-medium">₹999</div>
+              <div class="difficulty-badge bg-white/20 px-3 py-1 rounded-full text-xs">Comprehension</div>
+            </div>
+            
+            <div class="flex justify-center gap-3 mt-6">
+              <button class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-300">
+                View Set
+              </button>
+              <button class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-300">
+                Add to Cart
+              </button>
+            </div>
+            <button class="text-white/80 hover:text-white text-sm font-medium mt-2 transition-colors">
+              Read Sample
+            </button>
+          </div>
         </div>
       </div>
       
-      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-        <p>&copy; <span x-text="new Date().getFullYear()"></span> Let's Read India. All rights reserved.</p>
+      <!-- Additional Levels Indicator -->
+      <div class="text-center mt-12">
+        <div class="inline-flex items-center gap-2 text-gray-400">
+          <div class="w-3 h-3 bg-child-yellow rounded-full"></div>
+          <div class="w-3 h-3 bg-child-yellow rounded-full"></div>
+          <div class="w-3 h-3 bg-child-yellow rounded-full"></div>
+          <div class="w-3 h-3 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+        </div>
+        <p class="text-gray-500 dark:text-gray-400 mt-2">More levels available</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Inside a Set Section -->
+  <section class="section-bg py-24 relative overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0" style="background: 
+        radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);"></div>
+    
+    <!-- Floating elements -->
+    <div class="absolute top-[10%] left-[5%] w-8 h-8 bg-child-blue/10 rounded-full" style="animation: float 6s ease-in-out infinite;"></div>
+    <div class="absolute top-[20%] right-[10%] w-10 h-10 bg-child-green/10 rounded-full" style="animation: float 6s ease-in-out infinite 2s;"></div>
+    <div class="absolute bottom-[30%] left-[8%] w-6 h-6 bg-child-pink/10 rounded-full" style="animation: float 6s ease-in-out infinite 4s;"></div>
+    <div class="absolute bottom-[15%] right-[15%] w-9 h-9 bg-child-purple/10 rounded-full" style="animation: float 6s ease-in-out infinite 1s;"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">WHAT'S INSIDE A SET</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">What you get in every pack</h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
+          6–10 booklets, big type, picture cues, target sounds list, discussion questions, and a progress sticker sheet.
+        </p>
+      </div>
+
+      <!-- Feature Cards Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Feature 1 -->
+        <div class="backdrop-blur-xl bg-white/90 dark:bg-gray-800/90 border border-white/30 dark:border-gray-700/30 shadow-xl rounded-3xl p-8 text-center transform hover:scale-105 hover:-translate-y-2 transition-all duration-400 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-blue to-child-green"></div>
+          <div class="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl mb-6 mx-auto shadow-lg relative overflow-hidden" style="background: linear-gradient(135deg, #3B82F6, #1D4ED8);">
+            <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
+            <span class="relative">📚</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">6–10 booklets</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">(level-dependent)</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="backdrop-blur-xl bg-white/90 dark:bg-gray-800/90 border border-white/30 dark:border-gray-700/30 shadow-xl rounded-3xl p-8 text-center transform hover:scale-105 hover:-translate-y-2 transition-all duration-400 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-green to-child-pink"></div>
+          <div class="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl mb-6 mx-auto shadow-lg relative overflow-hidden" style="background: linear-gradient(135deg, #10B981, #059669);">
+            <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
+            <span class="relative">🎯</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Big type + picture cues</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Clear, readable text with visual support</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="backdrop-blur-xl bg-white/90 dark:bg-gray-800/90 border border-white/30 dark:border-gray-700/30 shadow-xl rounded-3xl p-8 text-center transform hover:scale-105 hover:-translate-y-2 transition-all duration-400 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-pink to-child-purple"></div>
+          <div class="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl mb-6 mx-auto shadow-lg relative overflow-hidden" style="background: linear-gradient(135deg, #EC4899, #DB2777);">
+            <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
+            <span class="relative">📝</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Target sounds & word list</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">on inside cover</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="backdrop-blur-xl bg-white/90 dark:bg-gray-800/90 border border-white/30 dark:border-gray-700/30 shadow-xl rounded-3xl p-8 text-center transform hover:scale-105 hover:-translate-y-2 transition-all duration-400 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-purple to-child-yellow"></div>
+          <div class="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl mb-6 mx-auto shadow-lg relative overflow-hidden" style="background: linear-gradient(135deg, #A855F7, #9333EA);">
+            <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
+            <span class="relative">💬</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">2–3 discussion questions</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">+ sticker tracker</p>
+        </div>
+      </div>
+
+      <!-- Download Button -->
+      <div class="text-center mt-16">
+        <button class="bg-gradient-to-r from-child-yellow/20 to-child-pink/20 dark:from-child-yellow/10 dark:to-child-pink/10 border-2 border-child-yellow dark:border-child-yellow/50 text-yellow-800 dark:text-yellow-200 font-semibold px-8 py-4 rounded-2xl hover:bg-gradient-to-r hover:from-child-yellow/30 hover:to-child-pink/30 dark:hover:from-child-yellow/20 dark:hover:to-child-pink/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 backdrop-blur-sm">
+          Download Parent Guide (PDF)
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Divider -->
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="h-0.5 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent my-16"></div>
+  </div>
+
+  <!-- Try a Sample Section -->
+  <section class="sample-section py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">TRY A SAMPLE</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8">Read a sample story</h2>
+      </div>
+
+      <!-- Sample Card -->
+      <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-white/20 dark:border-gray-700/20 rounded-3xl p-12 text-center relative shadow-2xl" style="box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);">
+        <!-- Animated border gradient -->
+        <div class="absolute -inset-0.5 bg-gradient-to-r from-child-blue via-child-green via-child-pink via-child-purple to-child-yellow rounded-3xl opacity-20" style="animation: gradient-rotate 6s linear infinite;"></div>
+        
+        <div class="relative z-10">
+          <!-- Sample Content -->
+          <div class="mb-8">
+            <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
+              Short, phonics-friendly story with big type and picture prompts.
+            </p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <button class="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold px-8 py-4 rounded-2xl hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              Read Sample
+            </button>
+            <button class="bg-white/90 dark:bg-gray-700/90 text-orange-600 dark:text-orange-400 border-2 border-orange-500 dark:border-orange-400 font-semibold px-8 py-4 rounded-2xl hover:bg-orange-50 dark:hover:bg-gray-600 hover:-translate-y-1 transition-all duration-300 backdrop-blur-sm">
+              Download PDF
+            </button>
+          </div>
+
+          <!-- Additional Info -->
+          <p class="text-gray-500 dark:text-gray-400 text-sm">
+            Works on mobile; print-friendly.
+          </p>
+        </div>
+
+        <!-- Decorative elements inside the card -->
+        <div class="absolute top-8 left-8 w-4 h-4 bg-child-blue/20 rounded-full"></div>
+        <div class="absolute top-12 right-12 w-3 h-3 bg-child-green/20 rounded-full"></div>
+        <div class="absolute bottom-8 left-12 w-5 h-5 bg-child-pink/20 rounded-full"></div>
+        <div class="absolute bottom-12 right-8 w-2 h-2 bg-child-purple/20 rounded-full"></div>
+      </div>
+
+      <!-- Trust Indicator -->
+      <div class="text-center mt-12">
+        <div class="inline-flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg">
+          <div class="flex text-yellow-400 text-lg">★★★★★</div>
+          <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">Loved by thousands of families</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Use at Home Section -->
+  <section class="home-routine-section py-24 relative overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0" style="background: 
+        radial-gradient(circle at 15% 25%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 85% 75%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 45% 60%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);"></div>
+    
+    <!-- Floating shapes -->
+    <div class="absolute top-[10%] left-[5%] w-5 h-5 bg-child-blue/10 rounded-full" style="animation: float-gentle 8s ease-in-out infinite;"></div>
+    <div class="absolute top-[20%] right-[8%] w-8 h-8 bg-child-green/10 rounded-full" style="animation: float-gentle 8s ease-in-out infinite 2s;"></div>
+    <div class="absolute bottom-[25%] left-[10%] w-6 h-6 bg-child-pink/10 rounded-full" style="animation: float-gentle 8s ease-in-out infinite 4s;"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">HOW TO USE AT HOME</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8">A simple 5-step routine</h2>
+      </div>
+
+      <!-- Steps Grid -->
+      <div class="grid md:grid-cols-5 gap-6">
+        <!-- Step 1 -->
+        <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-white/30 dark:border-gray-700/30 shadow-lg rounded-2xl p-6 hover:-translate-y-1 transition-all duration-400 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-blue to-child-green"></div>
+          <div class="w-12 h-12 bg-gradient-to-br from-child-blue to-child-green rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">1</div>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Warm-up (1 min)</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Review 5 target sounds/words.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-white/30 dark:border-gray-700/30 shadow-lg rounded-2xl p-6 hover:-translate-y-1 transition-all duration-400 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-green to-child-pink"></div>
+          <div class="w-12 h-12 bg-gradient-to-br from-child-green to-child-pink rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">2</div>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Finger track (2–3 min)</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Child reads; point to each word.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-white/30 dark:border-gray-700/30 shadow-lg rounded-2xl p-6 hover:-translate-y-1 transition-all duration-400 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-pink to-child-purple"></div>
+          <div class="w-12 h-12 bg-gradient-to-br from-child-pink to-child-purple rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">3</div>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Reread (1–2 min)</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Same page; focus on phrasing.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-white/30 dark:border-gray-700/30 shadow-lg rounded-2xl p-6 hover:-translate-y-1 transition-all duration-400 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-purple to-child-yellow"></div>
+          <div class="w-12 h-12 bg-gradient-to-br from-child-purple to-child-yellow rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">4</div>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Talk time (1–2 min)</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Answer 1 'why/how' using the picture.</p>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-white/30 dark:border-gray-700/30 shadow-lg rounded-2xl p-6 hover:-translate-y-1 transition-all duration-400 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-yellow to-child-blue"></div>
+          <div class="w-12 h-12 bg-gradient-to-br from-child-yellow to-child-blue rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">5</div>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Celebrate (10 sec)</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Sticker on tracker; pick tomorrow's page.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- For Classrooms Section -->
+  <section class="classroom-section py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">FOR CLASSROOMS</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8">Easy to manage in class</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Left Content -->
+        <div>
+          <!-- Feature 1 -->
+          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/20 rounded-2xl p-6 mb-5 hover:translate-x-1 transition-all duration-300 relative">
+            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-16 bg-gradient-to-b from-child-green to-child-blue rounded-r-full"></div>
+            <div class="flex items-start ml-6">
+              <div class="w-3 h-3 bg-gradient-to-br from-child-green to-child-blue rounded-full mr-3 mt-1 flex-shrink-0"></div>
+              <div>
+                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Colour-coded levels & book ID for tracking</h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/20 rounded-2xl p-6 mb-5 hover:translate-x-1 transition-all duration-300 relative">
+            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-16 bg-gradient-to-b from-child-pink to-child-purple rounded-r-full"></div>
+            <div class="flex items-start ml-6">
+              <div class="w-3 h-3 bg-gradient-to-br from-child-pink to-child-purple rounded-full mr-3 mt-1 flex-shrink-0"></div>
+              <div>
+                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Small-group rotation (5–8 mins/child) + whisper phones (optional)</h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/20 rounded-2xl p-6 mb-5 hover:translate-x-1 transition-all duration-300 relative">
+            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-16 bg-gradient-to-b from-child-purple to-child-yellow rounded-r-full"></div>
+            <div class="flex items-start ml-6">
+              <div class="w-3 h-3 bg-gradient-to-br from-child-purple to-child-yellow rounded-full mr-3 mt-1 flex-shrink-0"></div>
+              <div>
+                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Take-home packs with simple note to parents</h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/20 rounded-2xl p-6 mb-8 hover:translate-x-1 transition-all duration-300 relative">
+            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-16 bg-gradient-to-b from-child-yellow to-child-green rounded-r-full"></div>
+            <div class="flex items-start ml-6">
+              <div class="w-3 h-3 bg-gradient-to-br from-child-yellow to-child-green rounded-full mr-3 mt-1 flex-shrink-0"></div>
+              <div>
+                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Term inventory sheet + replacements for wear-and-tear</h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button class="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold px-7 py-4 rounded-2xl hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              Get Classroom
+            </button>
+            <button class="bg-white/90 dark:bg-gray-800/90 text-yellow-800 dark:text-yellow-200 border-2 border-yellow-700/30 dark:border-yellow-600/30 font-semibold px-7 py-4 rounded-2xl hover:bg-white dark:hover:bg-gray-700 hover:border-yellow-700/50 dark:hover:border-yellow-600/50 hover:-translate-y-1 transition-all duration-300 backdrop-blur-sm">
+              Download
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Visual -->
+        <div class="relative">
+          <div class="bg-gradient-to-br from-child-yellow to-yellow-600 rounded-3xl p-16 text-center relative overflow-hidden shadow-2xl">
+            <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-3xl"></div>
+            
+            <div class="relative z-10">
+              <div class="w-24 h-24 bg-white/30 rounded-2xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm">
+                <div class="w-16 h-16 bg-white/40 rounded-xl flex items-center justify-center">
+                  <div class="w-8 h-8 bg-child-pink rounded-lg"></div>
+                </div>
+              </div>
+              <p class="text-white/90 font-medium text-lg mb-2">Classroom storage box / rotation photo</p>
+            </div>
+            
+            <!-- Decorative elements -->
+            <div class="absolute top-6 left-6 w-3 h-3 bg-white/30 rounded-full"></div>
+            <div class="absolute top-10 right-8 w-2 h-2 bg-white/25 rounded-full"></div>
+            <div class="absolute bottom-8 left-10 w-4 h-4 bg-white/30 rounded-full"></div>
+            <div class="absolute bottom-6 right-6 w-2 h-2 bg-white/25 rounded-full"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bundles & Offers Section -->
+  <section class="bundles-section py-24 relative overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djJoLTR2LTJoNHptMC0xNnYxMGgtNFYxOGg0em0wIDI0di0yaC00djJoNHoiLz48L2c+PC9nPjwvc3ZnPg==')]"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <span class="inline-block bg-gradient-to-r from-child-yellow to-amber-400 text-gray-900 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+          BUNDLES & OFFERS
+        </span>
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Smart Savings on Learning Packs</h2>
+        <p class="text-lg text-gray-300 max-w-2xl mx-auto">Get more value with our carefully curated bundles, designed to support every step of your child's reading journey.</p>
+      </div>
+
+      <!-- Bundle Cards -->
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Starter Bundle -->
+        <div class="group relative bg-white/5 backdrop-blur-lg rounded-2xl p-0.5 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+          <div class="absolute inset-0 bg-gradient-to-br from-amber-400/20 via-pink-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="h-full bg-gradient-to-b from-white/5 to-white/[0.01] rounded-2xl p-8 relative">
+            <!-- Popular Badge -->
+            <div class="absolute top-4 right-4 bg-gradient-to-r from-amber-400 to-yellow-500 text-gray-900 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg z-10">
+              POPULAR CHOICE
+            </div>
+            
+            <!-- Icon -->
+            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            
+            <!-- Content -->
+            <h3 class="text-2xl font-bold text-white mb-3">Starter Bundle</h3>
+            <p class="text-amber-400 font-medium mb-1">Level B</p>
+            <div class="h-px w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent my-4 mx-auto"></div>
+            
+            <ul class="text-gray-300 space-y-2 mb-8 text-left">
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                6 engaging booklets
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Parent Guide
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Sticker tracker
+              </li>
+            </ul>
+            
+            <div class="text-4xl font-bold text-white mb-6">
+              ₹999
+              <span class="text-sm font-normal text-gray-400">+ shipping</span>
+            </div>
+            
+            <button class="w-full bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-500 hover:to-yellow-600 text-gray-900 font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl hover:shadow-amber-500/20">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <!-- Progression Bundle -->
+        <div class="group relative bg-white/5 backdrop-blur-lg rounded-2xl p-0.5 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+          <div class="absolute inset-0 bg-gradient-to-br from-pink-500/20 via-purple-500/20 to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="h-full bg-gradient-to-b from-white/5 to-white/[0.01] rounded-2xl p-8 relative">
+            <!-- Best Value Badge -->
+            <div class="absolute top-4 right-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg z-10">
+              BEST VALUE
+            </div>
+            
+            <!-- Icon -->
+            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+              </svg>
+            </div>
+            
+            <!-- Content -->
+            <h3 class="text-2xl font-bold text-white mb-3">Progression Bundle</h3>
+            <p class="text-pink-400 font-medium mb-1">Levels B → C → D</p>
+            <div class="h-px w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent my-4 mx-auto"></div>
+            
+            <ul class="text-gray-300 space-y-2 mb-8 text-left">
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Complete reading journey
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                18-30 booklets total
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Save 15% vs buying separately
+              </li>
+            </ul>
+            
+            <div class="text-4xl font-bold text-white mb-2">
+              ₹2,699
+              <span class="text-sm font-normal text-gray-400">+ shipping</span>
+            </div>
+            <p class="text-sm text-pink-300 mb-6">You save ₹400</p>
+            
+            <button class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl hover:shadow-purple-500/20">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <!-- Classroom Pack -->
+        <div class="group relative bg-white/5 backdrop-blur-lg rounded-2xl p-0.5 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-indigo-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="h-full bg-gradient-to-b from-white/5 to-white/[0.01] rounded-2xl p-8 relative">
+            <!-- Icon -->
+            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            
+            <!-- Content -->
+            <h3 class="text-2xl font-bold text-white mb-3">Classroom Pack</h3>
+            <p class="text-blue-400 font-medium mb-1">For 20–30 learners</p>
+            <div class="h-px w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent my-4 mx-auto"></div>
+            
+            <ul class="text-gray-300 space-y-2 mb-8 text-left">
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                6× each title
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Durable storage box
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Teacher's guide included
+              </li>
+            </ul>
+            
+            <div class="text-4xl font-bold text-white mb-6">
+              Custom Quote
+            </div>
+            
+            <button class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl hover:shadow-indigo-500/20">
+              Request Quote
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Trust Badges -->
+      <div class="mt-16 pt-8 border-t border-white/10">
+        <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+          <div class="flex items-center">
+            <div class="flex -space-x-2">
+              <img class="h-10 w-10 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/women/12.jpg" alt="Happy parent">
+              <img class="h-10 w-10 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/men/43.jpg" alt="Happy parent">
+              <img class="h-10 w-10 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/women/34.jpg" alt="Happy parent">
+            </div>
+            <div class="ml-4">
+              <div class="flex items-center">
+                <svg class="h-5 w-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <span class="ml-1 text-white font-medium">4.9</span>
+                <span class="text-gray-400 ml-1">(1.2k+ reviews)</span>
+              </div>
+              <p class="text-sm text-gray-400">Loved by parents & teachers</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center">
+            <svg class="h-12 w-12 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <div class="ml-4">
+              <p class="text-white font-medium">100% Satisfaction</p>
+              <p class="text-sm text-gray-400">30-day money back guarantee</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center">
+            <svg class="h-12 w-12 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <div class="ml-4">
+              <p class="text-white font-medium">Fast Shipping</p>
+              <p class="text-sm text-gray-400">Delivered in 3-5 business days</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phonics-Aligned Sequence Section -->
+  <section class="phonics-section py-32">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">PHONICS-ALIGNED SEQUENCE</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8">Scope & sequence (quick view)</h2>
+      </div>
+
+      <!-- Phonics Table -->
+      <div class="phonics-table">
+        <!-- Table Header -->
+        <div class="grid grid-cols-2 table-header">
+          <div class="relative z-10">
+            <h3 class="text-xl font-bold">Level</h3>
+          </div>
+          <div class="relative z-10">
+            <h3 class="text-xl font-bold">Focus / Patterns</h3>
+          </div>
+        </div>
+
+        <!-- Table Rows -->
+        <div class="table-row grid grid-cols-2 gap-8 items-center">
+          <div>
+            <div class="level-badge">Level A (Pre-CVC)</div>
+          </div>
+          <div>
+            <p class="text-gray-600 dark:text-gray-300 font-mono text-sm">s a t p i n | m d g o c k | e u r h ...</p>
+          </div>
+        </div>
+
+        <div class="table-row grid grid-cols-2 gap-8 items-center">
+          <div>
+            <div class="level-badge" style="background: linear-gradient(135deg, #10B981, #EC4899);">Level B (CVC)</div>
+          </div>
+          <div>
+            <p class="text-gray-600 dark:text-gray-300">CVC families (at, an, ap, it, in...), no tricky spellings</p>
+          </div>
+        </div>
+
+        <div class="table-row grid grid-cols-2 gap-8 items-center">
+          <div>
+            <div class="level-badge" style="background: linear-gradient(135deg, #EC4899, #A855F7);">Level C (Sentences)</div>
+          </div>
+          <div>
+            <p class="text-gray-600 dark:text-gray-300">bl, st, sh, ch, th, ng; simple punctuation</p>
+          </div>
+        </div>
+
+        <div class="table-row grid grid-cols-2 gap-8 items-center">
+          <div>
+            <div class="level-badge" style="background: linear-gradient(135deg, #A855F7, #F6C548);">Level D (Short stories)</div>
+          </div>
+          <div>
+            <p class="text-gray-600 dark:text-gray-300">Multisyllable beginnings; high-frequency words; 'why/how' prompts</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- PDF Button -->
+      <div class="mt-12 text-center">
+        <a href="#" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-full text-white bg-gradient-to-r from-child-purple to-child-pink hover:from-child-pink hover:to-child-purple shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          See Scope and Sequence (PDF)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery & Returns Section -->
+  <section class="delivery-section py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">DELIVERY & RETURNS</h2>
+        <div class="h-1 w-20 bg-gradient-to-r from-child-purple to-child-pink mx-auto rounded-full"></div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+        <!-- Shipping & Returns -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div class="w-12 h-12 bg-gradient-to-r from-child-purple to-child-pink rounded-lg flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Shipping & returns (India)</h3>
+          <ul class="text-gray-600 dark:text-gray-300 space-y-1 text-sm">
+            <li class="flex items-start">
+              <span class="text-child-pink mr-2">•</span>
+              <span>Pan-India delivery</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-child-pink mr-2">•</span>
+              <span>Tracking provided; typically 3–7 working days</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Payment -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div class="w-12 h-12 bg-gradient-to-r from-child-blue to-child-green rounded-lg flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Payment</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm">UPI / cards / netbanking (COD optional)</p>
+        </div>
+
+        <!-- Returns -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div class="w-12 h-12 bg-gradient-to-r from-child-yellow to-amber-500 rounded-lg flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Returns</h3>
+          <ul class="text-gray-600 dark:text-gray-300 space-y-1 text-sm">
+            <li class="flex items-start">
+              <span class="text-amber-500 mr-2">•</span>
+              <span>7-day easy returns on unopened packs</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-amber-500 mr-2">•</span>
+              <span>Replacements for damaged copies</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Support</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">WhatsApp/phone/email for quick help</p>
+          <div class="pt-2 border-t border-gray-100 dark:border-gray-700">
+            <a href="#" class="text-sm font-medium text-child-purple hover:text-child-pink transition-colors">
+              Shipping & Returns Policy
+            </a>
+            <span class="mx-2 text-gray-300">•</span>
+            <a href="#" class="text-sm font-medium text-child-purple hover:text-child-pink transition-colors">
+              Refunds
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden" x-data="faq()">
+    <div class="absolute left-0 bottom-0 w-80 h-80 opacity-20">
+      <div class="w-full h-full bg-gradient-to-r from-yellow-400 to-pink-500 rounded-full"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-orange-500 dark:text-orange-400 font-semibold uppercase tracking-wider mb-4 text-sm">
+          FAQ
+        </p>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          Frequently Asked Questions
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
+          Get Answers to Some Common Queries.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen"
+            class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <span class="font-medium pr-4 text-gray-900 dark:text-white">1. How long does it take?</span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="isOpen" x-transition
+            class="px-6 pb-6 pt-0 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            <div class="border-t pt-4">
+              <p class="text-gray-600 leading-relaxed dark:text-gray-400">5–7 minutes per learner.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen"
+            class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <span class="font-medium pr-4 text-gray-900 dark:text-white">2. Who can administer it?</span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="isOpen" x-transition
+            class="px-6 pb-6 pt-0 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            <div class="border-t pt-4">
+              <p class="text-gray-600 leading-relaxed dark:text-gray-400">A trained teacher or parent facilitator; we provide a short orientation.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen"
+            class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <span class="font-medium pr-4 text-gray-900 dark:text-white">3. Is it an exam?</span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="isOpen" x-transition
+            class="px-6 pb-6 pt-0 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            <div class="border-t pt-4">
+              <p class="text-gray-600 leading-relaxed dark:text-gray-400">(Answer not shown in image)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen"
+            class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <span class="font-medium pr-4 text-gray-900 dark:text-white">4. How often should we re-check?</span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="isOpen" x-transition
+            class="px-6 pb-6 pt-0 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            <div class="border-t pt-4">
+              <p class="text-gray-600 leading-relaxed dark:text-gray-400">(Answer not shown in image)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen"
+            class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <span class="font-medium pr-4 text-gray-900 dark:text-white">5. Does it work if English isn't the first language?</span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="isOpen" x-transition
+            class="px-6 pb-6 pt-0 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            <div class="border-t pt-4">
+              <p class="text-gray-600 leading-relaxed dark:text-gray-400">(Answer not shown in image)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen"
+            class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <span class="font-medium pr-4 text-gray-900 dark:text-white">6. What about children with special needs?</span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="isOpen" x-transition
+            class="px-6 pb-6 pt-0 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            <div class="border-t pt-4">
+              <p class="text-gray-600 leading-relaxed dark:text-gray-400">(Answer not shown in image)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen"
+            class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <span class="font-medium pr-4 text-gray-900 dark:text-white">5. How often do resources update?</span>
+            <svg class="w-5 h-5 text-gray-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="isOpen" x-transition
+            class="px-6 pb-6 pt-0 bg-gray-50 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            <div class="border-t pt-4">
+              <p class="text-gray-600 leading-relaxed dark:text-gray-400">We regularly add new resources and update existing ones. Subscribe to our newsletter for updates.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gradient-to-r from-purple-600 to-pink-500 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Get Started?</h2>
+      <p class="text-xl mb-8">Start your diagnostic screening today and discover where your students or child stands in their reading journey.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#" class="bg-white text-purple-700 hover:bg-gray-100 font-medium py-3 px-8 rounded-lg transition-colors inline-block">
+          Run Class Screening
+        </a>
+        <a href="#" class="bg-transparent border-2 border-white text-white hover:bg-white/10 font-medium py-3 px-8 rounded-lg transition-colors inline-flex items-center justify-center">
+          Get Individual Check
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer role="contentinfo" style="background: linear-gradient(90deg,#5b21b6,#6d28d9); background-color: #6d28d9;" class="text-white pt-16 pb-8 relative overflow-hidden z-10">
+    <!-- decorative top glow -->
+    <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 w-3/4 h-36 pointer-events-none bg-gradient-to-b from-pink-500/20 to-transparent rounded-full"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+        <!-- Brand -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="bg-yellow-400 rounded-full p-2 flex items-center justify-center">
+              <span class="text-purple-700 font-bold text-lg">LR</span>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold tracking-tight text-white">LET'S READ</h3>
+              <p class="text-sm text-white">Empowering young minds through literacy.</p>
+            </div>
+          </div>
+
+          <p class="text-white leading-relaxed text-sm max-w-sm">
+            Reading kits, diagnostics and training to help children build strong reading foundations.
+          </p>
+
+          <!-- Social / contact icons -->
+          <div class="flex items-center gap-2 flex-wrap">
+            <a href="#" aria-label="Twitter" title="Twitter" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-sky-400 hover:text-white">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.52 8.52 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+              </svg>
+            </a>
+            <a href="https://wa.me/911234567890" aria-label="WhatsApp" title="WhatsApp" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-green-400 hover:text-white">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M16.7 14.6c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.2s-.8.9-1 1.1c-.2.2-.4.2-.7.1-.3-.1-1.4-.5-2.6-1.6-1-1-1.6-2.2-1.8-2.5-.2-.3 0-.5.1-.7.1-.1.3-.4.4-.6.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.7-.5-.6-.7-.6h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1.1 2.7 1.2 2.9.1.2 2.2 3.5 5.4 4.9.8.3 1.5.5 2 .6.8.3 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.4-.1-.2-.3-.2-.6-.3zM12 2C6.5 2 2 6.3 2 11.7c0 2.1.7 4 1.9 5.6L2 22l4.8-1.6c1.6.9 3.4 1.3 5.2 1.3 5.5 0 10-4.3 10-9.7S17.5 2 12 2z"/>
+              </svg>
+            </a>
+            <a href="tel:+911234567890" aria-label="Phone" title="Call us" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-blue-200 hover:text-white">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C9.92 21 3 14.08 3 6a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.27.2 2.48.57 3.6.12.33.04.7-.25.99l-2.2 2.2z"/>
+              </svg>
+            </a>
+            <a href="mailto:info@letsread.com" aria-label="Email" title="Email us" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-rose-300 hover:text-white">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- For Parents -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-white">For Parents</h4>
+          <ul class="space-y-2 text-white text-sm">
+            <li><a href="products.html" class="hover:underline">Shop Kits</a></li>
+            <li><a href="#" class="hover:underline">Readiness Quiz</a></li>
+            <li><a href="#" class="hover:underline">Sample Activity</a></li>
+            <li><a href="#" class="hover:underline">FAQs</a></li>
+          </ul>
+        </div>
+
+        <!-- For Schools -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-white">For Schools</h4>
+          <ul class="space-y-2 text-white text-sm">
+            <li><a href="#" class="hover:underline">Program</a></li>
+            <li><a href="diagnostic.html" class="hover:underline">Diagnostic</a></li>
+            <li><a href="#" class="hover:underline">Training</a></li>
+            <li><a href="#" class="hover:underline">Case Studies</a></li>
+            <li><a href="#" class="hover:underline">Demo</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-white">Resources</h4>
+          <ul class="space-y-2 text-white text-sm">
+            <li><a href="#" class="hover:underline">Articles</a></li>
+            <li><a href="#" class="hover:underline">Downloads</a></li>
+            <li><a href="#" class="hover:underline">Research</a></li>
+            <li><a href="#" class="hover:underline">Press</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal row: full width -->
+        <div class="lg:col-span-4 mt-8 pt-6 border-t border-white/20">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-white text-sm"> 2025 Let's Read India. All rights reserved.</div>
+            <div class="flex items-center gap-4 text-sm">
+              <a href="#" class="text-white/70 hover:text-white transition">Privacy</a>
+              <span class="hidden md:inline text-white/40">•</span>
+              <a href="#" class="text-white/70 hover:text-white transition">Terms</a>
+              <span class="hidden md:inline text-white/40">•</span>
+              <a href="#" class="text-white/70 hover:text-white transition">Refunds / Shipping</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </footer>
 
-  <script>
-    // Initialize dark mode
-    document.addEventListener('alpine:init', () => {
-      if (localStorage.darkMode === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-        Alpine.store('darkMode', true);
-      } else {
-        document.documentElement.classList.remove('dark');
-        Alpine.store('darkMode', false);
-      }
-    });
-  </script>
+  <!-- Contact Modal -->
+  <div x-show="contactOpen" class="fixed inset-0 z-60 flex items-center justify-center px-4" x-transition x-cloak>
+    <!-- backdrop -->
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" @click="contactOpen = false" aria-hidden="true"></div>
+
+    <!-- modal panel -->
+    <div class="relative w-full max-w-md bg-white rounded-2xl p-6 shadow-2xl z-10 mx-auto my-8 overflow-y-auto" 
+         @click.away="contactOpen = false"
+         x-transition:enter="ease-out duration-300"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="ease-in duration-200"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95">
+      
+      <!-- Close button -->
+      <button @click="contactOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="text-center">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Let's Talk!</h2>
+        <p class="text-gray-600 mb-6">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+      </div>
+
+      <form class="space-y-4">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+          <input type="text" id="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+          <input type="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
+          <textarea id="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+
 </body>
 </html>

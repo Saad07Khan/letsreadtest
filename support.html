@@ -1,0 +1,1715 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="./public/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training - Let's Read India</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'child-purple': '#A855F7',
+            'child-pink': '#EC4899',
+            'child-yellow': '#F6C548',
+            'child-blue': '#3B82F6',
+            'child-green': '#10B981',
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  
+  <!-- Alpine.js -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <style>
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 240 10% 3.9%;
+      --primary: 240 73% 57%;
+      --child-purple: 280 87% 65%;
+      --child-pink: 330 81% 60%;
+      --child-yellow: 45 93% 58%;
+      --child-blue: 210 92% 60%;
+      --child-green: 140 69% 58%;
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 1.75rem;
+      --text-4xl: 2rem;
+      --text-5xl: 2.25rem;
+      --text-6xl: 2.5rem;
+    }
+
+    .dark {
+      --background: 240 10% 3.9%;
+      --foreground: 0 0% 98%;
+    }
+
+    body {
+      background-color: hsl(var(--background));
+      color: hsl(var(--foreground));
+      font-family: 'Poppins', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Custom animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-15px) rotate(2deg); }
+      66% { transform: translateY(5px) rotate(-1deg); }
+    }
+
+    @keyframes slide-up {
+      from { 
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(246, 197, 72, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(246, 197, 72, 0.6); }
+    }
+
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .slide-up {
+      animation: slide-up 0.8s ease-out forwards;
+    }
+
+    .pulse-glow {
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    /* Glassmorphism */
+    .glass-card {
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .dark .glass-card {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #F6C548, #EC4899, #A855F7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [x-cloak] { display: none !important; }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Dark mode fixes for specific sections */
+    .section-bg {
+      background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 50%, #F1F5F9 100%);
+    }
+
+    .dark .section-bg {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    }
+
+    .sample-section {
+      background: linear-gradient(135deg, #fefce8 0%, #ffedd5 50%, #fce7f3 100%);
+    }
+
+    .dark .sample-section {
+      background: linear-gradient(135deg, #1c1917 0%, #292524 50%, #44403c 100%);
+    }
+
+    .home-routine-section {
+      background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 50%, #F1F5F9 100%);
+    }
+
+    .dark .home-routine-section {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    }
+
+    .classroom-section {
+      background: linear-gradient(135deg, #dbeafe 0%, #dcfce7 50%, #f3e8ff 100%);
+    }
+
+    .dark .classroom-section {
+      background: linear-gradient(135deg, #1e3a8a 0%, #166534 50%, #581c87 100%);
+    }
+
+    .phonics-section {
+      background: linear-gradient(135deg, #fefce8 0%, #ffedd5 50%, #fce7f3 100%);
+    }
+
+    .dark .phonics-section {
+      background: linear-gradient(135deg, #1c1917 0%, #292524 50%, #44403c 100%);
+    }
+
+    .delivery-section {
+      background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+    }
+
+    .dark .delivery-section {
+      background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+    }
+
+    /* Fix for bundles section background */
+    .bundles-section {
+      background: linear-gradient(135deg, #3730a3 0%, #6d28d9 50%, #be185d 100%);
+    }
+
+    .dark .bundles-section {
+      background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 50%, #831843 100%);
+    }
+
+    /* Level cards dark mode fix */
+    .level-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .level-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: inherit;
+      z-index: -1;
+    }
+
+    /* Table styles for phonics section */
+    .phonics-table {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+    }
+
+    .dark .phonics-table {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .table-header {
+      background: linear-gradient(135deg, #F6C548 0%, #EC4899 50%, #A855F7 100%);
+      color: white;
+      font-weight: 700;
+      padding: 20px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .table-row {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark .table-row {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .table-row:hover {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(16, 185, 129, 0.03) 100%);
+      transform: translateX(8px);
+    }
+
+    .dark .table-row:hover {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+    }
+
+    .level-badge {
+      background: linear-gradient(135deg, #3B82F6, #10B981);
+      color: white;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      display: inline-block;
+    }
+
+    /* Additional animations */
+    @keyframes float-gentle {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-15px) rotate(3deg); }
+      66% { transform: translateY(8px) rotate(-2deg); }
+    }
+    
+    @keyframes gradient-rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .floating-icon {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .progress-arrow {
+      position: relative;
+      padding: 0 20px;
+    }
+    
+    .progress-arrow:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9CA3AF;
+      font-size: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .progress-arrow {
+        padding: 10px 0;
+        width: 100%;
+      }
+      
+      .progress-arrow:not(:last-child)::after {
+        content: '↓';
+        right: 50%;
+        top: 100%;
+        transform: translateX(50%);
+      }
+    }
+  </style>
+
+  <meta name="description" content="Professional training programs for educators and parents to enhance children's reading skills. Learn effective teaching methodologies and strategies." />
+</head>
+
+<body x-data="{ 
+  darkMode: localStorage.getItem('darkMode') === 'true', 
+  mobileMenuOpen: false,
+  contactOpen: false,
+  topMenuOpen: true
+}"
+x-init="
+  darkMode = localStorage.getItem('darkMode') === 'true';
+  $watch('darkMode', value => {
+    localStorage.setItem('darkMode', value);
+    document.documentElement.classList.toggle('dark', value);
+  });
+  if (darkMode) {
+    document.documentElement.classList.add('dark');
+  }
+">
+
+  <!-- Top Bar -->
+  <div x-show="topMenuOpen" x-cloak class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-10 py-2">
+        <div class="flex items-center">
+          <span class="text-xs sm:text-sm">🎁 Free Reading Age Check for your child/class — Book a 10-min call</span>
+        </div>
+        <button class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium px-3 py-1 rounded-full text-xs transition-colors">
+          Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <nav class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50 dark:border-b dark:border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <a href="index.html" class="flex-shrink-0">
+          <img src="./public/lets%20read%20logo.png" alt="Let's Read Logo" class="h-10 w-auto">
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-1">
+          <a href="about.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">About</a>
+          <a href="diagnostic.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Reading Diagnostic</a>
+          <a href="resources.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Resources</a>
+          <a href="products.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Products</a>
+          <a href="#" class="px-3 py-2 text-sm font-medium text-purple-600 dark:text-purple-400">Training</a>
+          <a href="#" @click.prevent="contactOpen = true" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Contact</a>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="hidden md:flex items-center space-x-3">
+          <button class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800">I'm a Parent</button>
+          <button class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700">I'm a School</button>
+          <button @click="darkMode = !darkMode" class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
+            <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 rounded-md text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
+            <svg class="h-6 w-6" :class="{ 'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg class="h-6 w-6" :class="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden" x-cloak>
+      <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-800">
+        <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">About</a>
+        <a href="diagnostic.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Reading Diagnostic</a>
+        <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Resources</a>
+        <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Products</a>
+        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-purple-600 hover:bg-gray-50 dark:text-purple-400 dark:hover:bg-gray-700">Training</a>
+        <a href="#" @click.prevent="contactOpen = true" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Background with childish gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-pink-300 via-purple-300 to-blue-300"></div>
+    
+    <!-- Floating decorative elements -->
+    <div class="absolute top-20 left-10 w-16 h-16 bg-yellow-300 rounded-full opacity-60 float-animation"></div>
+    <div class="absolute top-40 right-20 w-12 h-12 bg-green-300 rounded-full opacity-50 float-animation" style="animation-delay: 2s;"></div>
+    <div class="absolute bottom-32 left-20 w-20 h-20 bg-pink-400 rounded-full opacity-40 float-animation" style="animation-delay: 4s;"></div>
+    <div class="absolute bottom-20 right-32 w-14 h-14 bg-purple-400 rounded-full opacity-50 float-animation" style="animation-delay: 1s;"></div>
+    
+    <!-- Main content container -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        
+        <!-- Left side - Content -->
+        <div class="text-center lg:text-left space-y-8">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg slide-up">
+            Let's Read Support
+          </h1>
+          
+          <!-- Support categories grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-12 slide-up" style="animation-delay: 0.2s;">
+            
+            <!-- Orders -->
+            <div class="group">
+              <div class="bg-white/90 hover:bg-white rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+                <div class="flex flex-col items-center space-y-3">
+                  <div class="w-12 h-12 bg-gradient-to-br from-pink-400 to-pink-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700">Orders</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Return/Exchange -->
+            <div class="group">
+              <div class="bg-white/90 hover:bg-white rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+                <div class="flex flex-col items-center space-y-3">
+                  <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700">Return/Exchange</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Downloads -->
+            <div class="group">
+              <div class="bg-white/90 hover:bg-white rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+                <div class="flex flex-col items-center space-y-3">
+                  <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700">Downloads</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Payments -->
+            <div class="group">
+              <div class="bg-white/90 hover:bg-white rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+                <div class="flex flex-col items-center space-y-3">
+                  <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700">Payments</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Warranty/parts -->
+            <div class="group">
+              <div class="bg-white/90 hover:bg-white rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+                <div class="flex flex-col items-center space-y-3">
+                  <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700">Warranty/parts</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Bulk and School quotes -->
+            <div class="group">
+              <div class="bg-white/90 hover:bg-white rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+                <div class="flex flex-col items-center space-y-3">
+                  <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700">School</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Training -->
+            <div class="group">
+              <div class="bg-white/90 hover:bg-white rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+                <div class="flex flex-col items-center space-y-3">
+                  <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-green-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700">Training</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Privacy -->
+            <div class="group">
+              <div class="bg-white/90 hover:bg-white rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+                <div class="flex flex-col items-center space-y-3">
+                  <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700">Privacy</span>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        
+        <!-- Right side - Image -->
+        <div class="relative slide-up" style="animation-delay: 0.4s;">
+          <div class="relative bg-white/20 backdrop-blur-sm rounded-3xl p-8 shadow-2xl">
+            <div class="aspect-[4/3] bg-gradient-to-br from-white/40 to-white/20 rounded-2xl flex items-center justify-center overflow-hidden">
+              <!-- Illustration placeholder - child with book/tablet -->
+              <div class="text-center space-y-4">
+                <div class="w-32 h-32 mx-auto bg-gradient-to-br from-yellow-300 to-orange-300 rounded-full flex items-center justify-center shadow-lg">
+                  <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <div class="text-white/80 text-lg font-medium">We're here to help!</div>
+                <div class="flex space-x-2 justify-center">
+                  <div class="w-3 h-3 bg-pink-400 rounded-full animate-bounce"></div>
+                  <div class="w-3 h-3 bg-purple-400 rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+                  <div class="w-3 h-3 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- Bottom wave decoration -->
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg class="w-full h-20 text-white" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,0V6c0,21.6,291,111.46,741,110.26,445.39,3.6,459-88.3,459-110.26V0Z" fill="currentColor" opacity="0.3"></path>
+      </svg>
+    </div>
+  </section>
+
+   <!-- Tell us what you need section -->
+   <section class="py-12 md:py-16 relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-blue-900/20">
+    <!-- Floating decorative elements -->
+    <div class="absolute top-8 right-16 w-10 h-10 bg-yellow-300/30 rounded-full float-animation"></div>
+    <div class="absolute bottom-16 left-8 w-12 h-12 bg-green-300/30 rounded-full float-animation" style="animation-delay: 3s;"></div>
+    
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold uppercase tracking-wide">TELL US WHAT YOU NEED</h2>
+        <div class="w-16 h-1 bg-pink-500 mx-auto mb-4 mt-2"></div>
+        <div class="flex justify-center items-center space-x-1.5">
+          <div class="w-2 h-2 bg-purple-600 rounded-full"></div>
+          <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
+          <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+        </div>
+      </div>
+
+      <!-- Collapsible sections -->
+      <div class="space-y-4" x-data="{ 
+        activeSection: 'orders',
+        sections: {
+          orders: false,
+          returns: false,
+          downloads: false,
+          diagnostic: false
+        }
+      }">
+        
+        <!-- Orders & Shipping -->
+        <div class="glass-card rounded-xl overflow-hidden shadow-md slide-up">
+          <button @click="sections.orders = !sections.orders" 
+                  class="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/50 dark:hover:bg-black/20 transition-all duration-200">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Orders & Shipping</h3>
+            <div class="w-6 h-6 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full flex items-center justify-center">
+              <svg class="w-4 h-4 text-white transition-transform duration-200" 
+                   :class="sections.orders ? 'rotate-45' : ''" 
+                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+            </div>
+          </button>
+          
+          <div x-show="sections.orders" 
+               x-transition:enter="transition ease-out duration-200"
+               x-transition:enter-start="opacity-0 transform -translate-y-1"
+               x-transition:enter-end="opacity-100 transform translate-y-0"
+               x-transition:leave="transition ease-in duration-150"
+               x-transition:leave-start="opacity-100 transform translate-y-0"
+               x-transition:leave-end="opacity-0 transform -translate-y-1"
+               class="px-6 pb-6">
+            <div class="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+              <div class="flex items-center space-x-2">
+                <span class="flex-shrink-0 w-5 h-5 bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                <div>Track order → <a href="#" class="text-orange-500 hover:underline">Click here</a></div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="flex-shrink-0 w-5 h-5 bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                <div>Need help? <a href="#" class="text-orange-500 hover:underline">Contact us</a></div>
+              </div>
+              
+              <!-- Action buttons -->
+              <div class="flex flex-wrap gap-3 mt-4">
+                <button class="px-4 py-2 text-sm bg-gradient-to-r from-orange-400 to-orange-500 text-white font-medium rounded-xl hover:from-orange-500 hover:to-orange-600 transition-all duration-200 shadow">
+                  Track Order
+                </button>
+                <button class="px-4 py-2 text-sm bg-white/80 border border-orange-300 text-orange-600 font-medium rounded-xl hover:bg-orange-50 transition-all duration-200">
+                  Change Address
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Returns & Exchanges -->
+        <div class="glass-card rounded-xl overflow-hidden shadow-md slide-up" style="animation-delay: 0.1s;">
+          <button @click="sections.returns = !sections.returns" 
+                  class="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/50 dark:hover:bg-black/20 transition-all duration-200">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Returns & Exchanges</h3>
+            <div class="w-6 h-6 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center">
+              <svg class="w-4 h-4 text-white transition-transform duration-200" 
+                   :class="sections.returns ? 'rotate-45' : ''" 
+                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+            </div>
+          </button>
+          
+          <div x-show="sections.returns" 
+               x-transition:enter="transition ease-out duration-200"
+               x-transition:enter-start="opacity-0 transform -translate-y-1"
+               x-transition:enter-end="opacity-100 transform translate-y-0"
+               x-transition:leave="transition ease-in duration-150"
+               x-transition:leave-start="opacity-100 transform translate-y-0"
+               x-transition:leave-end="opacity-0 transform -translate-y-1"
+               class="px-6 pb-6">
+            <div class="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+              <div class="flex items-center space-x-2">
+                <span class="flex-shrink-0 w-5 h-5 bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                <div>30-day return policy</div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="flex-shrink-0 w-5 h-5 bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                <div>Contact us with order details</div>
+              </div>
+              
+              <div class="flex flex-wrap gap-3 mt-4">
+                <button class="px-4 py-2 text-sm bg-gradient-to-r from-purple-400 to-pink-500 text-white font-medium rounded-xl hover:from-purple-500 hover:to-pink-600 transition-all duration-200 shadow">
+                  Start Return
+                </button>
+                <button class="px-4 py-2 text-sm bg-white/80 border border-purple-300 text-purple-600 font-medium rounded-xl hover:bg-purple-50 transition-all duration-200">
+                  Exchange Item
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Downloads & Videos -->
+        <div class="glass-card rounded-xl overflow-hidden shadow-md slide-up" style="animation-delay: 0.1s;">
+          <button @click="sections.downloads = !sections.downloads" 
+                  class="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/50 dark:hover:bg-black/20 transition-all duration-200">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Downloads & Videos</h3>
+            <div class="w-6 h-6 bg-gradient-to-r from-blue-400 to-green-500 rounded-full flex items-center justify-center">
+              <svg class="w-4 h-4 text-white transition-transform duration-200" 
+                   :class="sections.downloads ? 'rotate-45' : ''" 
+                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+            </div>
+          </button>
+          
+          <div x-show="sections.downloads" 
+               x-transition:enter="transition ease-out duration-200"
+               x-transition:enter-start="opacity-0 transform -translate-y-1"
+               x-transition:enter-end="opacity-100 transform translate-y-0"
+               x-transition:leave="transition ease-in duration-150"
+               x-transition:leave-start="opacity-100 transform translate-y-0"
+               x-transition:leave-end="opacity-0 transform -translate-y-1"
+               class="px-6 pb-6">
+            <div class="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+              <div class="flex items-center space-x-2">
+                <span class="flex-shrink-0 w-5 h-5 bg-gradient-to-r from-blue-400 to-green-400 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                <div>Access your purchased materials</div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="flex-shrink-0 w-5 h-5 bg-gradient-to-r from-blue-400 to-green-400 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                <div>Browse free resources & samples</div>
+              </div>
+              
+              <div class="flex flex-wrap gap-3 mt-4">
+                <button class="px-4 py-2 text-sm bg-gradient-to-r from-blue-400 to-green-500 text-white font-medium rounded-xl hover:from-blue-500 hover:to-green-600 transition-all duration-200 shadow">
+                  My Downloads
+                </button>
+                <button class="px-4 py-2 text-sm bg-white/80 border border-blue-300 text-blue-600 font-medium rounded-xl hover:bg-blue-50 transition-all duration-200">
+                  Free Resources
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Diagnostic & Dashboard -->
+        <div class="glass-card rounded-xl overflow-hidden shadow-md slide-up" style="animation-delay: 0.2s;">
+          <button @click="sections.diagnostic = !sections.diagnostic" 
+                  class="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/50 dark:hover:bg-black/20 transition-all duration-200">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Diagnostic & Dashboard</h3>
+            <div class="w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+              <svg class="w-4 h-4 text-white transition-transform duration-200" 
+                   :class="sections.diagnostic ? 'rotate-45' : ''" 
+                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+            </div>
+          </button>
+          
+          <div x-show="sections.diagnostic" 
+               x-transition:enter="transition ease-out duration-200"
+               x-transition:enter-start="opacity-0 transform -translate-y-1"
+               x-transition:enter-end="opacity-100 transform translate-y-0"
+               x-transition:leave="transition ease-in duration-150"
+               x-transition:leave-start="opacity-100 transform translate-y-0"
+               x-transition:leave-end="opacity-0 transform -translate-y-1"
+               class="px-6 pb-6">
+            <div class="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+              <div class="flex items-start space-x-3">
+                <span class="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
+                <div>Take our comprehensive reading assessment</div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full flex items-center justify-center text-sm font-bold">2</span>
+                <div>View detailed progress reports and insights</div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full flex items-center justify-center text-sm font-bold">3</span>
+                <div>Get personalized learning recommendations</div>
+              </div>
+              
+              <div class="flex flex-wrap gap-4 mt-6">
+                <button class="px-6 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-medium rounded-2xl hover:from-yellow-500 hover:to-orange-600 transition-all duration-300 hover:scale-105 shadow-lg">
+                  Start Diagnostic
+                </button>
+                <button class="px-6 py-3 bg-white/80 border-2 border-yellow-400 text-yellow-600 font-medium rounded-2xl hover:bg-yellow-50 transition-all duration-300 hover:scale-105">
+                  View Dashboard
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- Track My Order Section -->
+  <section class="py-20 relative overflow-hidden bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900/20 dark:via-purple-900/20 dark:to-pink-900/20">
+    <!-- Floating decorative elements -->
+    <div class="absolute top-16 left-16 w-20 h-20 bg-yellow-300/20 rounded-full float-animation"></div>
+    <div class="absolute top-32 right-24 w-14 h-14 bg-blue-300/25 rounded-full float-animation" style="animation-delay: 1.5s;"></div>
+    <div class="absolute bottom-24 left-32 w-16 h-16 bg-pink-300/20 rounded-full float-animation" style="animation-delay: 3s;"></div>
+    
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mt-6 mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-wide">TRACK MY ORDER</h2>
+        <div class="w-20 h-1 bg-pink-500 mx-auto mb-6 mt-3"></div>
+        <div class="flex justify-center items-center space-x-2">
+          <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+          <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+          <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+        </div>
+
+      </div>
+
+      <!-- Main Tracking Card -->
+      <div class="glass-card rounded-3xl p-8 sm:p-12 shadow-2xl slide-up" style="animation-delay: 0.2s;">
+        
+        <!-- Tab Selection -->
+        <div class="flex flex-col sm:flex-row gap-4 mb-8" x-data="{ activeTab: 'order-id' }">
+          <button @click="activeTab = 'order-id'" 
+                  :class="activeTab === 'order-id' ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg' : 'bg-white/60 dark:bg-gray-800/60 text-gray-700 dark:text-gray-300 hover:bg-white/80 dark:hover:bg-gray-700/80'"
+                  class="flex-1 px-6 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105">
+            Order ID
+          </button>
+          <button @click="activeTab = 'phone'" 
+                  :class="activeTab === 'phone' ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg' : 'bg-white/60 dark:bg-gray-800/60 text-gray-700 dark:text-gray-300 hover:bg-white/80 dark:hover:bg-gray-700/80'"
+                  class="flex-1 px-6 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105">
+            Phone (OTP)
+          </button>
+        </div>
+
+        <!-- Input Form -->
+        <form class="space-y-6" x-data="{ activeTab: 'order-id' }">
+          
+          <!-- Order ID Input -->
+          <div x-show="activeTab === 'order-id'" 
+               x-transition:enter="transition ease-out duration-300"
+               x-transition:enter-start="opacity-0 transform translate-x-4"
+               x-transition:enter-end="opacity-100 transform translate-x-0">
+            <label for="order-id" class="block text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
+              Order ID
+            </label>
+            <div class="relative">
+              <input type="text" 
+                     id="order-id" 
+                     placeholder="Order ID e.g., LRI123"
+                     class="w-full px-6 py-4 text-lg bg-white/80 dark:bg-gray-800/80 border-2 border-transparent rounded-2xl focus:border-purple-400 focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 outline-none transition-all duration-300 placeholder-gray-500 dark:placeholder-gray-400">
+              <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
+                <div class="w-10 h-10 bg-gradient-to-r from-purple-400 to-pink-400 rounded-xl flex items-center justify-center">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone Input -->
+          <div x-show="activeTab === 'phone'" 
+               x-transition:enter="transition ease-out duration-300"
+               x-transition:enter-start="opacity-0 transform translate-x-4"
+               x-transition:enter-end="opacity-100 transform translate-x-0">
+            <label for="phone" class="block text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
+              Phone Number
+            </label>
+            <div class="relative">
+              <input type="tel" 
+                     id="phone" 
+                     placeholder="Enter your phone number"
+                     class="w-full px-6 py-4 text-lg bg-white/80 dark:bg-gray-800/80 border-2 border-transparent rounded-2xl focus:border-blue-400 focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800 outline-none transition-all duration-300 placeholder-gray-500 dark:placeholder-gray-400">
+              <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
+                <div class="w-10 h-10 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-xl flex items-center justify-center">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 pt-4">
+            <button type="submit" 
+                    class="flex-1 px-8 py-4 bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500 text-white font-bold text-lg rounded-2xl hover:from-yellow-500 hover:via-orange-500 hover:to-pink-600 transition-all duration-300 hover:scale-105 hover:shadow-xl transform">
+              <div class="flex items-center justify-center space-x-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <span>Track</span>
+              </div>
+            </button>
+            
+            <button type="button" 
+                    class="flex-1 px-8 py-4 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-800/30 dark:to-pink-800/30 border-2 border-purple-300 dark:border-purple-600 text-purple-700 dark:text-purple-300 font-bold text-lg rounded-2xl hover:bg-gradient-to-r hover:from-purple-200 hover:to-pink-200 dark:hover:from-purple-700/40 dark:hover:to-pink-700/40 transition-all duration-300 hover:scale-105">
+              <div class="flex items-center justify-center space-x-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>Download Invoice</span>
+              </div>
+            </button>
+          </div>
+
+        </form>
+
+        <!-- Quick Tips -->
+        <div class="mt-8 p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl border border-blue-200/30 dark:border-blue-700/30">
+          <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center">
+            <div class="w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center mr-3">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            Quick Tips
+          </h4>
+          <ul class="text-gray-600 dark:text-gray-300 space-y-2">
+            <li class="flex items-start">
+              <span class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              Order ID format: LRI followed by numbers (e.g., LRI123, LRI456)
+            </li>
+            <li class="flex items-start">
+              <span class="w-2 h-2 bg-pink-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              Use the phone number you provided during checkout
+            </li>
+            <li class="flex items-start">
+              <span class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              Download your invoice anytime for your records
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Start a return / exchange Section -->
+  <section class="py-20 relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-yellow-900/20">
+    <!-- Floating decorative elements -->
+    <div class="absolute top-20 right-20 w-18 h-18 bg-purple-300/20 rounded-full float-animation"></div>
+    <div class="absolute bottom-32 left-16 w-12 h-12 bg-yellow-300/25 rounded-full float-animation" style="animation-delay: 2s;"></div>
+    <div class="absolute top-40 left-24 w-16 h-16 bg-pink-300/20 rounded-full float-animation" style="animation-delay: 4s;"></div>
+    
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mt-6 mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-wide">START A RETURN / EXCHANGE</h2>
+        <div class="w-20 h-1 bg-pink-500 mx-auto mb-6 mt-3"></div>
+        <div class="flex justify-center items-center space-x-2">
+          <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+          <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+          <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+        </div>
+        <p class="text-xl text-gray-600 dark:text-gray-300 font-medium">
+          <span class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-yellow-100 to-orange-100 dark:from-yellow-900/30 dark:to-orange-900/30 rounded-full border border-yellow-300 dark:border-yellow-700">
+            <svg class="w-5 h-5 text-yellow-600 dark:text-yellow-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            7-day window from delivery • unopened required unless transit damage
+          </span>
+        </p>
+      </div>
+
+      <!-- Main Return Form Card -->
+      <div class="glass-card rounded-3xl p-8 sm:p-12 shadow-2xl slide-up" style="animation-delay: 0.2s;">
+        
+        <form class="space-y-8" x-data="{ 
+          selectedReason: '', 
+          filesSelected: false, 
+          confirmChecked: false,
+          fileName: ''
+        }">
+          
+          <!-- Reason Selection -->
+          <div class="space-y-4">
+            <label class="block text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+              Reason
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              
+              <label class="relative cursor-pointer group">
+                <input type="radio" name="reason" value="wrong-level" x-model="selectedReason" class="sr-only">
+                <div class="p-6 rounded-2xl border-2 transition-all duration-300 group-hover:scale-105"
+                     :class="selectedReason === 'wrong-level' ? 
+                       'bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-800/40 dark:to-pink-800/40 border-purple-400 dark:border-purple-500' : 
+                       'bg-white/60 dark:bg-gray-800/60 border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-500'">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center"
+                         :class="selectedReason === 'wrong-level' ? 'border-purple-500 bg-purple-500' : 'border-gray-300 dark:border-gray-500'">
+                      <div class="w-3 h-3 rounded-full bg-white" x-show="selectedReason === 'wrong-level'"></div>
+                    </div>
+                    <span class="font-medium text-gray-800 dark:text-gray-200">Wrong level</span>
+                  </div>
+                </div>
+              </label>
+
+              <label class="relative cursor-pointer group">
+                <input type="radio" name="reason" value="damaged" x-model="selectedReason" class="sr-only">
+                <div class="p-6 rounded-2xl border-2 transition-all duration-300 group-hover:scale-105"
+                     :class="selectedReason === 'damaged' ? 
+                       'bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-800/40 dark:to-indigo-800/40 border-blue-400 dark:border-blue-500' : 
+                       'bg-white/60 dark:bg-gray-800/60 border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-500'">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center"
+                         :class="selectedReason === 'damaged' ? 'border-blue-500 bg-blue-500' : 'border-gray-300 dark:border-gray-500'">
+                      <div class="w-3 h-3 rounded-full bg-white" x-show="selectedReason === 'damaged'"></div>
+                    </div>
+                    <span class="font-medium text-gray-800 dark:text-gray-200">Damaged in transit</span>
+                  </div>
+                </div>
+              </label>
+
+              <label class="relative cursor-pointer group">
+                <input type="radio" name="reason" value="defective" x-model="selectedReason" class="sr-only">
+                <div class="p-6 rounded-2xl border-2 transition-all duration-300 group-hover:scale-105"
+                     :class="selectedReason === 'defective' ? 
+                       'bg-gradient-to-r from-yellow-100 to-orange-100 dark:from-yellow-800/40 dark:to-orange-800/40 border-yellow-400 dark:border-yellow-500' : 
+                       'bg-white/60 dark:bg-gray-800/60 border-gray-200 dark:border-gray-600 hover:border-yellow-300 dark:hover:border-yellow-500'">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center"
+                         :class="selectedReason === 'defective' ? 'border-yellow-500 bg-yellow-500' : 'border-gray-300 dark:border-gray-500'">
+                      <div class="w-3 h-3 rounded-full bg-white" x-show="selectedReason === 'defective'"></div>
+                    </div>
+                    <span class="font-medium text-gray-800 dark:text-gray-200">Defective item</span>
+                  </div>
+                </div>
+              </label>
+
+              <label class="relative cursor-pointer group">
+                <input type="radio" name="reason" value="other" x-model="selectedReason" class="sr-only">
+                <div class="p-6 rounded-2xl border-2 transition-all duration-300 group-hover:scale-105"
+                     :class="selectedReason === 'other' ? 
+                       'bg-gradient-to-r from-pink-100 to-purple-100 dark:from-pink-800/40 dark:to-purple-800/40 border-pink-400 dark:border-pink-500' : 
+                       'bg-white/60 dark:bg-gray-800/60 border-gray-200 dark:border-gray-600 hover:border-pink-300 dark:hover:border-pink-500'">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center"
+                         :class="selectedReason === 'other' ? 'border-pink-500 bg-pink-500' : 'border-gray-300 dark:border-gray-500'">
+                      <div class="w-3 h-3 rounded-full bg-white" x-show="selectedReason === 'other'"></div>
+                    </div>
+                    <span class="font-medium text-gray-800 dark:text-gray-200">Other reason</span>
+                  </div>
+                </div>
+              </label>
+
+            </div>
+          </div>
+
+          <!-- Upload Photos Section -->
+          <div class="space-y-4">
+            <label class="block text-xl font-semibold text-gray-800 dark:text-gray-200">
+              Upload photos (optional)
+            </label>
+            <div class="relative">
+              <input type="file" 
+                     id="photo-upload" 
+                     multiple 
+                     accept="image/*"
+                     class="sr-only" 
+                     @change="filesSelected = $event.target.files.length > 0; fileName = $event.target.files.length > 1 ? `${$event.target.files.length} files selected` : $event.target.files[0]?.name || 'No file chosen'">
+              <label for="photo-upload" 
+                     class="flex items-center justify-between w-full p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-900/20 dark:to-purple-900/20 border-2 border-dashed border-blue-300 dark:border-blue-600 rounded-2xl cursor-pointer hover:from-blue-100/50 hover:to-purple-100/50 dark:hover:from-blue-800/30 dark:hover:to-purple-800/30 transition-all duration-300 group hover:scale-105">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-400 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-lg font-medium text-gray-800 dark:text-gray-200">Choose Files</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400" x-text="fileName || 'No file chosen'"></p>
+                  </div>
+                </div>
+                <div class="text-blue-600 dark:text-blue-400 font-medium">Browse</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Confirmation Checkbox -->
+          <div class="flex items-start space-x-4 p-6 bg-gradient-to-r from-yellow-50/50 to-pink-50/50 dark:from-yellow-900/20 dark:to-pink-900/20 rounded-2xl border border-yellow-200 dark:border-yellow-700">
+            <label class="relative cursor-pointer flex items-start space-x-3 group">
+              <input type="checkbox" x-model="confirmChecked" class="sr-only">
+              <div class="w-6 h-6 mt-0.5 rounded-lg border-2 flex items-center justify-center transition-all duration-300"
+                   :class="confirmChecked ? 'bg-gradient-to-r from-green-400 to-blue-500 border-green-400' : 'border-gray-300 dark:border-gray-500 bg-white dark:bg-gray-700'">
+                <svg x-show="confirmChecked" class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-gray-800 dark:text-gray-200 leading-relaxed">
+                I confirm it's within 7 days and unopened (unless damaged)
+              </span>
+            </label>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 pt-4">
+            <button type="submit" 
+                    :disabled="!selectedReason || !confirmChecked"
+                    :class="selectedReason && confirmChecked ? 
+                      'bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-white hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 hover:scale-105 hover:shadow-xl cursor-pointer' : 
+                      'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'"
+                    class="flex-1 px-8 py-4 font-bold text-lg rounded-2xl transition-all duration-300 transform">
+              <div class="flex items-center justify-center space-x-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <span>Start Return</span>
+              </div>
+            </button>
+            
+            <button type="button" 
+                    class="flex-1 px-8 py-4 bg-gradient-to-r from-yellow-100 to-orange-100 dark:from-yellow-800/30 dark:to-orange-800/30 border-2 border-yellow-300 dark:border-yellow-600 text-yellow-700 dark:text-yellow-300 font-bold text-lg rounded-2xl hover:bg-gradient-to-r hover:from-yellow-200 hover:to-orange-200 dark:hover:from-yellow-700/40 dark:hover:to-orange-700/40 transition-all duration-300 hover:scale-105">
+              <div class="flex items-center justify-center space-x-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>Read full policy</span>
+              </div>
+            </button>
+          </div>
+
+        </form>
+
+        <!-- Quick Info -->
+        <div class="mt-8 p-6 bg-gradient-to-r from-purple-50/50 to-blue-50/50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-2xl border border-purple-200/30 dark:border-purple-700/30">
+          <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center">
+            <div class="w-6 h-6 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full flex items-center justify-center mr-3">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            Return Guidelines
+          </h4>
+          <ul class="text-gray-600 dark:text-gray-300 space-y-2">
+            <li class="flex items-start">
+              <span class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              Items must be returned within 7 days of delivery
+            </li>
+            <li class="flex items-start">
+              <span class="w-2 h-2 bg-pink-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              Products should be unopened unless damaged during transit
+            </li>
+            <li class="flex items-start">
+              <span class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+              Photos help us process your return faster
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+    
+      <!-- Your Account Section -->
+      <section class="py-20 relative overflow-hidden bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 dark:from-pink-900/20 dark:via-purple-900/20 dark:to-blue-900/20">
+        <!-- Floating decorative elements -->
+        <div class="absolute top-20 right-24 w-12 h-12 bg-green-300/25 rounded-full float-animation"></div>
+        <div class="absolute bottom-32 left-20 w-18 h-18 bg-yellow-300/20 rounded-full float-animation" style="animation-delay: 3s;"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <!-- Account Management Card -->
+          <div class="glass-card rounded-3xl p-8 sm:p-12 shadow-2xl slide-up">
+            
+            <!-- Header -->
+            <div class="text-center mt-6 mb-8">
+              <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-wide">YOUR ACCOUNT</h2>
+              <div class="w-20 h-1 bg-pink-500 mx-auto mb-6 mt-3"></div>
+              <div class="flex justify-center items-center space-x-2 mb-6">
+                <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+                <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+                <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+              </div>
+              <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                Sign in to manage your account and orders
+              </p>
+            </div>
+    
+            <!-- Account Actions -->
+            <div class="flex flex-col sm:flex-row gap-4 mb-8" x-data="{ showDemo: false }">
+              
+              <!-- Sign In Button -->
+              <button class="flex-1 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-lg rounded-2xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+                <div class="flex items-center justify-center space-x-2">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                  </svg>
+                  <span>Sign In</span>
+                </div>
+              </button>
+    
+              <!-- Create Account Button -->
+              <button class="flex-1 px-8 py-4 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-800/30 dark:to-purple-800/30 border-2 border-blue-300 dark:border-blue-600 text-blue-700 dark:text-blue-300 font-bold text-lg rounded-2xl hover:bg-gradient-to-r hover:from-blue-200 hover:to-purple-200 dark:hover:from-blue-700/40 dark:hover:to-purple-700/40 transition-all duration-300 hover:scale-105">
+                <div class="flex items-center justify-center space-x-2">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                  </svg>
+                  <span>Create Account</span>
+                </div>
+              </button>
+    
+              <!-- Demo Button -->
+              <button @click="showDemo = !showDemo" 
+                      class="flex-1 px-8 py-4 bg-gradient-to-r from-yellow-100 to-orange-100 dark:from-yellow-800/30 dark:to-orange-800/30 border-2 border-yellow-300 dark:border-yellow-600 text-yellow-700 dark:text-yellow-300 font-bold text-lg rounded-2xl hover:bg-gradient-to-r hover:from-yellow-200 hover:to-orange-200 dark:hover:from-yellow-700/40 dark:hover:to-orange-700/40 transition-all duration-300 hover:scale-105">
+                <div class="flex items-center justify-center space-x-2">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  <span>Demo: Pretend I'm Signed In</span>
+                </div>
+              </button>
+    
+            </div>
+    
+            <!-- Demo Panel -->
+            <div x-show="showDemo" 
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 transform -translate-y-4"
+                 x-transition:enter-end="opacity-100 transform translate-y-0"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100 transform translate-y-0"
+                 x-transition:leave-end="opacity-0 transform -translate-y-4"
+                 class="mb-8 p-6 bg-gradient-to-r from-green-50/50 to-blue-50/50 dark:from-green-900/20 dark:to-blue-900/20 rounded-2xl border-2 border-green-200 dark:border-green-700" 
+                 x-data="{ showDemo: false }">
+              <div class="text-center">
+                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-green-400 to-blue-400 rounded-2xl flex items-center justify-center">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-2">Welcome back, Demo User!</h3>
+                <p class="text-gray-600 dark:text-gray-300">Access your account details</p>
+                <div class="mt-4 flex flex-wrap justify-center gap-3">
+                  <span class="px-4 py-2 bg-white/60 dark:bg-gray-800/60 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300">3 Orders</span>
+                  <span class="px-4 py-2 bg-white/60 dark:bg-gray-800/60 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300">2 Invoices</span>
+                  <span class="px-4 py-2 bg-white/60 dark:bg-gray-800/60 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300">Language: EN</span>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Privacy Note -->
+            <div class="text-center p-6 bg-gradient-to-r from-purple-50/50 to-pink-50/50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl border border-purple-200/30 dark:border-purple-700/30">
+              <div class="flex items-center justify-center space-x-2 text-gray-600 dark:text-gray-300">
+                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <span class="font-medium">We never sell your data.</span>
+                <a href="#" class="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 underline font-medium">
+                  See Privacy Policy.
+                </a>
+              </div>
+            </div>
+    
+          </div>
+        </div>
+      </section>
+
+
+    <!-- School / NGO support Section -->
+    <section class="py-20 relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20">
+        <!-- Floating decorative elements -->
+        <div class="absolute top-16 left-20 w-14 h-14 bg-yellow-300/20 rounded-full float-animation"></div>
+        <div class="absolute bottom-24 right-16 w-20 h-20 bg-pink-300/20 rounded-full float-animation" style="animation-delay: 2.5s;"></div>
+        <div class="absolute top-32 right-32 w-16 h-16 bg-blue-300/25 rounded-full float-animation" style="animation-delay: 1s;"></div>
+        
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <!-- Section Header -->
+          <div class="text-center mt-6 mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-wide">SCHOOL / NGO SUPPORT</h2>
+            <div class="w-20 h-1 bg-pink-500 mx-auto mb-6 mt-3"></div>
+            <div class="flex justify-center items-center space-x-2">
+              <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+              <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+              <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+            </div>
+          </div>
+    
+          <!-- Support Cards Grid -->
+          <div class="grid md:grid-cols-3 gap-8 mb-12">
+            
+            <!-- Implementation Guide -->
+            <div class="glass-card rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 slide-up bg-gradient-to-br from-yellow-100/80 to-orange-100/80 dark:from-yellow-900/30 dark:to-orange-900/30 border border-yellow-200 dark:border-yellow-700">
+              <div class="text-center space-y-6">
+                <!-- Icon -->
+                <div class="w-20 h-20 mx-auto bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center float-animation shadow-lg">
+                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                
+                <div>
+                  <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                    Implementation Guide
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-300">Essential startup resources</p>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Training & PD -->
+            <div class="glass-card rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 slide-up bg-gradient-to-br from-purple-100/80 to-pink-100/80 dark:from-purple-900/30 dark:to-pink-900/30 border border-purple-200 dark:border-purple-700" style="animation-delay: 0.1s;">
+              <div class="text-center space-y-6">
+                <!-- Icon -->
+                <div class="w-20 h-20 mx-auto bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center float-animation shadow-lg" style="animation-delay: 2s;">
+                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                  </svg>
+                </div>
+                
+                <div>
+                  <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                    Training & PD
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-300">Professional development</p>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Diagnostic & Reporting -->
+            <div class="glass-card rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 slide-up bg-gradient-to-br from-blue-100/80 to-green-100/80 dark:from-blue-900/30 dark:to-green-900/30 border border-blue-200 dark:border-blue-700" style="animation-delay: 0.2s;">
+              <div class="text-center space-y-6">
+                <!-- Icon -->
+                <div class="w-20 h-20 mx-auto bg-gradient-to-r from-blue-500 to-green-500 rounded-2xl flex items-center justify-center float-animation shadow-lg" style="animation-delay: 4s;">
+                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                
+                <div>
+                  <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                    Diagnostic & Reporting
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-300">Progress tracking tools</p>
+                </div>
+              </div>
+            </div>
+    
+          </div>
+    
+          <!-- CTA Button -->
+          <div class="text-center slide-up" style="animation-delay: 0.3s;">
+            <button class="px-12 py-5 bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 text-white font-bold text-xl rounded-3xl hover:from-orange-500 hover:via-pink-600 hover:to-purple-600 transition-all duration-300 hover:scale-110 shadow-2xl hover:shadow-3xl pulse-glow">
+              Book a School Demo
+            </button>
+          </div>
+        </div>
+      </section>
+  
+
+      <!-- Policies & Guarantees Section -->
+  <section class="py-20 relative overflow-hidden bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 dark:from-indigo-900/20 dark:via-blue-900/20 dark:to-cyan-900/20">
+    <!-- Floating decorative elements -->
+    <div class="absolute top-24 left-16 w-16 h-16 bg-purple-300/20 rounded-full float-animation"></div>
+    <div class="absolute bottom-20 right-20 w-14 h-14 bg-pink-300/25 rounded-full float-animation" style="animation-delay: 2s;"></div>
+    <div class="absolute top-40 right-32 w-12 h-12 bg-yellow-300/20 rounded-full float-animation" style="animation-delay: 3s;"></div>
+    
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center mt-6 mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-wide">POLICIES & GUARANTEES</h2>
+        <div class="w-20 h-1 bg-pink-500 mx-auto mb-6 mt-3"></div>
+        <div class="flex justify-center items-center space-x-2">
+          <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+          <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+          <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mt-6">
+          Your protection, our priority
+        </p>
+      </div>
+
+      <!-- Policies Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Shipping & Delivery -->
+        <div class="glass-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 slide-up group bg-gradient-to-br from-blue-50/80 to-cyan-50/80 dark:from-blue-900/30 dark:to-cyan-900/30 border border-blue-200 dark:border-blue-700">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform shadow-lg">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4-8-4m16 0v10l-8 4-8-4V7" />
+              </svg>
+            </div>
+            <div class="opacity-60 group-hover:opacity-100 transition-opacity">
+              <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            Shipping & Delivery
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
+            Shipping info and tracking
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:text-blue-700 dark:hover:text-blue-300 transition-colors group-hover:translate-x-1 transform duration-300">
+            Read
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Refunds & Returns -->
+        <div class="glass-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 slide-up group bg-gradient-to-br from-purple-50/80 to-pink-50/80 dark:from-purple-900/30 dark:to-pink-900/30 border border-purple-200 dark:border-purple-700" style="animation-delay: 0.1s;">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-gradient-to-r from-purple-400 to-pink-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform shadow-lg">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </div>
+            <div class="opacity-60 group-hover:opacity-100 transition-opacity">
+              <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            Refunds & Returns
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
+            Returns and refunds info
+          </p>
+          <a href="#" class="inline-flex items-center text-purple-600 dark:text-purple-400 font-semibold hover:text-purple-700 dark:hover:text-purple-300 transition-colors group-hover:translate-x-1 transform duration-300">
+            Read
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Warranty & Replacements -->
+        <div class="glass-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 slide-up group bg-gradient-to-br from-green-50/80 to-emerald-50/80 dark:from-green-900/30 dark:to-emerald-900/30 border border-green-200 dark:border-green-700" style="animation-delay: 0.2s;">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-gradient-to-r from-green-400 to-emerald-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform shadow-lg">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <div class="opacity-60 group-hover:opacity-100 transition-opacity">
+              <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            Warranty & Replacements
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
+            Warranty details
+          </p>
+          <a href="#" class="inline-flex items-center text-green-600 dark:text-green-400 font-semibold hover:text-green-700 dark:hover:text-green-300 transition-colors group-hover:translate-x-1 transform duration-300">
+            Read
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Privacy & Data -->
+        <div class="glass-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 slide-up group bg-gradient-to-br from-yellow-50/80 to-amber-50/80 dark:from-yellow-900/30 dark:to-amber-900/30 border border-yellow-200 dark:border-yellow-700" style="animation-delay: 0.3s;">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform shadow-lg">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <div class="opacity-60 group-hover:opacity-100 transition-opacity">
+              <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            Privacy & Data
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
+            Your data protection
+          </p>
+          <a href="#" class="inline-flex items-center text-yellow-600 dark:text-yellow-400 font-semibold hover:text-yellow-700 dark:hover:text-yellow-300 transition-colors group-hover:translate-x-1 transform duration-300">
+            Read
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            </a>
+        </div>
+
+        <!-- Terms of Service -->
+        <div class="glass-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 slide-up group bg-gradient-to-br from-rose-50/80 to-pink-50/80 dark:from-rose-900/30 dark:to-pink-900/30 border border-rose-200 dark:border-rose-700 md:col-span-2 lg:col-span-1" style="animation-delay: 0.4s;">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-14 h-14 bg-gradient-to-r from-rose-400 to-pink-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform shadow-lg">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div class="opacity-60 group-hover:opacity-100 transition-opacity">
+              <svg class="w-5 h-5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            Terms of Service
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
+            Terms of service
+          </p>
+          <a href="#" class="inline-flex items-center text-rose-600 dark:text-rose-400 font-semibold hover:text-rose-700 dark:hover:text-rose-300 transition-colors group-hover:translate-x-1 transform duration-300">
+            Read
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Trust Badge -->
+      <div class="mt-16 text-center slide-up" style="animation-delay: 0.5s;">
+        <div class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-100 to-blue-100 dark:from-green-900/30 dark:to-blue-900/30 rounded-2xl border border-green-200 dark:border-green-700">
+          <svg class="w-8 h-8 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          <div class="text-left">
+            <p class="font-bold text-gray-900 dark:text-white text-lg">100% Transparency Guarantee</p>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">Your satisfaction guaranteed</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-gradient-to-r from-purple-600 to-pink-500 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/10"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">Still need a hand?</h2>
+      <p class="text-lg mb-8 opacity-90">Contact us for assistance</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-6">
+        <a href="mailto:careers@letsreadindia.com" class="bg-white text-purple-700 hover:bg-gray-100 font-semibold py-4 px-8 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg inline-block">
+          Email Us
+        </a>
+        <a href="tel:+919876543210" class="bg-transparent border-2 border-white text-white hover:bg-white/10 font-semibold py-4 px-8 rounded-xl transition-all duration-200 transform hover:scale-105 inline-flex items-center justify-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+          </svg>
+          +91 98765 43210
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer role="contentinfo" style="background: linear-gradient(90deg,#5b21b6,#6d28d9); background-color: #6d28d9;" class="text-white pt-16 pb-8 relative overflow-hidden z-10">
+    <!-- decorative top glow -->
+    <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 w-3/4 h-36 pointer-events-none bg-gradient-to-b from-pink-500/20 to-transparent rounded-full"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+        <!-- Brand -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="bg-yellow-400 rounded-full p-2 flex items-center justify-center">
+              <span class="text-purple-700 font-bold text-lg">LR</span>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold tracking-tight text-white">LET'S READ</h3>
+              <p class="text-sm text-white">Empowering young minds</p>
+            </div>
+          </div>
+
+          <p class="text-white leading-relaxed text-sm max-w-sm">
+            Helping children build strong reading skills
+          </p>
+
+          <!-- Social / contact icons -->
+          <div class="flex items-center gap-2 flex-wrap">
+            <a href="#" aria-label="Twitter" title="Twitter" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-sky-400 hover:text-white">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.52 8.52 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+              </svg>
+            </a>
+            <a href="https://wa.me/911234567890" aria-label="WhatsApp" title="WhatsApp" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-green-400 hover:text-white">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M16.7 14.6c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.2s-.8.9-1 1.1c-.2.2-.4.2-.7.1-.3-.1-1.4-.5-2.6-1.6-1-1-1.6-2.2-1.8-2.5-.2-.3 0-.5.1-.7.1-.1.3-.4.4-.6.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.7-.5-.6-.7-.6h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1.1 2.7 1.2 2.9.1.2 2.2 3.5 5.4 4.9.8.3 1.5.5 2 .6.8.3 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.4-.1-.2-.3-.2-.6-.3zM12 2C6.5 2 2 6.3 2 11.7c0 2.1.7 4 1.9 5.6L2 22l4.8-1.6c1.6.9 3.4 1.3 5.2 1.3 5.5 0 10-4.3 10-9.7S17.5 2 12 2z"/>
+              </svg>
+            </a>
+            <a href="tel:+911234567890" aria-label="Phone" title="Call us" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-blue-200 hover:text-white">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C9.92 21 3 14.08 3 6a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.27.2 2.48.57 3.6.12.33.04.7-.25.99l-2.2 2.2z"/>
+              </svg>
+            </a>
+            <a href="mailto:info@letsread.com" aria-label="Email" title="Email us" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-rose-300 hover:text-white">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- For Parents -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-white">For Parents</h4>
+          <ul class="space-y-2 text-white text-sm">
+            <li><a href="products.html" class="hover:underline">Shop Kits</a></li>
+            <li><a href="#" class="hover:underline">Readiness Quiz</a></li>
+            <li><a href="#" class="hover:underline">Sample Activity</a></li>
+            <li><a href="#" class="hover:underline">FAQs</a></li>
+          </ul>
+        </div>
+
+        <!-- For Schools -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-white">For Schools</h4>
+          <ul class="space-y-2 text-white text-sm">
+            <li><a href="#" class="hover:underline">Program</a></li>
+            <li><a href="diagnostic.html" class="hover:underline">Diagnostic</a></li>
+            <li><a href="#" class="hover:underline">Training</a></li>
+            <li><a href="#" class="hover:underline">Case Studies</a></li>
+            <li><a href="#" class="hover:underline">Demo</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-white">Resources</h4>
+          <ul class="space-y-2 text-white text-sm">
+            <li><a href="#" class="hover:underline">Articles</a></li>
+            <li><a href="#" class="hover:underline">Downloads</a></li>
+            <li><a href="#" class="hover:underline">Research</a></li>
+            <li><a href="#" class="hover:underline">Press</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal row: full width -->
+        <div class="lg:col-span-4 mt-8 pt-6 border-t border-white/20">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-white text-sm">© 2025 Let's Read India. All rights reserved.</div>
+            <div class="flex items-center gap-4 text-sm">
+              <a href="#" class="text-white/70 hover:text-white transition">Privacy</a>
+              <span class="hidden md:inline text-white/40">•</span>
+              <a href="#" class="text-white/70 hover:text-white transition">Terms</a>
+              <span class="hidden md:inline text-white/40">•</span>
+              <a href="#" class="text-white/70 hover:text-white transition">Refunds / Shipping</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact Modal -->
+  <div x-show="contactOpen" class="fixed inset-0 z-60 flex items-center justify-center px-4" x-transition x-cloak>
+    <!-- backdrop -->
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" @click="contactOpen = false" aria-hidden="true"></div>
+
+    <!-- modal panel -->
+    <div class="relative w-full max-w-md bg-white rounded-2xl p-6 shadow-2xl z-10 mx-auto my-8 overflow-y-auto" 
+         @click.away="contactOpen = false"
+         x-transition:enter="ease-out duration-300"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="ease-in duration-200"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95">
+      
+      <!-- Close button -->
+      <button @click="contactOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="text-center">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Let's Talk!</h2>
+        <p class="text-gray-600 mb-6">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+      </div>
+
+      <form class="space-y-4">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+          <input type="text" id="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+          <input type="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
+          <textarea id="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
+

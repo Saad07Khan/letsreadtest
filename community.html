@@ -6,7 +6,7 @@
   <title>Community | Let's Read India</title>
   <link rel="icon" type="image/svg+xml" href="./public/favicon.ico">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -19,30 +19,6 @@
             'child-yellow': '#F6C548',
             'child-blue': '#3B82F6',
             'child-green': '#10B981',
-            'maroon': {
-              50: '#fef2f3',
-              100: '#fde6e7',
-              200: '#fbd0d5',
-              300: '#f7aab2',
-              400: '#f27a8a',
-              500: '#e63f5c',
-              600: '#d1294d',
-              700: '#b01e3f',
-              800: '#931b3b',
-              900: '#7d1a37',
-            },
-            'rose-pink': {
-              50: '#fff1f3',
-              100: '#ffe4e9',
-              200: '#fecdd6',
-              300: '#fda4b8',
-              400: '#fb7193',
-              500: '#f43f6f',
-              600: '#e11d5f',
-              700: '#be1250',
-              800: '#9f134b',
-              900: '#881447',
-            }
           },
           fontFamily: {
             poppins: ['Poppins', 'sans-serif'],
@@ -53,19 +29,144 @@
   </script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <style>
-    [x-cloak] { display: none !important; }
-    body { 
+    /* Apply Comic Sans MS to all text elements */
+    body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, div {
+      font-family: 'Comic Sans MS', 'Comic Neue', 'Comic Sans', cursive, sans-serif !important;
+    }
+    
+    :root {
+      --hero-yellow: #F6C548;
+      --gradient-primary: linear-gradient(135deg, #4F46E5, #A855F7);
+      --gradient-secondary: linear-gradient(135deg, #EC4899, #A855F7);
+    }
+    
+    body {
       font-family: 'Poppins', sans-serif;
-      overflow-x: hidden;
+      color: #1f2937;
+      background-color: #ffffff;
     }
     
-    .gradient-text {
-      background: linear-gradient(135deg, #b01e3f 0%, #f43f6f 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .dark body {
+      color: #f3f4f6;
+      background-color: #111827;
     }
     
+    .btn-primary {
+      background-color: #7c3aed;
+      color: white;
+      font-weight: 500;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.2s;
+    }
+    
+    .btn-primary:hover {
+      background-color: #6d28d9;
+    }
+    
+    .btn-secondary {
+      background-color: #ec4899;
+      color: white;
+      font-weight: 500;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.2s;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #db2777;
+    }
+    
+    .section-padding {
+      padding: 4rem 0;
+    }
+    
+    @media (min-width: 768px) {
+      .section-padding {
+        padding: 6rem 0;
+      }
+    }
+    
+    .container {
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    @media (min-width: 640px) {
+      .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+
+    /* Custom styles & micro-interactions from index.html */
+    .lr-card {
+      border-width: 1px;
+      border-style: solid;
+      transition: transform 250ms cubic-bezier(.2,.9,.2,1), box-shadow 250ms ease, border-color 250ms ease;
+      will-change: transform;
+    }
+    
+    .lr-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 40px rgba(99, 24, 155, 0.12);
+    }
+    
+    .card-img-zoom img {
+      transition: transform 420ms cubic-bezier(.2,.9,.2,1);
+      transform-origin: center center;
+    }
+    
+    .lr-card:hover .card-img-zoom img {
+      transform: scale(1.06) rotate(-0.5deg);
+    }
+
+    @keyframes floatSlow {
+      0% { transform: translateY(0) scale(1); opacity: .35; }
+      50% { transform: translateY(-8px) scale(1.03); opacity: .45; }
+      100% { transform: translateY(0) scale(1); opacity: .35; }
+    }
+    
+    .float-blob { animation: floatSlow 6s ease-in-out infinite; filter: blur(16px); }
+
+    .lr-cta {
+      transition: transform 220ms ease, box-shadow 220ms ease;
+      background-size: 200% 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .lr-cta:focus { outline: 4px solid rgba(139,92,246,0.14); outline-offset: 4px; }
+    .lr-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(99,24,155,0.14); }
+    
+    .chev {
+      transition: transform 260ms cubic-bezier(.2,.9,.2,1);
+    }
+    
+    .lr-cta:hover .chev { transform: translateX(6px); }
+
+    .card-parent { border-color: rgba(189, 97, 255, 0.12); background: linear-gradient(180deg, rgba(250,244,255,0.9), rgba(255,250,255,0.85)); }
+    .card-school { border-color: rgba(255,176,199,0.12); background: linear-gradient(180deg, rgba(255,245,246,0.95), rgba(255,245,248,0.9)); }
+
+    @media (max-width: 767px) {
+      .lr-cta { width: 100%; display: inline-flex; justify-content:center; }
+    }
+
+    :focus-visible { outline: 3px solid rgba(99,24,155,0.12); outline-offset: 3px; }
+    
+    [x-cloak] { display: none !important; }
+
+    /* Animations from community.html */
     .floating-card {
       animation: float 6s ease-in-out infinite;
     }
@@ -92,36 +193,36 @@
       0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
       50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
     }
-
-    .card-hover {
-      transition: all 0.3s ease;
-    }
-
-    .card-hover:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(177, 30, 63, 0.2);
-    }
   </style>
 </head>
 
-<body x-data="{ 
-    mobileMenuOpen: false, 
-    darkMode: false,
-    activeTab: 'all',
+<body x-data="{
+    darkMode: localStorage.getItem('darkMode') === 'true',
+    mobileMenuOpen: false,
     contactOpen: false,
+    activeTab: 'all',
     name: '',
     email: '',
     mobileNum: '',
     childName: '',
     message: '',
     submitted: false
-  }" 
+  }"
   x-init="
+    // Initialize dark mode from localStorage
+    darkMode = localStorage.getItem('darkMode') === 'true';
+    $watch('darkMode', value => {
+      localStorage.setItem('darkMode', value);
+      document.documentElement.classList.toggle('dark', value);
+    });
+    
+    // Initialize dark mode on page load
     if (darkMode) {
       document.documentElement.classList.add('dark');
     }
   "
-  :class="{ 'dark': darkMode }">
+  class="font-poppins antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200"
+  :class="{ 'overflow-hidden': mobileMenuOpen || contactOpen }">
   
   <!-- Navigation -->
   <nav class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50 dark:border-b dark:border-gray-700">
@@ -188,8 +289,8 @@
   <section class="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-rose-50 via-white to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
     
     <!-- Decorative Background Blobs -->
-    <div class="absolute top-20 left-10 w-72 h-72 bg-rose-pink-200/30 dark:bg-rose-pink-900/20 rounded-full blob blur-3xl"></div>
-    <div class="absolute bottom-20 right-10 w-96 h-96 bg-maroon-200/20 dark:bg-maroon-900/20 rounded-full blob blur-3xl" style="animation-delay: 2s;"></div>
+    <div class="absolute top-20 left-10 w-72 h-72 bg-pink-200/30 dark:bg-pink-900/20 rounded-full blob blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-200/20 dark:bg-purple-900/20 rounded-full blob blur-3xl" style="animation-delay: 2s;"></div>
     <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-pink-200/25 dark:bg-pink-900/20 rounded-full blob blur-3xl" style="animation-delay: 4s;"></div>
 
     <div class="max-w-7xl mx-auto relative z-10">
@@ -199,9 +300,9 @@
         <div class="space-y-8">
           
           <!-- Badge -->
-          <div class="inline-flex items-center gap-2 bg-gradient-to-r from-maroon-100 to-rose-pink-100 dark:from-maroon-900/50 dark:to-rose-pink-900/50 px-5 py-2 rounded-full border border-maroon-200/50 dark:border-maroon-700/50">
-            <div class="w-2 h-2 bg-maroon-600 dark:bg-maroon-400 rounded-full animate-pulse"></div>
-            <span class="text-maroon-700 dark:text-maroon-300 font-semibold text-sm">Join 10,000+ Parents & Teachers</span>
+          <div class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/50 dark:to-pink-900/50 px-5 py-2 rounded-full border border-purple-200/50 dark:border-purple-700/50">
+            <div class="w-2 h-2 bg-purple-600 dark:bg-purple-400 rounded-full animate-pulse"></div>
+            <span class="text-purple-700 dark:text-purple-300 font-semibold text-sm">Join 10,000+ Parents & Teachers</span>
           </div>
 
           <!-- Main Headline -->
@@ -213,14 +314,14 @@
             <span class="text-gray-900 dark:text-white">from </span>
             <span class="gradient-text">Sounds</span>
             <span class="inline-flex items-center mx-2">
-              <svg class="w-10 h-10 text-maroon-500 dark:text-maroon-400 arrow-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-10 h-10 text-purple-500 dark:text-purple-400 arrow-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
               </svg>
             </span>
             <span class="gradient-text">Words</span>
             <br/>
             <span class="inline-flex items-center mr-2">
-              <svg class="w-10 h-10 text-maroon-500 dark:text-maroon-400 arrow-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-10 h-10 text-purple-500 dark:text-purple-400 arrow-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
               </svg>
             </span>
@@ -229,22 +330,22 @@
 
           <!-- Supporting Text -->
           <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl">
-            Real classrooms, real homes, and <span class="font-semibold text-maroon-700 dark:text-maroon-400">measurable progress</span> — powered by <span class="font-semibold text-maroon-700 dark:text-maroon-400">10–15-minute routines</span>, <span class="font-semibold text-maroon-700 dark:text-maroon-400">decodable readers</span>, and a <span class="font-semibold text-maroon-700 dark:text-maroon-400">quick diagnostic</span>.
+            Real classrooms, real homes, and <span class="font-semibold text-purple-700 dark:text-purple-400">measurable progress</span> — powered by <span class="font-semibold text-purple-700 dark:text-purple-400">10–15-minute routines</span>, <span class="font-semibold text-purple-700 dark:text-purple-400">decodable readers</span>, and a <span class="font-semibold text-purple-700 dark:text-purple-400">quick diagnostic</span>.
           </p>
 
           <!-- CTA Buttons -->
           <div class="flex flex-col sm:flex-row gap-4 pt-4">
-            <button class="group relative px-8 py-4 bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden">
+            <button class="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden">
               <span class="relative z-10 flex items-center justify-center gap-2">
                 Join the Community
                 <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                 </svg>
               </span>
-              <div class="absolute inset-0 bg-gradient-to-r from-rose-pink-600 to-maroon-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </button>
 
-            <button class="px-8 py-4 bg-white dark:bg-gray-800 text-maroon-700 dark:text-maroon-400 font-semibold rounded-2xl border-2 border-maroon-300 dark:border-maroon-700 hover:bg-maroon-50 dark:hover:bg-maroon-900/30 hover:border-maroon-500 dark:hover:border-maroon-500 transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+            <button class="px-8 py-4 bg-white dark:bg-gray-800 text-purple-700 dark:text-purple-400 font-semibold rounded-2xl border-2 border-purple-300 dark:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/30 hover:border-purple-500 dark:hover:border-purple-500 transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2">
               Share Your Story
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
@@ -255,10 +356,10 @@
           <!-- Trust Indicators -->
           <div class="flex items-center gap-6 pt-6">
             <div class="flex -space-x-3">
-              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-maroon-400 to-rose-pink-400 border-2 border-white dark:border-gray-800 flex items-center justify-center text-white font-bold text-sm">A</div>
-              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-rose-pink-400 to-maroon-400 border-2 border-white dark:border-gray-800 flex items-center justify-center text-white font-bold text-sm">S</div>
-              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-maroon-500 to-rose-pink-500 border-2 border-white dark:border-gray-800 flex items-center justify-center text-white font-bold text-sm">R</div>
-              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-rose-pink-500 to-maroon-500 border-2 border-white dark:border-gray-800 flex items-center justify-center text-white font-bold text-sm">+</div>
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 border-2 border-white dark:border-gray-800 flex items-center justify-center text-white font-bold text-sm">A</div>
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-purple-400 border-2 border-white dark:border-gray-800 flex items-center justify-center text-white font-bold text-sm">S</div>
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-white dark:border-gray-800 flex items-center justify-center text-white font-bold text-sm">R</div>
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 border-2 border-white dark:border-gray-800 flex items-center justify-center text-white font-bold text-sm">+</div>
             </div>
             <div class="text-sm">
               <div class="flex items-center gap-1 text-yellow-500">
@@ -280,24 +381,24 @@
           <div class="relative">
             
             <!-- Floating Card 1 - "500+ Stories" -->
-            <div class="floating-card absolute top-0 left-0 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl border border-maroon-100 dark:border-maroon-900 card-hover z-20" style="animation-delay: 0s;">
+            <div class="floating-card absolute top-0 left-0 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl border border-purple-100 dark:border-purple-900 card-hover z-20" style="animation-delay: 0s;">
               <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-gradient-to-br from-maroon-500 to-rose-pink-500 rounded-full flex items-center justify-center">
+                <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
                   <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                   </svg>
                 </div>
                 <div>
-                  <div class="text-3xl font-bold text-maroon-700 dark:text-maroon-400">500+</div>
+                  <div class="text-3xl font-bold text-purple-700 dark:text-purple-400">500+</div>
                   <div class="text-sm text-gray-600 dark:text-gray-400">Stories Read</div>
                 </div>
               </div>
             </div>
 
             <!-- Floating Card 2 - Profile card -->
-            <div class="floating-card absolute top-20 right-0 bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-xl border border-maroon-100 dark:border-maroon-900 card-hover z-20" style="animation-delay: 1s;">
+            <div class="floating-card absolute top-20 right-0 bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-xl border border-purple-100 dark:border-purple-900 card-hover z-20" style="animation-delay: 1s;">
               <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-gradient-to-br from-rose-pink-400 to-maroon-400 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                <div class="w-12 h-12 bg-gradient-to-br from-pink-400 to-purple-400 rounded-full flex items-center justify-center text-white font-bold text-lg">
                   S
                 </div>
                 <div>
@@ -311,22 +412,22 @@
             </div>
 
             <!-- Central Image Area -->
-            <div class="relative w-full h-96 bg-gradient-to-br from-maroon-100 to-rose-pink-100 dark:from-maroon-900/50 dark:to-rose-pink-900/50 rounded-3xl overflow-hidden shadow-2xl">
+            <div class="relative w-full h-96 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/50 dark:to-pink-900/50 rounded-3xl overflow-hidden shadow-2xl">
               <div class="absolute inset-0 flex items-center justify-center">
                 <div class="text-center space-y-4 p-8">
-                  <div class="w-32 h-32 mx-auto bg-gradient-to-br from-maroon-500 to-rose-pink-500 rounded-full flex items-center justify-center shadow-lg">
+                  <div class="w-32 h-32 mx-auto bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg">
                     <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
                   </div>
-                  <h3 class="text-2xl font-bold text-maroon-700 dark:text-maroon-300">Growing Together</h3>
+                  <h3 class="text-2xl font-bold text-purple-700 dark:text-purple-300">Growing Together</h3>
                   <p class="text-gray-600 dark:text-gray-400">A supportive community of parents and educators</p>
                 </div>
               </div>
             </div>
 
             <!-- Floating Card 3 - Bottom stat card -->
-            <div class="floating-card absolute -bottom-6 left-10 bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-xl border border-maroon-100 dark:border-maroon-900 card-hover z-20" style="animation-delay: 2s;">
+            <div class="floating-card absolute -bottom-6 left-10 bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-xl border border-purple-100 dark:border-purple-900 card-hover z-20" style="animation-delay: 2s;">
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-lg flex items-center justify-center">
                   <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -350,19 +451,19 @@
   <!-- What Changes Section - Ultra Modern -->
   <section class="relative py-32 bg-white dark:bg-gray-900 overflow-hidden">
     <!-- Animated gradient orbs -->
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-maroon-500/20 rounded-full blur-3xl animate-pulse"></div>
-    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-rose-pink-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <!-- Section Header -->
       <div class="text-center mb-20">
         <div class="inline-block mb-6">
-          <span class="text-maroon-400 text-sm font-bold tracking-widest uppercase">Timeline</span>
+          <span class="text-purple-400 text-sm font-bold tracking-widest uppercase">Timeline</span>
         </div>
         <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-6 leading-tight">
           What changes in<br/>
-          <span class="bg-gradient-to-r from-maroon-400 via-rose-pink-400 to-maroon-400 bg-clip-text text-transparent">
+          <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
             9–12 weeks
           </span>
         </h2>
@@ -372,12 +473,12 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
         
         <!-- Card 1: Band Movement - Large -->
-        <div class="md:col-span-1 group relative bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-3xl p-10 overflow-hidden hover:border-maroon-500/50 transition-all duration-500">
-          <div class="absolute inset-0 bg-gradient-to-br from-maroon-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="md:col-span-1 group relative bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-3xl p-10 overflow-hidden hover:border-purple-500/50 transition-all duration-500">
+          <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
           <div class="relative z-10">
-            <div class="w-16 h-16 bg-maroon-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-              <svg class="w-8 h-8 text-maroon-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+              <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
               </svg>
             </div>
@@ -387,19 +488,19 @@
             
             <div class="flex items-center gap-4 text-xl font-bold">
               <span class="text-gray-500">Emerging</span>
-              <div class="flex-1 h-0.5 bg-gradient-to-r from-maroon-500 to-rose-pink-500"></div>
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-maroon-400 to-rose-pink-400">Developing/Fluent</span>
+              <div class="flex-1 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Developing/Fluent</span>
             </div>
           </div>
         </div>
 
         <!-- Card 2: Fluency -->
-        <div class="md:col-span-1 group relative bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-3xl p-10 overflow-hidden hover:border-rose-pink-500/50 transition-all duration-500">
-          <div class="absolute inset-0 bg-gradient-to-br from-rose-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="md:col-span-1 group relative bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-3xl p-10 overflow-hidden hover:border-pink-500/50 transition-all duration-500">
+          <div class="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
           <div class="relative z-10">
-            <div class="w-16 h-16 bg-rose-pink-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-              <svg class="w-8 h-8 text-rose-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-16 h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+              <svg class="w-8 h-8 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
               </svg>
             </div>
@@ -408,32 +509,32 @@
             
             <div class="flex items-center gap-3 text-lg font-bold">
               <span class="text-gray-500">Words</span>
-              <svg class="w-6 h-6 text-rose-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-6 h-6 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
               </svg>
               <span class="text-gray-400">Phrases</span>
-              <svg class="w-6 h-6 text-rose-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-6 h-6 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
               </svg>
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-maroon-400 to-rose-pink-400">Stories</span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Stories</span>
             </div>
           </div>
         </div>
 
         <!-- Card 3: Consistency -->
-        <div class="md:col-span-1 group relative bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-3xl p-10 overflow-hidden hover:border-maroon-500/50 transition-all duration-500">
-          <div class="absolute inset-0 bg-gradient-to-br from-maroon-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="md:col-span-1 group relative bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-3xl p-10 overflow-hidden hover:border-purple-500/50 transition-all duration-500">
+          <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
           <div class="relative z-10">
-            <div class="w-16 h-16 bg-maroon-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-              <svg class="w-8 h-8 text-maroon-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+              <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
             
             <h3 class="text-2xl font-black text-white mb-3">Consistency</h3>
             
-            <div class="text-5xl font-black bg-gradient-to-r from-maroon-400 to-rose-pink-400 bg-clip-text text-transparent mb-2">
+            <div class="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
               ≥ 4
             </div>
             <p class="text-gray-400 text-lg">days/week routines</p>
@@ -441,12 +542,12 @@
         </div>
 
         <!-- Card 4: Placement -->
-        <div class="md:col-span-1 group relative bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-3xl p-10 overflow-hidden hover:border-rose-pink-500/50 transition-all duration-500">
-          <div class="absolute inset-0 bg-gradient-to-br from-rose-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="md:col-span-1 group relative bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-3xl p-10 overflow-hidden hover:border-pink-500/50 transition-all duration-500">
+          <div class="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
           <div class="relative z-10">
-            <div class="w-16 h-16 bg-rose-pink-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-              <svg class="w-8 h-8 text-rose-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-16 h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+              <svg class="w-8 h-8 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
               </svg>
             </div>
@@ -455,8 +556,8 @@
             
             <div class="flex items-center gap-4 text-lg font-bold">
               <span class="text-gray-500">Quick diagnostic</span>
-              <div class="flex-1 h-0.5 bg-gradient-to-r from-maroon-500 to-rose-pink-500"></div>
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-maroon-400 to-rose-pink-400">regrouping</span>
+              <div class="flex-1 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">regrouping</span>
             </div>
           </div>
         </div>
@@ -465,7 +566,7 @@
 
       <!-- CTA Button -->
       <div class="text-center">
-        <a href="diagnostic.html" class="group inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white font-bold text-lg rounded-full hover:shadow-2xl hover:shadow-maroon-500/50 transform hover:scale-105 transition-all duration-300">
+        <a href="diagnostic.html" class="group inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-lg rounded-full hover:shadow-2xl hover:shadow-purple-500/50 transform hover:scale-105 transition-all duration-300">
           See the Reading Diagnostic
           <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -483,10 +584,10 @@
       <!-- Section Header -->
       <div class="text-center mb-20">
         <div class="inline-block mb-6">
-          <span class="text-maroon-600 dark:text-maroon-400 text-sm font-bold tracking-widest uppercase">Success Stories</span>
+          <span class="text-purple-600 dark:text-purple-400 text-sm font-bold tracking-widest uppercase">Success Stories</span>
         </div>
         <h2 class="text-5xl md:text-7xl font-black text-gray-900 dark:text-white mb-6 leading-tight">
-          <span class="bg-gradient-to-r from-maroon-600 via-rose-pink-600 to-maroon-600 bg-clip-text text-transparent">
+          <span class="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
             Mini Case Studies
           </span>
         </h2>
@@ -499,16 +600,16 @@
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         <!-- Case 1: Pune -->
-        <div class="group relative bg-gradient-to-br from-maroon-50 to-rose-pink-50 dark:from-gray-900 dark:to-gray-800 rounded-3xl overflow-hidden border-2 border-transparent hover:border-maroon-400 dark:hover:border-maroon-600 transition-all duration-500">
+        <div class="group relative bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-900 dark:to-gray-800 rounded-3xl overflow-hidden border-2 border-transparent hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-500">
           
           <!-- Gradient overlay on hover -->
-          <div class="absolute inset-0 bg-gradient-to-br from-maroon-500/10 to-rose-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
           <div class="relative z-10 p-8">
             <!-- Location chip -->
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-maroon-100 dark:bg-maroon-900/50 rounded-full mb-6">
-              <div class="w-2 h-2 bg-maroon-500 rounded-full animate-pulse"></div>
-              <span class="text-maroon-700 dark:text-maroon-300 font-bold text-sm">Pune</span>
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 dark:bg-purple-900/50 rounded-full mb-6">
+              <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+              <span class="text-purple-700 dark:text-purple-300 font-bold text-sm">Pune</span>
             </div>
 
             <h3 class="text-3xl font-black text-gray-900 dark:text-white mb-8">
@@ -518,33 +619,33 @@
             <!-- Metrics -->
             <div class="space-y-6 mb-10">
               <div class="flex items-start gap-4">
-                <div class="w-2 h-2 bg-maroon-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
                 <p class="text-gray-700 dark:text-gray-300 text-lg">
-                  Daily <span class="font-black text-maroon-700 dark:text-maroon-400">10-min routines</span> within a week
+                  Daily <span class="font-black text-purple-700 dark:text-purple-400">10-min routines</span> within a week
                 </p>
               </div>
 
               <div class="flex items-start gap-4">
-                <div class="w-2 h-2 bg-rose-pink-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div class="w-2 h-2 bg-pink-500 rounded-full mt-2 flex-shrink-0"></div>
                 <p class="text-gray-700 dark:text-gray-300 text-lg">
-                  <span class="font-black text-maroon-700 dark:text-maroon-400">Midline regrouping</span> using screener
+                  <span class="font-black text-purple-700 dark:text-purple-400">Midline regrouping</span> using screener
                 </p>
               </div>
 
               <div class="flex items-start gap-4">
-                <div class="w-2 h-2 bg-maroon-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
                 <p class="text-gray-700 dark:text-gray-300 text-lg">
-                  <span class="font-black text-maroon-700 dark:text-maroon-400">Readers A–B</span> introduced
+                  <span class="font-black text-purple-700 dark:text-purple-400">Readers A–B</span> introduced
                 </p>
               </div>
             </div>
 
             <!-- CTAs -->
             <div class="space-y-3">
-              <button class="w-full py-4 px-6 bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white font-bold rounded-2xl hover:shadow-xl hover:shadow-maroon-500/30 transform hover:-translate-y-0.5 transition-all duration-300">
+              <button class="w-full py-4 px-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl hover:shadow-xl hover:shadow-purple-500/30 transform hover:-translate-y-0.5 transition-all duration-300">
                 Read Case
               </button>
-              <button class="w-full py-4 px-6 bg-white dark:bg-gray-800 text-maroon-700 dark:text-maroon-400 font-bold rounded-2xl border-2 border-maroon-300 dark:border-maroon-700 hover:bg-maroon-50 dark:hover:bg-maroon-900/30 transition-all duration-300 flex items-center justify-center gap-2">
+              <button class="w-full py-4 px-6 bg-white dark:bg-gray-800 text-purple-700 dark:text-purple-400 font-bold rounded-2xl border-2 border-purple-300 dark:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all duration-300 flex items-center justify-center gap-2">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                 </svg>
@@ -555,14 +656,14 @@
         </div>
 
         <!-- Case 2: Nashik -->
-        <div class="group relative bg-gradient-to-br from-rose-pink-50 to-maroon-50 dark:from-gray-900 dark:to-gray-800 rounded-3xl overflow-hidden border-2 border-transparent hover:border-rose-pink-400 dark:hover:border-rose-pink-600 transition-all duration-500">
+        <div class="group relative bg-gradient-to-br from-pink-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 rounded-3xl overflow-hidden border-2 border-transparent hover:border-pink-400 dark:hover:border-pink-600 transition-all duration-500">
           
-          <div class="absolute inset-0 bg-gradient-to-br from-rose-pink-500/10 to-maroon-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
           <div class="relative z-10 p-8">
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-rose-pink-100 dark:bg-rose-pink-900/50 rounded-full mb-6">
-              <div class="w-2 h-2 bg-rose-pink-500 rounded-full animate-pulse"></div>
-              <span class="text-rose-pink-700 dark:text-rose-pink-300 font-bold text-sm">Nashik</span>
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-pink-100 dark:bg-pink-900/50 rounded-full mb-6">
+              <div class="w-2 h-2 bg-pink-500 rounded-full animate-pulse"></div>
+              <span class="text-pink-700 dark:text-pink-300 font-bold text-sm">Nashik</span>
             </div>
 
             <h3 class="text-3xl font-black text-gray-900 dark:text-white mb-8">
@@ -571,25 +672,25 @@
 
             <div class="space-y-6 mb-10">
               <div class="flex items-start gap-4">
-                <div class="w-2 h-2 bg-rose-pink-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div class="w-2 h-2 bg-pink-500 rounded-full mt-2 flex-shrink-0"></div>
                 <p class="text-gray-700 dark:text-gray-300 text-lg">
-                  <span class="font-black text-rose-pink-700 dark:text-rose-pink-400">5–7 min checks</span> at baseline & follow-up
+                  <span class="font-black text-pink-700 dark:text-pink-400">5–7 min checks</span> at baseline & follow-up
                 </p>
               </div>
 
               <div class="flex items-start gap-4">
-                <div class="w-2 h-2 bg-maroon-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
                 <p class="text-gray-700 dark:text-gray-300 text-lg">
-                  <span class="font-black text-rose-pink-700 dark:text-rose-pink-400">Developing band doubles</span>
+                  <span class="font-black text-pink-700 dark:text-pink-400">Developing band doubles</span>
                 </p>
               </div>
             </div>
 
             <div class="space-y-3">
-              <button class="w-full py-4 px-6 bg-gradient-to-r from-rose-pink-600 to-maroon-600 text-white font-bold rounded-2xl hover:shadow-xl hover:shadow-rose-pink-500/30 transform hover:-translate-y-0.5 transition-all duration-300">
+              <button class="w-full py-4 px-6 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-bold rounded-2xl hover:shadow-xl hover:shadow-pink-500/30 transform hover:-translate-y-0.5 transition-all duration-300">
                 Read Case
               </button>
-              <button class="w-full py-4 px-6 bg-white dark:bg-gray-800 text-rose-pink-700 dark:text-rose-pink-400 font-bold rounded-2xl border-2 border-rose-pink-300 dark:border-rose-pink-700 hover:bg-rose-pink-50 dark:hover:bg-rose-pink-900/30 transition-all duration-300 flex items-center justify-center gap-2">
+              <button class="w-full py-4 px-6 bg-white dark:bg-gray-800 text-pink-700 dark:text-pink-400 font-bold rounded-2xl border-2 border-pink-300 dark:border-pink-700 hover:bg-pink-50 dark:hover:bg-pink-900/30 transition-all duration-300 flex items-center justify-center gap-2">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                 </svg>
@@ -600,14 +701,14 @@
         </div>
 
         <!-- Case 3: Mumbai -->
-        <div class="group relative bg-gradient-to-br from-maroon-50 to-rose-pink-50 dark:from-gray-900 dark:to-gray-800 rounded-3xl overflow-hidden border-2 border-transparent hover:border-maroon-400 dark:hover:border-maroon-600 transition-all duration-500">
+        <div class="group relative bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-900 dark:to-gray-800 rounded-3xl overflow-hidden border-2 border-transparent hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-500">
           
-          <div class="absolute inset-0 bg-gradient-to-br from-maroon-500/10 to-rose-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
           <div class="relative z-10 p-8">
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-maroon-100 dark:bg-maroon-900/50 rounded-full mb-6">
-              <div class="w-2 h-2 bg-maroon-500 rounded-full animate-pulse"></div>
-              <span class="text-maroon-700 dark:text-maroon-300 font-bold text-sm">Mumbai</span>
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 dark:bg-purple-900/50 rounded-full mb-6">
+              <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+              <span class="text-purple-700 dark:text-purple-300 font-bold text-sm">Mumbai</span>
             </div>
 
             <h3 class="text-3xl font-black text-gray-900 dark:text-white mb-8">
@@ -616,25 +717,25 @@
 
             <div class="space-y-6 mb-10">
               <div class="flex items-start gap-4">
-                <div class="w-2 h-2 bg-maroon-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
                 <p class="text-gray-700 dark:text-gray-300 text-lg">
-                  Leaders use <span class="font-black text-maroon-700 dark:text-maroon-400">band charts</span> in reviews
+                  Leaders use <span class="font-black text-purple-700 dark:text-purple-400">band charts</span> in reviews
                 </p>
               </div>
 
               <div class="flex items-start gap-4">
-                <div class="w-2 h-2 bg-rose-pink-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div class="w-2 h-2 bg-pink-500 rounded-full mt-2 flex-shrink-0"></div>
                 <p class="text-gray-700 dark:text-gray-300 text-lg">
-                  <span class="font-black text-maroon-700 dark:text-maroon-400">Home Connection</span> boosts consistency
+                  <span class="font-black text-purple-700 dark:text-purple-400">Home Connection</span> boosts consistency
                 </p>
               </div>
             </div>
 
             <div class="space-y-3">
-              <button class="w-full py-4 px-6 bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white font-bold rounded-2xl hover:shadow-xl hover:shadow-maroon-500/30 transform hover:-translate-y-0.5 transition-all duration-300">
+              <button class="w-full py-4 px-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-2xl hover:shadow-xl hover:shadow-purple-500/30 transform hover:-translate-y-0.5 transition-all duration-300">
                 Read Case
               </button>
-              <button class="w-full py-4 px-6 bg-white dark:bg-gray-800 text-maroon-700 dark:text-maroon-400 font-bold rounded-2xl border-2 border-maroon-300 dark:border-maroon-700 hover:bg-maroon-50 dark:hover:bg-maroon-900/30 transition-all duration-300 flex items-center justify-center gap-2">
+              <button class="w-full py-4 px-6 bg-white dark:bg-gray-800 text-purple-700 dark:text-purple-400 font-bold rounded-2xl border-2 border-purple-300 dark:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all duration-300 flex items-center justify-center gap-2">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                 </svg>
@@ -656,10 +757,10 @@
       <!-- Section Header -->
       <div class="text-center mb-20">
         <div class="inline-block mb-6">
-          <span class="text-maroon-600 dark:text-maroon-400 text-sm font-bold tracking-widest uppercase">Learning in Action</span>
+          <span class="text-purple-600 dark:text-purple-400 text-sm font-bold tracking-widest uppercase">Learning in Action</span>
         </div>
         <h2 class="text-5xl md:text-7xl font-black text-gray-900 dark:text-white mb-6 leading-tight">
-          <span class="bg-gradient-to-r from-maroon-600 via-rose-pink-600 to-maroon-600 bg-clip-text text-transparent">
+          <span class="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
             See the progress
           </span>
         </h2>
@@ -673,25 +774,25 @@
         <div class="inline-flex bg-white dark:bg-gray-800 rounded-xl p-1 shadow-sm border border-gray-200 dark:border-gray-700">
           <button 
             @click="activeTab = 'all'"
-            :class="activeTab === 'all' ? 'bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
+            :class="activeTab === 'all' ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
             class="px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200">
             All
           </button>
           <button 
             @click="activeTab = 'home'"
-            :class="activeTab === 'home' ? 'bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
+            :class="activeTab === 'home' ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
             class="px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200">
             Home
           </button>
           <button 
             @click="activeTab = 'class'"
-            :class="activeTab === 'class' ? 'bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
+            :class="activeTab === 'class' ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
             class="px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200">
             Class
           </button>
           <button 
             @click="activeTab = 'training'"
-            :class="activeTab === 'training' ? 'bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
+            :class="activeTab === 'training' ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
             class="px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200">
             Training
           </button>
@@ -702,9 +803,9 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         
         <!-- Card 1: Parent - Bengaluru -->
-        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-maroon-400 dark:hover:border-maroon-600 transition-all duration-300 hover:shadow-xl">
-          <div class="aspect-[4/3] bg-gradient-to-br from-maroon-100 to-rose-pink-100 dark:from-maroon-900/30 dark:to-rose-pink-900/30 flex items-center justify-center">
-            <svg class="w-16 h-16 text-maroon-400 dark:text-maroon-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-xl">
+          <div class="aspect-[4/3] bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 flex items-center justify-center">
+            <svg class="w-16 h-16 text-purple-400 dark:text-purple-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
           </div>
@@ -724,9 +825,9 @@
         </div>
 
         <!-- Card 2: School - Pune -->
-        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-rose-pink-400 dark:hover:border-rose-pink-600 transition-all duration-300 hover:shadow-xl">
-          <div class="aspect-[4/3] bg-gradient-to-br from-rose-pink-100 to-maroon-100 dark:from-rose-pink-900/30 dark:to-maroon-900/30 flex items-center justify-center">
-            <svg class="w-16 h-16 text-rose-pink-400 dark:text-rose-pink-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-pink-400 dark:hover:border-pink-600 transition-all duration-300 hover:shadow-xl">
+          <div class="aspect-[4/3] bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 flex items-center justify-center">
+            <svg class="w-16 h-16 text-pink-400 dark:text-pink-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
           </div>
@@ -746,9 +847,9 @@
         </div>
 
         <!-- Card 3: PD - Virtual -->
-        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-maroon-400 dark:hover:border-maroon-600 transition-all duration-300 hover:shadow-xl">
-          <div class="aspect-[4/3] bg-gradient-to-br from-maroon-100 to-rose-pink-100 dark:from-maroon-900/30 dark:to-rose-pink-900/30 flex items-center justify-center">
-            <svg class="w-16 h-16 text-maroon-400 dark:text-maroon-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-xl">
+          <div class="aspect-[4/3] bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 flex items-center justify-center">
+            <svg class="w-16 h-16 text-purple-400 dark:text-purple-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
             </svg>
           </div>
@@ -768,9 +869,9 @@
         </div>
 
         <!-- Card 4: Parent - Pune -->
-        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-rose-pink-400 dark:hover:border-rose-pink-600 transition-all duration-300 hover:shadow-xl">
-          <div class="aspect-[4/3] bg-gradient-to-br from-rose-pink-100 to-maroon-100 dark:from-rose-pink-900/30 dark:to-maroon-900/30 flex items-center justify-center">
-            <svg class="w-16 h-16 text-rose-pink-400 dark:text-rose-pink-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-pink-400 dark:hover:border-pink-600 transition-all duration-300 hover:shadow-xl">
+          <div class="aspect-[4/3] bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 flex items-center justify-center">
+            <svg class="w-16 h-16 text-pink-400 dark:text-pink-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
           </div>
@@ -790,9 +891,9 @@
         </div>
 
         <!-- Card 5: Teacher - Nashik -->
-        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-maroon-400 dark:hover:border-maroon-600 transition-all duration-300 hover:shadow-xl">
-          <div class="aspect-[4/3] bg-gradient-to-br from-maroon-100 to-rose-pink-100 dark:from-maroon-900/30 dark:to-rose-pink-900/30 flex items-center justify-center">
-            <svg class="w-16 h-16 text-maroon-400 dark:text-maroon-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-xl">
+          <div class="aspect-[4/3] bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 flex items-center justify-center">
+            <svg class="w-16 h-16 text-purple-400 dark:text-purple-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
           </div>
@@ -812,9 +913,9 @@
         </div>
 
         <!-- Card 6: Workshop - Mumbai -->
-        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-rose-pink-400 dark:hover:border-rose-pink-600 transition-all duration-300 hover:shadow-xl">
-          <div class="aspect-[4/3] bg-gradient-to-br from-rose-pink-100 to-maroon-100 dark:from-rose-pink-900/30 dark:to-maroon-900/30 flex items-center justify-center">
-            <svg class="w-16 h-16 text-rose-pink-400 dark:text-rose-pink-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-pink-400 dark:hover:border-pink-600 transition-all duration-300 hover:shadow-xl">
+          <div class="aspect-[4/3] bg-gradient-to-br from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 flex items-center justify-center">
+            <svg class="w-16 h-16 text-pink-400 dark:text-pink-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
           </div>
@@ -837,7 +938,7 @@
 
       <!-- CTA Button -->
       <div class="text-center">
-        <button class="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-maroon-500/30 transform hover:scale-105 transition-all duration-300">
+        <button class="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-purple-500/30 transform hover:scale-105 transition-all duration-300">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
           </svg>
@@ -850,8 +951,8 @@
   <!-- Testimonials Section -->
   <section class="relative py-24 bg-white dark:bg-gray-950 overflow-hidden">
     <!-- Decorative background -->
-    <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-maroon-500/10 dark:bg-maroon-500/5 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-rose-pink-500/10 dark:bg-rose-pink-500/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500/10 dark:bg-pink-500/5 rounded-full blur-3xl"></div>
     
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
@@ -867,7 +968,7 @@
         
         <!-- Quote Icon -->
         <div class="absolute top-8 left-8 md:top-12 md:left-12">
-          <svg class="w-12 h-12 md:w-16 md:h-16 text-maroon-200 dark:text-maroon-900/50" fill="currentColor" viewBox="0 0 24 24">
+          <svg class="w-12 h-12 md:w-16 md:h-16 text-purple-200 dark:text-purple-900/50" fill="currentColor" viewBox="0 0 24 24">
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
           </svg>
         </div>
@@ -875,22 +976,22 @@
         <!-- Testimonial Content -->
         <div class="relative text-center max-w-3xl mx-auto pt-8">
           <blockquote class="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white leading-relaxed mb-8">
-            "Five minutes into <span class="text-maroon-600 dark:text-maroon-400">Level 1</span>, he read his <span class="text-rose-pink-600 dark:text-rose-pink-400">first word</span>!"
+            "Five minutes into <span class="text-purple-600 dark:text-purple-400">Level 1</span>, he read his <span class="text-pink-600 dark:text-pink-400">first word</span>!"
           </blockquote>
           
           <div class="flex items-center justify-center gap-3">
-            <div class="h-px w-12 bg-gradient-to-r from-transparent via-maroon-400 to-transparent"></div>
+            <div class="h-px w-12 bg-gradient-to-r from-transparent via-purple-400 to-transparent"></div>
             <cite class="not-italic text-base font-medium text-gray-600 dark:text-gray-400">
               Parent, Pune
             </cite>
-            <div class="h-px w-12 bg-gradient-to-r from-transparent via-maroon-400 to-transparent"></div>
+            <div class="h-px w-12 bg-gradient-to-r from-transparent via-purple-400 to-transparent"></div>
           </div>
         </div>
 
         <!-- Navigation Buttons -->
         <div class="flex items-center justify-center gap-4 mt-12">
-          <button class="group flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:border-maroon-400 dark:hover:border-maroon-600 transition-all duration-300 hover:shadow-lg">
-            <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-maroon-600 dark:group-hover:text-maroon-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button class="group flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-lg">
+            <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
             <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Prev</span>
@@ -898,12 +999,12 @@
 
           <!-- Indicator Dots -->
           <div class="flex gap-2">
-            <div class="w-2 h-2 rounded-full bg-gradient-to-r from-maroon-600 to-rose-pink-600"></div>
+            <div class="w-2 h-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600"></div>
             <div class="w-2 h-2 rounded-full bg-gray-300 dark:bg-gray-700"></div>
             <div class="w-2 h-2 rounded-full bg-gray-300 dark:bg-gray-700"></div>
           </div>
 
-          <button class="group flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white rounded-xl hover:shadow-xl hover:shadow-maroon-500/30 transition-all duration-300 transform hover:scale-105">
+          <button class="group flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:shadow-xl hover:shadow-purple-500/30 transition-all duration-300 transform hover:scale-105">
             <span class="text-sm font-medium">Next</span>
             <svg class="w-5 h-5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -923,7 +1024,7 @@
       <!-- Section Header -->
       <div class="text-center mb-16">
           <div class="inline-block mb-4">
-            <span class="text-maroon-600 dark:text-maroon-400 text-sm font-bold tracking-widest uppercase">Resources</span>
+            <span class="text-purple-600 dark:text-purple-400 text-sm font-bold tracking-widest uppercase">Resources</span>
           </div>
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
           Available Proof Packets
@@ -943,10 +1044,10 @@
             
             <!-- Card 1: Case Pack -->
             <div class="w-full flex-shrink-0 px-3">
-              <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-700 hover:border-maroon-400 dark:hover:border-maroon-600 transition-all duration-300 hover:shadow-xl max-w-md mx-auto">
+              <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-xl max-w-md mx-auto">
                 
                 <!-- Icon -->
-                <div class="w-16 h-16 bg-gradient-to-br from-maroon-500 to-rose-pink-500 rounded-2xl flex items-center justify-center mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6">
                   <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                   </svg>
@@ -964,10 +1065,10 @@
 
                 <!-- Action Buttons -->
                 <div class="flex gap-3">
-                  <button class="flex-1 px-6 py-3 bg-white dark:bg-gray-700 border-2 border-maroon-300 dark:border-maroon-700 text-maroon-700 dark:text-maroon-400 font-semibold rounded-xl hover:bg-maroon-50 dark:hover:bg-maroon-900/30 transition-all duration-300">
+                  <button class="flex-1 px-6 py-3 bg-white dark:bg-gray-700 border-2 border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-400 font-semibold rounded-xl hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all duration-300">
                     Preview
                   </button>
-                  <button class="flex-1 px-6 py-3 bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-maroon-500/30 transition-all duration-300 flex items-center justify-center gap-2">
+                  <button class="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-purple-500/30 transition-all duration-300 flex items-center justify-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>
@@ -979,9 +1080,9 @@
 
             <!-- Card 2: Diagnostic Sample -->
             <div class="w-full flex-shrink-0 px-3">
-              <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-700 hover:border-rose-pink-400 dark:hover:border-rose-pink-600 transition-all duration-300 hover:shadow-xl max-w-md mx-auto">
+              <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-700 hover:border-pink-400 dark:hover:border-pink-600 transition-all duration-300 hover:shadow-xl max-w-md mx-auto">
                 
-                <div class="w-16 h-16 bg-gradient-to-br from-rose-pink-500 to-maroon-500 rounded-2xl flex items-center justify-center mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-2xl flex items-center justify-center mb-6">
                   <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                   </svg>
@@ -996,10 +1097,10 @@
                 </p>
 
                 <div class="flex gap-3">
-                  <button class="flex-1 px-6 py-3 bg-white dark:bg-gray-700 border-2 border-rose-pink-300 dark:border-rose-pink-700 text-rose-pink-700 dark:text-rose-pink-400 font-semibold rounded-xl hover:bg-rose-pink-50 dark:hover:bg-rose-pink-900/30 transition-all duration-300">
+                  <button class="flex-1 px-6 py-3 bg-white dark:bg-gray-700 border-2 border-pink-300 dark:border-pink-700 text-pink-700 dark:text-pink-400 font-semibold rounded-xl hover:bg-pink-50 dark:hover:bg-pink-900/30 transition-all duration-300">
                     Preview
                   </button>
-                  <button class="flex-1 px-6 py-3 bg-gradient-to-r from-rose-pink-600 to-maroon-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-rose-pink-500/30 transition-all duration-300 flex items-center justify-center gap-2">
+                  <button class="flex-1 px-6 py-3 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-pink-500/30 transition-all duration-300 flex items-center justify-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>
@@ -1011,9 +1112,9 @@
 
             <!-- Card 3: Implementation Snapshot -->
             <div class="w-full flex-shrink-0 px-3">
-              <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-700 hover:border-maroon-400 dark:hover:border-maroon-600 transition-all duration-300 hover:shadow-xl max-w-md mx-auto">
+              <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-xl max-w-md mx-auto">
                 
-                <div class="w-16 h-16 bg-gradient-to-br from-maroon-500 to-rose-pink-500 rounded-2xl flex items-center justify-center mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6">
                   <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                   </svg>
@@ -1028,10 +1129,10 @@
                 </p>
 
                 <div class="flex gap-3">
-                  <button class="flex-1 px-6 py-3 bg-white dark:bg-gray-700 border-2 border-maroon-300 dark:border-maroon-700 text-maroon-700 dark:text-maroon-400 font-semibold rounded-xl hover:bg-maroon-50 dark:hover:bg-maroon-900/30 transition-all duration-300">
+                  <button class="flex-1 px-6 py-3 bg-white dark:bg-gray-700 border-2 border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-400 font-semibold rounded-xl hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all duration-300">
                     Preview
                   </button>
-                  <button class="flex-1 px-6 py-3 bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-maroon-500/30 transition-all duration-300 flex items-center justify-center gap-2">
+                  <button class="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-purple-500/30 transition-all duration-300 flex items-center justify-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>
@@ -1043,9 +1144,9 @@
 
             <!-- Card 4: NEP/NCF Alignment -->
             <div class="w-full flex-shrink-0 px-3">
-              <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-700 hover:border-rose-pink-400 dark:hover:border-rose-pink-600 transition-all duration-300 hover:shadow-xl max-w-md mx-auto">
+              <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-700 hover:border-pink-400 dark:hover:border-pink-600 transition-all duration-300 hover:shadow-xl max-w-md mx-auto">
                 
-                <div class="w-16 h-16 bg-gradient-to-br from-rose-pink-500 to-maroon-500 rounded-2xl flex items-center justify-center mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-2xl flex items-center justify-center mb-6">
                   <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                   </svg>
@@ -1060,10 +1161,10 @@
                 </p>
 
                 <div class="flex gap-3">
-                  <button class="flex-1 px-6 py-3 bg-white dark:bg-gray-700 border-2 border-rose-pink-300 dark:border-rose-pink-700 text-rose-pink-700 dark:text-rose-pink-400 font-semibold rounded-xl hover:bg-rose-pink-50 dark:hover:bg-rose-pink-900/30 transition-all duration-300">
+                  <button class="flex-1 px-6 py-3 bg-white dark:bg-gray-700 border-2 border-pink-300 dark:border-pink-700 text-pink-700 dark:text-pink-400 font-semibold rounded-xl hover:bg-pink-50 dark:hover:bg-pink-900/30 transition-all duration-300">
                     Preview
                   </button>
-                  <button class="flex-1 px-6 py-3 bg-gradient-to-r from-rose-pink-600 to-maroon-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-rose-pink-500/30 transition-all duration-300 flex items-center justify-center gap-2">
+                  <button class="flex-1 px-6 py-3 bg-gradient-to-r from-pink-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-pink-500/30 transition-all duration-300 flex items-center justify-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>
@@ -1082,8 +1183,8 @@
           <!-- Previous Button -->
           <button 
             @click="currentSlide = currentSlide > 0 ? currentSlide - 1 : slides - 1"
-            class="group flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:border-maroon-400 dark:hover:border-maroon-600 transition-all duration-300 hover:shadow-lg">
-            <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-maroon-600 dark:group-hover:text-maroon-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            class="group flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-lg">
+            <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
             <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Prev</span>
@@ -1094,29 +1195,29 @@
             <button 
               @click="currentSlide = 0"
               class="w-2.5 h-2.5 rounded-full transition-all duration-300"
-              :class="currentSlide === 0 ? 'bg-gradient-to-r from-maroon-600 to-rose-pink-600 w-8' : 'bg-gray-300 dark:bg-gray-700'">
+              :class="currentSlide === 0 ? 'bg-gradient-to-r from-purple-600 to-pink-600 w-8' : 'bg-gray-300 dark:bg-gray-700'">
             </button>
             <button 
               @click="currentSlide = 1"
               class="w-2.5 h-2.5 rounded-full transition-all duration-300"
-              :class="currentSlide === 1 ? 'bg-gradient-to-r from-maroon-600 to-rose-pink-600 w-8' : 'bg-gray-300 dark:bg-gray-700'">
+              :class="currentSlide === 1 ? 'bg-gradient-to-r from-purple-600 to-pink-600 w-8' : 'bg-gray-300 dark:bg-gray-700'">
             </button>
             <button 
               @click="currentSlide = 2"
               class="w-2.5 h-2.5 rounded-full transition-all duration-300"
-              :class="currentSlide === 2 ? 'bg-gradient-to-r from-maroon-600 to-rose-pink-600 w-8' : 'bg-gray-300 dark:bg-gray-700'">
+              :class="currentSlide === 2 ? 'bg-gradient-to-r from-purple-600 to-pink-600 w-8' : 'bg-gray-300 dark:bg-gray-700'">
             </button>
             <button 
               @click="currentSlide = 3"
               class="w-2.5 h-2.5 rounded-full transition-all duration-300"
-              :class="currentSlide === 3 ? 'bg-gradient-to-r from-maroon-600 to-rose-pink-600 w-8' : 'bg-gray-300 dark:bg-gray-700'">
+              :class="currentSlide === 3 ? 'bg-gradient-to-r from-purple-600 to-pink-600 w-8' : 'bg-gray-300 dark:bg-gray-700'">
             </button>
           </div>
 
           <!-- Next Button -->
           <button 
             @click="currentSlide = currentSlide < slides - 1 ? currentSlide + 1 : 0"
-            class="group flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white rounded-xl hover:shadow-xl hover:shadow-maroon-500/30 transition-all duration-300 transform hover:scale-105">
+            class="group flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:shadow-xl hover:shadow-purple-500/30 transition-all duration-300 transform hover:scale-105">
             <span class="text-sm font-medium">Next</span>
             <svg class="w-5 h-5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -1152,7 +1253,7 @@
           
           <div class="text-center mb-6">
             <div class="inline-block mb-4">
-              <span class="text-maroon-600 dark:text-maroon-400 text-sm font-bold tracking-widest uppercase">Join the community</span>
+              <span class="text-purple-600 dark:text-purple-400 text-sm font-bold tracking-widest uppercase">Join the community</span>
             </div>
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
              Strengthening Connections Beyond the Classroom
@@ -1167,7 +1268,7 @@
             
             <!-- Feature 1 -->
             <div class="flex items-start gap-4">
-              <div class="w-3 h-3 rounded-full bg-gradient-to-r from-maroon-600 to-rose-pink-600 mt-1.5 flex-shrink-0"></div>
+              <div class="w-3 h-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 mt-1.5 flex-shrink-0"></div>
               <div>
                 <h3 class="font-semibold text-gray-900 dark:text-white text-base mb-1">
                   Parents' WhatsApp Group
@@ -1177,7 +1278,7 @@
 
             <!-- Feature 2 -->
             <div class="flex items-start gap-4">
-              <div class="w-3 h-3 rounded-full bg-gradient-to-r from-maroon-600 to-rose-pink-600 mt-1.5 flex-shrink-0"></div>
+              <div class="w-3 h-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 mt-1.5 flex-shrink-0"></div>
               <div>
                 <h3 class="font-semibold text-gray-900 dark:text-white text-base mb-1">
                   Quality Time with Family
@@ -1187,7 +1288,7 @@
 
             <!-- Feature 3 -->
             <div class="flex items-start gap-4">
-              <div class="w-3 h-3 rounded-full bg-gradient-to-r from-maroon-600 to-rose-pink-600 mt-1.5 flex-shrink-0"></div>
+              <div class="w-3 h-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 mt-1.5 flex-shrink-0"></div>
               <div>
                 <h3 class="font-semibold text-gray-900 dark:text-white text-base mb-1">
                   Teacher Circle
@@ -1197,7 +1298,7 @@
 
             <!-- Feature 4 -->
             <div class="flex items-start gap-4">
-              <div class="w-3 h-3 rounded-full bg-gradient-to-r from-maroon-600 to-rose-pink-600 mt-1.5 flex-shrink-0"></div>
+              <div class="w-3 h-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 mt-1.5 flex-shrink-0"></div>
               <div>
                 <h3 class="font-semibold text-gray-900 dark:text-white text-base mb-1">
                   Ambassadors / Volunteers
@@ -1209,7 +1310,7 @@
 
           <!-- Community Dropdown -->
           <div class="pt-4 relative group">
-            <button class="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white font-semibold text-base rounded-full hover:shadow-2xl hover:shadow-maroon-500/40 transform hover:scale-105 transition-all duration-300">
+            <button class="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-base rounded-full hover:shadow-2xl hover:shadow-purple-500/40 transform hover:scale-105 transition-all duration-300">
               Join the Community
               <svg class="w-5 h-5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -1274,7 +1375,7 @@
       <!-- Section Header -->
       <div class="text-center mb-16">
         <div class="inline-block mb-4">
-          <span class="text-maroon-600 dark:text-maroon-400 text-sm font-bold tracking-widest uppercase">Calendar</span>
+          <span class="text-purple-600 dark:text-purple-400 text-sm font-bold tracking-widest uppercase">Calendar</span>
         </div>
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
           Events & meetups
@@ -1288,16 +1389,16 @@
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         
         <!-- Event 1: Parent Clinic -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-gray-200 dark:border-gray-700 hover:border-maroon-400 dark:hover:border-maroon-600 transition-all duration-300 hover:shadow-xl">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-xl">
           
           <!-- Icon & Badge -->
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 bg-gradient-to-br from-maroon-500 to-rose-pink-500 rounded-xl flex items-center justify-center flex-shrink-0">
+            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0">
               <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
               </svg>
             </div>
-            <span class="px-3 py-1 bg-maroon-100 dark:bg-maroon-900/50 text-maroon-700 dark:text-maroon-300 text-xs font-semibold rounded-full">Online</span>
+            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 text-xs font-semibold rounded-full">Online</span>
           </div>
 
           <!-- Event Title -->
@@ -1324,7 +1425,7 @@
 
           <!-- Action Buttons -->
           <div class="flex gap-2">
-            <button class="flex-1 px-4 py-2.5 bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-maroon-500/30 transition-all duration-300">
+            <button class="flex-1 px-4 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300">
               RSVP
             </button>
             <button class="px-4 py-2.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300" title="Add to Calendar">
@@ -1336,15 +1437,15 @@
         </div>
 
         <!-- Event 2: Teacher Lab -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-gray-200 dark:border-gray-700 hover:border-rose-pink-400 dark:hover:border-rose-pink-600 transition-all duration-300 hover:shadow-xl">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-gray-200 dark:border-gray-700 hover:border-pink-400 dark:hover:border-pink-600 transition-all duration-300 hover:shadow-xl">
           
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 bg-gradient-to-br from-rose-pink-500 to-maroon-500 rounded-xl flex items-center justify-center flex-shrink-0">
+            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
               <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
               </svg>
             </div>
-            <span class="px-3 py-1 bg-rose-pink-100 dark:bg-rose-pink-900/50 text-rose-pink-700 dark:text-rose-pink-300 text-xs font-semibold rounded-full">Online</span>
+            <span class="px-3 py-1 bg-pink-100 dark:bg-pink-900/50 text-pink-700 dark:text-pink-300 text-xs font-semibold rounded-full">Online</span>
           </div>
 
           <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
@@ -1368,7 +1469,7 @@
           </div>
 
           <div class="flex gap-2">
-            <button class="flex-1 px-4 py-2.5 bg-gradient-to-r from-rose-pink-600 to-maroon-600 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-rose-pink-500/30 transition-all duration-300">
+            <button class="flex-1 px-4 py-2.5 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300">
               RSVP
             </button>
             <button class="px-4 py-2.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300" title="Add to Calendar">
@@ -1380,15 +1481,15 @@
         </div>
 
         <!-- Event 3: Partner Showcase -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-gray-200 dark:border-gray-700 hover:border-maroon-400 dark:hover:border-maroon-600 transition-all duration-300 hover:shadow-xl">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-xl">
           
           <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 bg-gradient-to-br from-maroon-500 to-rose-pink-500 rounded-xl flex items-center justify-center flex-shrink-0">
+            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0">
               <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
               </svg>
             </div>
-            <span class="px-3 py-1 bg-maroon-100 dark:bg-maroon-900/50 text-maroon-700 dark:text-maroon-300 text-xs font-semibold rounded-full">In-Person</span>
+            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 text-xs font-semibold rounded-full">In-Person</span>
           </div>
 
           <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
@@ -1412,7 +1513,7 @@
           </div>
 
           <div class="flex gap-2">
-            <button class="flex-1 px-4 py-2.5 bg-gradient-to-r from-maroon-600 to-rose-pink-600 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-maroon-500/30 transition-all duration-300">
+            <button class="flex-1 px-4 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300">
               RSVP
             </button>
             <button class="px-4 py-2.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300" title="Add to Calendar">
@@ -1427,7 +1528,7 @@
 
       <!-- See All Events Button -->
       <div class="text-center">
-        <button class="group inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-semibold rounded-xl hover:border-maroon-400 dark:hover:border-maroon-600 hover:shadow-lg transition-all duration-300">
+        <button class="group inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white font-semibold rounded-xl hover:border-purple-400 dark:hover:border-purple-600 hover:shadow-lg transition-all duration-300">
           See all events
           <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -1443,9 +1544,9 @@
     
     <!-- Animated gradient background -->
     <div class="absolute inset-0">
-      <div class="absolute top-1/4 -left-1/4 w-96 h-96 bg-maroon-500/20 dark:bg-maroon-500/10 rounded-full blur-3xl animate-pulse"></div>
-      <div class="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-rose-pink-500/20 dark:bg-rose-pink-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
-      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-maroon-500/10 to-rose-pink-500/10 dark:from-maroon-500/5 dark:to-rose-pink-500/5 rounded-full blur-3xl"></div>
+      <div class="absolute top-1/4 -left-1/4 w-96 h-96 bg-purple-500/20 dark:bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-pink-500/20 dark:bg-pink-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-purple-500/10 to-pink-500/10 dark:from-purple-500/5 dark:to-pink-500/5 rounded-full blur-3xl"></div>
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -1460,7 +1561,7 @@
             <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
               Children First
             </h2>
-            <h3 class="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-maroon-600 to-rose-pink-600 bg-clip-text text-transparent mb-4">
+            <h3 class="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
               Safety, Consent & Privacy Commitments
             </h3>
             <p class="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
@@ -1472,8 +1573,8 @@
           <div class="space-y-6">
             
             <!-- Consent -->
-            <div class="relative pl-8 pb-6 border-l-2 border-gradient-to-b from-maroon-400 to-transparent">
-              <div class="absolute -left-2.5 top-0 w-5 h-5 rounded-full bg-gradient-to-br from-maroon-600 to-rose-pink-600 shadow-lg"></div>
+            <div class="relative pl-8 pb-6 border-l-2 border-gradient-to-b from-purple-400 to-transparent">
+              <div class="absolute -left-2.5 top-0 w-5 h-5 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 shadow-lg"></div>
               <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
                 Consent
               </h4>
@@ -1483,8 +1584,8 @@
             </div>
 
             <!-- Privacy -->
-            <div class="relative pl-8 pb-6 border-l-2 border-gradient-to-b from-rose-pink-400 to-transparent">
-              <div class="absolute -left-2.5 top-0 w-5 h-5 rounded-full bg-gradient-to-br from-rose-pink-600 to-maroon-600 shadow-lg"></div>
+            <div class="relative pl-8 pb-6 border-l-2 border-gradient-to-b from-pink-400 to-transparent">
+              <div class="absolute -left-2.5 top-0 w-5 h-5 rounded-full bg-gradient-to-br from-pink-600 to-purple-600 shadow-lg"></div>
               <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
                 Privacy
               </h4>
@@ -1495,12 +1596,12 @@
 
             <!-- Credit -->
             <div class="relative pl-8">
-              <div class="absolute -left-2.5 top-0 w-5 h-5 rounded-full bg-gradient-to-br from-maroon-600 to-rose-pink-600 shadow-lg"></div>
+              <div class="absolute -left-2.5 top-0 w-5 h-5 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 shadow-lg"></div>
               <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
                 Credit
               </h4>
               <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                All materials carry <span class="font-semibold text-maroon-700 dark:text-maroon-400">Let's Read India</span> credit, with partner acknowledgements where applicable.
+                All materials carry <span class="font-semibold text-purple-700 dark:text-purple-400">Let's Read India</span> credit, with partner acknowledgements where applicable.
               </p>
             </div>
 
@@ -1508,7 +1609,7 @@
 
           <!-- CTA Link -->
           <div class="pt-4">
-            <a href="#" class="group inline-flex items-center gap-2 text-base font-semibold text-maroon-700 dark:text-maroon-400 hover:text-rose-pink-600 dark:hover:text-rose-pink-400 transition-colors">
+            <a href="#" class="group inline-flex items-center gap-2 text-base font-semibold text-purple-700 dark:text-purple-400 hover:text-pink-600 dark:hover:text-pink-400 transition-colors">
               Read Privacy Policy
               <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -1525,15 +1626,15 @@
                  alt="Happy child learning" 
                  class="w-full h-full object-cover aspect-[4/3]">
             <!-- Interactive gradient overlay -->
-            <div class="absolute inset-0 bg-gradient-to-tr from-maroon-600/20 via-transparent to-rose-pink-600/20 opacity-60"></div>
+            <div class="absolute inset-0 bg-gradient-to-tr from-purple-600/20 via-transparent to-pink-600/20 opacity-60"></div>
             <!-- Bottom accent bar -->
-            <div class="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-maroon-600 via-rose-pink-600 to-maroon-600"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600"></div>
           </div>
           
           <!-- Floating badge -->
           <div class="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-2xl border-2 border-gray-100 dark:border-gray-700">
             <div class="flex items-center gap-3">
-              <div class="w-12 h-12 bg-gradient-to-br from-maroon-600 to-rose-pink-600 rounded-full flex items-center justify-center">
+              <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                 </svg>
@@ -1555,15 +1656,15 @@
   <section class="relative py-24 bg-white dark:bg-gray-950 overflow-hidden">
     
     <!-- Decorative elements -->
-    <div class="absolute top-0 left-0 w-64 h-64 bg-maroon-500/5 dark:bg-maroon-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-rose-pink-500/5 dark:bg-rose-pink-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-0 left-0 w-64 h-64 bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-pink-500/5 dark:bg-pink-500/10 rounded-full blur-3xl"></div>
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <!-- Section Header -->
       <div class="text-center mb-16">
         <div class="inline-block mb-4">
-          <span class="text-maroon-600 dark:text-maroon-400 text-lg font-bold tracking-widest uppercase">Why These Methods Work</span>
+          <span class="text-purple-600 dark:text-purple-400 text-lg font-bold tracking-widest uppercase">Why These Methods Work</span>
         </div>
       </div>
 
@@ -1575,11 +1676,11 @@
           <!-- Description -->
           <div class="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl p-8 border-2 border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-shadow duration-300">
             <div class="relative">
-              <div class="absolute -left-3 top-0 h-full w-1 bg-gradient-to-b from-maroon-500 to-rose-pink-500 rounded-full"></div>
+              <div class="absolute -left-3 top-0 h-full w-1 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></div>
               <p class="text-lg text-gray-800 dark:text-gray-200 leading-relaxed pl-6">
-                <span class="text-maroon-600 dark:text-maroon-300 font-semibold">Decodable readers</span> remove guessing and build accuracy. 
-                <span class="text-maroon-600 dark:text-maroon-300 font-semibold">Short, repeated routines</span> develop fluency and expression. 
-                <span class="text-maroon-600 dark:text-maroon-300 font-semibold">Quick screeners</span> spot gaps early so teachers can regroup, producing measurable reading-age gains.
+                <span class="text-purple-600 dark:text-purple-300 font-semibold">Decodable readers</span> remove guessing and build accuracy. 
+                <span class="text-purple-600 dark:text-purple-300 font-semibold">Short, repeated routines</span> develop fluency and expression. 
+                <span class="text-purple-600 dark:text-purple-300 font-semibold">Quick screeners</span> spot gaps early so teachers can regroup, producing measurable reading-age gains.
               </p>
             </div>
           </div>
@@ -1588,8 +1689,8 @@
           <div class="grid grid-cols-3 gap-6">
             
             <!-- Stat 1 -->
-            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-maroon-100 dark:border-maroon-900 hover:border-maroon-300 dark:hover:border-maroon-700 transition-all duration-300 hover:shadow-xl">
-              <div class="text-4xl md:text-5xl font-black bg-gradient-to-br from-maroon-600 to-rose-pink-600 bg-clip-text text-transparent mb-3">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-purple-100 dark:border-purple-900 hover:border-purple-300 dark:hover:border-purple-700 transition-all duration-300 hover:shadow-xl">
+              <div class="text-4xl md:text-5xl font-black bg-gradient-to-br from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
                 100+
               </div>
               <p class="text-sm font-semibold text-gray-900 dark:text-white mb-1">
@@ -1601,8 +1702,8 @@
             </div>
 
             <!-- Stat 2 -->
-            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-rose-pink-100 dark:border-rose-pink-900 hover:border-rose-pink-300 dark:hover:border-rose-pink-700 transition-all duration-300 hover:shadow-xl">
-              <div class="text-4xl md:text-5xl font-black bg-gradient-to-br from-rose-pink-600 to-maroon-600 bg-clip-text text-transparent mb-3">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-pink-100 dark:border-pink-900 hover:border-pink-300 dark:hover:border-pink-700 transition-all duration-300 hover:shadow-xl">
+              <div class="text-4xl md:text-5xl font-black bg-gradient-to-br from-pink-600 to-purple-600 bg-clip-text text-transparent mb-3">
                 10K+
               </div>
               <p class="text-sm font-semibold text-gray-900 dark:text-white mb-1">
@@ -1614,8 +1715,8 @@
             </div>
 
             <!-- Stat 3 -->
-            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-maroon-100 dark:border-maroon-900 hover:border-maroon-300 dark:hover:border-maroon-700 transition-all duration-300 hover:shadow-xl">
-              <div class="text-4xl md:text-5xl font-black bg-gradient-to-br from-maroon-600 to-rose-pink-600 bg-clip-text text-transparent mb-3">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-purple-100 dark:border-purple-900 hover:border-purple-300 dark:hover:border-purple-700 transition-all duration-300 hover:shadow-xl">
+              <div class="text-4xl md:text-5xl font-black bg-gradient-to-br from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
                 50K+
               </div>
               <p class="text-sm font-semibold text-gray-900 dark:text-white mb-1">
@@ -1638,12 +1739,12 @@
                  alt="Children reading together in classroom" 
                  class="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-500">
             <!-- Gradient overlay -->
-            <div class="absolute inset-0 bg-gradient-to-tr from-maroon-600/30 via-transparent to-rose-pink-600/30 opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
+            <div class="absolute inset-0 bg-gradient-to-tr from-purple-600/30 via-transparent to-pink-600/30 opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
           </div>
           
           <!-- Decorative corner accents -->
-          <div class="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-maroon-500 to-rose-pink-500 rounded-2xl opacity-20 blur-xl"></div>
-          <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-rose-pink-500 to-maroon-500 rounded-2xl opacity-20 blur-xl"></div>
+          <div class="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl opacity-20 blur-xl"></div>
+          <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-pink-500 to-purple-500 rounded-2xl opacity-20 blur-xl"></div>
         </div>
 
       </div>
@@ -1654,25 +1755,25 @@
   <!-- FAQ Section -->
   <section id="faq" class="py-20 bg-white dark:bg-gray-950 relative overflow-hidden" x-data="faq()">
     <!-- Decorative elements -->
-    <div class="absolute top-0 right-0 w-96 h-96 bg-maroon-500/10 dark:bg-maroon-500/5 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-rose-pink-500/10 dark:bg-rose-pink-500/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-pink-500/10 dark:bg-pink-500/5 rounded-full blur-3xl"></div>
 
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       <div class="text-center mb-16">
         <div class="inline-block mb-4">
-          <span class="text-maroon-600 dark:text-maroon-400 text-lg font-bold tracking-widest uppercase">Frequently Asked Questions</span>
+          <span class="text-purple-600 dark:text-purple-400 text-lg font-bold tracking-widest uppercase">Frequently Asked Questions</span>
         </div>
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
           Get Answers to Common Queries
         </h2>
-        <div class="w-24 h-1 bg-gradient-to-r from-maroon-500 to-rose-pink-500 mx-auto mb-8 rounded-full"></div>
+        <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-8 rounded-full"></div>
       </div>
 
       <div class="space-y-4">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-maroon-300 dark:hover:border-maroon-600 transition-all duration-300" x-data="{ isOpen: false }">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300" x-data="{ isOpen: false }">
           <button @click="isOpen = !isOpen" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
             <span class="font-medium text-gray-800 dark:text-gray-200 pr-4">1. What ages is this for?</span>
-            <svg class="w-5 h-5 text-maroon-500 dark:text-rose-pink-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-purple-500 dark:text-pink-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
@@ -1683,10 +1784,10 @@
           </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-maroon-300 dark:hover:border-maroon-600 transition-all duration-300" x-data="{ isOpen: false }">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300" x-data="{ isOpen: false }">
           <button @click="isOpen = !isOpen" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
             <span class="font-medium text-gray-800 dark:text-gray-200 pr-4">2. How much time daily?</span>
-            <svg class="w-5 h-5 text-maroon-500 dark:text-rose-pink-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-purple-500 dark:text-pink-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
@@ -1697,10 +1798,10 @@
           </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-maroon-300 dark:hover:border-maroon-600 transition-all duration-300" x-data="{ isOpen: false }">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300" x-data="{ isOpen: false }">
           <button @click="isOpen = !isOpen" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
             <span class="font-medium text-gray-800 dark:text-gray-200 pr-4">3. Do I need training?</span>
-            <svg class="w-5 h-5 text-maroon-500 dark:text-rose-pink-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-purple-500 dark:text-pink-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
@@ -1711,10 +1812,10 @@
           </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-maroon-300 dark:hover:border-maroon-600 transition-all duration-300" x-data="{ isOpen: false }">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300" x-data="{ isOpen: false }">
           <button @click="isOpen = !isOpen" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
             <span class="font-medium text-gray-800 dark:text-gray-200 pr-4">4. Does this follow the curriculum?</span>
-            <svg class="w-5 h-5 text-maroon-500 dark:text-rose-pink-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-purple-500 dark:text-pink-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
@@ -1725,10 +1826,10 @@
           </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-maroon-300 dark:hover:border-maroon-600 transition-all duration-300" x-data="{ isOpen: false }">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300" x-data="{ isOpen: false }">
           <button @click="isOpen = !isOpen" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
             <span class="font-medium text-gray-800 dark:text-gray-200 pr-4">5. How is progress tracked?</span>
-            <svg class="w-5 h-5 text-maroon-500 dark:text-rose-pink-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-purple-500 dark:text-pink-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
@@ -1739,10 +1840,10 @@
           </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-maroon-300 dark:hover:border-maroon-600 transition-all duration-300" x-data="{ isOpen: false }">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border-2 border-gray-100 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300" x-data="{ isOpen: false }">
           <button @click="isOpen = !isOpen" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
             <span class="font-medium text-gray-800 dark:text-gray-200 pr-4">6. Language support?</span>
-            <svg class="w-5 h-5 text-maroon-500 dark:text-rose-pink-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-purple-500 dark:text-pink-400 transition-transform" :class="{ 'rotate-180': isOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
@@ -1760,13 +1861,13 @@
 
 
   <!-- CTA Section -->
-  <section class="py-20 bg-gradient-to-r from-maroon-600 to-rose-pink-500 text-white relative overflow-hidden">
+  <section class="py-20 bg-gradient-to-r from-purple-600 to-pink-500 text-white relative overflow-hidden">
     <div class="absolute inset-0 bg-black/10"></div>
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
       <h2 class="text-4xl md:text-5xl font-bold mb-6">Have Questions?</h2>
       <p class="text-xl mb-8 opacity-90">We'd love to hear from you. Reach out to our team for more information.</p>
       <div class="flex flex-col sm:flex-row justify-center gap-6">
-        <a href="mailto:community@letsreadindia.com" class="bg-white text-maroon-700 hover:bg-gray-100 font-semibold py-4 px-8 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg inline-block">
+        <a href="mailto:community@letsreadindia.com" class="bg-white text-purple-700 hover:bg-gray-100 font-semibold py-4 px-8 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg inline-block">
           Email Us
         </a>
         <a href="tel:+919876543210" class="bg-transparent border-2 border-white text-white hover:bg-white/10 font-semibold py-4 px-8 rounded-xl transition-all duration-200 transform hover:scale-105 inline-flex items-center justify-center">

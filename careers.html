@@ -6,7 +6,9 @@
   <title>Careers | Let's Read India</title>
   <link rel="icon" type="image/svg+xml" href="./public/favicon.ico">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -21,7 +23,9 @@
             'child-green': '#10B981',
           },
           fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
             poppins: ['Poppins', 'sans-serif'],
+            'comic-neue': ['Comic Neue', 'cursive'],
           },
         }
       }
@@ -30,7 +34,9 @@
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <style>
     [x-cloak] { display: none !important; }
-    body { font-family: 'Poppins', sans-serif; }
+    body, h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label {
+      font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif;
+    }
   </style>
 </head>
 

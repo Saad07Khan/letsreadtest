@@ -7,8 +7,9 @@
   <title>Training - Let's Read India</title>
   
   <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,7 +26,9 @@
             'child-green': '#10B981',
           },
           fontFamily: {
+            sans: ['Comic Sans MS', 'Comic Neue', 'sans-serif'],
             poppins: ['Poppins', 'sans-serif'],
+            'comic-neue': ['Comic Neue', 'cursive', 'sans-serif'],
           },
         }
       }
@@ -36,6 +39,11 @@
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   
   <style>
+    /* Global Font Family */
+    body, h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label {
+      font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif;
+    }
+
     :root {
       --background: 0 0% 100%;
       --foreground: 240 10% 3.9%;

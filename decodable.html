@@ -181,21 +181,29 @@
       background: linear-gradient(135deg, #1e3a8a 0%, #166534 50%, #581c87 100%);
     }
 
-    .phonics-section {
-      background: linear-gradient(135deg, #fefce8 0%, #ffedd5 50%, #fce7f3 100%);
+    /* Phonics Section Animation */
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-20px) translateX(10px); }
     }
+    @keyframes float-medium {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-15px) translateX(-10px); }
+    }
+    .animate-float-slow { animation: float-slow 15s ease-in-out infinite; }
+    .animate-float-medium { animation: float-medium 12s ease-in-out infinite; }
 
-    .dark .phonics-section {
-      background: linear-gradient(135deg, #1c1917 0%, #292524 50%, #44403c 100%);
+    /* Delivery Section Animation */
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-20px) translateX(10px); }
     }
-
-    .delivery-section {
-      background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+    @keyframes float-medium {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-15px) translateX(-10px); }
     }
-
-    .dark .delivery-section {
-      background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-    }
+    .animate-float-slow { animation: float-slow 15s ease-in-out infinite; }
+    .animate-float-medium { animation: float-medium 12s ease-in-out infinite; }
 
     /* Fix for bundles section background */
     .bundles-section {
@@ -224,18 +232,10 @@
     }
 
     /* Table styles for phonics section */
-    .phonics-table {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(25px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
-    }
-
-    .dark .phonics-table {
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    .level-badge {
+      @apply inline-flex items-center px-4 py-2.5 rounded-full text-sm font-semibold text-white shadow-sm transition-all duration-300;
+      background: linear-gradient(135deg, #8B5CF6, #EC4899);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
 
     .table-header {
@@ -419,23 +419,31 @@ x-init="
   </nav>
 
   <!-- Hero Section -->
-  <section class="relative min-h-screen flex items-center overflow-hidden" style="background: linear-gradient(135deg, #3B82F6 0%, #10B981 50%, #EC4899 100%);">
+  <section class="relative min-h-[90vh] flex items-center justify-start overflow-hidden bg-gray-100 dark:bg-gray-900">
+    <!-- Background gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-r from-purple-900/60 to-pink-800/40 dark:from-gray-900/80 dark:to-gray-900/90"></div>
+    
     <!-- Floating background elements -->
     <div class="absolute inset-0 pointer-events-none">
       <div class="absolute top-[10%] left-[10%] w-10 h-10 bg-child-yellow/30 rounded-full" style="animation: float 6s ease-in-out infinite;"></div>
       <div class="absolute top-[20%] right-[15%] w-15 h-15 bg-child-purple/20 rounded-full" style="animation: float 8s ease-in-out infinite reverse;"></div>
-      <div class="absolute bottom-[30%] left-[20%] w-8 h-8 bg-child-pink/25 rounded-full" style="animation: float 7s ease-in-out infinite;"></div>
-      <div class="absolute bottom-[15%] right-[25%] w-12 h-12 bg-child-green/20 rounded-full" style="animation: float 5s ease-in-out infinite reverse;"></div>
+      <div class="absolute bottom-[15%] left-[20%] w-12 h-12 bg-child-pink/20 rounded-full" style="animation: float 7s ease-in-out infinite 1s;"></div>
+      <div class="absolute bottom-[25%] right-[10%] w-8 h-8 bg-child-blue/20 rounded-full" style="animation: float 9s ease-in-out infinite 0.5s;"></div>
+      <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-child-green/20 rounded-full" style="animation: float 10s ease-in-out infinite 0.3s;"></div>
+      
+      <!-- Blob elements -->
+      <div class="absolute -top-32 -right-32 w-64 h-64 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full filter blur-3xl"></div>
+      <div class="absolute -bottom-20 -left-20 w-48 h-48 bg-gradient-to-br from-yellow-400/20 to-pink-400/20 rounded-full filter blur-3xl"></div>
     </div>
-    
-    <!-- Text overlay for better readability -->
-    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(16, 185, 129, 0.85) 50%, rgba(236, 72, 153, 0.9) 100%);"></div>
     
     <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
-        
         <!-- Left Content -->
-        <div class="space-y-8" style="animation: slideInUp 1s ease-out;">
+        <div class="space-y-6 text-white dark:text-gray-100" style="animation: slideInUp 1s ease-out;">
+          <!-- Badge -->
+          <span class="inline-block bg-white/20 backdrop-blur-sm text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+            DECODABLE BOOKS
+          </span>
           <div class="space-y-6">
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight" style="text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);">
               Build Confidence with the 
@@ -517,99 +525,167 @@ x-init="
 
   </section>
 
-  <!-- Benefits Section -->
-  <section class="section-bg py-20 relative">
+  <!-- Benefits Section - Modern Design -->
+  <section class="py-24 relative overflow-hidden bg-white dark:bg-gray-900">
+    <!-- Animated gradient background -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-1/4 -right-1/4 w-[800px] h-[800px] bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-full animate-float-slow"></div>
+      <div class="absolute -bottom-1/4 -left-1/4 w-[800px] h-[800px] bg-gradient-to-tr from-yellow-500/5 to-pink-500/5 rounded-full animate-float"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] bg-radial-gradient(circle, rgba(168,85,247,0.05) 0%, rgba(255,255,255,0) 60%) dark:bg-radial-gradient(circle, rgba(168,85,247,0.1) 0%, rgba(0,0,0,0) 60%)"></div>
+    </div>
+    
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Section Header -->
-      <div class="text-center mb-16">
-        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">BENEFITS</p>
-        <div class="flex items-center justify-center gap-8 mb-12">
-          <div class="progress-arrow text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Decode</h2>
-          </div>
-          <div class="progress-arrow text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Fluency</h2>
-          </div>
-          <div class="progress-arrow text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Comprehension</h2>
-          </div>
+      <div class="text-center mb-20">
+        <div class="inline-flex items-center justify-center gap-2 mb-4">
+          <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+          <span class="text-xs font-semibold tracking-wider text-purple-600 dark:text-purple-400">THE BENEFITS</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
         </div>
+        
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+          Unlock Your Child's
+          <span class="relative inline-block">
+            <span class="relative z-10">Reading Potential</span>
+            <span class="absolute bottom-1.5 left-0 w-full h-2.5 bg-yellow-200/60 dark:bg-yellow-900/40 -rotate-1 -z-0"></span>
+          </span>
+        </h2>
+        
+        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          Our structured approach transforms reading from a challenge into a joyful journey of discovery and achievement.
+        </p>
       </div>
 
-      <!-- Benefits Cards -->
+      <!-- Animated Progress Bar -->
+      <div class="relative max-w-4xl mx-auto mb-16 h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 rounded-full animate-progress"></div>
+        <div class="absolute -bottom-8 left-0 text-purple-600 dark:text-purple-400 font-medium">Decode</div>
+        <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-pink-600 dark:text-pink-400 font-medium">Fluency</div>
+        <div class="absolute -bottom-8 right-0 text-yellow-600 dark:text-yellow-400 font-medium">Comprehend</div>
+      </div>
+
+      <!-- Benefits Grid -->
       <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <!-- Benefit 1 -->
-        <div class="glass-card rounded-3xl p-8 text-center transform hover:scale-105 transition-all duration-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
-          <div class="benefit-icon floating-icon mx-auto text-4xl mb-4">
-            ☀️
+        <div class="group relative bg-white dark:bg-gray-800 rounded-3xl p-8 text-left overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl border border-gray-100 dark:border-gray-700">
+          <!-- Decorative corner accent -->
+          <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 rounded-bl-full transition-all duration-500 group-hover:bg-purple-500/10"></div>
+          
+          <div class="relative z-10">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-100 to-white dark:from-purple-900/30 dark:to-gray-800 flex items-center justify-center mb-6 shadow-sm group-hover:shadow-md transition-shadow duration-300">
+              <span class="text-3xl">🔍</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">Just-Right Difficulty</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Carefully crafted content that matches your child's reading level, using only the sounds and patterns they've learned.</p>
+            <div class="mt-6">
+              <span class="inline-flex items-center text-sm font-medium text-purple-600 dark:text-purple-400 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
+                Learn more
+                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </div>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Just-right difficulty</h3>
-          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Words use taught sounds/patterns; fewer surprises.</p>
         </div>
 
         <!-- Benefit 2 -->
-        <div class="glass-card rounded-3xl p-8 text-center transform hover:scale-105 transition-all duration-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
-          <div class="benefit-icon floating-icon mx-auto text-4xl mb-4">
-            📈
+        <div class="group relative bg-white dark:bg-gray-800 rounded-3xl p-8 text-left overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl border border-gray-100 dark:border-gray-700">
+          <!-- Decorative corner accent -->
+          <div class="absolute top-0 right-0 w-24 h-24 bg-pink-500/5 rounded-bl-full transition-all duration-500 group-hover:bg-pink-500/10"></div>
+          
+          <div class="relative z-10">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-100 to-white dark:from-pink-900/30 dark:to-gray-800 flex items-center justify-center mb-6 shadow-sm group-hover:shadow-md transition-shadow duration-300">
+              <span class="text-3xl">📈</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Visible Progress</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Short, engaging stories with repeated patterns that build confidence through achievable milestones.</p>
+            <div class="mt-6">
+              <span class="inline-flex items-center text-sm font-medium text-pink-600 dark:text-pink-400 group-hover:text-pink-700 dark:group-hover:text-pink-300 transition-colors">
+                Learn more
+                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </div>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Visible progress</h3>
-          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Short stories, repeated patterns; easy wins.</p>
         </div>
 
         <!-- Benefit 3 -->
-        <div class="glass-card rounded-3xl p-8 text-center transform hover:scale-105 transition-all duration-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
-          <div class="benefit-icon floating-icon mx-auto text-4xl mb-4">
-            📚
+        <div class="group relative bg-white dark:bg-gray-800 rounded-3xl p-8 text-left overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl border border-gray-100 dark:border-gray-700">
+          <!-- Decorative corner accent -->
+          <div class="absolute top-0 right-0 w-24 h-24 bg-yellow-500/5 rounded-bl-full transition-all duration-500 group-hover:bg-yellow-500/10"></div>
+          
+          <div class="relative z-10">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-100 to-white dark:from-yellow-900/30 dark:to-gray-800 flex items-center justify-center mb-6 shadow-sm group-hover:shadow-md transition-shadow duration-300">
+              <span class="text-3xl">📚</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors">Real-World Ready</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Seamless transition to general reading materials with improved accuracy, speed, and comprehension.</p>
+            <div class="mt-6">
+              <span class="inline-flex items-center text-sm font-medium text-yellow-600 dark:text-yellow-400 group-hover:text-yellow-700 dark:group-hover:text-yellow-300 transition-colors">
+                Learn more
+                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </div>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Transfer to real books</h3>
-          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Build accuracy & pace before general readers.</p>
         </div>
       </div>
 
-      <!-- CTA Button -->
-      <div class="text-center mt-12">
-        <button class="quiz-btn bg-child-yellow hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
-          See Score & Sequence
-        </button>
+      <!-- CTA Section -->
+      <div class="mt-20 text-center">
+        <div class="inline-flex flex-col items-center">
+          <button class="relative group bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold py-4 px-10 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-purple-400/30 dark:shadow-purple-800/40 overflow-hidden">
+            <span class="relative z-10 flex items-center gap-2">
+              Discover the Sequence
+              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </span>
+            <span class="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+          </button>
+          <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">Join 50,000+ parents who've transformed their child's reading journey</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Choose Your Level Section -->
-  <section class="py-20 relative overflow-hidden">
-    <!-- Background gradient -->
-    <div class="absolute inset-0 -z-10">
-      <!-- Main gradient overlay -->
-      <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 via-blue-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
-      
-      <!-- Animated gradient overlay -->
-      <div class="absolute inset-0 opacity-50 dark:opacity-30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-200 via-transparent to-pink-200 dark:from-purple-900/30 dark:to-pink-900/30"></div>
-      
-      <!-- Decorative elements -->
-      <div class="absolute inset-0 overflow-hidden">
-        <!-- Floating gradient orbs -->
-        <div class="absolute -top-32 -left-32 w-64 h-64 bg-gradient-to-br from-blue-200 to-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-70 dark:opacity-20 dark:from-blue-900/30 dark:to-purple-900/30"></div>
-        <div class="absolute top-1/3 -right-20 w-80 h-80 bg-gradient-to-br from-pink-200 to-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-70 dark:opacity-20 dark:from-pink-900/30 dark:to-yellow-900/30"></div>
-        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-gradient-to-tr from-purple-200 to-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 dark:opacity-10 dark:from-purple-900/20 dark:to-blue-900/20"></div>
-        
-        <!-- Grid pattern -->
-        <div class="absolute inset-0 bg-[radial-gradient(#6366f180_1px,transparent_1px)] [background-size:16px_16px] dark:opacity-10"></div>
-      </div>
+  <section class="py-24 relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-1/4 -right-1/4 w-[800px] h-[800px] bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-full animate-float-slow"></div>
+      <div class="absolute -bottom-1/4 -left-1/4 w-[800px] h-[800px] bg-gradient-to-tr from-yellow-500/5 to-pink-500/5 rounded-full animate-float"></div>
     </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Section Header -->
       <div class="text-center mb-16">
-        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">CHOOSE YOUR LEVEL</p>
-        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Find your starting set</h2>
-        <p class="text-xl text-gray-600 dark:text-gray-300">
-          Not sure? <button class="quiz-btn bg-child-yellow hover:bg-yellow-500 text-gray-900 font-bold py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-md ml-2">Take the Readiness Quiz</button>
+        <div class="inline-flex items-center justify-center gap-2 mb-4">
+          <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+          <span class="text-xs font-semibold tracking-wider text-purple-600 dark:text-purple-400">GET STARTED</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
+        </div>
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          Find Your
+          <span class="relative inline-block">
+            <span class="relative z-10">Starting Set</span>
+            <span class="absolute bottom-1.5 left-0 w-full h-2.5 bg-yellow-200/60 dark:bg-yellow-900/40 -rotate-1 -z-0"></span>
+          </span>
+        </h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
+          Not sure where to begin? Take our quick assessment to find the perfect starting point for your child's reading journey.
         </p>
+        <button class="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-purple-400/30 dark:shadow-purple-800/40">
+          Take the Readiness Quiz
+        </button>
       </div>
 
       <!-- Level Cards -->
       <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         <!-- Level A -->
-        <div class="level-card p-8 text-center bg-gradient-to-br from-child-purple to-child-blue rounded-2xl shadow-xl transform hover:scale-102 transition-all duration-300">
+        <div class="level-card p-8 text-center bg-gradient-to-br from-purple-600 to-pink-500 rounded-2xl shadow-xl transform hover:scale-102 transition-all duration-300">
           <div class="level-badge inline-block mb-6 bg-white/20 text-white px-4 py-1 rounded-full text-sm font-medium">Level A</div>
           
           <!-- Card Visual Area -->
@@ -750,80 +826,86 @@ x-init="
   </section>
 
   <!-- What's Inside a Set Section -->
-  <section class="section-bg py-24 relative overflow-hidden">
-    <!-- Background Effects -->
-    <div class="absolute inset-0" style="background: 
-        radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);"></div>
-    
-    <!-- Floating elements -->
-    <div class="absolute top-[10%] left-[5%] w-8 h-8 bg-child-blue/10 rounded-full" style="animation: float 6s ease-in-out infinite;"></div>
-    <div class="absolute top-[20%] right-[10%] w-10 h-10 bg-child-green/10 rounded-full" style="animation: float 6s ease-in-out infinite 2s;"></div>
-    <div class="absolute bottom-[30%] left-[8%] w-6 h-6 bg-child-pink/10 rounded-full" style="animation: float 6s ease-in-out infinite 4s;"></div>
-    <div class="absolute bottom-[15%] right-[15%] w-9 h-9 bg-child-purple/10 rounded-full" style="animation: float 6s ease-in-out infinite 1s;"></div>
+  <section class="py-24 relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-1/4 -right-1/4 w-[800px] h-[800px] bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-full animate-float-slow"></div>
+      <div class="absolute -bottom-1/4 -left-1/4 w-[800px] h-[800px] bg-gradient-to-tr from-yellow-500/5 to-pink-500/5 rounded-full animate-float"></div>
+    </div>
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Section Header -->
       <div class="text-center mb-16">
-        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">WHAT'S INSIDE A SET</p>
-        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">What you get in every pack</h2>
-        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
-          6–10 booklets, big type, picture cues, target sounds list, discussion questions, and a progress sticker sheet.
+        <div class="inline-flex items-center justify-center gap-2 mb-4">
+          <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+          <span class="text-xs font-semibold tracking-wider text-purple-600 dark:text-purple-400">WHAT'S INSIDE</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
+        </div>
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          What You Get In
+          <span class="relative inline-block">
+            <span class="relative z-10">Every Pack</span>
+            <span class="absolute bottom-1.5 left-0 w-full h-2.5 bg-yellow-200/60 dark:bg-yellow-900/40 -rotate-1 -z-0"></span>
+          </span>
+        </h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          Each carefully curated set includes everything your child needs for a successful reading experience.
         </p>
       </div>
 
       <!-- Feature Cards Grid -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
         <!-- Feature 1 -->
-        <div class="backdrop-blur-xl bg-white/90 dark:bg-gray-800/90 border border-white/30 dark:border-gray-700/30 shadow-xl rounded-3xl p-8 text-center transform hover:scale-105 hover:-translate-y-2 transition-all duration-400 relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-blue to-child-green"></div>
-          <div class="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl mb-6 mx-auto shadow-lg relative overflow-hidden" style="background: linear-gradient(135deg, #3B82F6, #1D4ED8);">
-            <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
-            <span class="relative">📚</span>
+        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 text-center border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-100 to-white dark:from-purple-900/30 dark:to-gray-800 flex items-center justify-center text-3xl mb-4 mx-auto shadow-sm group-hover:shadow-md transition-shadow duration-300">
+            <span>📚</span>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">6–10 booklets</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">(level-dependent)</p>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">6–10 Booklets</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">Carefully leveled for progressive learning</p>
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
 
         <!-- Feature 2 -->
-        <div class="backdrop-blur-xl bg-white/90 dark:bg-gray-800/90 border border-white/30 dark:border-gray-700/30 shadow-xl rounded-3xl p-8 text-center transform hover:scale-105 hover:-translate-y-2 transition-all duration-400 relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-green to-child-pink"></div>
-          <div class="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl mb-6 mx-auto shadow-lg relative overflow-hidden" style="background: linear-gradient(135deg, #10B981, #059669);">
-            <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
-            <span class="relative">🎯</span>
+        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 text-center border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-100 to-white dark:from-pink-900/30 dark:to-gray-800 flex items-center justify-center text-3xl mb-4 mx-auto shadow-sm group-hover:shadow-md transition-shadow duration-300">
+            <span>🔍</span>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Big type + picture cues</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Clear, readable text with visual support</p>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Big Type & Visuals</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">Clear text with engaging picture cues</p>
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
 
         <!-- Feature 3 -->
-        <div class="backdrop-blur-xl bg-white/90 dark:bg-gray-800/90 border border-white/30 dark:border-gray-700/30 shadow-xl rounded-3xl p-8 text-center transform hover:scale-105 hover:-translate-y-2 transition-all duration-400 relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-pink to-child-purple"></div>
-          <div class="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl mb-6 mx-auto shadow-lg relative overflow-hidden" style="background: linear-gradient(135deg, #EC4899, #DB2777);">
-            <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
-            <span class="relative">📝</span>
+        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 text-center border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-100 to-white dark:from-yellow-900/30 dark:to-gray-800 flex items-center justify-center text-3xl mb-4 mx-auto shadow-sm group-hover:shadow-md transition-shadow duration-300">
+            <span>📝</span>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Target sounds & word list</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">on inside cover</p>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Target Sounds</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">Focused phonics patterns and word lists</p>
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
 
         <!-- Feature 4 -->
-        <div class="backdrop-blur-xl bg-white/90 dark:bg-gray-800/90 border border-white/30 dark:border-gray-700/30 shadow-xl rounded-3xl p-8 text-center transform hover:scale-105 hover:-translate-y-2 transition-all duration-400 relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-purple to-child-yellow"></div>
-          <div class="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl mb-6 mx-auto shadow-lg relative overflow-hidden" style="background: linear-gradient(135deg, #A855F7, #9333EA);">
-            <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
-            <span class="relative">💬</span>
+        <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 text-center border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 flex items-center justify-center text-3xl mb-4 mx-auto shadow-sm group-hover:shadow-md transition-shadow duration-300">
+            <span>💬</span>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">2–3 discussion questions</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">+ sticker tracker</p>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Discussion Prompts</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">Questions to build comprehension</p>
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
       </div>
 
       <!-- Download Button -->
       <div class="text-center mt-16">
-        <button class="bg-gradient-to-r from-child-yellow/20 to-child-pink/20 dark:from-child-yellow/10 dark:to-child-pink/10 border-2 border-child-yellow dark:border-child-yellow/50 text-yellow-800 dark:text-yellow-200 font-semibold px-8 py-4 rounded-2xl hover:bg-gradient-to-r hover:from-child-yellow/30 hover:to-child-pink/30 dark:hover:from-child-yellow/20 dark:hover:to-child-pink/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 backdrop-blur-sm">
-          Download Parent Guide (PDF)
+        <button class="group relative bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-purple-400/30 dark:shadow-purple-800/40 overflow-hidden">
+          <span class="relative z-10 flex items-center justify-center gap-2">
+            Download Parent Guide (PDF)
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </svg>
+          </span>
+          <span class="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
         </button>
       </div>
     </div>
@@ -835,211 +917,324 @@ x-init="
   </div>
 
   <!-- Try a Sample Section -->
-  <section class="sample-section py-24">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-24 relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-full animate-float-slow"></div>
+      <div class="absolute -bottom-1/4 -right-1/4 w-[800px] h-[800px] bg-gradient-to-tr from-yellow-500/5 to-pink-500/5 rounded-full animate-float"></div>
+    </div>
+    
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Section Header -->
       <div class="text-center mb-12">
-        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">TRY A SAMPLE</p>
-        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8">Read a sample story</h2>
+        <div class="inline-flex items-center justify-center gap-2 mb-4">
+          <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+          <span class="text-xs font-semibold tracking-wider text-purple-600 dark:text-purple-400">TRY A SAMPLE</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
+        </div>
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          Read A
+          <span class="relative inline-block">
+            <span class="relative z-10">Sample Story</span>
+            <span class="absolute bottom-1.5 left-0 w-full h-2.5 bg-yellow-200/60 dark:bg-yellow-900/40 -rotate-1 -z-0"></span>
+          </span>
+        </h2>
       </div>
 
       <!-- Sample Card -->
-      <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-white/20 dark:border-gray-700/20 rounded-3xl p-12 text-center relative shadow-2xl" style="box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);">
-        <!-- Animated border gradient -->
-        <div class="absolute -inset-0.5 bg-gradient-to-r from-child-blue via-child-green via-child-pink via-child-purple to-child-yellow rounded-3xl opacity-20" style="animation: gradient-rotate 6s linear infinite;"></div>
+      <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-white/20 dark:border-gray-700/20 rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden shadow-2xl group">
+        <!-- Animated gradient border -->
+        <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 rounded-3xl opacity-30 group-hover:opacity-60 transition-opacity duration-500" style="animation: gradient-rotate 6s linear infinite;"></div>
         
         <div class="relative z-10">
           <!-- Sample Content -->
           <div class="mb-8">
-            <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
-              Short, phonics-friendly story with big type and picture prompts.
+            <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
+              Experience our phonics-friendly stories with big type and engaging picture prompts.
             </p>
           </div>
 
           <!-- Action Buttons -->
           <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <button class="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold px-8 py-4 rounded-2xl hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-              Read Sample
+            <button class="group relative bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-purple-400/30 dark:shadow-purple-800/40 overflow-hidden">
+              <span class="relative z-10 flex items-center justify-center gap-2">
+                Read Sample
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </span>
+              <span class="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </button>
-            <button class="bg-white/90 dark:bg-gray-700/90 text-orange-600 dark:text-orange-400 border-2 border-orange-500 dark:border-orange-400 font-semibold px-8 py-4 rounded-2xl hover:bg-orange-50 dark:hover:bg-gray-600 hover:-translate-y-1 transition-all duration-300 backdrop-blur-sm">
-              Download PDF
+            <button class="group relative bg-white/90 dark:bg-gray-700/90 text-purple-600 dark:text-purple-300 border-2 border-purple-500 dark:border-purple-400 font-semibold px-8 py-4 rounded-2xl hover:bg-purple-50 dark:hover:bg-gray-600 transition-all duration-300 transform hover:-translate-y-0.5 backdrop-blur-sm">
+              <span class="relative z-10 flex items-center justify-center gap-2">
+                Download PDF
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+              </span>
             </button>
           </div>
 
           <!-- Additional Info -->
-          <p class="text-gray-500 dark:text-gray-400 text-sm">
-            Works on mobile; print-friendly.
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            Works on all devices • Print-friendly format • No credit card required
           </p>
         </div>
 
-        <!-- Decorative elements inside the card -->
-        <div class="absolute top-8 left-8 w-4 h-4 bg-child-blue/20 rounded-full"></div>
-        <div class="absolute top-12 right-12 w-3 h-3 bg-child-green/20 rounded-full"></div>
-        <div class="absolute bottom-8 left-12 w-5 h-5 bg-child-pink/20 rounded-full"></div>
-        <div class="absolute bottom-12 right-8 w-2 h-2 bg-child-purple/20 rounded-full"></div>
+        <!-- Decorative elements -->
+        <div class="absolute top-8 left-8 w-4 h-4 bg-purple-200 dark:bg-purple-800/30 rounded-full animate-pulse"></div>
+        <div class="absolute top-12 right-12 w-3 h-3 bg-pink-200 dark:bg-pink-800/30 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+        <div class="absolute bottom-8 left-12 w-5 h-5 bg-yellow-200 dark:bg-yellow-800/30 rounded-full animate-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-12 right-8 w-2 h-2 bg-purple-200 dark:bg-purple-800/30 rounded-full animate-pulse" style="animation-delay: 1.5s;"></div>
       </div>
 
       <!-- Trust Indicator -->
       <div class="text-center mt-12">
-        <div class="inline-flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg">
+        <div class="inline-flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-gray-100 dark:border-gray-700">
           <div class="flex text-yellow-400 text-lg">★★★★★</div>
-          <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">Loved by thousands of families</span>
+          <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Loved by thousands of families</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- How to Use at Home Section -->
-  <section class="home-routine-section py-24 relative overflow-hidden">
-    <!-- Background Effects -->
-    <div class="absolute inset-0" style="background: 
-        radial-gradient(circle at 15% 25%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 85% 75%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 45% 60%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);"></div>
-    
-    <!-- Floating shapes -->
-    <div class="absolute top-[10%] left-[5%] w-5 h-5 bg-child-blue/10 rounded-full" style="animation: float-gentle 8s ease-in-out infinite;"></div>
-    <div class="absolute top-[20%] right-[8%] w-8 h-8 bg-child-green/10 rounded-full" style="animation: float-gentle 8s ease-in-out infinite 2s;"></div>
-    <div class="absolute bottom-[25%] left-[10%] w-6 h-6 bg-child-pink/10 rounded-full" style="animation: float-gentle 8s ease-in-out infinite 4s;"></div>
+  <section class="py-24 relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-full animate-float-slow"></div>
+      <div class="absolute -bottom-1/4 -right-1/4 w-[800px] h-[800px] bg-gradient-to-tr from-yellow-500/5 to-pink-500/5 rounded-full animate-float"></div>
+    </div>
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Section Header -->
       <div class="text-center mb-16">
-        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">HOW TO USE AT HOME</p>
-        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8">A simple 5-step routine</h2>
+        <div class="inline-flex items-center justify-center gap-2 mb-4">
+          <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+          <span class="text-xs font-semibold tracking-wider text-purple-600 dark:text-purple-400">HOW TO USE AT HOME</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
+        </div>
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          A Simple <span class="relative">
+            <span class="relative z-10">5-Step</span>
+            <span class="absolute bottom-1.5 left-0 w-full h-2.5 bg-yellow-200/60 dark:bg-yellow-900/40 -rotate-1 -z-0"></span>
+          </span> Routine
+        </h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Just 5-10 minutes a day to build confident readers</p>
       </div>
 
       <!-- Steps Grid -->
-      <div class="grid md:grid-cols-5 gap-6">
+      <div class="grid md:grid-cols-5 gap-4">
         <!-- Step 1 -->
-        <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-white/30 dark:border-gray-700/30 shadow-lg rounded-2xl p-6 hover:-translate-y-1 transition-all duration-400 relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-blue to-child-green"></div>
-          <div class="w-12 h-12 bg-gradient-to-br from-child-blue to-child-green rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">1</div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Warm-up (1 min)</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Review 5 target sounds/words.</p>
+        <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-white/20 dark:border-gray-700/20 rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500" style="animation: gradient-rotate 6s linear infinite;"></div>
+          <div class="relative z-10">
+            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">1</div>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Warm-up (1 min)</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Review 5 target sounds/words.</p>
+          </div>
         </div>
 
         <!-- Step 2 -->
-        <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-white/30 dark:border-gray-700/30 shadow-lg rounded-2xl p-6 hover:-translate-y-1 transition-all duration-400 relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-green to-child-pink"></div>
-          <div class="w-12 h-12 bg-gradient-to-br from-child-green to-child-pink rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">2</div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Finger track (2–3 min)</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Child reads; point to each word.</p>
+        <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-white/20 dark:border-gray-700/20 rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 via-yellow-400 to-purple-500 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500" style="animation: gradient-rotate 6s linear infinite;"></div>
+          <div class="relative z-10">
+            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-yellow-400 rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">2</div>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Finger Track (2–3 min)</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Child reads while pointing to each word.</p>
+          </div>
         </div>
 
         <!-- Step 3 -->
-        <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-white/30 dark:border-gray-700/30 shadow-lg rounded-2xl p-6 hover:-translate-y-1 transition-all duration-400 relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-pink to-child-purple"></div>
-          <div class="w-12 h-12 bg-gradient-to-br from-child-pink to-child-purple rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">3</div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Reread (1–2 min)</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Same page; focus on phrasing.</p>
+        <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-white/20 dark:border-gray-700/20 rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-yellow-400 via-purple-500 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500" style="animation: gradient-rotate 6s linear infinite;"></div>
+          <div class="relative z-10">
+            <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-purple-500 rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">3</div>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Reread (1–2 min)</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Same page; focus on smooth phrasing.</p>
+          </div>
         </div>
 
         <!-- Step 4 -->
-        <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-white/30 dark:border-gray-700/30 shadow-lg rounded-2xl p-6 hover:-translate-y-1 transition-all duration-400 relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-purple to-child-yellow"></div>
-          <div class="w-12 h-12 bg-gradient-to-br from-child-purple to-child-yellow rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">4</div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Talk time (1–2 min)</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Answer 1 'why/how' using the picture.</p>
+        <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-white/20 dark:border-gray-700/20 rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500" style="animation: gradient-rotate 6s linear infinite;"></div>
+          <div class="relative z-10">
+            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">4</div>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Talk Time (1–2 min)</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Discuss the story with 'why/how' questions.</p>
+          </div>
         </div>
 
         <!-- Step 5 -->
-        <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border border-white/30 dark:border-gray-700/30 shadow-lg rounded-2xl p-6 hover:-translate-y-1 transition-all duration-400 relative overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-child-yellow to-child-blue"></div>
-          <div class="w-12 h-12 bg-gradient-to-br from-child-yellow to-child-blue rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">5</div>
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Celebrate (10 sec)</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Sticker on tracker; pick tomorrow's page.</p>
+        <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-white/20 dark:border-gray-700/20 rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-yellow-400 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500" style="animation: gradient-rotate 6s linear infinite;"></div>
+          <div class="relative z-10">
+            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-yellow-400 rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-5 shadow-lg">5</div>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Celebrate! (10 sec)</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Add a sticker to the tracker and celebrate!</p>
+          </div>
         </div>
+      </div>
+      
+      <!-- CTA -->
+      <div class="text-center mt-16">
+        <button class="group relative bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-purple-400/30 dark:shadow-purple-800/40 overflow-hidden">
+          <span class="relative z-10 flex items-center justify-center gap-2">
+            Get Started with Our Reading Kit
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </span>
+          <span class="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+        </button>
       </div>
     </div>
   </section>
 
   <!-- For Classrooms Section -->
-  <section class="classroom-section py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-24 relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-1/4 -right-1/4 w-[800px] h-[800px] bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-full animate-float-slow"></div>
+      <div class="absolute -bottom-1/4 -left-1/4 w-[800px] h-[800px] bg-gradient-to-tr from-yellow-500/5 to-pink-500/5 rounded-full animate-float"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Section Header -->
       <div class="text-center mb-16">
-        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">FOR CLASSROOMS</p>
-        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8">Easy to manage in class</h2>
+        <div class="inline-flex items-center justify-center gap-2 mb-4">
+          <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+          <span class="text-xs font-semibold tracking-wider text-purple-600 dark:text-purple-400">FOR CLASSROOMS</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
+        </div>
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          Easy to <span class="relative">
+            <span class="relative z-10">Manage</span>
+            <span class="absolute bottom-1.5 left-0 w-full h-2.5 bg-yellow-200/60 dark:bg-yellow-900/40 -rotate-1 -z-0"></span>
+          </span> in Class
+        </h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Designed for busy teachers with small-group rotations in mind</p>
       </div>
 
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <!-- Left Content -->
-        <div>
+        <div class="space-y-5">
           <!-- Feature 1 -->
-          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/20 rounded-2xl p-6 mb-5 hover:translate-x-1 transition-all duration-300 relative">
-            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-16 bg-gradient-to-b from-child-green to-child-blue rounded-r-full"></div>
-            <div class="flex items-start ml-6">
-              <div class="w-3 h-3 bg-gradient-to-br from-child-green to-child-blue rounded-full mr-3 mt-1 flex-shrink-0"></div>
+          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-white/20 dark:border-gray-700/20 rounded-2xl p-6 hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden group">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500" style="animation: gradient-rotate 6s linear infinite;"></div>
+            <div class="relative z-10 flex items-start">
+              <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white font-bold text-lg mr-4 mt-0.5 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+              </div>
               <div>
-                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Colour-coded levels & book ID for tracking</h3>
+                <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Color-Coded Levels & Tracking</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">Easy identification with our intuitive color-coded system and unique book IDs</p>
               </div>
             </div>
           </div>
 
           <!-- Feature 2 -->
-          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/20 rounded-2xl p-6 mb-5 hover:translate-x-1 transition-all duration-300 relative">
-            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-16 bg-gradient-to-b from-child-pink to-child-purple rounded-r-full"></div>
-            <div class="flex items-start ml-6">
-              <div class="w-3 h-3 bg-gradient-to-br from-child-pink to-child-purple rounded-full mr-3 mt-1 flex-shrink-0"></div>
+          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-white/20 dark:border-gray-700/20 rounded-2xl p-6 hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden group">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 via-yellow-400 to-purple-500 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500" style="animation: gradient-rotate 6s linear infinite;"></div>
+            <div class="relative z-10 flex items-start">
+              <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-yellow-400 rounded-xl flex items-center justify-center text-white font-bold text-lg mr-4 mt-0.5 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </div>
               <div>
-                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Small-group rotation (5–8 mins/child) + whisper phones (optional)</h3>
+                <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Small-Group Rotation Ready</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">Perfect for 5–8 minute rotations, with optional whisper phones for focused reading</p>
               </div>
             </div>
           </div>
 
           <!-- Feature 3 -->
-          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/20 rounded-2xl p-6 mb-5 hover:translate-x-1 transition-all duration-300 relative">
-            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-16 bg-gradient-to-b from-child-purple to-child-yellow rounded-r-full"></div>
-            <div class="flex items-start ml-6">
-              <div class="w-3 h-3 bg-gradient-to-br from-child-purple to-child-yellow rounded-full mr-3 mt-1 flex-shrink-0"></div>
+          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-white/20 dark:border-gray-700/20 rounded-2xl p-6 hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden group">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-yellow-400 via-purple-500 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500" style="animation: gradient-rotate 6s linear infinite;"></div>
+            <div class="relative z-10 flex items-start">
+              <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-purple-500 rounded-xl flex items-center justify-center text-white font-bold text-lg mr-4 mt-0.5 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                </svg>
+              </div>
               <div>
-                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Take-home packs with simple note to parents</h3>
+                <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Take-Home Packs</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">Complete with simple parent notes to continue learning at home</p>
               </div>
             </div>
           </div>
 
           <!-- Feature 4 -->
-          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/20 rounded-2xl p-6 mb-8 hover:translate-x-1 transition-all duration-300 relative">
-            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-16 bg-gradient-to-b from-child-yellow to-child-green rounded-r-full"></div>
-            <div class="flex items-start ml-6">
-              <div class="w-3 h-3 bg-gradient-to-br from-child-yellow to-child-green rounded-full mr-3 mt-1 flex-shrink-0"></div>
+          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border-2 border-white/20 dark:border-gray-700/20 rounded-2xl p-6 hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden group">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500" style="animation: gradient-rotate 6s linear infinite;"></div>
+            <div class="relative z-10 flex items-start">
+              <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white font-bold text-lg mr-4 mt-0.5 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+              </div>
               <div>
-                <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Term inventory sheet + replacements for wear-and-tear</h3>
+                <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Teacher Resources</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">Term inventory sheet and replacement options for wear-and-tear</p>
               </div>
             </div>
           </div>
 
           <!-- Action Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4">
-            <button class="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold px-7 py-4 rounded-2xl hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-              Get Classroom
+          <div class="flex flex-col sm:flex-row gap-4 pt-4">
+            <button class="group relative bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold px-7 py-4 rounded-2xl transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-purple-400/30 dark:shadow-purple-800/40 overflow-hidden">
+              <span class="relative z-10 flex items-center justify-center gap-2">
+                Get Classroom Kit
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </span>
+              <span class="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </button>
-            <button class="bg-white/90 dark:bg-gray-800/90 text-yellow-800 dark:text-yellow-200 border-2 border-yellow-700/30 dark:border-yellow-600/30 font-semibold px-7 py-4 rounded-2xl hover:bg-white dark:hover:bg-gray-700 hover:border-yellow-700/50 dark:hover:border-yellow-600/50 hover:-translate-y-1 transition-all duration-300 backdrop-blur-sm">
-              Download
+            <button class="group relative bg-white/90 dark:bg-gray-800/90 text-purple-600 dark:text-purple-300 border-2 border-purple-500/30 dark:border-purple-400/30 font-semibold px-7 py-4 rounded-2xl hover:bg-purple-50 dark:hover:bg-gray-700 hover:border-purple-500/50 dark:hover:border-purple-400/50 transition-all duration-300 transform hover:-translate-y-0.5 backdrop-blur-sm">
+              <span class="relative z-10 flex items-center justify-center gap-2">
+                Download Brochure
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+              </span>
             </button>
           </div>
         </div>
 
         <!-- Right Visual -->
         <div class="relative">
-          <div class="bg-gradient-to-br from-child-yellow to-yellow-600 rounded-3xl p-16 text-center relative overflow-hidden shadow-2xl">
+          <div class="bg-gradient-to-br from-purple-600 to-pink-500 rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden shadow-2xl">
             <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-3xl"></div>
             
             <div class="relative z-10">
               <div class="w-24 h-24 bg-white/30 rounded-2xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm">
                 <div class="w-16 h-16 bg-white/40 rounded-xl flex items-center justify-center">
-                  <div class="w-8 h-8 bg-child-pink rounded-lg"></div>
+                  <div class="w-10 h-10 bg-yellow-300 rounded-lg flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  </div>
                 </div>
               </div>
-              <p class="text-white/90 font-medium text-lg mb-2">Classroom storage box / rotation photo</p>
+              <h3 class="text-2xl font-bold text-white mb-3">Classroom Organization</h3>
+              <p class="text-white/90 mb-6 max-w-md mx-auto">Our color-coded system makes it easy to organize and track student progress throughout the year.</p>
+              <div class="flex justify-center gap-3">
+                <span class="inline-block w-4 h-4 rounded-full bg-purple-300"></span>
+                <span class="inline-block w-4 h-4 rounded-full bg-pink-300"></span>
+                <span class="inline-block w-4 h-4 rounded-full bg-yellow-300"></span>
+                <span class="inline-block w-4 h-4 rounded-full bg-white/30"></span>
+              </div>
             </div>
             
             <!-- Decorative elements -->
-            <div class="absolute top-6 left-6 w-3 h-3 bg-white/30 rounded-full"></div>
-            <div class="absolute top-10 right-8 w-2 h-2 bg-white/25 rounded-full"></div>
-            <div class="absolute bottom-8 left-10 w-4 h-4 bg-white/30 rounded-full"></div>
-            <div class="absolute bottom-6 right-6 w-2 h-2 bg-white/25 rounded-full"></div>
+            <div class="absolute top-6 left-6 w-4 h-4 bg-white/30 rounded-full animate-pulse"></div>
+            <div class="absolute top-10 right-8 w-2 h-2 bg-yellow-200/80 rounded-full"></div>
+            <div class="absolute bottom-8 left-10 w-5 h-5 bg-white/30 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+            <div class="absolute bottom-6 right-6 w-3 h-3 bg-pink-200/80 rounded-full"></div>
           </div>
         </div>
       </div>
@@ -1266,155 +1461,374 @@ x-init="
   </section>
 
   <!-- Phonics-Aligned Sequence Section -->
-  <section class="phonics-section py-32">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Section Header -->
-      <div class="text-center mb-16">
-        <p class="text-child-yellow font-semibold text-lg tracking-wider uppercase mb-4">PHONICS-ALIGNED SEQUENCE</p>
-        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8">Scope & sequence (quick view)</h2>
+  <section class="relative py-24 overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/30 dark:to-pink-900/20"></div>
+      <!-- Floating gradient circles -->
+      <div class="absolute top-1/4 -left-20 w-96 h-96 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 dark:opacity-10 animate-float-slow"></div>
+      <div class="absolute top-1/2 -right-20 w-96 h-96 bg-gradient-to-r from-yellow-200 to-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 dark:opacity-10 animate-float-medium"></div>
+      <div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-purple-200 to-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 dark:opacity-5 animate-float-slow"></div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <!-- Section Header with decorative elements -->
+      <div class="text-center mb-16 relative">
+        <div class="flex items-center justify-center mb-6">
+          <span class="w-3 h-3 rounded-full bg-purple-400 mr-2"></span>
+          <span class="w-2 h-2 rounded-full bg-pink-400 mr-2"></span>
+          <span class="w-1 h-1 rounded-full bg-yellow-400"></span>
+        </div>
+        <p class="text-purple-600 dark:text-purple-300 font-semibold text-lg tracking-wider uppercase mb-4">PHONICS-ALIGNED SEQUENCE</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Scope & Sequence</h2>
+        <div class="w-24 h-1.5 bg-gradient-to-r from-yellow-400 to-pink-500 mx-auto rounded-full mb-8"></div>
+        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          Our carefully structured progression builds reading skills systematically, from first sounds to fluent reading.
+        </p>
       </div>
 
-      <!-- Phonics Table -->
-      <div class="phonics-table">
+      <!-- Modern Card Layout -->
+      <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden border border-white/30 dark:border-gray-700/30">
         <!-- Table Header -->
-        <div class="grid grid-cols-2 table-header">
+        <div class="grid grid-cols-2 bg-gradient-to-r from-purple-600 to-pink-500 text-white p-6">
           <div class="relative z-10">
-            <h3 class="text-xl font-bold">Level</h3>
+            <h3 class="text-lg font-bold flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+              </svg>
+              Level
+            </h3>
           </div>
           <div class="relative z-10">
-            <h3 class="text-xl font-bold">Focus / Patterns</h3>
+            <h3 class="text-lg font-bold flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385V4.804zM11 4.804A7.968 7.968 0 0114.5 4c1.255 0 2.443.29 3.5.804v10A7.969 7.969 0 0014.5 14c-1.669 0-3.218.51-4.5 1.385V4.804z" />
+              </svg>
+              Focus / Patterns
+            </h3>
           </div>
         </div>
 
         <!-- Table Rows -->
-        <div class="table-row grid grid-cols-2 gap-8 items-center">
-          <div>
-            <div class="level-badge">Level A (Pre-CVC)</div>
+        <div class="divide-y divide-gray-100 dark:divide-gray-700/50">
+          <!-- Level A -->
+          <div class="group grid grid-cols-2 gap-6 p-6 hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition-colors duration-300 relative">
+            <div class="relative">
+              <div class="absolute -left-3 top-0 h-full w-1 bg-gradient-to-b from-purple-400 to-pink-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="level-badge group-hover:scale-105 transition-transform duration-300">
+                <span class="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Level A</span>
+                <span class="text-gray-400">(Pre-CVC)</span>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <p class="text-gray-600 dark:text-gray-300 font-mono text-sm md:text-base">
+                <span class="text-purple-500 dark:text-purple-300 font-medium">s a t p i n</span> | 
+                <span class="text-pink-500 dark:text-pink-300 font-medium">m d g o c k</span> | 
+                <span class="text-yellow-500 dark:text-yellow-300 font-medium">e u r h b f l</span>
+              </p>
+            </div>
           </div>
-          <div>
-            <p class="text-gray-600 dark:text-gray-300 font-mono text-sm">s a t p i n | m d g o c k | e u r h ...</p>
-          </div>
-        </div>
 
-        <div class="table-row grid grid-cols-2 gap-8 items-center">
-          <div>
-            <div class="level-badge" style="background: linear-gradient(135deg, #10B981, #EC4899);">Level B (CVC)</div>
+          <!-- Level B -->
+          <div class="group grid grid-cols-2 gap-6 p-6 hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition-colors duration-300 relative">
+            <div class="relative">
+              <div class="absolute -left-3 top-0 h-full w-1 bg-gradient-to-b from-pink-400 to-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="level-badge group-hover:scale-105 transition-transform duration-300" style="background: linear-gradient(135deg, #EC4899, #F59E0B);">
+                Level B (CVC)
+              </div>
+            </div>
+            <div class="flex items-center">
+              <p class="text-sm text-gray-600 dark:text-gray-300">
+                CVC word families 
+                <span class="text-purple-500 dark:text-purple-300 font-medium">(at, an, ap)</span>, 
+                <span class="text-pink-500 dark:text-pink-300 font-medium">(it, in, ip)</span>, 
+                <span class="text-yellow-500 dark:text-yellow-300 font-medium">(ot, og, op)</span>
+              </p>
+            </div>
           </div>
-          <div>
-            <p class="text-gray-600 dark:text-gray-300">CVC families (at, an, ap, it, in...), no tricky spellings</p>
-          </div>
-        </div>
 
-        <div class="table-row grid grid-cols-2 gap-8 items-center">
-          <div>
-            <div class="level-badge" style="background: linear-gradient(135deg, #EC4899, #A855F7);">Level C (Sentences)</div>
+          <!-- Level C -->
+          <div class="group grid grid-cols-2 gap-6 p-6 hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition-colors duration-300 relative">
+            <div class="relative">
+              <div class="absolute -left-3 top-0 h-full w-1 bg-gradient-to-b from-yellow-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="level-badge group-hover:scale-105 transition-transform duration-300" style="background: linear-gradient(135deg, #F59E0B, #8B5CF6);">
+                Level C (Sentences)
+              </div>
+            </div>
+            <div class="flex items-center">
+              <p class="text-sm text-gray-600 dark:text-gray-300">
+                Consonant blends 
+                <span class="text-purple-400 dark:text-purple-300">(bl, st)</span>, 
+                digraphs 
+                <span class="text-pink-400 dark:text-pink-300">(sh, ch, th, ng)</span>, 
+                and simple punctuation
+              </p>
+            </div>
           </div>
-          <div>
-            <p class="text-gray-600 dark:text-gray-300">bl, st, sh, ch, th, ng; simple punctuation</p>
-          </div>
-        </div>
 
-        <div class="table-row grid grid-cols-2 gap-8 items-center">
-          <div>
-            <div class="level-badge" style="background: linear-gradient(135deg, #A855F7, #F6C548);">Level D (Short stories)</div>
-          </div>
-          <div>
-            <p class="text-gray-600 dark:text-gray-300">Multisyllable beginnings; high-frequency words; 'why/how' prompts</p>
+          <!-- Level D -->
+          <div class="group grid grid-cols-2 gap-6 p-6 hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition-colors duration-300 relative">
+            <div class="relative">
+              <div class="absolute -left-3 top-0 h-full w-1 bg-gradient-to-b from-purple-400 via-pink-400 to-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="level-badge group-hover:scale-105 transition-transform duration-300" style="background: linear-gradient(135deg, #8B5CF6, #EC4899, #F59E0B);">
+                Level D (Short Stories)
+              </div>
+            </div>
+            <div class="flex items-center">
+              <p class="text-sm text-gray-600 dark:text-gray-300">
+                <span class="text-purple-400 dark:text-purple-300">Multisyllable words</span>, 
+                <span class="text-pink-400 dark:text-pink-300">high-frequency words</span>, 
+                <span class="text-yellow-500 dark:text-yellow-300">comprehension questions</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
       
-      <!-- PDF Button -->
-      <div class="mt-12 text-center">
-        <a href="#" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-full text-white bg-gradient-to-r from-child-purple to-child-pink hover:from-child-pink hover:to-child-purple shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          See Scope and Sequence (PDF)
+      <!-- CTA Button -->
+      <div class="mt-16 text-center relative z-10">
+        <a href="#" class="inline-flex items-center justify-center px-8 py-4 border-0 text-base font-medium rounded-full text-white bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-500 hover:from-yellow-500 hover:via-pink-500 hover:to-purple-600 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 hover:scale-105 group">
+          <span class="relative z-10 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 group-hover:animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Download Full Scope & Sequence (PDF)
+          </span>
+          <span class="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
         </a>
+        <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+          Perfect for teachers and homeschooling parents
+        </p>
       </div>
     </div>
   </section>
 
   <!-- Delivery & Returns Section -->
-  <section class="delivery-section py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">DELIVERY & RETURNS</h2>
-        <div class="h-1 w-20 bg-gradient-to-r from-child-purple to-child-pink mx-auto rounded-full"></div>
+  <section class="relative py-24 overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-yellow-50 dark:from-gray-900 dark:to-purple-900/20"></div>
+      <!-- Floating gradient shapes -->
+      <div class="absolute top-1/4 -right-20 w-96 h-96 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 dark:opacity-10 animate-float-slow"></div>
+      <div class="absolute bottom-1/4 -left-20 w-80 h-80 bg-gradient-to-r from-yellow-200 to-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 dark:opacity-10 animate-float-medium"></div>
+      <div class="absolute top-3/4 left-1/3 w-64 h-64 bg-gradient-to-r from-purple-200 to-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 dark:opacity-5 animate-float-slow"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <!-- Section Header -->
+      <div class="text-center mb-16 relative">
+        <div class="flex items-center justify-center mb-6">
+          <span class="w-3 h-3 rounded-full bg-purple-400 mr-2"></span>
+          <span class="w-2 h-2 rounded-full bg-pink-400 mr-2"></span>
+          <span class="w-1 h-1 rounded-full bg-yellow-400"></span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Delivery & Returns</h2>
+        <div class="w-24 h-1.5 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 mx-auto rounded-full mb-6"></div>
+        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          Fast, reliable delivery and hassle-free returns across India
+        </p>
       </div>
       
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+      <!-- Feature Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
         <!-- Shipping & Returns -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-          <div class="w-12 h-12 bg-gradient-to-r from-child-purple to-child-pink rounded-lg flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
-            </svg>
+        <div class="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-white/30 dark:border-gray-700/30">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-100 blur transition duration-300"></div>
+          <div class="relative h-full">
+            <div class="w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Nationwide Shipping</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-pink-100 dark:bg-pink-900/50 text-pink-600 dark:text-pink-400 flex items-center justify-center mr-3 mt-0.5">
+                  <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <span class="text-sm text-gray-600 dark:text-gray-300">Pan-India delivery</span>
+              </li>
+              <li class="flex items-start">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-pink-100 dark:bg-pink-900/50 text-pink-600 dark:text-pink-400 flex items-center justify-center mr-3 mt-0.5">
+                  <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <span class="text-sm text-gray-600 dark:text-gray-300">3–7 working days</span>
+              </li>
+              <li class="flex items-start">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-pink-100 dark:bg-pink-900/50 text-pink-600 dark:text-pink-400 flex items-center justify-center mr-3 mt-0.5">
+                  <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+                <span class="text-sm text-gray-600 dark:text-gray-300">Real-time tracking</span>
+              </li>
+            </ul>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Shipping & returns (India)</h3>
-          <ul class="text-gray-600 dark:text-gray-300 space-y-1 text-sm">
-            <li class="flex items-start">
-              <span class="text-child-pink mr-2">•</span>
-              <span>Pan-India delivery</span>
-            </li>
-            <li class="flex items-start">
-              <span class="text-child-pink mr-2">•</span>
-              <span>Tracking provided; typically 3–7 working days</span>
-            </li>
-          </ul>
         </div>
 
         <!-- Payment -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-          <div class="w-12 h-12 bg-gradient-to-r from-child-blue to-child-green rounded-lg flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-            </svg>
+        <div class="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-white/30 dark:border-gray-700/30">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-yellow-400 rounded-2xl opacity-0 group-hover:opacity-100 blur transition duration-300"></div>
+          <div class="relative h-full">
+            <div class="w-14 h-14 bg-gradient-to-r from-pink-500 to-yellow-400 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Secure Payment</h3>
+            <div class="space-y-3">
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mr-3">
+                  <span class="text-purple-600 dark:text-purple-400 text-[10px] font-bold">UPI</span>
+                </div>
+                <span class="text-sm text-gray-600 dark:text-gray-300">UPI Payments</span>
+              </div>
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded-lg bg-pink-100 dark:bg-pink-900/50 flex items-center justify-center mr-3">
+                  <span class="text-pink-600 dark:text-pink-400 text-[10px] font-bold">CC</span>
+                </div>
+                <span class="text-sm text-gray-600 dark:text-gray-300">Credit/Debit Cards</span>
+              </div>
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded-lg bg-yellow-100 dark:bg-yellow-900/50 flex items-center justify-center mr-3">
+                  <span class="text-yellow-600 dark:text-yellow-400 text-[10px] font-bold">NB</span>
+                </div>
+                <span class="text-sm text-gray-600 dark:text-gray-300">Net Banking</span>
+              </div>
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center mr-3">
+                  <span class="text-gray-600 dark:text-gray-400 text-[10px] font-bold">COD</span>
+                </div>
+                <span class="text-sm text-gray-600 dark:text-gray-300">Cash on Delivery (Optional)</span>
+              </div>
+            </div>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Payment</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-sm">UPI / cards / netbanking (COD optional)</p>
         </div>
 
         <!-- Returns -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-          <div class="w-12 h-12 bg-gradient-to-r from-child-yellow to-amber-500 rounded-lg flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
+        <div class="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-white/30 dark:border-gray-700/30">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-yellow-400 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-100 blur transition duration-300"></div>
+          <div class="relative h-full">
+            <div class="w-14 h-14 bg-gradient-to-r from-yellow-400 to-pink-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Easy Returns</h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center mr-3 mt-0.5">
+                  <span class="text-yellow-600 dark:text-yellow-400 text-xs font-bold">7</span>
+                </div>
+                <div>
+                  <h4 class="text-sm font-medium text-gray-900 dark:text-white">7-Day Returns</h4>
+                  <p class="text-xs text-gray-600 dark:text-gray-400">Easy returns on unopened packs</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center mr-3 mt-0.5">
+                  <svg class="w-5 h-5 text-pink-600 dark:text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-medium text-gray-900 dark:text-white">Damage Protection</h4>
+                  <p class="text-xs text-gray-600 dark:text-gray-400">Free replacements for damaged items</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Returns</h3>
-          <ul class="text-gray-600 dark:text-gray-300 space-y-1 text-sm">
-            <li class="flex items-start">
-              <span class="text-amber-500 mr-2">•</span>
-              <span>7-day easy returns on unopened packs</span>
-            </li>
-            <li class="flex items-start">
-              <span class="text-amber-500 mr-2">•</span>
-              <span>Replacements for damaged copies</span>
-            </li>
-          </ul>
         </div>
 
         <!-- Support -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-          <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <div class="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-white/30 dark:border-gray-700/30">
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 rounded-2xl opacity-0 group-hover:opacity-100 blur transition duration-300"></div>
+          <div class="relative h-full flex flex-col">
+            <div class="w-14 h-14 bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">24/7 Support</h3>
+            <div class="flex-1 space-y-4">
+              <p class="text-sm text-gray-600 dark:text-gray-300">We're here to help with any questions about your order or our products.</p>
+              <div class="space-y-2 mt-4">
+                <a href="#" class="flex items-center text-purple-600 hover:text-purple-800 dark:text-purple-400 dark:hover:text-purple-300 transition-colors">
+                  <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
+                  </svg>
+                  FAQ Center
+                </a>
+                <a href="#" class="flex items-center text-pink-600 hover:text-pink-800 dark:text-pink-400 dark:hover:text-pink-300 transition-colors">
+                  <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
+                  </svg>
+                  Shipping Policy
+                </a>
+                <a href="#" class="flex items-center text-yellow-600 hover:text-yellow-800 dark:text-yellow-400 dark:hover:text-yellow-300 transition-colors">
+                  <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
+                  </svg>
+                  Returns & Refunds
+                </a>
+              </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
+              <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Need help? Contact us:</p>
+              <div class="flex space-x-3">
+                <a href="#" class="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center text-purple-600 hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15h-1v-6h1v6zm-1-7.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5S11.33 12 10.5 12 9 11.33 9 10.5z" />
+                  </svg>
+                </a>
+                <a href="#" class="w-8 h-8 rounded-full bg-pink-100 dark:bg-pink-900/50 flex items-center justify-center text-pink-600 hover:bg-pink-200 dark:hover:bg-pink-800 transition-colors">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                  </svg>
+                </a>
+                <a href="#" class="w-8 h-8 rounded-full bg-yellow-100 dark:bg-yellow-900/50 flex items-center justify-center text-yellow-600 hover:bg-yellow-200 dark:hover:bg-yellow-800 transition-colors">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust Badges -->
+      <div class="mt-16 flex flex-wrap items-center justify-center gap-6 md:gap-12">
+        <div class="flex items-center">
+          <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mr-3">
+            <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Support</h3>
-          <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">WhatsApp/phone/email for quick help</p>
-          <div class="pt-2 border-t border-gray-100 dark:border-gray-700">
-            <a href="#" class="text-sm font-medium text-child-purple hover:text-child-pink transition-colors">
-              Shipping & Returns Policy
-            </a>
-            <span class="mx-2 text-gray-300">•</span>
-            <a href="#" class="text-sm font-medium text-child-purple hover:text-child-pink transition-colors">
-              Refunds
-            </a>
+          <span class="text-sm text-gray-700 dark:text-gray-300">100% Secure Payments</span>
+        </div>
+        <div class="hidden md:block w-px h-8 bg-gray-200 dark:bg-gray-700"></div>
+        <div class="flex items-center">
+          <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-3">
+            <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
           </div>
+          <span class="text-sm text-gray-700 dark:text-gray-300">Trusted by 10,000+ Parents</span>
+        </div>
+        <div class="hidden md:block w-px h-8 bg-gray-200 dark:bg-gray-700"></div>
+        <div class="flex items-center">
+          <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mr-3">
+            <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+            </svg>
+          </div>
+          <span class="text-sm text-gray-700 dark:text-gray-300">1-Year Quality Guarantee</span>
         </div>
       </div>
     </div>

@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Training - Let's Read India</title>
   
-  <!-- Google Fonts -->
+  <!-- Google Fonts - Comic Neue -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,7 +25,7 @@
             'child-green': '#10B981',
           },
           fontFamily: {
-            poppins: ['Poppins', 'sans-serif'],
+            comic: ['Comic Sans MS', 'Comic Neue', 'Comic Sans', 'cursive', 'sans-serif'],
           },
         }
       }
@@ -36,6 +36,11 @@
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   
   <style>
+    /* Global font family */
+    body {
+      font-family: 'Comic Sans MS', 'Comic Neue', 'Comic Sans', 'cursive', 'sans-serif' !important;
+    }
+    
     :root {
       --background: 0 0% 100%;
       --foreground: 240 10% 3.9%;
@@ -331,97 +336,285 @@
   darkMode: localStorage.getItem('darkMode') === 'true', 
   mobileMenuOpen: false,
   contactOpen: false,
-  topMenuOpen: true
+  topMenuOpen: true,
+  cartOpen: false,
+  name: '',
+  email: '',
+  mobileNum: '',
+  childName: '',
+  message: '',
+  submitted: false
 }"
 x-init="
+  // Initialize dark mode from localStorage
   darkMode = localStorage.getItem('darkMode') === 'true';
   $watch('darkMode', value => {
     localStorage.setItem('darkMode', value);
     document.documentElement.classList.toggle('dark', value);
   });
+  
+  // Initialize dark mode on page load
   if (darkMode) {
     document.documentElement.classList.add('dark');
   }
-">
+"
+class="font-poppins antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200"
+:class="{ 'overflow-hidden': mobileMenuOpen || contactOpen || cartOpen }">
 
-  <!-- Top Bar -->
-  <div x-show="topMenuOpen" x-cloak class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-10 py-2">
-        <div class="flex items-center">
-          <span class="text-xs sm:text-sm">🎁 Free Reading Age Check for your child/class — Book a 10-min call</span>
+<!-- Top Bar -->
+<div x-show="topMenuOpen" x-cloak class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-10 py-2">
+      <div class="flex items-center">
+        <span class="text-xs sm:text-sm">🎁 Free Reading Age Check for your child/class — Book a 10-min call</span>
+      </div>
+      <button
+        class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium px-3 py-1 rounded-full text-xs transition-colors">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Navigation -->
+<nav class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50 dark:border-b dark:border-gray-700">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <a href="index.html" class="flex-shrink-0">
+        <img src="./public/lets%20read%20logo.png" alt="Let's Read Logo" class="h-10 w-auto">
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-1">
+        <!-- About Dropdown -->
+        <div class="relative group" x-data="{ open: false }">
+          <button @click="open = !open" 
+                  class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 flex items-center transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md"
+                  :class="{ 'text-purple-600 dark:text-purple-400': open }">
+            About
+            <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10" x-cloak>
+            <div class="py-1" role="menu" aria-orientation="vertical">
+              <a href="about.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">About (main page)</a>
+              <a href="community.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Community</a>
+              <a href="careers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Careers</a>
+              <a href="mediakits.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Media Kits</a>
+            </div>
+          </div>
         </div>
-        <button class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium px-3 py-1 rounded-full text-xs transition-colors">
-          Book Now
+
+        <!-- Programs / Tools Dropdown -->
+        <div class="relative group" x-data="{ open: false }">
+          <button @click="open = !open" 
+                  class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 flex items-center transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md"
+                  :class="{ 'text-purple-600 dark:text-purple-400': open }">
+            Programs / Tools
+            <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10" x-cloak>
+            <div class="py-1" role="menu" aria-orientation="vertical">
+              <a href="diagnostic.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Reading Diagnostic</a>
+              <a href="decodable.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Decodable</a>
+              <a href="readiness-quiz.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Readiness Quiz</a>
+              <a href="training.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Training</a>
+              <a href="demo.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resources Dropdown -->
+        <div class="relative group" x-data="{ open: false }">
+          <button @click="open = !open" 
+                  class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 flex items-center transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md"
+                  :class="{ 'text-purple-600 dark:text-purple-400': open }">
+            Resources
+            <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-50" x-show="open" @click.away="open = false" x-cloak>
+              <div class="py-1">
+                <a href="resources.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Resources</a>
+                <a href="training.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Training</a>
+                <a href="community.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Community</a>
+                <a href="partner.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Partner Deck</a>
+                <a href="support.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Support</a>
+                <a href="utility.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Utility</a>
+              </div>
+            </div>
+        </div>
+
+        <!-- Products Dropdown -->
+        <div class="relative group" x-data="{ open: false }">
+          <button @click="open = !open" 
+                  class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 flex items-center transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md"
+                  :class="{ 'text-purple-600 dark:text-purple-400': open }">
+            Products
+            <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10" x-cloak>
+            <div class="py-1" role="menu" aria-orientation="vertical">
+              <a href="products.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Products (main page)</a>
+              <a href="bulkorders.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Bulk Orders</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <a href="#" @click.prevent="contactOpen = true"
+          class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md">
+          Contact
+        </a>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="hidden md:flex items-center space-x-3">
+        <a href="parents.html"
+          class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800">I'm
+          a Parent</a>
+        <a href="schools.html"
+          class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700">I'm
+          a School</a>
+        <button @click="darkMode = !darkMode"
+          class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
+          :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+          <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </button>
+        <button @click="$store.cart.open()"
+          class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 relative"
+          :aria-label="'View Cart'">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          <span x-show="$store.cart.count > 0" 
+                class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center"
+                x-text="$store.cart.count">
+          </span>
+        </button>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button @click="mobileMenuOpen = !mobileMenuOpen"
+          class="p-2 rounded-md text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
+          <svg class="h-6 w-6" :class="{ 'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg class="h-6 w-6" :class="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Main Navigation -->
-  <nav class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50 dark:border-b dark:border-gray-700">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <!-- Logo -->
-        <a href="index.html" class="flex-shrink-0">
-          <img src="./public/lets%20read%20logo.png" alt="Let's Read Logo" class="h-10 w-auto">
-        </a>
-
-        <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center space-x-1">
-          <a href="about.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">About</a>
-          <a href="diagnostic.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Reading Diagnostic</a>
-          <a href="resources.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Resources</a>
-          <a href="products.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Products</a>
-          <a href="#" class="px-3 py-2 text-sm font-medium text-purple-600 dark:text-purple-400">Training</a>
-          <a href="#" @click.prevent="contactOpen = true" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Contact</a>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="hidden md:flex items-center space-x-3">
-          <button class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800">I'm a Parent</button>
-          <button class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700">I'm a School</button>
-          <button @click="darkMode = !darkMode" class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
-            <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-            <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-          </button>
-        </div>
-
-        <!-- Mobile menu button -->
-        <div class="md:hidden">
-          <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 rounded-md text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
-            <svg class="h-6 w-6" :class="{ 'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <svg class="h-6 w-6" :class="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+  <!-- Mobile menu -->
+  <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden" x-cloak>
+    <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-800">
+      <!-- About Dropdown -->
+      <div class="space-y-1" x-data="{ open: false }">
+        <button @click="open = !open" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+          <span>About</span>
+          <svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div x-show="open" class="pl-4 space-y-1" x-cloak>
+          <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">About (main page)</a>
+          <a href="community.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Community</a>
+          <a href="careers.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Careers</a>
+          <a href="mediakits.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Media Kits</a>
         </div>
       </div>
-    </div>
 
-    <!-- Mobile menu -->
-    <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden" x-cloak>
-      <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-800">
-        <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">About</a>
-        <a href="diagnostic.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Reading Diagnostic</a>
-        <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Resources</a>
-        <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Products</a>
-        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-purple-600 hover:bg-gray-50 dark:text-purple-400 dark:hover:bg-gray-700">Training</a>
-        <a href="#" @click.prevent="contactOpen = true" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Contact</a>
+      <!-- Programs / Tools Dropdown -->
+      <div class="space-y-1" x-data="{ open: false }">
+        <button @click="open = !open" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+          <span>Programs / Tools</span>
+          <svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div x-show="open" class="pl-4 space-y-1" x-cloak>
+          <a href="diagnostic.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Reading Diagnostic</a>
+          <a href="decodable.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Decodable</a>
+          <a href="readiness-quiz.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Readiness Quiz</a>
+          <a href="training.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Training</a>
+          <a href="demo.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Demo</a>
+        </div>
+      </div>
+
+      <!-- Resources Dropdown -->
+      <div class="space-y-1" x-data="{ open: false }">
+        <button @click="open = !open" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-purple-600 hover:bg-gray-50 dark:text-purple-400 dark:hover:bg-gray-700">
+          <span>Resources</span>
+          <svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div x-show="open" class="pl-4 space-y-1" x-cloak>
+          <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-purple-600 hover:bg-gray-50 dark:text-purple-400 dark:hover:bg-gray-700">Resources (main page)</a>
+          <a href="support.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Support</a>
+          <a href="utility.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Utility</a>
+        </div>
+      </div>
+
+      <!-- Products Dropdown -->
+      <div class="space-y-1" x-data="{ open: false }">
+        <button @click="open = !open" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+          <span>Products</span>
+          <svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div x-show="open" class="pl-4 space-y-1" x-cloak>
+          <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Products (main page)</a>
+          <a href="bulkorders.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Bulk Orders</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <a href="#" @click.prevent="contactOpen = true; mobileMenuOpen = false"
+        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Contact</a>
+    </div>
+    <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+      <div class="space-y-1 px-2">
+        <a href="parents.html" class="block w-full text-left px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">I'm a Parent</a>
+        <a href="schools.html" class="block w-full text-left px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">I'm a School</a>
+        <button @click="darkMode = !darkMode"
+          class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+          <span x-text="darkMode ? 'Light Mode' : 'Dark Mode'"></span>
+        </button>
+        <button @click="$store.cart.open()"
+          class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+          View Cart
+        </button>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
+
 
   <!-- Hero Section -->
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
     <!-- Background with childish gradient -->
-    <div class="absolute inset-0 bg-gradient-to-br from-pink-300 via-purple-300 to-blue-300"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-pink-300 via-purple-300 to-blue-300 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300"></div>
     
     <!-- Floating decorative elements -->
     <div class="absolute top-20 left-10 w-16 h-16 bg-yellow-300 rounded-full opacity-60 float-animation"></div>
@@ -435,7 +628,7 @@ x-init="
         
         <!-- Left side - Content -->
         <div class="text-center lg:text-left space-y-8">
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg slide-up">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white dark:text-gray-100 drop-shadow-lg slide-up">
             Let's Read Support
           </h1>
           
@@ -804,17 +997,17 @@ x-init="
     </div>
   </section>
   <!-- Track My Order Section -->
-  <section class="py-20 relative overflow-hidden bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900/20 dark:via-purple-900/20 dark:to-pink-900/20">
+  <section class="py-12 relative overflow-hidden bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900/20 dark:via-purple-900/20 dark:to-pink-900/20">
     <!-- Floating decorative elements -->
-    <div class="absolute top-16 left-16 w-20 h-20 bg-yellow-300/20 rounded-full float-animation"></div>
-    <div class="absolute top-32 right-24 w-14 h-14 bg-blue-300/25 rounded-full float-animation" style="animation-delay: 1.5s;"></div>
-    <div class="absolute bottom-24 left-32 w-16 h-16 bg-pink-300/20 rounded-full float-animation" style="animation-delay: 3s;"></div>
+    <div class="absolute top-8 left-8 w-12 h-12 bg-yellow-300/20 rounded-full float-animation"></div>
+    <div class="absolute top-16 right-16 w-10 h-10 bg-blue-300/25 rounded-full float-animation" style="animation-delay: 1.5s;"></div>
+    <div class="absolute bottom-16 left-16 w-12 h-12 bg-pink-300/20 rounded-full float-animation" style="animation-delay: 3s;"></div>
     
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
-      <div class="text-center mt-6 mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-wide">TRACK MY ORDER</h2>
-        <div class="w-20 h-1 bg-pink-500 mx-auto mb-6 mt-3"></div>
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold uppercase tracking-wide">TRACK MY ORDER</h2>
+        <div class="w-16 h-1 bg-pink-500 mx-auto mb-4 mt-2"></div>
         <div class="flex justify-center items-center space-x-2">
           <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
           <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
@@ -892,7 +1085,7 @@ x-init="
           <!-- Action Buttons -->
           <div class="flex flex-col sm:flex-row gap-4 pt-4">
             <button type="submit" 
-                    class="flex-1 px-8 py-4 bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500 text-white font-bold text-lg rounded-2xl hover:from-yellow-500 hover:via-orange-500 hover:to-pink-600 transition-all duration-300 hover:scale-105 hover:shadow-xl transform">
+                    class="flex-1 px-6 py-3 bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500 text-white font-bold text-base rounded-xl hover:from-yellow-500 hover:via-orange-500 hover:to-pink-600 transition-all duration-300 hover:scale-105 hover:shadow transform">
               <div class="flex items-center justify-center space-x-2">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -915,7 +1108,7 @@ x-init="
         </form>
 
         <!-- Quick Tips -->
-        <div class="mt-8 p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl border border-blue-200/30 dark:border-blue-700/30">
+        <div class="mt-6 p-4 bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl border border-blue-200/30 dark:border-blue-700/30 text-sm">
           <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center">
             <div class="w-6 h-6 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center mr-3">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -945,17 +1138,17 @@ x-init="
   </section>
 
   <!-- Start a return / exchange Section -->
-  <section class="py-20 relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-yellow-900/20">
+  <section class="py-12 relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-yellow-900/20">
     <!-- Floating decorative elements -->
-    <div class="absolute top-20 right-20 w-18 h-18 bg-purple-300/20 rounded-full float-animation"></div>
-    <div class="absolute bottom-32 left-16 w-12 h-12 bg-yellow-300/25 rounded-full float-animation" style="animation-delay: 2s;"></div>
-    <div class="absolute top-40 left-24 w-16 h-16 bg-pink-300/20 rounded-full float-animation" style="animation-delay: 4s;"></div>
+    <div class="absolute top-12 right-12 w-14 h-14 bg-purple-300/20 rounded-full float-animation"></div>
+    <div class="absolute bottom-20 left-12 w-10 h-10 bg-yellow-300/25 rounded-full float-animation" style="animation-delay: 2s;"></div>
+    <div class="absolute top-32 left-16 w-12 h-12 bg-pink-300/20 rounded-full float-animation" style="animation-delay: 4s;"></div>
     
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
-      <div class="text-center mt-6 mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-wide">START A RETURN / EXCHANGE</h2>
-        <div class="w-20 h-1 bg-pink-500 mx-auto mb-6 mt-3"></div>
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold uppercase tracking-wide">START A RETURN / EXCHANGE</h2>
+        <div class="w-16 h-1 bg-pink-500 mx-auto mb-4 mt-2"></div>
         <div class="flex justify-center items-center space-x-2">
           <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
           <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
@@ -982,9 +1175,12 @@ x-init="
         }">
           
           <!-- Reason Selection -->
-          <div class="space-y-4">
-            <label class="block text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-              Reason
+          <div class="space-y-3">
+            <label class="block text-lg font-semibold text-gray-800 dark:text-gray-200">
+              Additional Notes
+              <span class="text-xs font-normal text-gray-500 dark:text-gray-400 block mt-1">
+                Any additional information about your return
+              </span>
             </label>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
@@ -1056,9 +1252,12 @@ x-init="
           </div>
 
           <!-- Upload Photos Section -->
-          <div class="space-y-4">
-            <label class="block text-xl font-semibold text-gray-800 dark:text-gray-200">
-              Upload photos (optional)
+          <div class="space-y-3">
+            <label class="block text-lg font-semibold text-gray-800 dark:text-gray-200">
+              Upload Photos (Optional)
+              <span class="text-xs font-normal text-gray-500 dark:text-gray-400 block mt-1">
+                Max 5 photos (JPG/PNG, 5MB each)
+              </span>
             </label>
             <div class="relative">
               <input type="file" 
@@ -1075,12 +1274,12 @@ x-init="
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <div>
+                  <div class="flex items-start">
                     <p class="text-lg font-medium text-gray-800 dark:text-gray-200">Choose Files</p>
                     <p class="text-sm text-gray-600 dark:text-gray-400" x-text="fileName || 'No file chosen'"></p>
                   </div>
+                  <div class="text-blue-600 dark:text-blue-400 font-medium">Browse</div>
                 </div>
-                <div class="text-blue-600 dark:text-blue-400 font-medium">Browse</div>
               </label>
             </div>
           </div>
@@ -1088,7 +1287,7 @@ x-init="
           <!-- Confirmation Checkbox -->
           <div class="flex items-start space-x-4 p-6 bg-gradient-to-r from-yellow-50/50 to-pink-50/50 dark:from-yellow-900/20 dark:to-pink-900/20 rounded-2xl border border-yellow-200 dark:border-yellow-700">
             <label class="relative cursor-pointer flex items-start space-x-3 group">
-              <input type="checkbox" x-model="confirmChecked" class="sr-only">
+              <input type="checkbox" x-model="confirmChecked" class="w-4 h-4 mt-1 text-purple-600 rounded border-gray-300 focus:ring-purple-500">
               <div class="w-6 h-6 mt-0.5 rounded-lg border-2 flex items-center justify-center transition-all duration-300"
                    :class="confirmChecked ? 'bg-gradient-to-r from-green-400 to-blue-500 border-green-400' : 'border-gray-300 dark:border-gray-500 bg-white dark:bg-gray-700'">
                 <svg x-show="confirmChecked" class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1102,28 +1301,28 @@ x-init="
           </div>
 
           <!-- Action Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <div class="flex flex-col sm:flex-row gap-3 pt-3">
             <button type="submit" 
                     :disabled="!selectedReason || !confirmChecked"
                     :class="selectedReason && confirmChecked ? 
-                      'bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-white hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 hover:scale-105 hover:shadow-xl cursor-pointer' : 
-                      'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'"
-                    class="flex-1 px-8 py-4 font-bold text-lg rounded-2xl transition-all duration-300 transform">
-              <div class="flex items-center justify-center space-x-2">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                <span>Start Return</span>
-              </div>
+                      'bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-white hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 hover:scale-105 hover:shadow cursor-pointer' : 
+                      'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed',
+                    'flex-1 px-4 py-2.5 font-medium text-base rounded-xl transition-all duration-300 flex items-center justify-center space-x-2'
+                    ">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Submit Request</span>
             </button>
             
             <button type="button" 
-                    class="flex-1 px-8 py-4 bg-gradient-to-r from-yellow-100 to-orange-100 dark:from-yellow-800/30 dark:to-orange-800/30 border-2 border-yellow-300 dark:border-yellow-600 text-yellow-700 dark:text-yellow-300 font-bold text-lg rounded-2xl hover:bg-gradient-to-r hover:from-yellow-200 hover:to-orange-200 dark:hover:from-yellow-700/40 dark:hover:to-orange-700/40 transition-all duration-300 hover:scale-105">
+                    @click="window.location.href='support.html'"
+                    class="flex-1 px-4 py-2.5 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800/30 dark:to-gray-700/30 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium text-base rounded-xl hover:bg-gradient-to-r hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-700/40 dark:hover:to-gray-600/40 transition-all duration-300 hover:scale-105">
               <div class="flex items-center justify-center space-x-2">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
-                <span>Read full policy</span>
+                <span>Cancel</span>
               </div>
             </button>
           </div>
@@ -1131,7 +1330,7 @@ x-init="
         </form>
 
         <!-- Quick Info -->
-        <div class="mt-8 p-6 bg-gradient-to-r from-purple-50/50 to-blue-50/50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-2xl border border-purple-200/30 dark:border-purple-700/30">
+        <div class="mt-6 p-4 bg-gradient-to-r from-purple-50/50 to-blue-50/50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl border border-purple-200/30 dark:border-purple-700/30 text-sm">
           <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center">
             <div class="w-6 h-6 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full flex items-center justify-center mr-3">
               <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1162,10 +1361,10 @@ x-init="
 
     
       <!-- Your Account Section -->
-      <section class="py-20 relative overflow-hidden bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 dark:from-pink-900/20 dark:via-purple-900/20 dark:to-blue-900/20">
+      <section class="py-12 relative overflow-hidden bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 dark:from-pink-900/20 dark:via-purple-900/20 dark:to-blue-900/20">
         <!-- Floating decorative elements -->
-        <div class="absolute top-20 right-24 w-12 h-12 bg-green-300/25 rounded-full float-animation"></div>
-        <div class="absolute bottom-32 left-20 w-18 h-18 bg-yellow-300/20 rounded-full float-animation" style="animation-delay: 3s;"></div>
+        <div class="absolute top-12 right-12 w-10 h-10 bg-green-300/25 rounded-full float-animation"></div>
+        <div class="absolute bottom-20 left-16 w-12 h-12 bg-yellow-300/20 rounded-full float-animation" style="animation-delay: 3s;"></div>
         
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -1173,15 +1372,10 @@ x-init="
           <div class="glass-card rounded-3xl p-8 sm:p-12 shadow-2xl slide-up">
             
             <!-- Header -->
-            <div class="text-center mt-6 mb-8">
-              <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-wide">YOUR ACCOUNT</h2>
-              <div class="w-20 h-1 bg-pink-500 mx-auto mb-6 mt-3"></div>
-              <div class="flex justify-center items-center space-x-2 mb-6">
-                <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
-                <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
-                <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
-              </div>
-              <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <div class="text-center mb-6">
+              <h2 class="text-2xl md:text-3xl font-bold uppercase tracking-wide">YOUR ACCOUNT</h2>
+              <div class="w-16 h-1 bg-pink-500 mx-auto mb-4 mt-2"></div>
+              <p class="text-base text-gray-600 dark:text-gray-300">
                 Sign in to manage your account and orders
               </p>
             </div>
@@ -1190,7 +1384,7 @@ x-init="
             <div class="flex flex-col sm:flex-row gap-4 mb-8" x-data="{ showDemo: false }">
               
               <!-- Sign In Button -->
-              <button class="flex-1 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-lg rounded-2xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+              <button class="flex-1 px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium text-base rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-105 shadow hover:shadow-md">
                 <div class="flex items-center justify-center space-x-2">
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -1200,7 +1394,7 @@ x-init="
               </button>
     
               <!-- Create Account Button -->
-              <button class="flex-1 px-8 py-4 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-800/30 dark:to-purple-800/30 border-2 border-blue-300 dark:border-blue-600 text-blue-700 dark:text-blue-300 font-bold text-lg rounded-2xl hover:bg-gradient-to-r hover:from-blue-200 hover:to-purple-200 dark:hover:from-blue-700/40 dark:hover:to-purple-700/40 transition-all duration-300 hover:scale-105">
+              <button class="flex-1 px-4 py-3 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-800/30 dark:to-purple-800/30 border-2 border-blue-300 dark:border-blue-600 text-blue-700 dark:text-blue-300 font-medium text-base rounded-xl hover:bg-gradient-to-r hover:from-blue-200 hover:to-purple-200 dark:hover:from-blue-700/40 dark:hover:to-purple-700/40 transition-all duration-300 hover:scale-105">
                 <div class="flex items-center justify-center space-x-2">
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -1211,7 +1405,7 @@ x-init="
     
               <!-- Demo Button -->
               <button @click="showDemo = !showDemo" 
-                      class="flex-1 px-8 py-4 bg-gradient-to-r from-yellow-100 to-orange-100 dark:from-yellow-800/30 dark:to-orange-800/30 border-2 border-yellow-300 dark:border-yellow-600 text-yellow-700 dark:text-yellow-300 font-bold text-lg rounded-2xl hover:bg-gradient-to-r hover:from-yellow-200 hover:to-orange-200 dark:hover:from-yellow-700/40 dark:hover:to-orange-700/40 transition-all duration-300 hover:scale-105">
+                      class="flex-1 px-4 py-3 bg-gradient-to-r from-yellow-100 to-orange-100 dark:from-yellow-800/30 dark:to-orange-800/30 border-2 border-yellow-300 dark:border-yellow-600 text-yellow-700 dark:text-yellow-300 font-medium text-sm rounded-xl hover:bg-gradient-to-r hover:from-yellow-200 hover:to-orange-200 dark:hover:from-yellow-700/40 dark:hover:to-orange-700/40 transition-all duration-300 hover:scale-105">
                 <div class="flex items-center justify-center space-x-2">
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -1234,23 +1428,23 @@ x-init="
                  class="mb-8 p-6 bg-gradient-to-r from-green-50/50 to-blue-50/50 dark:from-green-900/20 dark:to-blue-900/20 rounded-2xl border-2 border-green-200 dark:border-green-700" 
                  x-data="{ showDemo: false }">
               <div class="text-center">
-                <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-green-400 to-blue-400 rounded-2xl flex items-center justify-center">
+                <div class="w-12 h-12 mx-auto mb-3 bg-gradient-to-r from-green-400 to-blue-400 rounded-xl flex items-center justify-center">
                   <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-2">Welcome back, Demo User!</h3>
-                <p class="text-gray-600 dark:text-gray-300">Access your account details</p>
-                <div class="mt-4 flex flex-wrap justify-center gap-3">
-                  <span class="px-4 py-2 bg-white/60 dark:bg-gray-800/60 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300">3 Orders</span>
-                  <span class="px-4 py-2 bg-white/60 dark:bg-gray-800/60 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300">2 Invoices</span>
-                  <span class="px-4 py-2 bg-white/60 dark:bg-gray-800/60 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300">Language: EN</span>
+                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-1">Welcome back!</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Demo User</p>
+                <div class="flex flex-wrap justify-center gap-2">
+                  <span class="px-3 py-1 bg-white/60 dark:bg-gray-800/60 rounded-full text-xs font-medium text-gray-700 dark:text-gray-300">3 Orders</span>
+                  <span class="px-3 py-1 bg-white/60 dark:bg-gray-800/60 rounded-full text-xs font-medium text-gray-700 dark:text-gray-300">2 Invoices</span>
+                  <span class="px-3 py-1 bg-white/60 dark:bg-gray-800/60 rounded-full text-xs font-medium text-gray-700 dark:text-gray-300">EN</span>
                 </div>
               </div>
             </div>
     
             <!-- Privacy Note -->
-            <div class="text-center p-6 bg-gradient-to-r from-purple-50/50 to-pink-50/50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl border border-purple-200/30 dark:border-purple-700/30">
+            <div class="text-center p-4 text-sm bg-gradient-to-r from-purple-50/50 to-pink-50/50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl border border-purple-200/30 dark:border-purple-700/30">
               <div class="flex items-center justify-center space-x-2 text-gray-600 dark:text-gray-300">
                 <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -1268,48 +1462,43 @@ x-init="
 
 
     <!-- School / NGO support Section -->
-    <section class="py-20 relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20">
+    <section class="py-12 relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20">
         <!-- Floating decorative elements -->
-        <div class="absolute top-16 left-20 w-14 h-14 bg-yellow-300/20 rounded-full float-animation"></div>
-        <div class="absolute bottom-24 right-16 w-20 h-20 bg-pink-300/20 rounded-full float-animation" style="animation-delay: 2.5s;"></div>
-        <div class="absolute top-32 right-32 w-16 h-16 bg-blue-300/25 rounded-full float-animation" style="animation-delay: 1s;"></div>
+        <div class="absolute top-12 left-12 w-10 h-10 bg-yellow-300/20 rounded-full float-animation"></div>
+        <div class="absolute bottom-16 right-12 w-12 h-12 bg-pink-300/20 rounded-full float-animation" style="animation-delay: 2.5s;"></div>
+        <div class="absolute top-20 right-20 w-10 h-10 bg-blue-300/25 rounded-full float-animation" style="animation-delay: 1s;"></div>
         
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <!-- Section Header -->
-          <div class="text-center mt-6 mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-wide">SCHOOL / NGO SUPPORT</h2>
-            <div class="w-20 h-1 bg-pink-500 mx-auto mb-6 mt-3"></div>
-            <div class="flex justify-center items-center space-x-2">
-              <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
-              <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
-              <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
-            </div>
+          <div class="text-center mb-8">
+            <h2 class="text-2xl md:text-3xl font-bold uppercase tracking-wide">SCHOOL / NGO SUPPORT</h2>
+            <div class="w-16 h-1 bg-pink-500 mx-auto mb-4 mt-2"></div>
           </div>
     
           <!-- Support Cards Grid -->
-          <div class="grid md:grid-cols-3 gap-8 mb-12">
+          <div class="grid md:grid-cols-3 gap-4 mb-8">
             
             <!-- Implementation Guide -->
-            <div class="glass-card rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 slide-up bg-gradient-to-br from-yellow-100/80 to-orange-100/80 dark:from-yellow-900/30 dark:to-orange-900/30 border border-yellow-200 dark:border-yellow-700">
+            <div class="glass-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] slide-up bg-gradient-to-br from-yellow-100/80 to-orange-100/80 dark:from-yellow-900/30 dark:to-orange-900/30 border border-yellow-200 dark:border-yellow-700">
               <div class="text-center space-y-6">
                 <!-- Icon -->
-                <div class="w-20 h-20 mx-auto bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center float-animation shadow-lg">
-                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="w-14 h-14 mx-auto bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center float-animation shadow">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </div>
                 
                 <div>
-                  <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                  <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
                     Implementation Guide
                   </h3>
-                  <p class="text-gray-600 dark:text-gray-300">Essential startup resources</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">Essential startup resources</p>
                 </div>
               </div>
             </div>
     
             <!-- Training & PD -->
-            <div class="glass-card rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 slide-up bg-gradient-to-br from-purple-100/80 to-pink-100/80 dark:from-purple-900/30 dark:to-pink-900/30 border border-purple-200 dark:border-purple-700" style="animation-delay: 0.1s;">
+            <div class="glass-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] slide-up bg-gradient-to-br from-purple-100/80 to-pink-100/80 dark:from-purple-900/30 dark:to-pink-900/30 border border-purple-200 dark:border-purple-700" style="animation-delay: 0.1s;">
               <div class="text-center space-y-6">
                 <!-- Icon -->
                 <div class="w-20 h-20 mx-auto bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center float-animation shadow-lg" style="animation-delay: 2s;">
@@ -1359,54 +1548,49 @@ x-init="
   
 
       <!-- Policies & Guarantees Section -->
-  <section class="py-20 relative overflow-hidden bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 dark:from-indigo-900/20 dark:via-blue-900/20 dark:to-cyan-900/20">
+  <section class="py-12 relative overflow-hidden bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 dark:from-indigo-900/20 dark:via-blue-900/20 dark:to-cyan-900/20">
     <!-- Floating decorative elements -->
-    <div class="absolute top-24 left-16 w-16 h-16 bg-purple-300/20 rounded-full float-animation"></div>
-    <div class="absolute bottom-20 right-20 w-14 h-14 bg-pink-300/25 rounded-full float-animation" style="animation-delay: 2s;"></div>
-    <div class="absolute top-40 right-32 w-12 h-12 bg-yellow-300/20 rounded-full float-animation" style="animation-delay: 3s;"></div>
+    <div class="absolute top-8 left-1/4 w-12 h-12 bg-purple-300/30 rounded-full float-animation"></div>
+    <div class="absolute bottom-8 right-1/4 w-10 h-10 bg-pink-300/30 rounded-full float-animation" style="animation-delay: 2s;"></div>
+    <div class="absolute top-1/3 right-1/3 w-8 h-8 bg-yellow-300/30 rounded-full float-animation" style="animation-delay: 1s;"></div>
     
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Section Header -->
-      <div class="text-center mt-6 mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold uppercase tracking-wide">POLICIES & GUARANTEES</h2>
-        <div class="w-20 h-1 bg-pink-500 mx-auto mb-6 mt-3"></div>
-        <div class="flex justify-center items-center space-x-2">
-          <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
-          <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
-          <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
-        </div>
-        <p class="text-gray-600 dark:text-gray-300 mt-6">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold uppercase tracking-wide">POLICIES & GUARANTEES</h2>
+        <div class="w-16 h-1 bg-pink-500 mx-auto mb-3 mt-2"></div>
+        <p class="text-sm text-gray-600 dark:text-gray-300">
           Your protection, our priority
         </p>
       </div>
 
       <!-- Policies Grid -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         
         <!-- Shipping & Delivery -->
-        <div class="glass-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 slide-up group bg-gradient-to-br from-blue-50/80 to-cyan-50/80 dark:from-blue-900/30 dark:to-cyan-900/30 border border-blue-200 dark:border-blue-700">
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-14 h-14 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform shadow-lg">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="glass-card rounded-xl p-5 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] slide-up group bg-gradient-to-br from-blue-50/80 to-cyan-50/80 dark:from-blue-900/30 dark:to-cyan-900/30 border border-blue-200 dark:border-blue-700">
+          <div class="flex items-start justify-between mb-3">
+            <div class="w-10 h-10 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform shadow">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4-8-4m16 0v10l-8 4-8-4V7" />
               </svg>
             </div>
             <div class="opacity-60 group-hover:opacity-100 transition-opacity">
-              <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
             </div>
           </div>
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">
             Shipping & Delivery
           </h3>
-          <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
+          <p class="text-xs text-gray-600 dark:text-gray-300 mb-3">
             Shipping info and tracking
           </p>
-          <a href="#" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold hover:text-blue-700 dark:hover:text-blue-300 transition-colors group-hover:translate-x-1 transform duration-300">
+          <a href="#" class="inline-flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors group-hover:translate-x-1 transform duration-300">
             Read
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
           </a>
@@ -1527,14 +1711,14 @@ x-init="
       </div>
 
       <!-- Trust Badge -->
-      <div class="mt-16 text-center slide-up" style="animation-delay: 0.5s;">
-        <div class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-100 to-blue-100 dark:from-green-900/30 dark:to-blue-900/30 rounded-2xl border border-green-200 dark:border-green-700">
-          <svg class="w-8 h-8 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="mt-8 text-center slide-up" style="animation-delay: 0.5s;">
+        <div class="inline-flex items-center px-5 py-3 bg-gradient-to-r from-green-100 to-blue-100 dark:from-green-900/30 dark:to-blue-900/30 rounded-xl border border-green-200 dark:border-green-700">
+          <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
           </svg>
           <div class="text-left">
-            <p class="font-bold text-gray-900 dark:text-white text-lg">100% Transparency Guarantee</p>
-            <p class="text-gray-600 dark:text-gray-300 text-sm">Your satisfaction guaranteed</p>
+            <p class="font-bold text-gray-900 dark:text-white text-base">100% Transparency</p>
+            <p class="text-gray-600 dark:text-gray-300 text-xs">Your satisfaction guaranteed</p>
           </div>
         </div>
       </div>
@@ -1649,7 +1833,7 @@ x-init="
         <!-- Legal row: full width -->
         <div class="lg:col-span-4 mt-8 pt-6 border-t border-white/20">
           <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="text-white text-sm">© 2025 Let's Read India. All rights reserved.</div>
+            <div class="text-white text-sm"> 2025 Let's Read India. All rights reserved.</div>
             <div class="flex items-center gap-4 text-sm">
               <a href="#" class="text-white/70 hover:text-white transition">Privacy</a>
               <span class="hidden md:inline text-white/40">•</span>
@@ -1691,25 +1875,32 @@ x-init="
       </div>
 
       <form class="space-y-4">
-        <div>
-          <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-          <input type="text" id="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="name" class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+            <input type="text" id="name" class="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+          </div>
+          <div>
+            <label for="email" class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+            <input type="email" id="email" class="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+          </div>
         </div>
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-          <input type="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+          <label for="subject" class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
+          <input type="text" id="subject" class="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
         </div>
         <div>
-          <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
-          <textarea id="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+          <label for="message" class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+          <textarea id="message" rows="3" class="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white/50 dark:bg-gray-800/50 focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
         </div>
-        <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">
-          Send Message
-        </button>
+        <div class="pt-1">
+          <button type="submit" class="w-full py-2 px-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-medium rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-105 shadow">
+            Send Message
+          </button>
+        </div>
       </form>
     </div>
   </div>
 
 </body>
 </html>
-

@@ -224,27 +224,131 @@
   class="font-poppins antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200"
   :class="{ 'overflow-hidden': mobileMenuOpen || contactOpen }">
   
-  <!-- Navigation -->
+  <!-- Top Bar -->
+  <div x-show="topMenuOpen" x-cloak class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-10 py-2">
+        <div class="flex items-center">
+          <span class="text-xs sm:text-sm">🎁 Free Reading Age Check for your child/class — Book a 10-min call</span>
+        </div>
+        <button
+          class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium px-3 py-1 rounded-full text-xs transition-colors">
+          Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
   <nav class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50 dark:border-b dark:border-gray-700">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
         <a href="index.html" class="flex-shrink-0">
-          <img class="h-10 w-auto" src="./public/lets%20read%20logo.png" alt="Let's Read India">
+          <img src="./public/lets%20read%20logo.png" alt="Let's Read Logo" class="h-10 w-auto">
         </a>
-        
+
+        <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center space-x-1">
-          <a href="about.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">About</a>
-          <a href="diagnostic.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Reading Diagnostic</a>
-          <a href="resources.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Resources</a>
-          <a href="products.html" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Products</a>
-          <a href="careers.html" class="px-3 py-2 text-sm font-medium text-purple-600 dark:text-purple-400">Community</a>
-          <a href="#" @click.prevent="contactOpen = true" class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400">Contact</a>
+          <!-- About Dropdown -->
+          <div class="relative group" x-data="{ open: false }">
+            <button @click="open = !open" 
+                    class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 flex items-center transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md"
+                    :class="{ 'text-purple-600 dark:text-purple-400': open }">
+              About
+              <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10" x-cloak>
+              <div class="py-1" role="menu" aria-orientation="vertical">
+                <a href="about.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">About (main page)</a>
+                <a href="community.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Community</a>
+                <a href="careers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Careers</a>
+                <a href="mediakits.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Media Kits</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Programs / Tools Dropdown -->
+          <div class="relative group" x-data="{ open: false }">
+            <button @click="open = !open" 
+                    class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 flex items-center transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md"
+                    :class="{ 'text-purple-600 dark:text-purple-400': open }">
+              Programs / Tools
+              <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10" x-cloak>
+              <div class="py-1" role="menu" aria-orientation="vertical">
+                <a href="diagnostic.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Reading Diagnostic</a>
+                <a href="decodable.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Decodable</a>
+                <a href="readiness-quiz.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Readiness Quiz</a>
+                <a href="training.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Training</a>
+                <a href="demo.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Demo</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resources Dropdown -->
+          <div class="relative group" x-data="{ open: false }">
+            <button @click="open = !open" 
+                    class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 flex items-center transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md"
+                    :class="{ 'text-purple-600 dark:text-purple-400': open }">
+              Resources
+              <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-50" x-show="open" @click.away="open = false" x-cloak>
+                <div class="py-1">
+                  <a href="resources.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Resources</a>
+                  <a href="training.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Training</a>
+                  <a href="community.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Community</a>
+                  <a href="partner.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Partner Deck</a>
+                  <a href="support.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Support</a>
+                  <a href="utility.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Utility</a>
+                </div>
+              </div>
+          </div>
+
+          <!-- Products Dropdown -->
+          <div class="relative group" x-data="{ open: false }">
+            <button @click="open = !open" 
+                    class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 flex items-center transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md"
+                    :class="{ 'text-purple-600 dark:text-purple-400': open }">
+              Products
+              <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10" x-cloak>
+              <div class="py-1" role="menu" aria-orientation="vertical">
+                <a href="products.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Products (main page)</a>
+                <a href="bulkorders.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Bulk Orders</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <a href="#" @click.prevent="contactOpen = true"
+            class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md">
+            Contact
+          </a>
         </div>
 
+        <!-- Action Buttons -->
         <div class="hidden md:flex items-center space-x-3">
-          <button class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800">I'm a Parent</button>
-          <button class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700">I'm a School</button>
-          <button @click="darkMode = !darkMode" class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+          <a href="parents.html"
+            class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800">I'm
+            a Parent</a>
+          <a href="schools.html"
+            class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700">I'm
+            a School</a>
+          <button @click="darkMode = !darkMode"
+            class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
+            :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
             <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
@@ -252,34 +356,118 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
           </button>
+          <button @click="$store.cart.open()"
+            class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 relative"
+            :aria-label="'View Cart'">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span x-show="$store.cart.count > 0" 
+                  class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center"
+                  x-text="$store.cart.count">
+            </span>
+          </button>
         </div>
 
+        <!-- Mobile menu button -->
         <div class="md:hidden">
-          <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 rounded-md text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
-            <svg class="h-6 w-6" :class="{'hidden': mobileMenuOpen, 'block': !mobileMenuOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          <button @click="mobileMenuOpen = !mobileMenuOpen"
+            class="p-2 rounded-md text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
+            <svg class="h-6 w-6" :class="{ 'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-            <svg class="h-6 w-6" :class="{'block': mobileMenuOpen, 'hidden': !mobileMenuOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            <svg class="h-6 w-6" :class="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
       </div>
     </div>
-    
-    <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden bg-white dark:bg-gray-800 shadow-lg" x-cloak>
-      <div class="px-2 pt-2 pb-3 space-y-1">
-        <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">About</a>
-        <a href="diagnostic.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Reading Diagnostic</a>
-        <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Resources</a>
-        <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Products</a>
-        <a href="careers.html" class="block px-3 py-2 rounded-md text-base font-medium text-purple-600 dark:text-purple-400 hover:bg-gray-100 dark:hover:bg-gray-700">Community</a>
-        <a href="#" @click.prevent="contactOpen = true; mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Contact</a>
+
+    <!-- Mobile menu -->
+    <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden" x-cloak>
+      <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-800">
+        <!-- About Dropdown -->
+        <div class="space-y-1" x-data="{ open: false }">
+          <button @click="open = !open" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+            <span>About</span>
+            <svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="open" class="pl-4 space-y-1" x-cloak>
+            <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">About (main page)</a>
+            <a href="community.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Community</a>
+            <a href="careers.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Careers</a>
+            <a href="mediakits.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Media Kits</a>
+          </div>
+        </div>
+
+        <!-- Programs / Tools Dropdown -->
+        <div class="space-y-1" x-data="{ open: false }">
+          <button @click="open = !open" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+            <span>Programs / Tools</span>
+            <svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="open" class="pl-4 space-y-1" x-cloak>
+            <a href="diagnostic.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Reading Diagnostic</a>
+            <a href="decodable.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Decodable</a>
+            <a href="readiness-quiz.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Readiness Quiz</a>
+            <a href="training.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Training</a>
+            <a href="demo.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Demo</a>
+          </div>
+        </div>
+
+        <!-- Resources Dropdown -->
+        <div class="space-y-1" x-data="{ open: false }">
+          <button @click="open = !open" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-purple-600 hover:bg-gray-50 dark:text-purple-400 dark:hover:bg-gray-700">
+            <span>Resources</span>
+            <svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="open" class="pl-4 space-y-1" x-cloak>
+            <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-purple-600 hover:bg-gray-50 dark:text-purple-400 dark:hover:bg-gray-700">Resources (main page)</a>
+            <a href="support.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Support</a>
+            <a href="utility.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Utility</a>
+          </div>
+        </div>
+
+        <!-- Products Dropdown -->
+        <div class="space-y-1" x-data="{ open: false }">
+          <button @click="open = !open" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+            <span>Products</span>
+            <svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="open" class="pl-4 space-y-1" x-cloak>
+            <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Products (main page)</a>
+            <a href="bulkorders.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Bulk Orders</a>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <a href="#" @click.prevent="contactOpen = true; mobileMenuOpen = false"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Contact</a>
       </div>
       <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-        <div class="flex items-center px-5 space-x-3">
-          <button class="flex-1 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800">I'm a Parent</button>
-          <button class="flex-1 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700">I'm a School</button>
+        <div class="space-y-1 px-2">
+          <a href="parents.html" class="block w-full text-left px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">I'm a Parent</a>
+          <a href="schools.html" class="block w-full text-left px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">I'm a School</a>
+          <button @click="darkMode = !darkMode"
+            class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+            <span x-text="darkMode ? 'Light Mode' : 'Dark Mode'"></span>
+          </button>
+          <button @click="$store.cart.open()"
+            class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+            View Cart
+          </button>
         </div>
       </div>
     </div>

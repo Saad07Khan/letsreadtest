@@ -196,34 +196,35 @@
   </style>
 </head>
 
-<body x-data="{
-    darkMode: localStorage.getItem('darkMode') === 'true',
-    mobileMenuOpen: false,
-    contactOpen: false,
-    activeTab: 'all',
-    name: '',
-    email: '',
-    mobileNum: '',
-    childName: '',
-    message: '',
-    submitted: false
-  }"
-  x-init="
-    // Initialize dark mode from localStorage
-    darkMode = localStorage.getItem('darkMode') === 'true';
-    $watch('darkMode', value => {
-      localStorage.setItem('darkMode', value);
-      document.documentElement.classList.toggle('dark', value);
-    });
-    
-    // Initialize dark mode on page load
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    }
-  "
-  class="font-poppins antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200"
-  :class="{ 'overflow-hidden': mobileMenuOpen || contactOpen }">
+<body x-data="{ 
+  darkMode: localStorage.getItem('darkMode') === 'true', 
+  mobileMenuOpen: false,
+  contactOpen: false,
+  topMenuOpen: true,
+  cartOpen: false,
+  name: '',
+  email: '',
+  mobileNum: '',
+  childName: '',
+  message: '',
+  submitted: false
+}"
+x-init="
+  // Initialize dark mode from localStorage
+  darkMode = localStorage.getItem('darkMode') === 'true';
+  $watch('darkMode', value => {
+    localStorage.setItem('darkMode', value);
+    document.documentElement.classList.toggle('dark', value);
+  });
   
+  // Initialize dark mode on page load
+  if (darkMode) {
+    document.documentElement.classList.add('dark');
+  }
+"
+class="font-poppins antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200"
+:class="{ 'overflow-hidden': mobileMenuOpen || contactOpen || cartOpen }">
+
   <!-- Top Bar -->
   <div x-show="topMenuOpen" x-cloak class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -472,6 +473,8 @@
       </div>
     </div>
   </nav>
+
+
 
   <!-- Hero Section -->
   <section class="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-rose-50 via-white to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">

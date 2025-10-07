@@ -1323,81 +1323,108 @@ class="font-poppins antialiased bg-white dark:bg-gray-900 text-gray-900 dark:tex
     </div>
   </div>
 </section>
-
 <!-- Delivery Models Section -->
-<section class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
-  <!-- Background decoration -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute top-20 right-20 w-72 h-72 bg-gradient-to-bl from-blue-100/50 to-purple-100/50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-20 left-20 w-72 h-72 bg-gradient-to-tr from-purple-100/50 to-pink-100/50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-full blur-3xl"></div>
-  </div>
+<section class="py-16 md:py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
+  <!-- Decorative background elements -->
+  <div class="absolute top-10 right-10 w-64 h-64 bg-green-300/20 dark:bg-green-600/10 rounded-full filter blur-3xl"></div>
+  <div class="absolute bottom-10 left-10 w-72 h-72 bg-blue-300/20 dark:bg-blue-600/10 rounded-full filter blur-3xl"></div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-    <!-- Header -->
-    <div class="text-center mb-16 slide-up">
-      <div class="inline-flex items-center gap-2 px-4 py-2 mx-auto bg-purple-100 dark:bg-purple-900/30 rounded-full mb-6">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <!-- Purple Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 mx-auto bg-purple-100 dark:bg-purple-900/30 rounded-full mb-4">
         <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
         <span class="text-sm font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wider">Delivery Options</span>
       </div>
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-        <span class="gradient-text">Delivery models</span>
+
+      <!-- Main Title -->
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide dark:text-white">
+        Delivery models
       </h2>
+      
+      <!-- Pink Divider -->
       <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+      
+      <!-- Three Colored Dots -->
+      <div class="flex justify-center items-center space-x-2 mb-6">
+        <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+        <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+      </div>
     </div>
     
     <!-- Delivery Options Grid -->
-    <div class="grid md:grid-cols-3 gap-8 mb-12">
+    <div class="grid md:grid-cols-3 gap-6">
       <!-- Onsite -->
-      <div class="group lr-card bg-white dark:bg-gray-800 rounded-3xl p-8 text-center shadow-xl border border-green-100 dark:border-green-800/30 hover:border-green-300 dark:hover:border-green-600">
-        <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform">
-          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="group relative bg-gradient-to-br from-white to-green-50/50 dark:from-gray-800 dark:to-green-900/20 rounded-2xl p-6 border border-green-100 dark:border-green-800/30 hover:border-green-300 dark:hover:border-green-600 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/10 hover:-translate-y-2">
+        <!-- Icon -->
+        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
           </svg>
         </div>
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Onsite Day(s)</h3>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+
+        <!-- Content -->
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Onsite Day(s)</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
           Best for kickoffs; includes practice labs & demo classrooms
         </p>
+
+        <!-- Decorative corner -->
+        <div class="absolute top-0 right-0 w-20 h-20 bg-green-500/5 rounded-bl-full"></div>
       </div>
 
       <!-- Virtual + Micro-PD -->
-      <div class="group lr-card bg-white dark:bg-gray-800 rounded-3xl p-8 text-center shadow-xl border border-blue-100 dark:border-blue-800/30 hover:border-blue-300 dark:hover:border-blue-600" style="animation-delay: 0.1s;">
-        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform">
-          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="group relative bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-800 dark:to-blue-900/20 rounded-2xl p-6 border border-blue-100 dark:border-blue-800/30 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2">
+        <!-- Icon -->
+        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
           </svg>
         </div>
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Virtual + Micro-PD</h3>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+
+        <!-- Content -->
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Virtual + Micro-PD</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
           Short sessions + WhatsApp nudges; works across regions
         </p>
+
+        <!-- Decorative corner -->
+        <div class="absolute top-0 right-0 w-20 h-20 bg-blue-500/5 rounded-bl-full"></div>
       </div>
 
       <!-- Hybrid -->
-      <div class="group lr-card bg-white dark:bg-gray-800 rounded-3xl p-8 text-center shadow-xl border border-purple-100 dark:border-purple-800/30 hover:border-purple-300 dark:hover:border-purple-600" style="animation-delay: 0.2s;">
-        <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform">
-          <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="group relative bg-gradient-to-br from-white to-purple-50/50 dark:from-gray-800 dark:to-purple-900/20 rounded-2xl p-6 border border-purple-100 dark:border-purple-800/30 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-2">
+        <!-- Icon -->
+        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
           </svg>
         </div>
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Hybrid</h3>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+
+        <!-- Content -->
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Hybrid</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
           Onsite start + virtual follow-up + mentor coaching
         </p>
+
+        <!-- Decorative corner -->
+        <div class="absolute top-0 right-0 w-20 h-20 bg-purple-500/5 rounded-bl-full"></div>
       </div>
     </div>
 
     <!-- Additional Info -->
-    <div class="text-center mb-8 slide-up" style="animation-delay: 0.3s;">
-      <p class="text-gray-600 dark:text-gray-300 text-lg">
+    <div class="text-center mt-8 mb-6">
+      <p class="text-gray-700 dark:text-gray-300 text-base">
         Typical cohort size <strong class="text-purple-600 dark:text-purple-400">25-40 teachers</strong> (1-2 trainers); 
         language support <strong class="text-pink-600 dark:text-pink-400">EN/HI/MR</strong>
       </p>
     </div>
 
     <!-- CTA Button -->
-    <div class="text-center slide-up" style="animation-delay: 0.4s;">
-      <a href="#" class="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-bold py-4 px-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 lr-cta">
+    <div class="text-center">
+      <a href="#" class="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-bold py-4 px-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 lr-cta">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
         </svg>
@@ -1411,66 +1438,80 @@ class="font-poppins antialiased bg-white dark:bg-gray-900 text-gray-900 dark:tex
 </section>
 
 <!-- What's Included Section -->
-<section class="py-20 bg-gradient-to-br from-yellow-50 via-orange-50 to-pink-50 dark:from-gray-900 dark:via-yellow-900/10 dark:to-orange-900/10 relative overflow-hidden">
-  <!-- Background decoration -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-yellow-200/30 to-orange-200/30 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-orange-200/30 to-pink-200/30 rounded-full blur-3xl"></div>
-  </div>
+<section class="py-16 md:py-20 bg-gradient-to-br from-yellow-50 via-orange-50 to-pink-50 dark:from-gray-900 dark:via-yellow-900/10 dark:to-orange-900/10 relative overflow-hidden">
+  <!-- Decorative background elements -->
+  <div class="absolute top-10 right-10 w-64 h-64 bg-yellow-300/20 dark:bg-yellow-600/10 rounded-full filter blur-3xl"></div>
+  <div class="absolute bottom-10 left-10 w-72 h-72 bg-orange-300/20 dark:bg-orange-600/10 rounded-full filter blur-3xl"></div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-    <!-- Header -->
-    <div class="text-center mb-16 slide-up">
-      <div class="inline-flex items-center gap-2 px-4 py-2 mx-auto bg-yellow-100 dark:bg-yellow-900/30 rounded-full mb-6">
-        <div class="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
-        <span class="text-sm font-bold text-yellow-700 dark:text-yellow-300 uppercase tracking-wider">What's Included</span>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <!-- Purple Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 mx-auto bg-purple-100 dark:bg-purple-900/30 rounded-full mb-4">
+        <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+        <span class="text-sm font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wider">What's Included</span>
       </div>
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-        What's <span class="gradient-text">included</span>
+
+      <!-- Main Title -->
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide dark:text-white">
+        What's included
       </h2>
+      
+      <!-- Pink Divider -->
       <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+      
+      <!-- Three Colored Dots -->
+      <div class="flex justify-center items-center space-x-2 mb-6">
+        <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+        <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+      </div>
     </div>
     
     <!-- Included Items Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
       <!-- Trainers & Demos -->
-      <div class="group lr-card bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-orange-100 dark:border-orange-800/30 hover:border-orange-300 dark:hover:border-orange-600">
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Trainers & Demos</h3>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+      <div class="group relative bg-gradient-to-br from-white to-orange-50/50 dark:from-gray-800 dark:to-orange-900/20 rounded-2xl p-6 border border-orange-100 dark:border-orange-800/30 hover:border-orange-300 dark:hover:border-orange-600 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-2">
+        <h3 class="text-sm font-bold text-gray-900 dark:text-white mb-2">Trainers & Demos</h3>
+        <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
           Kit & decodable samples, live modeling
         </p>
+        <div class="absolute top-0 right-0 w-16 h-16 bg-orange-500/5 rounded-bl-full"></div>
       </div>
 
       <!-- Printables -->
-      <div class="group lr-card bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-yellow-100 dark:border-yellow-800/30 hover:border-yellow-300 dark:hover:border-yellow-600" style="animation-delay: 0.1s;">
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Printables</h3>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+      <div class="group relative bg-gradient-to-br from-white to-yellow-50/50 dark:from-gray-800 dark:to-yellow-900/20 rounded-2xl p-6 border border-yellow-100 dark:border-yellow-800/30 hover:border-yellow-300 dark:hover:border-yellow-600 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/10 hover:-translate-y-2">
+        <h3 class="text-sm font-bold text-gray-900 dark:text-white mb-2">Printables</h3>
+        <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
           2-week plan, routine cards, observation rubric
         </p>
+        <div class="absolute top-0 right-0 w-16 h-16 bg-yellow-500/5 rounded-bl-full"></div>
       </div>
 
       <!-- Diagnostic Pack -->
-      <div class="group lr-card bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-green-100 dark:border-green-800/30 hover:border-green-300 dark:hover:border-green-600" style="animation-delay: 0.2s;">
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Diagnostic Pack</h3>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+      <div class="group relative bg-gradient-to-br from-white to-green-50/50 dark:from-gray-800 dark:to-green-900/20 rounded-2xl p-6 border border-green-100 dark:border-green-800/30 hover:border-green-300 dark:hover:border-green-600 transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/10 hover:-translate-y-2">
+        <h3 class="text-sm font-bold text-gray-900 dark:text-white mb-2">Diagnostic Pack</h3>
+        <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
           Screener PDF + class tracker template
         </p>
+        <div class="absolute top-0 right-0 w-16 h-16 bg-green-500/5 rounded-bl-full"></div>
       </div>
 
       <!-- Certificates & Photos -->
-      <div class="group lr-card bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-pink-100 dark:border-pink-800/30 hover:border-pink-300 dark:hover:border-pink-600" style="animation-delay: 0.3s;">
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Certificates & Photos</h3>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+      <div class="group relative bg-gradient-to-br from-white to-pink-50/50 dark:from-gray-800 dark:to-pink-900/20 rounded-2xl p-6 border border-pink-100 dark:border-pink-800/30 hover:border-pink-300 dark:hover:border-pink-600 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/10 hover:-translate-y-2">
+        <h3 class="text-sm font-bold text-gray-900 dark:text-white mb-2">Certificates & Photos</h3>
+        <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
           For internal communications
         </p>
+        <div class="absolute top-0 right-0 w-16 h-16 bg-pink-500/5 rounded-bl-full"></div>
       </div>
     </div>
 
     <!-- CTA Button -->
-    <div class="text-center slide-up" style="animation-delay: 0.4s;">
+    <div class="text-center mt-10">
       <a href="#" class="inline-flex items-center gap-2 border-2 border-orange-400 text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 font-semibold py-3 px-8 rounded-full transition-all duration-300 lr-cta">
         Download Starter Pack
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 chev" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
         </svg>
       </a>
@@ -1479,81 +1520,94 @@ class="font-poppins antialiased bg-white dark:bg-gray-900 text-gray-900 dark:tex
 </section>
 
 <!-- Training + Materials Bundles Section -->
-<section class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
-  <!-- Background decoration -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute top-20 right-20 w-72 h-72 bg-gradient-to-bl from-purple-100/50 to-pink-100/50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-20 left-20 w-72 h-72 bg-gradient-to-tr from-blue-100/50 to-cyan-100/50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-full blur-3xl"></div>
-  </div>
+<section class="py-16 md:py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
+  <!-- Decorative background elements -->
+  <div class="absolute top-10 right-10 w-64 h-64 bg-purple-300/20 dark:bg-purple-600/10 rounded-full filter blur-3xl"></div>
+  <div class="absolute bottom-10 left-10 w-72 h-72 bg-pink-300/20 dark:bg-pink-600/10 rounded-full filter blur-3xl"></div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-    <!-- Header -->
-    <div class="text-center mb-16 slide-up">
-      <div class="inline-flex items-center gap-2 px-4 py-2 mx-auto bg-purple-100 dark:bg-purple-900/30 rounded-full mb-6">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <!-- Purple Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 mx-auto bg-purple-100 dark:bg-purple-900/30 rounded-full mb-4">
         <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
         <span class="text-sm font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wider">Training Bundles</span>
       </div>
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-        Training + materials <span class="gradient-text">bundles</span>
+
+      <!-- Main Title -->
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide dark:text-white">
+        Training + materials bundles
       </h2>
+      
+      <!-- Pink Divider -->
       <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+      
+      <!-- Three Colored Dots -->
+      <div class="flex justify-center items-center space-x-2 mb-6">
+        <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+        <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+      </div>
     </div>
     
     <!-- Bundles Grid -->
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-3 gap-6">
       <!-- Kickoff Bundle -->
-      <div class="group lr-card bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl border border-orange-100 dark:border-orange-800/30 hover:border-orange-300 dark:hover:border-orange-600">
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Kickoff Bundle</h3>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+      <div class="group relative bg-gradient-to-br from-white to-orange-50/50 dark:from-gray-800 dark:to-orange-900/20 rounded-3xl p-8 border border-orange-100 dark:border-orange-800/30 hover:border-orange-300 dark:hover:border-orange-600 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Kickoff Bundle</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
           1 training day + kits L1/L2 + readers B/C sets
         </p>
-        <div class="flex flex-col sm:flex-row gap-3">
-          <a href="#" class="flex-1 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-center">
+        <div class="space-y-3">
+          <a href="#" class="block w-full bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-center">
             Get a Quote
           </a>
-          <a href="#" class="flex-1 border-2 border-orange-400 text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 font-semibold py-3 px-4 rounded-xl transition-all duration-300 text-center">
+          <a href="#" class="block w-full border-2 border-orange-400 text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 font-semibold py-3 px-4 rounded-xl transition-all duration-300 text-center">
             See Kits
           </a>
         </div>
+        <div class="absolute top-0 right-0 w-24 h-24 bg-orange-500/5 rounded-bl-full"></div>
       </div>
 
       <!-- Progress Bundle - Most Popular -->
-      <div class="relative group lr-card bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-2xl border-2 border-orange-300 dark:border-orange-500 hover:border-orange-400 dark:hover:border-orange-400 transform hover:scale-105 transition-all duration-300" style="animation-delay: 0.1s;">
+      <div class="relative group bg-gradient-to-br from-white to-yellow-50/50 dark:from-gray-800 dark:to-yellow-900/20 rounded-3xl p-8 border-2 border-orange-300 dark:border-orange-500 hover:border-orange-400 dark:hover:border-orange-400 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/20 hover:-translate-y-2 transform">
         <!-- Popular badge -->
-        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-          <div class="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
+          <div class="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-6 py-2 rounded-full text-xs font-bold shadow-lg">
             Most Popular
           </div>
         </div>
         
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Progress Bundle</h3>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 mt-2">Progress Bundle</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
           2 training days + diagnostic + dashboard + readers A-D
         </p>
-        <div class="flex flex-col sm:flex-row gap-3">
-          <a href="#" class="flex-1 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-center">
+        <div class="space-y-3">
+          <a href="#" class="block w-full bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-center">
             Get a Quote
           </a>
-          <a href="#" class="flex-1 border-2 border-orange-400 text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 font-semibold py-3 px-4 rounded-xl transition-all duration-300 text-center">
+          <a href="#" class="block w-full border-2 border-orange-400 text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 font-semibold py-3 px-4 rounded-xl transition-all duration-300 text-center">
             See Kits
           </a>
         </div>
+        <div class="absolute top-0 right-0 w-24 h-24 bg-yellow-500/5 rounded-bl-full"></div>
       </div>
 
       <!-- CSR Pilot Bundle -->
-      <div class="group lr-card bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl border border-pink-100 dark:border-pink-800/30 hover:border-pink-300 dark:hover:border-pink-600" style="animation-delay: 0.2s;">
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">CSR Pilot Bundle</h3>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+      <div class="group relative bg-gradient-to-br from-white to-pink-50/50 dark:from-gray-800 dark:to-pink-900/20 rounded-3xl p-8 border border-pink-100 dark:border-pink-800/30 hover:border-pink-300 dark:hover:border-pink-600 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/10 hover:-translate-y-1">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">CSR Pilot Bundle</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
           Training + materials + baseline→follow-up report
         </p>
-        <div class="flex flex-col sm:flex-row gap-3">
-          <a href="#" class="flex-1 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-center">
+        <div class="space-y-3">
+          <a href="#" class="block w-full bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-center">
             Get a Quote
           </a>
-          <a href="#" class="flex-1 border-2 border-orange-400 text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 font-semibold py-3 px-4 rounded-xl transition-all duration-300 text-center">
+          <a href="#" class="block w-full border-2 border-orange-400 text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 font-semibold py-3 px-4 rounded-xl transition-all duration-300 text-center">
             See Kits
           </a>
         </div>
+        <div class="absolute top-0 right-0 w-24 h-24 bg-pink-500/5 rounded-bl-full"></div>
       </div>
     </div>
   </div>

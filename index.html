@@ -458,7 +458,7 @@
     </nav>
   
   <!-- Hero Section -->
-  <section class="relative min-h-[90vh] flex items-center justify-start overflow-hidden bg-gray-100 dark:bg-gray-900">
+  <section class="relative min-h-[90vh] flex items-center justify-start overflow-hidden bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-900">
     <!-- Background Images with Overlay - Responsive for Light/Dark Modes -->
     <div class="absolute inset-0 z-0 w-full">
       <!-- Light mode image -->
@@ -466,32 +466,33 @@
            alt="Children reading books" 
            class="w-full h-full object-cover dark:hidden" />
       
-      <!-- Dark mode image (using same image but you can replace with a different one) -->
+      <!-- Dark mode image with darker overlay -->
       <img src="./public/main image.png" 
            alt="Children reading books - Dark Mode" 
-           class="hidden w-full h-full object-cover dark:block" />
+           class="hidden w-full h-full object-cover dark:block brightness-75" />
            
-      <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-purple-900/50 to-transparent"></div>
+      <!-- Gradient overlay - darker in dark mode -->
+      <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-purple-900/70 to-transparent dark:from-black/90 dark:via-purple-900/80"></div>
     </div>
 
     <!-- Hero Content -->
-    <div class="container relative z-10 py-32">
+    <div class="container relative z-10 py-32 px-4 sm:px-6 lg:px-8">
       <div class="max-w-2xl">
-        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight dark:text-gray-100">
           Kinesthetic Reading Kits &amp; Programs
-          <span class="block">that Build Confident <span class="text-[var(--hero-yellow)] font-semibold">Readers</span></span>
+          <span class="block">that Build Confident <span class="text-[var(--hero-yellow)] font-semibold dark:text-yellow-400">Readers</span></span>
         </h1>
-        <p class="text-xl text-gray-200 mb-8 max-w-lg">
+        <p class="text-xl text-gray-200 mb-8 max-w-lg dark:text-gray-300">
           Let's Read India helps children (3–10) move from phonics → comprehension → fluent reading through joyful,
           hands-on learning — at home and in school.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
           <button
             style="background-color: var(--hero-yellow);"
-            class="text-gray-900 font-semibold py-3 px-6 rounded-full text-base transition-all transform hover:scale-105 w-full sm:w-auto text-center">
+            class="text-gray-900 font-semibold py-3 px-6 rounded-full text-base transition-all transform hover:scale-105 w-full sm:w-auto text-center hover:shadow-lg hover:shadow-yellow-500/30 dark:shadow-yellow-400/20 dark:hover:shadow-yellow-400/30">
             Shop Kits for My Child
           </button>
-          <a href="demo.html" class="bg-white hover:bg-gray-100 text-gray-900 font-semibold py-3 px-6 rounded-full text-base transition-all transform hover:scale-105 w-full sm:w-auto text-center inline-block">
+          <a href="demo.html" class="bg-white hover:bg-gray-100 text-gray-900 font-semibold py-3 px-6 rounded-full text-base transition-all transform hover:scale-105 w-full sm:w-auto text-center inline-block dark:bg-white/90 dark:hover:bg-white dark:text-gray-900 dark:hover:shadow-lg dark:hover:shadow-white/20">
             Book a Demo for My School
           </a>
         </div>
@@ -835,17 +836,17 @@
 
  <!-- Reading Age Diagnostic Section -->
 <section id="reading-age-diagnostic"
-         class="relative overflow-hidden py-16 md:py-20"
+         class="relative overflow-hidden py-16 md:py-20 dark:bg-gray-900"
          style="background: linear-gradient(90deg,#6b21a8 0%, #7c3aed 50%, #ec4899 100%);">
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-12 items-start">
       <!-- Left: Headline, copy, features, CTAs -->
       <div class="text-white">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight dark:text-white">
           Know Their Reading Age. Teach What Matters.
         </h2>
 
-        <p class="mt-6 text-white/90 text-lg leading-relaxed max-w-xl">
+        <p class="mt-6 text-white/90 text-lg leading-relaxed max-w-xl dark:text-gray-300">
           Our research-backed diagnostic tool provides precise reading-age assessment in just minutes.
           Understand exactly where each child stands and what they need to progress confidently.
         </p>
@@ -853,6 +854,7 @@
         <!-- Feature boxes in 2x2 grid -->
         <div class="mt-8 grid grid-cols-2 gap-4">
           <!-- 5-7 Minutes -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 dark:bg-gray-800 dark:border-gray-700">
           <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
             <div class="flex items-center gap-2 mb-2">
               <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

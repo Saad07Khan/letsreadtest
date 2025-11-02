@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utility | Let's Read India</title>
+  <link rel="icon" type="image/svg+xml" href="./public/favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'child-purple': '#A855F7',
+            'child-pink': '#EC4899',
+            'child-yellow': '#F6C548',
+            'child-blue': '#3B82F6',
+            'child-green': '#10B981',
+          },
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    /* Apply Comic Sans MS to all text elements */
+    body,
+    button,
+    input,
+    select,
+    textarea,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span,
+    a,
+    li,
+    td,
+    th,
+    label,
+    div {
+      font-family: 'Comic Sans MS', 'Comic Neue', 'Comic Sans', cursive, sans-serif !important;
+    }
+
+    :root {
+      --hero-yellow: #F6C548;
+      --gradient-primary: linear-gradient(135deg, #4F46E5, #A855F7);
+      --gradient-secondary: linear-gradient(135deg, #EC4899, #A855F7);
+    }
+
+    [x-cloak] {
+      display: none !important;
+    }
+
+    /* Card hover effects */
+    .lr-card {
+      border-width: 1px;
+      border-style: solid;
+      transition: transform 250ms cubic-bezier(.2, .9, .2, 1), box-shadow 250ms ease, border-color 250ms ease;
+      will-change: transform;
+    }
+
+    .lr-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 40px rgba(99, 24, 155, 0.12);
+    }
+
+    /* Float animation */
+    @keyframes floatSlow {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: .35;
+      }
+
+      50% {
+        transform: translateY(-8px) scale(1.03);
+        opacity: .45;
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: .35;
+      }
+    }
+
+    .float-blob {
+      animation: floatSlow 6s ease-in-out infinite;
+      filter: blur(16px);
+    }
+
+    /* Custom Animations */
+    @keyframes floatSlow {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: .35;
+      }
+
+      50% {
+        transform: translateY(-8px) scale(1.03);
+        opacity: .45;
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: .35;
+      }
+    }
+
+    @keyframes blob {
+      0% { transform: translate(0px, 0px) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+      100% { transform: translate(0px, 0px) scale(1); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .animate-blob {
+      animation: blob 7s infinite;
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .animation-delay-2000 {
+      animation-delay: 2s;
+    }
+
+    .animation-delay-3000 {
+      animation-delay: 3s;
+    }
+
+    .animation-delay-4000 {
+      animation-delay: 4s;
+    }
+
+    /* CTA Button styles */
+    .lr-cta {
+      transition: transform 220ms ease, box-shadow 220ms ease;
+      background-size: 200% 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lr-cta:focus {
+      outline: 4px solid rgba(139, 92, 246, 0.14);
+      outline-offset: 4px;
+    }
+
+    .lr-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 26px rgba(99, 24, 155, 0.14);
+    }
+
+    .chev {
+      transition: transform 260ms cubic-bezier(.2, .9, .2, 1);
+    }
+
+    .lr-cta:hover .chev {
+      transform: translateX(6px);
+    }
+
+    /* Utility card specific styles */
+    .utility-card {
+      background: linear-gradient(180deg, rgba(250, 244, 255, 0.9), rgba(255, 250, 255, 0.85));
+      border-color: rgba(189, 97, 255, 0.12);
+    }
+
+    .dark .utility-card {
+      background: linear-gradient(180deg, rgba(88, 28, 135, 0.2), rgba(107, 33, 168, 0.15));
+      border-color: rgba(168, 85, 247, 0.2);
+    }
+
+    /* Icon bounce animation */
+    @keyframes iconBounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .icon-bounce:hover {
+      animation: iconBounce 0.6s ease;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(99, 24, 155, 0.12);
+      outline-offset: 3px;
+    }
+
+    /* Preview box styling */
+    .preview-box {
+      background: linear-gradient(180deg, rgba(255, 245, 248, 0.95), rgba(255, 245, 250, 0.9));
+      border-color: rgba(255, 176, 199, 0.12);
+    }
+
+    .dark .preview-box {
+      background: linear-gradient(180deg, rgba(131, 24, 67, 0.2), rgba(157, 23, 77, 0.15));
+      border-color: rgba(236, 72, 153, 0.2);
+    }
+  </style>
+</head>
+
+<body x-data="{ 
+  darkMode: localStorage.getItem('darkMode') === 'true', 
+  mobileMenuOpen: false,
+  contactOpen: false,
+  topMenuOpen: true,
+  cartOpen: false,
+  name: '',
+  email: '',
+  mobileNum: '',
+  childName: '',
+  message: '',
+  submitted: false
+}"
+x-init="
+  // Initialize dark mode from localStorage
+  darkMode = localStorage.getItem('darkMode') === 'true';
+  $watch('darkMode', value => {
+    localStorage.setItem('darkMode', value);
+    document.documentElement.classList.toggle('dark', value);
+  });
+  
+  // Initialize dark mode on page load
+  if (darkMode) {
+    document.documentElement.classList.add('dark');
+  }
+"
+class="font-poppins antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200"
+:class="{ 'overflow-hidden': mobileMenuOpen || contactOpen || cartOpen }">
+
+  <!-- Top Bar -->
+  <div x-show="topMenuOpen" x-cloak class="bg-gradient-to-r from-purple-600 to-pink-500 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-10 py-2">
+        <div class="flex items-center">
+          <span class="text-xs sm:text-sm">🎁 Free Reading Age Check for your child/class — Book a 10-min call</span>
+        </div>
+        <button
+          class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-medium px-3 py-1 rounded-full text-xs transition-colors">
+          Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <nav class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50 dark:border-b dark:border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <a href="index.html" class="flex-shrink-0">
+          <img src="./public/lets%20read%20logo.png" alt="Let's Read Logo" class="h-10 w-auto">
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-1">
+          <!-- About Dropdown -->
+          <div class="relative group" x-data="{ open: false }">
+            <button @click="open = !open" 
+                    class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 flex items-center transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md"
+                    :class="{ 'text-purple-600 dark:text-purple-400': open }">
+              About
+              <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10" x-cloak>
+              <div class="py-1" role="menu" aria-orientation="vertical">
+                <a href="about.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">About (main page)</a>
+                <a href="community.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Community</a>
+                <a href="careers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Careers</a>
+                <a href="mediakits.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Media Kits</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Programs / Tools Dropdown -->
+          <div class="relative group" x-data="{ open: false }">
+            <button @click="open = !open" 
+                    class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 flex items-center transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md"
+                    :class="{ 'text-purple-600 dark:text-purple-400': open }">
+              Programs / Tools
+              <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10" x-cloak>
+              <div class="py-1" role="menu" aria-orientation="vertical">
+                <a href="diagnostic.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Reading Diagnostic</a>
+                <a href="decodable.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Decodable</a>
+                <a href="readiness-quiz.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Readiness Quiz</a>
+                <a href="training.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Training</a>
+                <a href="demo.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Demo</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resources Dropdown -->
+          <div class="relative group" x-data="{ open: false }">
+            <button @click="open = !open" 
+                    class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 flex items-center transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md"
+                    :class="{ 'text-purple-600 dark:text-purple-400': open }">
+              Resources
+              <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-50" x-show="open" @click.away="open = false" x-cloak>
+                <div class="py-1">
+                  <a href="resources.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Resources</a>
+                  <a href="training.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Training</a>
+                  <a href="community.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Community</a>
+                  <a href="partner.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Partner Deck</a>
+                  <a href="support.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Support</a>
+                  <a href="utility.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Utility</a>
+                </div>
+              </div>
+          </div>
+
+          <!-- Products Dropdown -->
+          <div class="relative group" x-data="{ open: false }">
+            <button @click="open = !open" 
+                    class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 flex items-center transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md"
+                    :class="{ 'text-purple-600 dark:text-purple-400': open }">
+              Products
+              <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10" x-cloak>
+              <div class="py-1" role="menu" aria-orientation="vertical">
+                <a href="products.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Products (main page)</a>
+                <a href="bulkorders.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Bulk Orders</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <a href="#" @click.prevent="contactOpen = true"
+            class="px-3 py-2 text-sm font-medium text-gray-900 hover:text-purple-600 dark:text-gray-200 dark:hover:text-purple-400 transition-colors duration-200 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-md">
+            Contact
+          </a>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="hidden md:flex items-center space-x-3">
+          <a href="parents.html"
+            class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800">I'm
+            a Parent</a>
+          <a href="schools.html"
+            class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600 dark:bg-pink-600 dark:hover:bg-pink-700">I'm
+            a School</a>
+          <button @click="darkMode = !darkMode"
+            class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
+            :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+            <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </button>
+          <button @click="$store.cart.open()"
+            class="p-2 rounded-full text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 relative"
+            :aria-label="'View Cart'">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span x-show="$store.cart.count > 0" 
+                  class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center"
+                  x-text="$store.cart.count">
+            </span>
+          </button>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button @click="mobileMenuOpen = !mobileMenuOpen"
+            class="p-2 rounded-md text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
+            <svg class="h-6 w-6" :class="{ 'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg class="h-6 w-6" :class="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden" x-cloak>
+      <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-800">
+        <!-- About Dropdown -->
+        <div class="space-y-1" x-data="{ open: false }">
+          <button @click="open = !open" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+            <span>About</span>
+            <svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="open" class="pl-4 space-y-1" x-cloak>
+            <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">About (main page)</a>
+            <a href="community.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Community</a>
+            <a href="careers.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Careers</a>
+            <a href="mediakits.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Media Kits</a>
+          </div>
+        </div>
+
+        <!-- Programs / Tools Dropdown -->
+        <div class="space-y-1" x-data="{ open: false }">
+          <button @click="open = !open" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+            <span>Programs / Tools</span>
+            <svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="open" class="pl-4 space-y-1" x-cloak>
+            <a href="diagnostic.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Reading Diagnostic</a>
+            <a href="decodable.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Decodable</a>
+            <a href="readiness-quiz.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Readiness Quiz</a>
+            <a href="training.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Training</a>
+            <a href="demo.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Demo</a>
+          </div>
+        </div>
+
+        <!-- Resources Dropdown -->
+        <div class="space-y-1" x-data="{ open: false }">
+          <button @click="open = !open" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-purple-600 hover:bg-gray-50 dark:text-purple-400 dark:hover:bg-gray-700">
+            <span>Resources</span>
+            <svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="open" class="pl-4 space-y-1" x-cloak>
+            <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-purple-600 hover:bg-gray-50 dark:text-purple-400 dark:hover:bg-gray-700">Resources (main page)</a>
+            <a href="support.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Support</a>
+            <a href="utility.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Utility</a>
+          </div>
+        </div>
+
+        <!-- Products Dropdown -->
+        <div class="space-y-1" x-data="{ open: false }">
+          <button @click="open = !open" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+            <span>Products</span>
+            <svg class="w-5 h-5 transform transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div x-show="open" class="pl-4 space-y-1" x-cloak>
+            <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Products (main page)</a>
+            <a href="bulkorders.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Bulk Orders</a>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <a href="#" @click.prevent="contactOpen = true; mobileMenuOpen = false"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Contact</a>
+      </div>
+      <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <div class="space-y-1 px-2">
+          <a href="parents.html" class="block w-full text-left px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">I'm a Parent</a>
+          <a href="schools.html" class="block w-full text-left px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">I'm a School</a>
+          <button @click="darkMode = !darkMode"
+            class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+            <span x-text="darkMode ? 'Light Mode' : 'Dark Mode'"></span>
+          </button>
+          <button @click="$store.cart.open()"
+            class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+            View Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+<!-- Product Hero Section -->
+<section class="py-12 md:py-16 bg-gradient-to-br from-purple-50 via-white to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      
+      <!-- Left Column: Product Image -->
+      <div class="relative">
+        <!-- Floating decorative elements -->
+        <div class="absolute -top-6 -right-6 w-32 h-32 bg-purple-500/20 rounded-full filter blur-xl animate-pulse"></div>
+        <div class="absolute -bottom-8 -left-8 w-40 h-40 bg-pink-500/20 rounded-full filter blur-xl animate-pulse animation-delay-2000"></div>
+        
+        <!-- Main Image Container -->
+        <div class="relative bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border-2 border-gray-200 dark:border-gray-700 overflow-hidden p-8">
+          <img src="./public/educators-guide.jpg" alt="Let's Read Educator's Guide" 
+               class="w-full h-auto rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-500">
+          
+          <!-- Badge -->
+          <div class="absolute top-4 right-4 bg-yellow-400 text-purple-700 px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+            ⭐ Bestseller
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Product Details -->
+      <div class="space-y-6">
+        <!-- Title -->
+        <div>
+          <h1 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-3 leading-tight">
+            Let's Read Educator's Guide
+          </h1>
+          
+          <!-- Rating -->
+          <div class="flex items-center gap-4 mb-4">
+            <div class="flex items-center gap-2 bg-green-100 dark:bg-green-900/30 px-4 py-2 rounded-full">
+              <span class="text-2xl font-bold text-green-700 dark:text-green-400">4.3</span>
+              <div class="flex gap-0.5">
+                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                </svg>
+                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                </svg>
+                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                </svg>
+                <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                </svg>
+                <svg class="w-5 h-5 text-gray-300 dark:text-gray-600 fill-current" viewBox="0 0 20 20">
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                </svg>
+              </div>
+            </div>
+            <span class="text-gray-600 dark:text-gray-400 text-sm">
+              5,136 Ratings & 461 Reviews
+            </span>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+          Our Let's Read Educator's Handbook is your ultimate guide to teaching phonics skills effectively. 
+          It's suitable for both teachers, parents and learners of all age groups.
+        </p>
+
+        <!-- Price & Purchase Section -->
+        <div class="bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-2xl p-6 border-2 border-purple-200 dark:border-purple-800">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Price</p>
+              <p class="text-4xl font-black text-purple-600 dark:text-purple-400">₹ 600.00</p>
+            </div>
+            
+            <!-- Quantity Selector -->
+            <div class="flex items-center gap-3">
+              <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">Quantity:</span>
+              <div class="flex items-center bg-white dark:bg-gray-800 rounded-lg border-2 border-purple-300 dark:border-purple-700">
+                <button class="px-4 py-2 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 font-bold transition-colors">
+                  −
+                </button>
+                <input type="number" value="1" min="1" 
+                       class="w-16 text-center bg-transparent border-x-2 border-purple-300 dark:border-purple-700 py-2 font-bold text-gray-900 dark:text-white focus:outline-none">
+                <button class="px-4 py-2 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 font-bold transition-colors">
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Buy Button -->
+          <button class="w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-bold text-lg rounded-xl transition-all hover:shadow-xl hover:-translate-y-1 lr-cta">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+            Buy Now
+            <svg class="w-5 h-5 chev" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+
+          <!-- Additional Actions -->
+          <div class="grid grid-cols-2 gap-3 mt-4">
+            <button class="inline-flex items-center justify-center gap-2 px-4 py-3 bg-white dark:bg-gray-800 border-2 border-purple-300 dark:border-purple-700 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 font-semibold rounded-xl transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+              Wishlist
+            </button>
+            <button class="inline-flex items-center justify-center gap-2 px-4 py-3 bg-white dark:bg-gray-800 border-2 border-blue-300 dark:border-blue-700 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 font-semibold rounded-xl transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+              </svg>
+              Share
+            </button>
+          </div>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="grid grid-cols-3 gap-4">
+          <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-2">
+              <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <p class="text-xs font-semibold text-gray-700 dark:text-gray-300">Quality Assured</p>
+          </div>
+          <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-2">
+              <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <p class="text-xs font-semibold text-gray-700 dark:text-gray-300">Fast Delivery</p>
+          </div>
+          <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-2">
+              <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <p class="text-xs font-semibold text-gray-700 dark:text-gray-300">Secure Payment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Product Section -->
+<section class="py-20 md:py-28 bg-white dark:bg-gray-900 relative overflow-hidden">
+  <!-- Animated background -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-purple-200/30 dark:bg-purple-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-3xl opacity-70 animate-pulse"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-200/30 dark:bg-pink-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-3xl opacity-70 animate-pulse" style="animation-delay: 2s;"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-2 mx-auto bg-purple-100 dark:bg-purple-900/30 rounded-full mb-4">
+        <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+        <span class="text-sm font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wider">Product Details</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide text-gray-900 dark:text-white">About Product</h2>
+      <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+      <div class="flex justify-center items-center space-x-2 mb-6">
+        <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+        <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+      </div>
+    </div>
+
+    <!-- Main Content Card -->
+    <div class="bg-gradient-to-br from-white to-purple-50/50 dark:from-gray-800 dark:to-purple-900/20 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <!-- Introduction -->
+      <div class="p-8 md:p-12 bg-gradient-to-r from-purple-600 to-pink-500 text-white">
+        <h3 class="text-3xl md:text-4xl font-black mb-4">Introducing Let's Read Educator's Guide:</h3>
+        <p class="text-xl md:text-2xl font-bold opacity-90">A Vibrant Journey into Phonics Sounds for Young Minds!</p>
+      </div>
+
+      <!-- Features Grid -->
+      <div class="p-8 md:p-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Feature 1 -->
+          <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-purple-200 dark:border-purple-800 hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+            <div class="absolute top-0 right-0 w-20 h-20 bg-purple-500/5 rounded-bl-full"></div>
+            <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <h4 class="text-xl font-black text-gray-900 dark:text-white mb-3">Embark on an Exciting Phonics Adventure</h4>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span><strong>Tailor-made for young learners:</strong> Perfect for those taking their first steps into the world of sounds.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span><strong>Catchy phonic songs:</strong> Delight in fun and engaging songs.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span><strong>Simple CVC words:</strong> Identify initial, last, and middle sounds.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-pink-200 dark:border-pink-800 hover:border-pink-400 dark:hover:border-pink-600 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+            <div class="absolute top-0 right-0 w-20 h-20 bg-pink-500/5 rounded-bl-full"></div>
+            <div class="w-14 h-14 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+              </svg>
+            </div>
+            <h4 class="text-xl font-black text-gray-900 dark:text-white mb-3">Beyond Mere Sounds: Comprehensive Learning</h4>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-pink-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span><strong>Sound blending techniques:</strong> Master pronunciation with abundant examples.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-pink-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span><strong>Effective comprehension:</strong> Ensure retention and understanding.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-blue-200 dark:border-blue-800 hover:border-blue-400 dark:hover:border-blue-600 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+            <div class="absolute top-0 right-0 w-20 h-20 bg-blue-500/5 rounded-bl-full"></div>
+            <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+            </div>
+            <h4 class="text-xl font-black text-gray-900 dark:text-white mb-3">Expand Vocabulary and Foster a Love for Language</h4>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span><strong>Three-letter wonders:</strong> Explore a wide array of CVC words.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span><strong>Abstract learning:</strong> Match vibrant pictures with corresponding letter sounds.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span><strong>Interactive and enjoyable:</strong> Enhance cognitive abilities in a fun way.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 border-2 border-green-200 dark:border-green-800 hover:border-green-400 dark:hover:border-green-600 transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+            <div class="absolute top-0 right-0 w-20 h-20 bg-green-500/5 rounded-bl-full"></div>
+            <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+              </svg>
+            </div>
+            <h4 class="text-xl font-black text-gray-900 dark:text-white mb-3">Well-Rounded Phonics Experience</h4>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span><strong>Assessment rubric:</strong> Track progress with a holistic report card.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span><strong>Captivating CVC stories:</strong> Engage with interesting and imaginative stories.</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Specifications Section -->
+<section class="py-20 md:py-28 bg-gradient-to-br from-purple-50 via-white to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
+  <!-- Decorative background elements -->
+  <div class="absolute top-10 right-10 w-72 h-72 bg-purple-300/20 dark:bg-purple-600/10 rounded-full filter blur-3xl"></div>
+  <div class="absolute bottom-10 left-10 w-96 h-96 bg-pink-300/20 dark:bg-pink-600/10 rounded-full filter blur-3xl"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-2 mx-auto bg-purple-100 dark:bg-purple-900/30 rounded-full mb-4">
+        <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+        <span class="text-sm font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wider">Technical Details</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide text-gray-900 dark:text-white">Specifications</h2>
+      <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+      <div class="flex justify-center items-center space-x-2 mb-6">
+        <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+        <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+      </div>
+    </div>
+
+    <!-- Specifications Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Spec Card 1 -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-purple-200 dark:border-purple-800/50 overflow-hidden hover:shadow-2xl transition-shadow">
+        <div class="bg-gradient-to-br from-purple-500 to-purple-600 p-4 text-white">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+            </div>
+            <h4 class="font-bold text-lg">Format</h4>
+          </div>
+        </div>
+        <div class="p-6">
+          <p class="text-gray-700 dark:text-gray-300 mb-2">Paperback / Hardcover</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">High-quality binding for durability</p>
+        </div>
+      </div>
+
+      <!-- Spec Card 2 -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-pink-200 dark:border-pink-800/50 overflow-hidden hover:shadow-2xl transition-shadow">
+        <div class="bg-gradient-to-br from-pink-500 to-pink-600 p-4 text-white">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <h4 class="font-bold text-lg">Pages</h4>
+          </div>
+        </div>
+        <div class="p-6">
+          <p class="text-gray-700 dark:text-gray-300 mb-2">200+ Pages</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Full-color illustrations throughout</p>
+        </div>
+      </div>
+
+      <!-- Spec Card 3 -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-blue-200 dark:border-blue-800/50 overflow-hidden hover:shadow-2xl transition-shadow">
+        <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-4 text-white">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/>
+              </svg>
+            </div>
+            <h4 class="font-bold text-lg">Language</h4>
+          </div>
+        </div>
+        <div class="p-6">
+          <p class="text-gray-700 dark:text-gray-300 mb-2">English</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Easy-to-understand instructions</p>
+        </div>
+      </div>
+
+      <!-- Spec Card 4 -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-green-200 dark:border-green-800/50 overflow-hidden hover:shadow-2xl transition-shadow">
+        <div class="bg-gradient-to-br from-green-500 to-green-600 p-4 text-white">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+              </svg>
+            </div>
+            <h4 class="font-bold text-lg">Age Group</h4>
+          </div>
+        </div>
+        <div class="p-6">
+          <p class="text-gray-700 dark:text-gray-300 mb-2">3-8 Years</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Suitable for early learners</p>
+        </div>
+      </div>
+
+      <!-- Spec Card 5 -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-amber-200 dark:border-amber-800/50 overflow-hidden hover:shadow-2xl transition-shadow">
+        <div class="bg-gradient-to-br from-amber-500 to-amber-600 p-4 text-white">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <h4 class="font-bold text-lg">Dimensions</h4>
+          </div>
+        </div>
+        <div class="p-6">
+          <p class="text-gray-700 dark:text-gray-300 mb-2">8.5" x 11"</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Standard letter size format</p>
+        </div>
+      </div>
+
+      <!-- Spec Card 6 -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-indigo-200 dark:border-indigo-800/50 overflow-hidden hover:shadow-2xl transition-shadow">
+        <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 p-4 text-white">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <h4 class="font-bold text-lg">ISBN</h4>
+          </div>
+        </div>
+        <div class="p-6">
+          <p class="text-gray-700 dark:text-gray-300 mb-2">978-XXXXXXXXXX</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Certified educational material</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Additional Info Box -->
+    <div class="mt-8 bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0">
+          <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <h4 class="text-sm font-bold text-gray-900 dark:text-white mb-2">Additional Information</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+            This educator's guide has been designed by experienced literacy experts and tested in classrooms across India. 
+            It includes comprehensive teaching notes, activity suggestions, and assessment tools to help educators track student progress effectively.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-20 md:py-28 bg-white dark:bg-gray-900 relative overflow-hidden">
+  <!-- Animated background -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-200/30 dark:bg-blue-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-3xl opacity-70 animate-pulse"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-green-200/30 dark:bg-green-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-3xl opacity-70 animate-pulse" style="animation-delay: 2s;"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-2 mx-auto bg-purple-100 dark:bg-purple-900/30 rounded-full mb-4">
+        <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+        <span class="text-sm font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wider">Key Benefits</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide text-gray-900 dark:text-white">Features</h2>
+      <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+      <div class="flex justify-center items-center space-x-2 mb-6">
+        <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+        <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+      </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- Feature 1 -->
+      <div class="group relative bg-gradient-to-br from-white to-purple-50/50 dark:from-gray-800 dark:to-purple-900/20 rounded-2xl p-6 border border-purple-200 dark:border-purple-800/30 hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+        <div class="absolute -top-3 -right-3 w-20 h-20 bg-purple-500/10 rounded-full filter blur-xl"></div>
+        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg icon-bounce">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+          </svg>
+        </div>
+        <h4 class="text-xl font-black text-gray-900 dark:text-white mb-3">Interactive Phonics Songs</h4>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          Engaging musical activities that make learning letter sounds fun and memorable for young learners.
+        </p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="group relative bg-gradient-to-br from-white to-pink-50/50 dark:from-gray-800 dark:to-pink-900/20 rounded-2xl p-6 border border-pink-200 dark:border-pink-800/30 hover:border-pink-400 dark:hover:border-pink-600 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+        <div class="absolute -top-3 -right-3 w-20 h-20 bg-pink-500/10 rounded-full filter blur-xl"></div>
+        <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg icon-bounce">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+          </svg>
+        </div>
+        <h4 class="text-xl font-black text-gray-900 dark:text-white mb-3">Step-by-Step Activities</h4>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          Structured lessons with clear instructions that guide educators through each phonics concept progressively.
+        </p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="group relative bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-800 dark:to-blue-900/20 rounded-2xl p-6 border border-blue-200 dark:border-blue-800/30 hover:border-blue-400 dark:hover:border-blue-600 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+        <div class="absolute -top-3 -right-3 w-20 h-20 bg-blue-500/10 rounded-full filter blur-xl"></div>
+        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg icon-bounce">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h4 class="text-xl font-black text-gray-900 dark:text-white mb-3">Colorful Illustrations</h4>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          Vibrant, child-friendly images that capture attention and reinforce phonics concepts visually.
+        </p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="group relative bg-gradient-to-br from-white to-green-50/50 dark:from-gray-800 dark:to-green-900/20 rounded-2xl p-6 border border-green-200 dark:border-green-800/30 hover:border-green-400 dark:hover:border-green-600 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+        <div class="absolute -top-3 -right-3 w-20 h-20 bg-green-500/10 rounded-full filter blur-xl"></div>
+        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg icon-bounce">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h4 class="text-xl font-black text-gray-900 dark:text-white mb-3">Assessment Tools</h4>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          Built-in rubrics and evaluation methods to track student progress and identify areas needing support.
+        </p>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="group relative bg-gradient-to-br from-white to-amber-50/50 dark:from-gray-800 dark:to-amber-900/20 rounded-2xl p-6 border border-amber-200 dark:border-amber-800/30 hover:border-amber-400 dark:hover:border-amber-600 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+        <div class="absolute -top-3 -right-3 w-20 h-20 bg-amber-500/10 rounded-full filter blur-xl"></div>
+        <div class="w-16 h-16 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg icon-bounce">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+          </svg>
+        </div>
+        <h4 class="text-xl font-black text-gray-900 dark:text-white mb-3">CVC Story Collection</h4>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          Captivating short stories using CVC words that help children apply their phonics knowledge in context.
+        </p>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="group relative bg-gradient-to-br from-white to-indigo-50/50 dark:from-gray-800 dark:to-indigo-900/20 rounded-2xl p-6 border border-indigo-200 dark:border-indigo-800/30 hover:border-indigo-400 dark:hover:border-indigo-600 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+        <div class="absolute -top-3 -right-3 w-20 h-20 bg-indigo-500/10 rounded-full filter blur-xl"></div>
+        <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg icon-bounce">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+        </div>
+        <h4 class="text-xl font-black text-gray-900 dark:text-white mb-3">For All Educators</h4>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+          Suitable for teachers, parents, and tutors working with children at various learning stages.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Ratings and Reviews Section -->
+<section class="py-20 md:py-28 bg-gradient-to-br from-slate-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
+  <!-- Decorative background -->
+  <div class="absolute top-10 right-10 w-72 h-72 bg-yellow-300/20 dark:bg-yellow-600/10 rounded-full filter blur-3xl"></div>
+  <div class="absolute bottom-10 left-10 w-96 h-96 bg-orange-300/20 dark:bg-orange-600/10 rounded-full filter blur-3xl"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-2 mx-auto bg-purple-100 dark:bg-purple-900/30 rounded-full mb-4">
+        <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+        <span class="text-sm font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wider">Customer Feedback</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide text-gray-900 dark:text-white">Ratings & Reviews</h2>
+      <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
+      <div class="flex justify-center items-center space-x-2 mb-6">
+        <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+        <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+      </div>
+    </div>
+
+    <!-- Overall Rating Card -->
+    <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 p-8 md:p-12 mb-12">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        <!-- Left: Overall Score -->
+        <div class="text-center lg:text-left">
+          <div class="inline-flex items-center gap-6 bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-2xl p-8 shadow-xl">
+            <div>
+              <p class="text-6xl md:text-7xl font-black mb-2">4.3</p>
+              <div class="flex gap-1 justify-center lg:justify-start mb-2">
+                <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 20 20">
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                </svg>
+                <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 20 20">
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                </svg>
+                <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 20 20">
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                </svg>
+                <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 20 20">
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                </svg>
+                <svg class="w-8 h-8 text-white/50 fill-current" viewBox="0 0 20 20">
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                </svg>
+              </div>
+              <p class="text-white/90 font-semibold">Out of 5</p>
+            </div>
+          </div>
+          <p class="text-gray-600 dark:text-gray-400 mt-6 text-lg">
+            <span class="font-bold text-gray-900 dark:text-white">5,136</span> Ratings & 
+            <span class="font-bold text-gray-900 dark:text-white">461</span> Reviews
+          </p>
+        </div>
+
+        <!-- Right: Rating Breakdown -->
+        <div class="space-y-4">
+          <!-- 5 Stars -->
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-1 w-24">
+              <span class="text-sm font-bold text-gray-700 dark:text-gray-300">5</span>
+              <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+              </svg>
+            </div>
+            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+              <div class="bg-gradient-to-r from-green-400 to-green-500 h-full rounded-full" style="width: 68%"></div>
+            </div>
+            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300 w-16 text-right">3,492</span>
+          </div>
+
+          <!-- 4 Stars -->
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-1 w-24">
+              <span class="text-sm font-bold text-gray-700 dark:text-gray-300">4</span>
+              <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+              </svg>
+            </div>
+            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+              <div class="bg-gradient-to-r from-lime-400 to-lime-500 h-full rounded-full" style="width: 20%"></div>
+            </div>
+            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300 w-16 text-right">1,027</span>
+          </div>
+
+          <!-- 3 Stars -->
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-1 w-24">
+              <span class="text-sm font-bold text-gray-700 dark:text-gray-300">3</span>
+              <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+              </svg>
+            </div>
+            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+              <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 h-full rounded-full" style="width: 8%"></div>
+            </div>
+            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300 w-16 text-right">411</span>
+          </div>
+
+          <!-- 2 Stars -->
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-1 w-24">
+              <span class="text-sm font-bold text-gray-700 dark:text-gray-300">2</span>
+              <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+              </svg>
+            </div>
+            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+              <div class="bg-gradient-to-r from-orange-400 to-orange-500 h-full rounded-full" style="width: 3%"></div>
+            </div>
+            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300 w-16 text-right">154</span>
+          </div>
+
+          <!-- 1 Star -->
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-1 w-24">
+              <span class="text-sm font-bold text-gray-700 dark:text-gray-300">1</span>
+              <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+              </svg>
+            </div>
+            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+              <div class="bg-gradient-to-r from-red-400 to-red-500 h-full rounded-full" style="width: 1%"></div>
+            </div>
+            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300 w-16 text-right">52</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Review Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      
+      <!-- Review 1 -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 hover:shadow-xl transition-shadow">
+        <!-- Review Header -->
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+              P
+            </div>
+            <div>
+              <h5 class="font-bold text-gray-900 dark:text-white">Priya Sharma</h5>
+              <p class="text-xs text-gray-500 dark:text-gray-400">Verified Purchase</p>
+            </div>
+          </div>
+          <div class="flex gap-0.5">
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Review Content -->
+        <h6 class="font-bold text-gray-900 dark:text-white mb-2">Excellent teaching resource!</h6>
+        <p class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-3">
+          As a primary school teacher, this guide has been invaluable. The step-by-step activities are easy to follow, 
+          and my students absolutely love the phonics songs! I've seen remarkable improvement in their reading skills 
+          within just a few weeks.
+        </p>
+        
+        <!-- Review Footer -->
+        <div class="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
+          <p class="text-xs text-gray-500 dark:text-gray-400">Reviewed on Oct 15, 2024</p>
+          <button class="text-xs text-purple-600 dark:text-purple-400 hover:underline font-semibold">
+            Helpful (24)
+          </button>
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 hover:shadow-xl transition-shadow">
+        <!-- Review Header -->
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+              R
+            </div>
+            <div>
+              <h5 class="font-bold text-gray-900 dark:text-white">Rajesh Kumar</h5>
+              <p class="text-xs text-gray-500 dark:text-gray-400">Verified Purchase</p>
+            </div>
+          </div>
+          <div class="flex gap-0.5">
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-gray-300 dark:text-gray-600 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Review Content -->
+        <h6 class="font-bold text-gray-900 dark:text-white mb-2">Perfect for home learning</h6>
+        <p class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-3">
+          I purchased this for homeschooling my 5-year-old daughter. The colorful illustrations keep her engaged, 
+          and the assessment tools help me track her progress. Would definitely recommend to other parents!
+        </p>
+        
+        <!-- Review Footer -->
+        <div class="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
+          <p class="text-xs text-gray-500 dark:text-gray-400">Reviewed on Oct 8, 2024</p>
+          <button class="text-xs text-purple-600 dark:text-purple-400 hover:underline font-semibold">
+            Helpful (18)
+          </button>
+        </div>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 hover:shadow-xl transition-shadow">
+        <!-- Review Header -->
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+              A
+            </div>
+            <div>
+              <h5 class="font-bold text-gray-900 dark:text-white">Anita Desai</h5>
+              <p class="text-xs text-gray-500 dark:text-gray-400">Verified Purchase</p>
+            </div>
+          </div>
+          <div class="flex gap-0.5">
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Review Content -->
+        <h6 class="font-bold text-gray-900 dark:text-white mb-2">Comprehensive and well-structured</h6>
+        <p class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-3">
+          This guide covers everything from basic sounds to more complex blending. The CVC stories are particularly 
+          effective in helping children apply what they've learned. Great value for money!
+        </p>
+        
+        <!-- Review Footer -->
+        <div class="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
+          <p class="text-xs text-gray-500 dark:text-gray-400">Reviewed on Sep 28, 2024</p>
+          <button class="text-xs text-purple-600 dark:text-purple-400 hover:underline font-semibold">
+            Helpful (31)
+          </button>
+        </div>
+      </div>
+
+      <!-- Review 4 -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 hover:shadow-xl transition-shadow">
+        <!-- Review Header -->
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+              M
+            </div>
+            <div>
+              <h5 class="font-bold text-gray-900 dark:text-white">Meera Patel</h5>
+              <p class="text-xs text-gray-500 dark:text-gray-400">Verified Purchase</p>
+            </div>
+          </div>
+          <div class="flex gap-0.5">
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="w-4 h-4 text-gray-300 dark:text-gray-600 fill-current" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Review Content -->
+        <h6 class="font-bold text-gray-900 dark:text-white mb-2">Great for literacy centers</h6>
+        <p class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-3">
+          I use this guide in my literacy center activities. The hands-on exercises and interactive elements keep 
+          students engaged during independent work time. Very practical for classroom implementation.
+        </p>
+        
+        <!-- Review Footer -->
+        <div class="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
+          <p class="text-xs text-gray-500 dark:text-gray-400">Reviewed on Sep 20, 2024</p>
+          <button class="text-xs text-purple-600 dark:text-purple-400 hover:underline font-semibold">
+            Helpful (15)
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Load More Reviews Button -->
+    <div class="text-center">
+      <button class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-bold rounded-xl transition-all hover:shadow-xl hover:-translate-y-1 lr-cta">
+        Load More Reviews
+        <svg class="w-5 h-5 chev" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Write Review CTA -->
+    <div class="mt-12 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-2xl p-8 border-2 border-purple-200 dark:border-purple-800 text-center">
+      <h3 class="text-2xl font-black text-gray-900 dark:text-white mb-3">Share Your Experience!</h3>
+      <p class="text-gray-700 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
+        Have you used Let's Read Educator's Guide? We'd love to hear your thoughts and feedback!
+      </p>
+      <button class="inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-gray-800 border-2 border-purple-300 dark:border-purple-700 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 font-bold rounded-xl transition-all hover:shadow-lg">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+        </svg>
+        Write a Review
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- Footer -->
+  <footer role="contentinfo" style="background: linear-gradient(90deg,#5b21b6,#6d28d9); background-color: #6d28d9;"
+    class="text-white pt-16 pb-8 relative overflow-hidden z-10">
+    <!-- decorative top glow -->
+    <div
+      class="absolute -top-10 left-1/2 transform -translate-x-1/2 w-3/4 h-36 pointer-events-none bg-gradient-to-b from-pink-500/20 to-transparent rounded-full">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+        <!-- Brand -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="bg-yellow-400 rounded-full p-2 flex items-center justify-center">
+              <span class="text-purple-700 font-bold text-lg">LR</span>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold tracking-tight text-white">LET'S READ</h3>
+              <p class="text-sm text-white">Empowering young minds through literacy.</p>
+            </div>
+          </div>
+
+          <p class="text-white leading-relaxed text-sm max-w-sm">
+            Reading kits, diagnostics and training to help children build strong reading foundations.
+          </p>
+
+          <!-- Social / contact icons -->
+          <div class="flex items-center gap-2 flex-wrap">
+            <a href="#" aria-label="Twitter" title="Twitter"
+              class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-sky-400 hover:text-white">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.52 8.52 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z" />
+              </svg>
+            </a>
+
+            <a href="https://wa.me/911234567890" aria-label="WhatsApp" title="WhatsApp"
+              class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-green-400 hover:text-white">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M16.7 14.6c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.2s-.8.9-1 1.1c-.2.2-.4.2-.7.1-.3-.1-1.4-.5-2.6-1.6-1-1-1.6-2.2-1.8-2.5-.2-.3 0-.5.1-.7.1-.1.3-.4.4-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.3-.7-.5-.6-.7-.6h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1.1 2.7 1.2 2.9.1.2 2.2 3.5 5.4 4.9.8.3 1.5.5 2 .6.8.3 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.4-.1-.2-.3-.2-.6-.3zM12 2C6.5 2 2 6.3 2 11.7c0 2.1.7 4 1.9 5.6L2 22l4.8-1.6c1.6.9 3.4 1.3 5.2 1.3 5.5 0 10-4.3 10-9.7S17.5 2 12 2z" />
+              </svg>
+            </a>
+
+            <a href="tel:+911234567890" aria-label="Phone" title="Call us"
+              class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-blue-200 hover:text-white">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C9.92 21 3 14.08 3 6a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.27.2 2.48.57 3.6.12.33.04.7-.25.99l-2.2 2.2z" />
+              </svg>
+            </a>
+
+            <a href="mailto:info@letsread.com" aria-label="Email" title="Email us"
+              class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition text-rose-300 hover:text-white">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- For Parents -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-white">For Parents</h4>
+          <ul class="space-y-2 text-white text-sm">
+            <li><a href="products.html" class="hover:underline">Shop Kits</a></li>
+            <li><a href="readiness-quiz.html" class="hover:underline">Readiness Quiz</a></li>
+            <li><a href="#" class="hover:underline">Sample Activity</a></li>
+            <li><a href="#" class="hover:underline">FAQs</a></li>
+          </ul>
+        </div>
+
+        <!-- For Schools -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-white">For Schools</h4>
+          <ul class="space-y-2 text-white text-sm">
+            <li><a href="#" class="hover:underline">Program</a></li>
+            <li><a href="diagnostic.html" class="hover:underline">Diagnostic</a></li>
+            <li><a href="#" class="hover:underline">Training</a></li>
+            <li><a href="#" class="hover:underline">Case Studies</a></li>
+            <li><a href="#" class="hover:underline">Demo</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-white">Resources</h4>
+          <ul class="space-y-2 text-white text-sm">
+            <li><a href="resources.html" class="hover:underline">Articles</a></li>
+            <li><a href="resources.html" class="hover:underline">Downloads</a></li>
+            <li><a href="#" class="hover:underline">Research</a></li>
+            <li><a href="#" class="hover:underline">Press</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal row: full width -->
+        <div class="lg:col-span-4 mt-8 pt-6 border-t border-white/20">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-white text-sm">© 2025 Let's Read India. All rights reserved.</div>
+
+            <div class="flex items-center gap-4 text-sm">
+              <a href="#" class="text-white/70 hover:text-white transition">Privacy</a>
+              <span class="hidden md:inline text-white/40">•</span>
+              <a href="#" class="text-white/70 hover:text-white transition">Terms</a>
+              <span class="hidden md:inline text-white/40">•</span>
+              <a href="#" class="text-white/70 hover:text-white transition">Refunds / Shipping</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact Modal -->
+  <div x-show="contactOpen" class="fixed inset-0 z-60 flex items-center justify-center px-4" x-transition x-cloak>
+    <!-- backdrop -->
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" @click="contactOpen = false" aria-hidden="true"></div>
+
+    <!-- modal panel -->
+    <div
+      class="relative w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-2xl z-10 mx-auto my-8 overflow-y-auto"
+      @click.away="contactOpen = false" x-transition:enter="ease-out duration-300"
+      x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+      x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
+      x-transition:leave-end="opacity-0 scale-95">
+
+      <!-- Close button -->
+      <button @click="contactOpen = false"
+        class="absolute top-4 right-4 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="text-center">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Let's Talk!</h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-6">We'd love to hear from you. Send us a message and we'll respond
+          as soon as possible.</p>
+      </div>
+
+      <form class="space-y-4" @submit.prevent="">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Name</label>
+          <input type="text" id="name" x-model="name" required
+            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email
+            Address</label>
+          <input type="email" id="email" x-model="email" required
+            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+        </div>
+
+        <div>
+          <label for="mobile" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mobile
+            Number</label>
+          <input type="tel" id="mobile" x-model="mobileNum" required
+            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+        </div>
+
+        <div>
+          <label for="child" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Child's Name (if
+            applicable)</label>
+          <input type="text" id="child" x-model="childName"
+            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your
+            Message</label>
+          <textarea id="message" rows="4" x-model="message" required
+            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+        </div>
+
+        <button type="submit"
+          @click="submitted = true; setTimeout(() => { submitted = false; contactOpen = false }, 2000)"
+          class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">
+          <span x-show="!submitted">Send Message</span>
+          <span x-show="submitted">Message Sent!</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Initialize dark mode
+    document.addEventListener('alpine:init', () => {
+      if (localStorage.darkMode === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    });
+  </script>
+</body>
+
+</html>
+
+
+
+ 

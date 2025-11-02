@@ -37,6 +37,125 @@
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   
   <style>
+    body {
+      font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif !important;
+    }
+    body {
+      font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif !important;
+    }
+    
+    /* Animation keyframes */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    /* Utility classes for animations */
+    .animate-on-scroll {
+      opacity: 0;
+    }
+    
+    .animate-on-scroll.animated {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .animate-scale.animated {
+      animation: scaleIn 0.6s ease-out forwards;
+    }
+    
+    /* Staggered animation delays */
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+    .delay-600 { animation-delay: 0.6s; }
+    .delay-700 { animation-delay: 0.7s; }
+    .delay-800 { animation-delay: 0.8s; }
+    /* Animation keyframes */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    /* Utility classes for animations */
+    .animate-on-scroll {
+      opacity: 0;
+    }
+    
+    .animate-on-scroll.animated {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .animate-fade-in.animated {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    /* Staggered animation delays */
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+    
+    @keyframes floatSlow {
+      0% { transform: translateY(0) scale(1); opacity: .35; }
+      50% { transform: translateY(-8px) scale(1.03); opacity: .45; }
+      100% { transform: translateY(0) scale(1); opacity: .35; }
+    }
+    
+    .float-blob { animation: floatSlow 6s ease-in-out infinite; filter: blur(16px); }
+    
+    .lr-cta {
+      transition: transform 220ms ease, box-shadow 220ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .lr-cta:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 8px 26px rgba(99,24,155,0.14); 
+    }
+    
+    .chev {
+      transition: transform 260ms cubic-bezier(.2,.9,.2,1);
+    }
+    
+    .lr-cta:hover .chev { 
+      transform: translateX(6px); 
+    }
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-20px); }
@@ -266,7 +385,6 @@
               <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10" x-cloak>
                 <div class="py-1" role="menu" aria-orientation="vertical">
                   <a href="about.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">About (main page)</a>
-                  <a href="community.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Community</a>
                   <a href="careers.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Careers</a>
                   <a href="mediakits.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700" role="menuitem">Media Kits</a>
                 </div>
@@ -307,7 +425,6 @@
               <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-50" x-show="open" @click.away="open = false" x-cloak>
                   <div class="py-1">
                     <a href="resources.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Resources</a>
-                    <a href="training.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Training</a>
                     <a href="community.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Community</a>
                     <a href="partner.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Partner Deck</a>
                     <a href="support.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Support</a>
@@ -403,7 +520,6 @@
             </button>
             <div x-show="open" class="pl-4 space-y-1" x-cloak>
               <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">About (main page)</a>
-              <a href="community.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Community</a>
               <a href="careers.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Careers</a>
               <a href="mediakits.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Media Kits</a>
             </div>
@@ -421,7 +537,6 @@
               <a href="diagnostic.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Reading Diagnostic</a>
               <a href="decodable.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Decodable</a>
               <a href="readiness-quiz.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Readiness Quiz</a>
-              <a href="training.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Training</a>
               <a href="demo.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Demo</a>
             </div>
           </div>
@@ -517,163 +632,214 @@
       </div>
     </div>
   </section>
-    <!-- Choose Your Path to Reading Success Section -->
-    <section id="choose-path" class="py-16 md:py-24 bg-white dark:bg-gray-900">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide">CHOOSE YOUR PATH TO READING SUCCESS</h2>
-          <div class="w-20 h-1 bg-pink-500 mx-auto mb-6"></div>
-          <div class="flex justify-center items-center space-x-2 mb-6">
-            <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
-            <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
-            <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
-          </div>
-          <p class="text-lg text-slate-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Whether you're a parent looking to support your child at home or an educator seeking to enhance your classroom,
-            we have the perfect solution for you.
-          </p>
-        </div>
-    
-        <!-- Cards -->
-        <div class="grid gap-8 grid-cols-1 md:grid-cols-2">
-          <!-- Parent Card -->
-          <article class="rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 flex flex-col h-full">
-            <div class="flex flex-col h-full">
-              <div class="flex items-start gap-6 w-full">
-                <!-- left column -->
-                <div class="flex-1 flex flex-col w-full">
-                  <div class="flex items-center gap-4">
-                    <div class="rounded-lg p-3 bg-purple-100 dark:bg-purple-900/30 shadow-sm">
-                      <!-- icon -->
-                      <svg class="w-6 h-6 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2 2 2 4-4 6 6"></path>
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 class="text-2xl font-bold text-slate-900 dark:text-white">For Parents</h3>
-                      <div class="text-sm font-semibold text-pink-600 mt-1">Home Learning Kits</div>
-                    </div>
-                  </div>
-      
-                  <p class="mt-6 text-slate-600 dark:text-slate-300">
-                    Give your child the gift of confident reading with our structured, fun-filled home learning kits.
-                    Perfect for ages 3–10 and designed for busy parents.
-                  </p>
-      
-                  <ul class="mt-6 space-y-3 text-slate-700 dark:text-slate-200">
-                    <li class="flex items-start gap-3">
-                      <span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span>
-                      <span>Age-appropriate levels</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span>
-                      <span>Parent-friendly guides</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span>
-                      <span>Progress tracking</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span>
-                      <span>15–20 mins daily routines</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              
-              <!-- push CTA to bottom with margin -->
-              <div class="mt-8">
-                <a href="parents.html" class="inline-flex items-center justify-center px-8 py-3 rounded-lg text-white font-semibold lr-cta bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 transition-all">
-                  Explore Home Kits
-                  <svg class="w-4 h-4 ml-3 chev" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-    
-            <!-- decorative float blob -->
-            <div class="absolute -right-16 -top-12 w-48 h-48 rounded-full bg-pink-200 dark:bg-pink-900/20 opacity-30 pointer-events-none float-blob"></div>
-          </article>
-    
-          <!-- School Card -->
-          <article class="bg-white dark:bg-gray-800 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
-            <div class="flex flex-col h-full">
-              <div class="flex flex-col md:flex-row items-start gap-6 w-full">
-                <!-- left column -->
-                <div class="flex-1 flex flex-col w-full">
-                  <div class="flex items-center gap-4">
-                    <div class="rounded-lg p-3 bg-pink-100 dark:bg-pink-900/30 shadow-sm">
-                      <!-- icon -->
-                      <svg class="w-6 h-6 text-pink-600 dark:text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 class="text-2xl font-bold text-slate-900 dark:text-white">For Schools</h3>
-                      <div class="text-sm font-semibold text-pink-600 mt-1">Classroom Programs</div>
-                    </div>
-                  </div>
-      
-                  <p class="mt-6 text-slate-600 dark:text-slate-300">
-                    Transform your school's reading program with our evidence-based curriculum and teacher training.
-                    Aligned with educational standards and proven to boost literacy rates.
-                  </p>
-      
-                  <ul class="mt-6 space-y-3 text-slate-700 dark:text-slate-200">
-                    <li class="flex items-start gap-3">
-                      <span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span>
-                      <span>Teacher training</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span>
-                      <span>Classroom resources</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span>
-                      <span>Assessment tools</span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                      <span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span>
-                      <span>Ongoing support</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              
-              <!-- push CTA to bottom with margin -->
-              <div class="mt-8">
-                <a href="schools.html" class="inline-flex items-center justify-center px-8 py-3 rounded-lg text-white font-semibold lr-cta bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 transition-all">
-                  See School Program
-                  <svg class="w-4 h-4 ml-3 chev" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-    
-            <!-- decorative float blob -->
-            <div class="absolute -left-16 -bottom-12 w-48 h-48 rounded-full bg-purple-200 opacity-30 pointer-events-none float-blob"></div>
-          </article>
-        </div>
-      </div>
-    </section>
-  
-  <!-- ---------- end replaced section ---------- -->
-<!-- How It Works Section -->
-<section id="how-it-works" class="py-20 bg-gradient-to-b from-white to-pink-50 dark:from-gray-900 dark:to-gray-900">
+  <section id="choose-path" 
+         class="py-16 md:py-24 bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50"
+         x-data="{ 
+           animated: false,
+           init() {
+             const observer = new IntersectionObserver((entries) => {
+               entries.forEach(entry => {
+                 if (entry.isIntersecting && !this.animated) {
+                   this.animated = true;
+                   // Add animated class to all elements with animate-on-scroll
+                   const elements = entry.target.querySelectorAll('.animate-on-scroll');
+                   elements.forEach((el, index) => {
+                     setTimeout(() => {
+                       el.classList.add('animated');
+                     }, index * 100);
+                   });
+                 }
+               });
+             }, {
+               threshold: 0.2,
+               rootMargin: '0px 0px -100px 0px'
+             });
+             
+             observer.observe(this.$el);
+           }
+         }">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Section Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide dark:text-white">How Let's Read India Works</h2>
-      <div class="w-24 h-1.5 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6 rounded-full"></div>
-      <div class="flex justify-center items-center space-x-2 mb-8">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide animate-on-scroll">
+        CHOOSE YOUR PATH TO READING SUCCESS
+      </h2>
+      <div class="w-20 h-1 bg-pink-500 mx-auto mb-6 animate-on-scroll delay-100"></div>
+      <div class="flex justify-center items-center space-x-2 mb-6 animate-on-scroll delay-200">
         <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
         <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
         <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
       </div>
-      <p class="text-lg text-slate-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+      <p class="text-lg text-slate-600 max-w-3xl mx-auto animate-on-scroll delay-300">
+        Whether you're a parent looking to support your child at home or an educator seeking to enhance your classroom,
+        we have the perfect solution for you.
+      </p>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid gap-8 grid-cols-1 md:grid-cols-2">
+      <!-- Parent Card -->
+      <article class="animate-on-scroll delay-400 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 bg-white flex flex-col h-full relative overflow-hidden">
+        <div class="flex flex-col h-full">
+          <div class="flex items-start gap-6 w-full">
+            <!-- left column -->
+            <div class="flex-1 flex flex-col w-full">
+              <div class="flex items-center gap-4">
+                <div class="rounded-lg p-3 bg-purple-100 shadow-sm">
+                  <!-- icon -->
+                  <svg class="w-6 h-6 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2 2 2 4-4 6 6"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold text-slate-900">For Parents</h3>
+                  <div class="text-sm font-semibold text-pink-600 mt-1">Home Learning Kits</div>
+                </div>
+              </div>
+  
+              <p class="mt-6 text-slate-600">
+                Give your child the gift of confident reading with our structured, fun-filled home learning kits.
+                Perfect for ages 3–10 and designed for busy parents.
+              </p>
+  
+              <ul class="mt-6 space-y-3 text-slate-700">
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span>
+                  <span>Age-appropriate levels</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span>
+                  <span>Parent-friendly guides</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span>
+                  <span>Progress tracking</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span>
+                  <span>15–20 mins daily routines</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- push CTA to bottom with margin -->
+          <div class="mt-8">
+            <a href="parents.html" class="inline-flex items-center justify-center px-8 py-3 rounded-lg text-white font-semibold lr-cta bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 transition-all">
+              Explore Home Kits
+              <svg class="w-4 h-4 ml-3 chev" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- decorative float blob -->
+        <div class="absolute -right-16 -top-12 w-48 h-48 rounded-full bg-pink-200 opacity-30 pointer-events-none float-blob"></div>
+      </article>
+
+      <!-- School Card -->
+      <article class="animate-on-scroll delay-500 bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full relative overflow-hidden">
+        <div class="flex flex-col h-full">
+          <div class="flex flex-col md:flex-row items-start gap-6 w-full">
+            <!-- left column -->
+            <div class="flex-1 flex flex-col w-full">
+              <div class="flex items-center gap-4">
+                <div class="rounded-lg p-3 bg-pink-100 shadow-sm">
+                  <!-- icon -->
+                  <svg class="w-6 h-6 text-pink-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold text-slate-900">For Schools</h3>
+                  <div class="text-sm font-semibold text-pink-600 mt-1">Classroom Programs</div>
+                </div>
+              </div>
+  
+              <p class="mt-6 text-slate-600">
+                Transform your school's reading program with our evidence-based curriculum and teacher training.
+                Aligned with educational standards and proven to boost literacy rates.
+              </p>
+  
+              <ul class="mt-6 space-y-3 text-slate-700">
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span>
+                  <span>Teacher training</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span>
+                  <span>Classroom resources</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span>
+                  <span>Assessment tools</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span>
+                  <span>Ongoing support</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- push CTA to bottom with margin -->
+          <div class="mt-8">
+            <a href="schools.html" class="inline-flex items-center justify-center px-8 py-3 rounded-lg text-white font-semibold lr-cta bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 transition-all">
+              See School Program
+              <svg class="w-4 h-4 ml-3 chev" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- decorative float blob -->
+        <div class="absolute -left-16 -bottom-12 w-48 h-48 rounded-full bg-purple-200 opacity-30 pointer-events-none float-blob"></div>
+      </article>
+    </div>
+  </div>
+</section>
+  <!-- ---------- end replaced section ---------- -->
+<!-- How It Works Section -->
+<section id="how-it-works" 
+         class="py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-yellow-50"
+         x-data="{ 
+           animated: false,
+           init() {
+             const observer = new IntersectionObserver((entries) => {
+               entries.forEach(entry => {
+                 if (entry.isIntersecting && !this.animated) {
+                   this.animated = true;
+                   const elements = entry.target.querySelectorAll('.animate-on-scroll, .animate-scale');
+                   elements.forEach((el, index) => {
+                     setTimeout(() => {
+                       el.classList.add('animated');
+                     }, index * 100);
+                   });
+                 }
+               });
+             }, {
+               threshold: 0.15,
+               rootMargin: '0px 0px -50px 0px'
+             });
+             
+             observer.observe(this.$el);
+           }
+         }">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide animate-on-scroll">
+        How Let's Read India Works
+      </h2>
+      <div class="w-24 h-1.5 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6 rounded-full animate-on-scroll delay-100"></div>
+      <div class="flex justify-center items-center space-x-2 mb-8 animate-on-scroll delay-200">
+        <div class="w-3 h-3 bg-purple-600 rounded-full"></div>
+        <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+      </div>
+      <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed animate-on-scroll delay-300">
         Our comprehensive approach combines proven methodologies with innovative tools to create an effective and joyful
         reading learning experience for children of all ages.
       </p>
@@ -682,18 +848,18 @@
     <!-- Cards Grid -->
     <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
       <!-- Card 1: Systematic Phonics -->
-      <article class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
-        <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/30 dark:to-pink-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="currentColor" aria-hidden="true">
+      <article class="animate-scale delay-400 group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 flex flex-col h-full">
+        <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-purple-600" fill="currentColor" aria-hidden="true">
             <path d="M12 8v4l3 3M12 6a9 9 0 110 12 9 9 0 010-12zm1 11.414V7a1 1 0 10-2 0v6a1 1 0 00.293.707l3 3a1 1 0 101.414-1.414L13 13.414z"/>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">Systematic Phonics</h3>
-        <p class="text-slate-600 dark:text-gray-300 leading-relaxed flex-grow">
+        <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-purple-600 transition-colors">Systematic Phonics</h3>
+        <p class="text-slate-600 leading-relaxed flex-grow">
           Structured progression through phonetic patterns, building strong foundational reading skills step by step with our carefully designed curriculum.
         </p>
-        <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
-          <a href="#" class="inline-flex items-center text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors">
+        <div class="mt-6 pt-4 border-t border-gray-100">
+          <a href="#" class="inline-flex items-center text-sm font-medium text-purple-600 hover:text-purple-800 transition-colors">
             Learn more
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -703,18 +869,18 @@
       </article>
 
       <!-- Card 2: Kinesthetic Activities -->
-      <article class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
-        <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-50 to-purple-50 dark:from-pink-900/30 dark:to-purple-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-pink-600 dark:text-pink-400" fill="currentColor" aria-hidden="true">
+      <article class="animate-scale delay-500 group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 flex flex-col h-full">
+        <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-pink-600" fill="currentColor" aria-hidden="true">
             <path d="M7 11a1 1 0 011-1h.26a2 2 0 001.98-1.68A3 3 0 0114.5 6c1.34 0 2.5 1.08 2.5 2.41V11h1.5A2.5 2.5 0 0121 13.5V18a4 4 0 01-4 4H8a4 4 0 01-4-4v-3a3 3 0 013-3h.5z"/>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Kinesthetic Activities</h3>
-        <p class="text-slate-600 dark:text-gray-300 leading-relaxed flex-grow">
+        <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-pink-600 transition-colors">Kinesthetic Activities</h3>
+        <p class="text-slate-600 leading-relaxed flex-grow">
           Hands-on learning with letter tiles, movement games, and tactile experiences that make reading engaging and memorable for young learners.
         </p>
-        <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
-          <a href="#" class="inline-flex items-center text-sm font-medium text-pink-600 dark:text-pink-400 hover:text-pink-800 dark:hover:text-pink-300 transition-colors">
+        <div class="mt-6 pt-4 border-t border-gray-100">
+          <a href="#" class="inline-flex items-center text-sm font-medium text-pink-600 hover:text-pink-800 transition-colors">
             Learn more
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -724,18 +890,18 @@
       </article>
 
       <!-- Card 3: Decodable Readers -->
-      <article class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
-        <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="currentColor" aria-hidden="true">
+      <article class="animate-scale delay-600 group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 flex flex-col h-full">
+        <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-blue-600" fill="currentColor" aria-hidden="true">
             <path d="M3 5a1 1 0 011-1h12a3 3 0 013 3v10a1 1 0 01-1 1H5a2 2 0 01-2-2V5zM6 7v10h12V7H6z"/>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Decodable Readers</h3>
-        <p class="text-slate-600 dark:text-gray-300 leading-relaxed flex-grow">
+        <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">Decodable Readers</h3>
+        <p class="text-slate-600 leading-relaxed flex-grow">
           Carefully crafted stories that match your child's phonetic knowledge, building confidence and fluency with every page they read.
         </p>
-        <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
-          <a href="#" class="inline-flex items-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+        <div class="mt-6 pt-4 border-t border-gray-100">
+          <a href="#" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors">
             Learn more
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -745,18 +911,18 @@
       </article>
 
       <!-- Card 4: Reading Diagnostic -->
-      <article class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
-        <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/30 dark:to-yellow-900/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-amber-600 dark:text-amber-400" fill="currentColor" aria-hidden="true">
+      <article class="animate-scale delay-700 group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 flex flex-col h-full">
+        <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-amber-600" fill="currentColor" aria-hidden="true">
             <path d="M3 3h2v18H3V3zm5 6h2v12H8V9zm5-4h2v16h-2V5zm5 8h2v8h-2v-8z"/>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">Reading Diagnostic</h3>
-        <p class="text-slate-600 dark:text-gray-300 leading-relaxed flex-grow">
+        <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-amber-600 transition-colors">Reading Diagnostic</h3>
+        <p class="text-slate-600 leading-relaxed flex-grow">
           Precise assessment tools that identify reading levels and guide personalized learning paths for optimal progress.
         </p>
-        <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
-          <a href="#" class="inline-flex items-center text-sm font-medium text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 transition-colors">
+        <div class="mt-6 pt-4 border-t border-gray-100">
+          <a href="#" class="inline-flex items-center text-sm font-medium text-amber-600 hover:text-amber-800 transition-colors">
             Learn more
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -767,6 +933,7 @@
     </div>
   </div>
 </section>
+
 <!-- <div class="h-12 md:h-20 lg:h-32"></div> -->
   <!-- What’s Inside (Program Snapshot) -->
     <section id="program-snapshot" class="mt-8 md:mt-26 py-16 bg-white dark:bg-gray-900">
@@ -794,7 +961,7 @@
             <ul class="mt-4 space-y-3 text-slate-700 dark:text-slate-300">
               <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span><span>letter/sound cards</span></li>
               <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span><span>blending boards</span></li>
-              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span><span>tactile mats</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span><span>tangle-mangle mat</span></li>
               <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span><span>word families</span></li>
               <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span><span>decodable story booklets</span></li>
               <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span><span>progress tracker</span></li>
@@ -818,7 +985,7 @@
             <ul class="mt-10 space-y-3 text-slate-700 dark:text-slate-300">
               <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span><span>1 classroom kit per section</span></li>
               <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span><span>set of levelled decodables</span></li>
-              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span><span>lesson plans</span></li>
+              <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span><span>28 Weeks Annual Plan</span></li>
               <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-pink-500"></span><span>LR Diagnostic Tool</span></li>
               <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-purple-600"></span><span>dashboards</span></li>
               <li class="flex items-start gap-3"><span class="mt-1 w-3 h-3 rounded-full bg-yellow-400"></span><span>teacher training (in-person/virtual)</span></li>
@@ -1060,7 +1227,7 @@
 </section>
 
   <!-- Testimonials Section -->
-  <section class="py-20 bg-white dark:bg-gray-900 relative overflow-hidden">
+  <section class="py-20 bg-gradient-to-br from-yellow-50 via-pink-50 to-purple-50 dark:bg-gray-900 relative overflow-hidden">
     <div class="absolute inset-0 opacity-10">
       <div class="absolute top-10 left-20 w-20 h-20 bg-yellow-400 rounded-full"></div>
       <div class="absolute bottom-32 right-16 w-28 h-28 bg-pink-500 rounded-full"></div>
@@ -1175,7 +1342,7 @@
 
   <!-- The rest of your page remains unchanged (Products, Skills, FAQ, CTA, Footer) -->
   <!-- Products Section -->
-  <section id="products" class="py-20 bg-white dark:bg-gray-900">
+  <section id="products" class="py-20 bg-gradient-to-br from-purple-50 via-yellow-50 to-pink-50 dark:bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section header -->
       <div class="text-center mb-16">
@@ -1423,7 +1590,7 @@
   </section>
 
   <!-- Skills Section -->
-  <section class="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
+  <section class="py-20 bg-gradient-to-br from-pink-50 via-yellow-50 to-purple-50 dark:bg-gray-900 relative overflow-hidden">
     <div class="absolute left-0 bottom-0 w-80 h-80 opacity-20">
       <div class="absolute top-10 left-20 w-20 h-20 bg-yellow-400 rounded-full"></div>
       <div class="absolute bottom-20 right-10 w-24 h-24 bg-pink-500 rounded-full"></div>
@@ -1490,7 +1657,7 @@
   </section>
 
   <!-- Founder & Research Section -->
-  <section class="py-20 bg-white dark:bg-gray-900">
+  <section class="py-20 bg-gradient-to-br from-yellow-50 via-purple-50 to-pink-50 dark:bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wide">Founder & Research</h2>
@@ -1524,7 +1691,7 @@
   </section>
 
   <!-- FAQ Section -->
-  <section id="faq" class="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden" x-data="faq()">
+  <section id="faq" class="py-20 bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 dark:bg-gray-900 relative overflow-hidden" x-data="faq()">
     <div class="absolute left-0 bottom-0 w-80 h-80 opacity-20">
       <div class="absolute top-10 left-20 w-20 h-20 bg-yellow-400 rounded-full"></div>
       <div class="absolute bottom-32 right-16 w-28 h-28 bg-pink-500 rounded-full"></div>
